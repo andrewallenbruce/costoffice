@@ -1,0 +1,19 @@
+Package: costoffice
+Title: Access Physician Office Visit Cost Data
+Version: 0.0.0.9000
+Authors@R: 
+    person("Andrew", "Bruce", , "andrewbruce.himni@gmail.com", role = c("aut", "cre", "cph"))
+Description: Provides various functions to enable downloading CMS physician office visit cost data.
+Maintainer: Andrew Bruce <andrewbruce.himni@gmail.com>
+License: AGPL (>= 3)
+Depends: 
+    R (>= 2.10)
+Imports: 
+    clock,
+    dplyr,
+    httr2,
+    tibble,
+    tidyr
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
