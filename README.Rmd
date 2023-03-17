@@ -21,6 +21,14 @@ knitr::opts_chunk$set(
 # `costoffice`
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/andrewallenbruce/costoffice/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/costoffice/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-https://github.com/andrewallenbruce/costoffice/blob/main/LICENSE.md.svg)](https://cran.r-project.org/web/licenses/AGPL-3.0)
+[![Code Size](https://img.shields.io/github/languages/code-size/andrewallenbruce/costoffice.svg)](https://github.com/andrewallenbruce/costoffice)
+[![Last Commit](https://img.shields.io/github/last-commit/andrewallenbruce/costoffice.svg)](https://github.com/andrewallenbruce/costoffice/commits/main)
+[![Codecov](https://codecov.io/gh/andrewallenbruce/costoffice/branch/main/graph/badge.svg)](https://codecov.io/gh/andrewallenbruce/costoffice)
+[![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/costoffice/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/costoffice)
 <!-- badges: end -->
 
 <br>
@@ -40,13 +48,16 @@ remotes::install_github("andrewallenbruce/costoffice")
 
 <br>
 
-## Motivation
+## Retrieve Dataset Info
 
 ```{r echo=TRUE}
 library(costoffice)
 ```
 
 <br>
+
+To retrieve information on all of the data sets (83 specialties in total), 
+simply call `search_datasets()` with no arguments:
 
 
 ```{r}
@@ -55,8 +66,97 @@ search_datasets()
 
 <br>
 
+If you're searching for one in particular, just supply the `specialty` argument:
+
 ```{r}
-search_datasets(specialty = "vascular surgery")
+search_datasets(specialty = "vascular surgery") |> dplyr::glimpse()
 ```
 
 <br>
+
+## Downloading Datasets
+
+
+```{r}
+vasc <- search_datasets(specialty = "vascular surgery")
+```
+
+<br>
+
+```{r}
+dt <- data.table::fread(vasc$csv_url)
+
+lobstr::obj_size(dt)
+```
+
+
+<br>
+
+```{r}
+dt <- dt |> 
+  dplyr::slice_sample(n = 25) |> 
+  dplyr::select(zip_code,
+                new_top_code = most_utilized_procedure_code_for_new_patient,
+                new_price_min = min_medicare_pricing_for_new_patient,
+                new_price_max = max_medicare_pricing_for_new_patient,
+                new_price_mode = mode_medicare_pricing_for_new_patient,
+                new_copay_min = min_copay_for_new_patient,
+                new_copay_max = max_copay_for_new_patient,
+                new_copay_mode = mode_copay_for_new_patient,
+                est_top_code = most_utilized_procedure_code_for_established_patient,
+                est_price_min = min_medicare_pricing_for_established_patient,
+                est_price_max = max_medicare_pricing_for_established_patient,
+                est_price_mode = mode_medicare_pricing_for_established_patient,
+                est_copay_min = min_copay_for_established_patient,
+                est_copay_max = max_copay_for_established_patient,
+                est_copay_mode = mode_copay_for_established_patient)
+dt
+```
+
+
+```{r}
+dt |> tibble::tibble() |> 
+  dplyr::mutate(zip_code = purrr::map_chr(.data$zip_code, 
+                                          zipcodeR::normalize_zip)) |>  
+  dplyr::mutate(zip_info = purrr::map_df(.data$zip_code, 
+                                         zipcodeR::reverse_zipcode), 
+                .after = zip_code) |> 
+  tidyr::unnest_wider(zip_info) |> 
+  dplyr::select(city = major_city, 
+                county, 
+                state,
+                zip_code,
+                lat,
+                lng,
+                bounds_west,
+                bounds_east,
+                bounds_north,
+                bounds_south,
+                dplyr::contains("new"),
+                dplyr::contains("est")) |> 
+  tidyr::nest(geo = c(lat, lng, dplyr::starts_with("bounds")))
+```
+
+
+
+```{r}
+zipcodeR::zip_code_db |> 
+  dplyr::select(zip_code = zipcode, 
+                city = major_city, 
+                county, 
+                state,
+                lat,
+                lng,
+                bounds_west,
+                bounds_east,
+                bounds_north,
+                bounds_south
+                )
+```
+
+
+
+
+## Code of Conduct
+
+Please note that the costoffice project is released with a [Contributor Code of Conduct](https://andrewallenbruce.github.io/costoffice/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

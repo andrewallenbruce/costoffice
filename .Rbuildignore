@@ -1,3 +1,8 @@
 ^costoffice\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^CODE_OF_CONDUCT\.md$
