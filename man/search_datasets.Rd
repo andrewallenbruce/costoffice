@@ -33,5 +33,5 @@ contractors.
 Update Frequency: \strong{Weekly}
 }
 \examples{
-search_datasets()
+#search_datasets()
 }

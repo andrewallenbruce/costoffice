@@ -18,7 +18,7 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' search_datasets()
+#' #search_datasets()
 #' @export
 
 search_datasets <- function(specialty = NULL) {
