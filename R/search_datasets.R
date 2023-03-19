@@ -31,32 +31,33 @@ search_datasets <- function(specialty = NULL) {
 
   results <- response |>
     httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE) |>
-    tibble::tibble() |>
-    dplyr::mutate(issued = clock::date_parse(issued),
-                  modified = clock::date_parse(modified),
-                  released = clock::date_parse(released)) |>
-    dplyr::select(theme,
-                  specialty = keyword,
-                  issued,
-                  modified,
-                  released,
-                  distribution) |>
-    tidyr::unnest(theme) |>
-    dplyr::filter(theme == "Physician office visit costs") |>
-    tidyr::unnest(specialty) |>
-    dplyr::filter(specialty != "office visit cost") |>
-    dplyr::filter(specialty != "costs") |>
-    tidyr::unnest(distribution, names_sep = ".") |>
-    dplyr::mutate(csv_url = distribution.downloadURL,
-                  theme = NULL,
-                  distribution.downloadURL = NULL,
-                  distribution.title = NULL,
-                  distribution.mediaType = NULL,
-                  distribution.mediaType = NULL,
-                  `distribution.@type` = NULL)
+    data.table::as.data.table() |>
+    tidytable::as_tidytable() |>
+    tidytable::mutate(issued = clock::date_parse(issued),
+                      modified = clock::date_parse(modified),
+                      released = clock::date_parse(released)) |>
+    tidytable::select(theme,
+                      specialty = keyword,
+                      issued,
+                      modified,
+                      released,
+                      distribution) |>
+    tidytable::unnest(theme, .drop = FALSE) |>
+    tidytable::filter(theme == "Physician office visit costs") |>
+    tidytable::unnest(specialty, .drop = FALSE) |>
+    tidytable::filter(specialty != "office visit cost") |>
+    tidytable::filter(specialty != "costs") |>
+    tidytable::unnest(distribution, names_sep = ".", .drop = FALSE) |>
+    tidytable::mutate(csv_url = distribution.downloadURL,
+                      theme = NULL,
+                      distribution.downloadURL = NULL,
+                      distribution.title = NULL,
+                      distribution.mediaType = NULL,
+                      `distribution.@type` = NULL) |>
+    tidytable::relocate(specialty)
 
   if (!is.null(specialty)) {
-    results <- results |> dplyr::filter(specialty == {{ specialty }})
+    results <- results |> tidytable::filter(specialty == {{ specialty }})
   }
   return(results)
 }

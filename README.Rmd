@@ -24,7 +24,6 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/andrewallenbruce/costoffice/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/costoffice/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-https://github.com/andrewallenbruce/costoffice/blob/main/LICENSE.md.svg)](https://cran.r-project.org/web/licenses/AGPL-3.0)
 [![Code Size](https://img.shields.io/github/languages/code-size/andrewallenbruce/costoffice.svg)](https://github.com/andrewallenbruce/costoffice)
 [![Last Commit](https://img.shields.io/github/last-commit/andrewallenbruce/costoffice.svg)](https://github.com/andrewallenbruce/costoffice/commits/main)
 [![Codecov](https://codecov.io/gh/andrewallenbruce/costoffice/branch/main/graph/badge.svg)](https://codecov.io/gh/andrewallenbruce/costoffice)
@@ -52,6 +51,8 @@ remotes::install_github("andrewallenbruce/costoffice")
 
 ```{r echo=TRUE}
 library(costoffice)
+library(data.table)
+library(tidytable)
 ```
 
 <br>
@@ -79,21 +80,17 @@ search_datasets(specialty = "vascular surgery") |> dplyr::glimpse()
 
 ```{r}
 vasc <- search_datasets(specialty = "vascular surgery")
-```
 
-<br>
-
-```{r}
 dt <- data.table::fread(vasc$csv_url)
 
 lobstr::obj_size(dt)
 ```
 
-
 <br>
 
 ```{r}
 dt <- dt |> 
+  tibble::tibble() |> 
   dplyr::slice_sample(n = 25) |> 
   dplyr::select(zip_code,
                 new_top_code = most_utilized_procedure_code_for_new_patient,
@@ -115,12 +112,9 @@ dt
 
 
 ```{r}
-dt |> tibble::tibble() |> 
-  dplyr::mutate(zip_code = purrr::map_chr(.data$zip_code, 
-                                          zipcodeR::normalize_zip)) |>  
-  dplyr::mutate(zip_info = purrr::map_df(.data$zip_code, 
-                                         zipcodeR::reverse_zipcode), 
-                .after = zip_code) |> 
+dt |> 
+  dplyr::mutate(zip_code = purrr::map_chr(.data$zip_code, zipcodeR::normalize_zip)) |>  
+  dplyr::mutate(zip_info = purrr::map_df(.data$zip_code, zipcodeR::reverse_zipcode), .after = zip_code) |>
   tidyr::unnest_wider(zip_info) |> 
   dplyr::select(city = major_city, 
                 county, 
@@ -135,23 +129,6 @@ dt |> tibble::tibble() |>
                 dplyr::contains("new"),
                 dplyr::contains("est")) |> 
   tidyr::nest(geo = c(lat, lng, dplyr::starts_with("bounds")))
-```
-
-
-
-```{r}
-zipcodeR::zip_code_db |> 
-  dplyr::select(zip_code = zipcode, 
-                city = major_city, 
-                county, 
-                state,
-                lat,
-                lng,
-                bounds_west,
-                bounds_east,
-                bounds_north,
-                bounds_south
-                )
 ```
 
 
