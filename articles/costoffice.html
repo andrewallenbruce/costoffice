@@ -5,15 +5,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Provides various functions to enable downloading CMS physician office visit cost data.">
-<title>Download Physician Office Visit Cost Data • costoffice</title>
-<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="deps/JetBrains_Mono-0.4.5/font.css" rel="stylesheet">
+<meta name="description" content="costoffice">
+<title>costoffice • costoffice</title>
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/JetBrains_Mono-0.4.5/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Download Physician Office Visit Cost Data">
-<meta property="og:description" content="Provides various functions to enable downloading CMS physician office visit cost data.">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="costoffice">
+<meta property="og:description" content="costoffice">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -25,7 +25,7 @@
 
     <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
     
-    <a class="navbar-brand me-2" href="index.html">costoffice</a>
+    <a class="navbar-brand me-2" href="../index.html">costoffice</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9003</small>
 
@@ -36,18 +36,18 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="articles/costoffice.html">Get started</a>
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/costoffice.html">Get started</a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="reference/index.html">Reference</a>
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="news/index.html">Changelog</a>
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
       <ul class="navbar-nav">
@@ -62,43 +62,61 @@
 
     
   </div>
-</nav><div class="container template-home">
-<div class="row">
-  <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="costoffice">
-<code>costoffice</code><a class="anchor" aria-label="anchor" href="#costoffice"></a>
-</h1></div>
-<!-- badges: start -->
+</nav><div class="container template-article">
 
-<p><br></p>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<p>You can install the development version of <code>costoffice</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>costoffice</h1>
+            
+      
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/costoffice/blob/HEAD/vignettes/costoffice.Rmd" class="external-link"><code>vignettes/costoffice.Rmd</code></a></small>
+      <div class="d-none name"><code>costoffice.Rmd</code></div>
+    </div>
+
+    
+    
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/costoffice"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/costoffice"</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-</div>
-<div class="section level2">
-<h2 id="retrieve-dataset-info">Retrieve Dataset Info<a class="anchor" aria-label="anchor" href="#retrieve-dataset-info"></a>
-</h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/andrewallenbruce/costoffice" class="external-link">costoffice</a></span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<p>To retrieve information on all of the data sets (83 specialties in total), simply call <code><a href="reference/search_datasets.html">search_datasets()</a></code> with no arguments:</p>
+<div class="section level2">
+<h2 id="retrieve-dataset-info-with-search_datasets">Retrieve Dataset Info with <code>search_datasets()</code><a class="anchor" aria-label="anchor" href="#retrieve-dataset-info-with-search_datasets"></a>
+</h2>
+<p><br></p>
+<p><code><a href="../reference/search_datasets.html">search_datasets()</a></code> retrieves information on the 83 data
+sets, separated by physician specialty. If you’re searching for one
+specialty in particular, just supply the <code>specialty</code>
+argument:</p>
+<p><br></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiac surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
+<span><span class="co">#&gt; Columns: 5</span></span>
+<span><span class="co">#&gt; $ specialty <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "cardiac surgery"</span></span>
+<span><span class="co">#&gt; $ issued    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2022-07-11</span></span>
+<span><span class="co">#&gt; $ modified  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2022-07-11</span></span>
+<span><span class="co">#&gt; $ released  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2022-07-14</span></span>
+<span><span class="co">#&gt; $ csv_url   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "https://data.cms.gov/provider-data/sites/default/files/reso…</span></span></code></pre>
+<p><br></p>
+<p>The result contains three dates related to the last time the data was
+updated and the download link for the csv file.</p>
+<p><br></p>
+<p>To retrieve information on all of the data sets (83 specialties in
+total), simply call <code><a href="../reference/search_datasets.html">search_datasets()</a></code> with no
+arguments:</p>
+<p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="21%">
 <col width="4%">
 <col width="4%">
 <col width="4%">
-<col width="64%">
+<col width="65%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">specialty</th>
@@ -312,7 +330,8 @@
 <td align="left"><a href="https://data.cms.gov/provider-data/sites/default/files/resources/a406cc6e7aefecbdd42c1e4bf205fcaf_1657569953/Hematology_Oncology.csv" class="external-link uri">https://data.cms.gov/provider-data/sites/default/files/resources/a406cc6e7aefecbdd42c1e4bf205fcaf_1657569953/Hematology_Oncology.csv</a></td>
 </tr>
 <tr class="even">
-<td align="left">hematopoietic cell transplantation and cellular therapy</td>
+<td align="left">hematopoietic cell transplantation and cellular
+therapy</td>
 <td align="left">2022-07-11</td>
 <td align="left">2022-07-11</td>
 <td align="left">2022-07-14</td>
@@ -692,61 +711,157 @@
 </tbody>
 </table>
 <p><br></p>
-<p>If you’re searching for one in particular, just supply the <code>specialty</code> argument:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiac surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 5</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty &lt;chr&gt; "cardiac surgery"</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ issued    &lt;date&gt; 2022-07-11</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ modified  &lt;date&gt; 2022-07-11</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ released  &lt;date&gt; 2022-07-14</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ csv_url   &lt;chr&gt; "https://data.cms.gov/provider-data/sites/default/files/reso…</span></span></code></pre></div>
-<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="downloading-a-dataset">Downloading A Dataset<a class="anchor" aria-label="anchor" href="#downloading-a-dataset"></a>
 </h2>
-<p>Each dataset has approximately 43k rows and is roughly 4.5 to 5 MB.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<p><br><code>costoffice</code> uses Mark Fairbanks’ excellent
+<code>tidytable</code> package underneath the hood (with it using
+<code>data.table</code> under it’s hood), resulting in much smaller
+download sizes and lightning fast data operations.</p>
+<p><br></p>
+<p>Each individual data set has approximately 43k rows and is roughly
+between 4.5 to 5 MB on disk/in memory.</p>
+<p><br></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_tail</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 10 × 15</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    zip_code new_top_code new_p…¹ new_p…² new_p…³ new_c…⁴ new_c…⁵ new_c…⁶ est_t…⁷</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;           &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 99919           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 99921           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 99922           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 99923           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 99925           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 99926           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 99927           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 99928           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 99929           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 99950           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 6 more variables: est_price_min &lt;dbl&gt;, est_price_max &lt;dbl&gt;,</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   est_price_mode &lt;dbl&gt;, est_copay_min &lt;dbl&gt;, est_copay_max &lt;dbl&gt;,</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   est_copay_mode &lt;dbl&gt;, and abbreviated variable names ¹​new_price_min,</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ²​new_price_max, ³​new_price_mode, ⁴​new_copay_min, ⁵​new_copay_max,</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁶​new_copay_mode, ⁷​est_top_code</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tidytable: 10 × 15</span></span></span>
+<span><span class="co">#&gt;    zip_code new_top_code new_p…¹ new_p…² new_p…³ new_c…⁴ new_c…⁵ new_c…⁶ est_t…⁷</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 99919           <span style="text-decoration: underline;">99</span>203    74.8    234.    117.    18.7    58.4    29.2   <span style="text-decoration: underline;">99</span>213</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 99921           <span style="text-decoration: underline;">99</span>203    74.8    234.    117.    18.7    58.4    29.2   <span style="text-decoration: underline;">99</span>213</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 99922           <span style="text-decoration: underline;">99</span>203    74.8    234.    117.    18.7    58.4    29.2   <span style="text-decoration: underline;">99</span>213</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 99923           <span style="text-decoration: underline;">99</span>203    74.8    234.    117.    18.7    58.4    29.2   <span style="text-decoration: underline;">99</span>213</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 99925           <span style="text-decoration: underline;">99</span>203    74.8    234.    117.    18.7    58.4    29.2   <span style="text-decoration: underline;">99</span>213</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 99926           <span style="text-decoration: underline;">99</span>203    74.8    234.    117.    18.7    58.4    29.2   <span style="text-decoration: underline;">99</span>213</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 99927           <span style="text-decoration: underline;">99</span>203    74.8    234.    117.    18.7    58.4    29.2   <span style="text-decoration: underline;">99</span>213</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 99928           <span style="text-decoration: underline;">99</span>203    74.8    234.    117.    18.7    58.4    29.2   <span style="text-decoration: underline;">99</span>213</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 99929           <span style="text-decoration: underline;">99</span>203    74.8    234.    117.    18.7    58.4    29.2   <span style="text-decoration: underline;">99</span>213</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 99950           <span style="text-decoration: underline;">99</span>203    74.8    234.    117.    18.7    58.4    29.2   <span style="text-decoration: underline;">99</span>213</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: est_price_min &lt;dbl&gt;, est_price_max &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   est_price_mode &lt;dbl&gt;, est_copay_min &lt;dbl&gt;, est_copay_max &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   est_copay_mode &lt;dbl&gt;, and abbreviated variable names ¹​new_price_min,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ²​new_price_max, ³​new_price_mode, ⁴​new_copay_min, ⁵​new_copay_max,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁶​new_copay_mode, ⁷​est_top_code</span></span></span></code></pre>
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="geocoding-with-zipcoder">Geocoding with <code>zipcodeR</code>
-<a class="anchor" aria-label="anchor" href="#geocoding-with-zipcoder"></a>
+<h2 id="geocoding-with-zipcoder">Geocoding with <code>zipcodeR</code><a class="anchor" aria-label="anchor" href="#geocoding-with-zipcoder"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_tail</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">geo</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<p><br></p>
+<p><code>costoffice</code> includes a subset of zip code data from Gavin
+Rozzi’s amazing <code>zipcodeR</code> package:</p>
+<p><br></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"zipcode_db"</span><span class="op">)</span></span>
+<span><span class="va">zipcode_db</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
+<col width="13%">
+<col width="16%">
 <col width="5%">
-<col width="14%">
+<col width="8%">
+<col width="5%">
+<col width="6%">
+<col width="10%">
+<col width="10%">
+<col width="11%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">city</th>
+<th align="left">county</th>
+<th align="left">state</th>
+<th align="left">zip_code</th>
+<th align="right">lat</th>
+<th align="right">lng</th>
+<th align="right">bounds_west</th>
+<th align="right">bounds_east</th>
+<th align="right">bounds_north</th>
+<th align="right">bounds_south</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Moody</td>
+<td align="left">St. Clair County</td>
+<td align="left">AL</td>
+<td align="left">35004</td>
+<td align="right">33.62</td>
+<td align="right">-86.50</td>
+<td align="right">-86.55178</td>
+<td align="right">-86.45282</td>
+<td align="right">33.66850</td>
+<td align="right">33.56269</td>
+</tr>
+<tr class="even">
+<td align="left">Adamsville</td>
+<td align="left">Jefferson County</td>
+<td align="left">AL</td>
+<td align="left">35005</td>
+<td align="right">33.59</td>
+<td align="right">-86.99</td>
+<td align="right">-87.08163</td>
+<td align="right">-86.90677</td>
+<td align="right">33.63943</td>
+<td align="right">33.53390</td>
+</tr>
+<tr class="odd">
+<td align="left">Adger</td>
+<td align="left">Jefferson County</td>
+<td align="left">AL</td>
+<td align="left">35006</td>
+<td align="right">33.40</td>
+<td align="right">-87.20</td>
+<td align="right">-87.34170</td>
+<td align="right">-87.07163</td>
+<td align="right">33.55580</td>
+<td align="right">33.32744</td>
+</tr>
+<tr class="even">
+<td align="left">Alabaster</td>
+<td align="left">Shelby County</td>
+<td align="left">AL</td>
+<td align="left">35007</td>
+<td align="right">33.22</td>
+<td align="right">-86.79</td>
+<td align="right">-86.86177</td>
+<td align="right">-86.72683</td>
+<td align="right">33.27176</td>
+<td align="right">33.15020</td>
+</tr>
+<tr class="odd">
+<td align="left">Alexander City</td>
+<td align="left">Tallapoosa County</td>
+<td align="left">AL</td>
+<td align="left">35010</td>
+<td align="right">32.90</td>
+<td align="right">-85.90</td>
+<td align="right">-86.10822</td>
+<td align="right">-85.76372</td>
+<td align="right">33.10446</td>
+<td align="right">32.69872</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Putting <code><a href="../reference/use_zipcoder.html">use_zipcoder()</a></code> in the pipe chain will add this
+information to the data table:</p>
+<p><br></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_tail</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">geo</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="4%">
+<col width="15%">
 <col width="2%">
 <col width="3%">
 <col width="4%">
@@ -785,806 +900,6 @@
 <th align="right">est_copay_mode</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
-<td align="left">Stevens Village</td>
-<td align="left">Yukon-Koyukuk Census Area</td>
-<td align="left">AK</td>
-<td align="left">99774</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Fairbanks</td>
-<td align="left">Fairbanks North Star Borough</td>
-<td align="left">AK</td>
-<td align="left">99775</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Tanacross</td>
-<td align="left">Southeast Fairbanks Census Area</td>
-<td align="left">AK</td>
-<td align="left">99776</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Tanana</td>
-<td align="left">Yukon-Koyukuk Census Area</td>
-<td align="left">AK</td>
-<td align="left">99777</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Teller</td>
-<td align="left">Nome Census Area</td>
-<td align="left">AK</td>
-<td align="left">99778</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Tok</td>
-<td align="left">Southeast Fairbanks Census Area</td>
-<td align="left">AK</td>
-<td align="left">99779</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Tok</td>
-<td align="left">Southeast Fairbanks Census Area</td>
-<td align="left">AK</td>
-<td align="left">99780</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Venetie</td>
-<td align="left">Yukon-Koyukuk Census Area</td>
-<td align="left">AK</td>
-<td align="left">99781</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Wainwright</td>
-<td align="left">North Slope Borough</td>
-<td align="left">AK</td>
-<td align="left">99782</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Wales</td>
-<td align="left">Nome Census Area</td>
-<td align="left">AK</td>
-<td align="left">99783</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">White Mountain</td>
-<td align="left">Nome Census Area</td>
-<td align="left">AK</td>
-<td align="left">99784</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Brevig Mission</td>
-<td align="left">Nome Census Area</td>
-<td align="left">AK</td>
-<td align="left">99785</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Ambler</td>
-<td align="left">Northwest Arctic Borough</td>
-<td align="left">AK</td>
-<td align="left">99786</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Chalkyitsik</td>
-<td align="left">Yukon-Koyukuk Census Area</td>
-<td align="left">AK</td>
-<td align="left">99788</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Nuiqsut</td>
-<td align="left">North Slope Borough</td>
-<td align="left">AK</td>
-<td align="left">99789</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Fairbanks</td>
-<td align="left">Yukon-Koyukuk Census Area</td>
-<td align="left">AK</td>
-<td align="left">99790</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Atqasuk</td>
-<td align="left">North Slope Borough</td>
-<td align="left">AK</td>
-<td align="left">99791</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Juneau</td>
-<td align="left">Juneau City and Borough</td>
-<td align="left">AK</td>
-<td align="left">99801</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Juneau</td>
-<td align="left">City and Borough of Juneau</td>
-<td align="left">AK</td>
-<td align="left">99802</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Juneau</td>
-<td align="left">City and Borough of Juneau</td>
-<td align="left">AK</td>
-<td align="left">99803</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Juneau</td>
-<td align="left">City and Borough of Juneau</td>
-<td align="left">AK</td>
-<td align="left">99811</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Juneau</td>
-<td align="left">City and Borough of Juneau</td>
-<td align="left">AK</td>
-<td align="left">99812</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Angoon</td>
-<td align="left">Hoonah-Angoon Census Area</td>
-<td align="left">AK</td>
-<td align="left">99820</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Auke Bay</td>
-<td align="left">City and Borough of Juneau</td>
-<td align="left">AK</td>
-<td align="left">99821</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Douglas</td>
-<td align="left">Juneau City and Borough</td>
-<td align="left">AK</td>
-<td align="left">99824</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Elfin Cove</td>
-<td align="left">Hoonah-Angoon Census Area</td>
-<td align="left">AK</td>
-<td align="left">99825</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Gustavus</td>
-<td align="left">Hoonah-Angoon Census Area</td>
-<td align="left">AK</td>
-<td align="left">99826</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Haines</td>
-<td align="left">Haines Borough</td>
-<td align="left">AK</td>
-<td align="left">99827</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Hoonah</td>
-<td align="left">Hoonah-Angoon Census Area</td>
-<td align="left">AK</td>
-<td align="left">99829</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Kake</td>
-<td align="left">Petersburg Census Area</td>
-<td align="left">AK</td>
-<td align="left">99830</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Pelican</td>
-<td align="left">Hoonah-Angoon Census Area</td>
-<td align="left">AK</td>
-<td align="left">99832</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Petersburg</td>
-<td align="left">Petersburg Census Area</td>
-<td align="left">AK</td>
-<td align="left">99833</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Sitka</td>
-<td align="left">Sitka City and Borough</td>
-<td align="left">AK</td>
-<td align="left">99835</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Port Alexander</td>
-<td align="left">Petersburg Census Area</td>
-<td align="left">AK</td>
-<td align="left">99836</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Skagway</td>
-<td align="left">Skagway Municipality</td>
-<td align="left">AK</td>
-<td align="left">99840</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Tenakee Springs</td>
-<td align="left">Hoonah-Angoon Census Area</td>
-<td align="left">AK</td>
-<td align="left">99841</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Juneau</td>
-<td align="left">City and Borough of Juneau</td>
-<td align="left">AK</td>
-<td align="left">99850</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Ketchikan</td>
-<td align="left">Ketchikan Gateway Borough</td>
-<td align="left">AK</td>
-<td align="left">99901</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="odd">
-<td align="left">Meyers Chuck</td>
-<td align="left">Wrangell City and Borough</td>
-<td align="left">AK</td>
-<td align="left">99903</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
-<tr class="even">
-<td align="left">Coffman Cove</td>
-<td align="left">Prince of Wales-Hyder Census Area</td>
-<td align="left">AK</td>
-<td align="left">99918</td>
-<td align="right">99203</td>
-<td align="right">74.816</td>
-<td align="right">233.632</td>
-<td align="right">116.688</td>
-<td align="right">18.704</td>
-<td align="right">58.408</td>
-<td align="right">29.172</td>
-<td align="right">99213</td>
-<td align="right">22.376</td>
-<td align="right">190.744</td>
-<td align="right">95.16</td>
-<td align="right">5.594</td>
-<td align="right">47.686</td>
-<td align="right">23.79</td>
-</tr>
 <tr class="odd">
 <td align="left">Thorne Bay</td>
 <td align="left">Prince of Wales-Hyder Census Area</td>
@@ -1792,11 +1107,14 @@
 <div class="section level2">
 <h2 id="summary-statistics-by-state">Summary Statistics by State<a class="anchor" aria-label="anchor" href="#summary-statistics-by-state"></a>
 </h2>
-<p>Current average prices by state for an office visit by a <strong>New Patient</strong> to a <strong>Vascular Surgeon</strong>:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<p><br></p>
+<p>Current average prices by state for an office visit by a <strong>New
+Patient</strong> to a <strong>Vascular Surgeon</strong>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">state</span>, <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"new_"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/summarize.html" class="external-link">summarise</a></span><span class="op">(</span>avg_min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">new_price_min</span><span class="op">)</span>,</span>
 <span>                       avg_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">new_price_max</span><span class="op">)</span>,</span>
@@ -1806,9 +1124,9 @@
 <span>                       avg_copay_mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">new_copay_mode</span><span class="op">)</span>,</span>
 <span>                       .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">new_top_code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
-<col width="7%">
+<col width="6%">
 <col width="14%">
 <col width="10%">
 <col width="10%">
@@ -2361,11 +1679,14 @@
 </tbody>
 </table>
 <p><br></p>
-<p>Current average prices by state for an office visit by an <strong>Established Patient</strong> to a <strong>Cardiologist</strong>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<p>Current average prices by state for an office visit by an
+<strong>Established Patient</strong> to a
+<strong>Cardiologist</strong>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">state</span>, <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"est_"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/summarize.html" class="external-link">summarise</a></span><span class="op">(</span>avg_min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">est_price_min</span><span class="op">)</span>,</span>
 <span>                       avg_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">est_price_max</span><span class="op">)</span>,</span>
@@ -2375,9 +1696,9 @@
 <span>                       avg_copay_mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">est_copay_mode</span><span class="op">)</span>,</span>
 <span>                       .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">est_top_code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
-<col width="7%">
+<col width="6%">
 <col width="14%">
 <col width="10%">
 <col width="10%">
@@ -2931,64 +2252,10 @@
 </table>
 <p><br></p>
 </div>
-<div class="section level2">
-<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
-</h2>
-<p>Please note that the <code>costoffice</code> project is released with a <a href="https://andrewallenbruce.github.io/costoffice/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
-</div>
-</div>
-  </main><aside class="col-md-3"><div class="links">
-<h2 data-toc-skip>Links</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/andrewallenbruce/costoffice/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/andrewallenbruce/costoffice/issues" class="external-link">Report a bug</a></li>
-</ul>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
-<div class="license">
-<h2 data-toc-skip>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small>AGPL (&gt;= 3)</small></li>
-</ul>
-</div>
-
-<div class="community">
-<h2 data-toc-skip>Community</h2>
-<ul class="list-unstyled">
-<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
-</ul>
-</div>
-
-<div class="citation">
-<h2 data-toc-skip>Citation</h2>
-<ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing costoffice</a></li>
-</ul>
-</div>
-
-<div class="developers">
-<h2 data-toc-skip>Developers</h2>
-<ul class="list-unstyled">
-<li>Andrew Bruce <br><small class="roles"> Author, maintainer, copyright holder </small>  </li>
-</ul>
-</div>
-
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/andrewallenbruce/costoffice/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/andrewallenbruce/costoffice/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public."></a></li>
-<li><a href="https://github.com/andrewallenbruce/costoffice" class="external-link"><img src="https://img.shields.io/github/languages/code-size/andrewallenbruce/costoffice.svg" alt="Code Size"></a></li>
-<li><a href="https://github.com/andrewallenbruce/costoffice/commits/main" class="external-link"><img src="https://img.shields.io/github/last-commit/andrewallenbruce/costoffice.svg" alt="Last Commit"></a></li>
-<li><a href="https://codecov.io/gh/andrewallenbruce/costoffice" class="external-link"><img src="https://codecov.io/gh/andrewallenbruce/costoffice/branch/main/graph/badge.svg" alt="Codecov"></a></li>
-<li><a href="https://www.codefactor.io/repository/github/andrewallenbruce/costoffice" class="external-link"><img src="https://www.codefactor.io/repository/github/andrewallenbruce/costoffice/badge" alt="CodeFactor"></a></li>
-</ul>
-</div>
-
-  </aside>
-</div>
 
 
     <footer><div class="pkgdown-footer-left">
