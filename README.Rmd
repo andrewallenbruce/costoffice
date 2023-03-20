@@ -8,7 +8,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse  = FALSE,
   echo      = TRUE,
-  message   = TRUE, 
+  message   = FALSE, 
   warning   = FALSE,
   error     = TRUE,
   comment   = "#>",
@@ -60,7 +60,7 @@ simply call `search_datasets()` with no arguments:
 
 
 ```{r}
-search_datasets()
+search_datasets() |> knitr::kable()
 ```
 
 <br>
@@ -68,71 +68,78 @@ search_datasets()
 If you're searching for one in particular, just supply the `specialty` argument:
 
 ```{r}
-search_datasets(specialty = "vascular surgery") |> dplyr::glimpse()
+search_datasets(specialty = "cardiac surgery") |> tidytable::glimpse()
 ```
 
 <br>
 
-## Downloading Datasets
+## Downloading A Dataset
 
+Each dataset has approximately 43k rows and is roughly 4.5 to 5 MB.
 
 ```{r}
-vasc <- search_datasets(specialty = "vascular surgery")
-
-dt <- data.table::fread(vasc$csv_url)
-
-lobstr::obj_size(dt)
+search_datasets(specialty = "vascular surgery") |> 
+  download_dataset() |> 
+  tidytable::slice_tail(n = 10)
 ```
 
 <br>
 
-```{r}
-dt <- dt |> 
-  tibble::tibble() |> 
-  dplyr::slice_sample(n = 25) |> 
-  dplyr::select(zip_code,
-                new_top_code = most_utilized_procedure_code_for_new_patient,
-                new_price_min = min_medicare_pricing_for_new_patient,
-                new_price_max = max_medicare_pricing_for_new_patient,
-                new_price_mode = mode_medicare_pricing_for_new_patient,
-                new_copay_min = min_copay_for_new_patient,
-                new_copay_max = max_copay_for_new_patient,
-                new_copay_mode = mode_copay_for_new_patient,
-                est_top_code = most_utilized_procedure_code_for_established_patient,
-                est_price_min = min_medicare_pricing_for_established_patient,
-                est_price_max = max_medicare_pricing_for_established_patient,
-                est_price_mode = mode_medicare_pricing_for_established_patient,
-                est_copay_min = min_copay_for_established_patient,
-                est_copay_max = max_copay_for_established_patient,
-                est_copay_mode = mode_copay_for_established_patient)
-dt
-```
+## Geocoding with `zipcodeR`
 
 
 ```{r}
-library(zipcodeR)
-dt |> 
-  dplyr::mutate(zip_code = purrr::map_chr(.data$zip_code, zipcodeR::normalize_zip)) |>  
-  dplyr::mutate(zip_info = purrr::map_df(.data$zip_code, zipcodeR::reverse_zipcode), .after = zip_code) |>
-  tidyr::unnest_wider(zip_info) |> 
-  dplyr::select(city = major_city, 
-                county, 
-                state,
-                zip_code,
-                lat,
-                lng,
-                bounds_west,
-                bounds_east,
-                bounds_north,
-                bounds_south,
-                dplyr::contains("new"),
-                dplyr::contains("est")) |> 
-  tidyr::nest(geo = c(lat, lng, dplyr::starts_with("bounds")))
+search_datasets(specialty = "vascular surgery") |> 
+  download_dataset() |> 
+  tidytable::slice_tail(n = 50) |> 
+  use_zipcoder() |> 
+  tidytable::select(-geo) |> 
+  knitr::kable()
 ```
 
+<br>
 
+## Summary Statistics by State
+
+Current average prices by state for an office visit by a New Patient to a Vascular Surgeon:
+
+```{r}
+search_datasets(specialty = "vascular surgery") |> 
+  download_dataset() |> 
+  use_zipcoder() |> 
+  tidytable::select(state, tidytable::starts_with("new_")) |> 
+  tidytable::summarise(avg_min = mean(new_price_min),
+                       avg_max = mean(new_price_max),
+                       avg_mode = mean(new_price_mode),
+                       avg_copay_min = mean(new_copay_min),
+                       avg_copay_max = mean(new_copay_max),
+                       avg_copay_mode = mean(new_copay_mode),
+                       .by = c(state, new_top_code)) |> 
+  knitr::kable()
+```
+
+<br>
+
+Current average prices by state for an office visit by an Established Patient to a Cardiologist:
+
+```{r}
+search_datasets(specialty = "cardiology") |> 
+  download_dataset() |> 
+  use_zipcoder() |> 
+  tidytable::select(state, tidytable::starts_with("est_")) |> 
+  tidytable::summarise(avg_min = mean(est_price_min),
+                       avg_max = mean(est_price_max),
+                       avg_mode = mean(est_price_mode),
+                       avg_copay_min = mean(est_copay_min),
+                       avg_copay_max = mean(est_copay_max),
+                       avg_copay_mode = mean(est_copay_mode),
+                       .by = c(state, est_top_code)) |> 
+  knitr::kable()
+```
+
+<br>
 
 
 ## Code of Conduct
 
-Please note that the costoffice project is released with a [Contributor Code of Conduct](https://andrewallenbruce.github.io/costoffice/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the `costoffice` project is released with a [Contributor Code of Conduct](https://andrewallenbruce.github.io/costoffice/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

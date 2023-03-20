@@ -4,7 +4,7 @@
 \name{costoffice-package}
 \alias{costoffice}
 \alias{costoffice-package}
-\title{costoffice: Access Physician Office Visit Cost Data}
+\title{costoffice: Download Physician Office Visit Cost Data}
 \description{
 Provides various functions to enable downloading CMS physician office visit cost data.
 }

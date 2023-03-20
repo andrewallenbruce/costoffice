@@ -1,24 +1,16 @@
-#' Search Physician Office Visit Costs Data sets
+#' Search Physician Office Visit Costs Data sets by Specialty
 #'
 #' @description A list of enrollment applications pending CMS contractor
 #'    review for physicians & non-physicians.
 #'
-#' @details The Pending Initial Logging and Tracking (L & T) data set provides
-#'    a list of pending applications that have not been processed by CMS
-#'    contractors.
-#'
 #' ## Links
 #' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
 #'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Weekly**
-#'
 #' @param specialty Provider's medical specialty
-#'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
+#' @return A `tidytable`
 #' @examples
-#' #search_datasets()
+#' search_datasets()
+#' @autoglobal
 #' @export
 
 search_datasets <- function(specialty = NULL) {
@@ -30,8 +22,8 @@ search_datasets <- function(specialty = NULL) {
   response <- request |> httr2::req_perform()
 
   results <- response |>
-    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE) |>
-    data.table::as.data.table() |>
+    httr2::resp_body_json(check_type = FALSE,
+                          simplifyVector = TRUE) |>
     tidytable::as_tidytable() |>
     tidytable::mutate(issued = clock::date_parse(issued),
                       modified = clock::date_parse(modified),
