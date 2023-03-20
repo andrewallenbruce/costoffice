@@ -692,76 +692,163 @@
 </tbody>
 </table>
 <p><br></p>
-<p>If you’re searching for one in particular, just supply the <code>specialty</code> argument:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">specialty</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] "addiction medicine"                                     </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [2] "advanced heart failure and transplant cardiology"       </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [3] "allergy/ immunology"                                    </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [4] "anesthesiology"                                         </span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [5] "cardiac surgery"                                        </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [6] "cardiology"                                             </span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [7] "certified clinical nurse specialist"                    </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [8] "certified nurse midwife"                                </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [9] "certified registered nurse anesthetist (crna)"          </span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [10] "clinic or group practice"                               </span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [11] "clinical cardiac electrophysiology"                     </span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [12] "clinical laboratory"                                    </span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [13] "colorectal surgery (proctology)"                        </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [14] "critical care (intensivists)"                           </span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [15] "dentist"                                                </span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [16] "dermatology"                                            </span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [17] "diagnostic radiology"                                   </span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [18] "emergency medicine"                                     </span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [19] "endocrinology"                                          </span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [20] "family practice"                                        </span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [21] "gastroenterology"                                       </span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [22] "general practice"                                       </span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [23] "general surgery"                                        </span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [24] "geriatric medicine"                                     </span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [25] "geriatric psychiatry"                                   </span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [26] "gynecological oncology"                                 </span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [27] "hand surgery"                                           </span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [28] "hematology"                                             </span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [29] "hematology-oncology"                                    </span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [30] "hematopoietic cell transplantation and cellular therapy"</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [31] "hospice and palliative care"                            </span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [32] "hospitalist"                                            </span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [33] "infectious disease"                                     </span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [34] "internal medicine"                                      </span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [35] "interventional cardiology"                              </span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [36] "interventional pain management"                         </span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [37] "interventional radiology"                               </span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [38] "licensed clinical social worker"                        </span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [39] "mammography center"                                     </span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [40] "maxillofacial surgery"                                  </span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [41] "medical genetics and genomics"                          </span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [42] "medical oncology"                                       </span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [43] "medical toxicology"                                     </span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [44] "nephrology"                                             </span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [45] "neurology"                                              </span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [46] "neuropsychiatry"                                        </span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [47] "neurosurgery"                                           </span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [48] "nuclear medicine"                                       </span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [49] "nurse practitioner"                                     </span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [50] "obstetrics &amp;amp; gynecology"                            </span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [51] "ophthalmology"                                          </span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [52] "optometry"                                              </span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [53] "oral surgery (dentist only)"                            </span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [54] "orthopedic surgery"                                     </span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [55] "osteopathic manipulative medicine"                      </span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [56] "otolaryngology"                                         </span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [57] "pain management"                                        </span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [58] "pathology"                                              </span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [59] "pediatric medicine"                                     </span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [60] "peripheral vascular disease"                            </span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [61] "physical medicine and rehabilitation"                   </span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [62] "physical therapist in private practice"                 </span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [63] "physician assistant"                                    </span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [64] "plastic and reconstructive surgery"                     </span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [65] "podiatry"                                               </span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [66] "preventive medicine"                                    </span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [67] "psychiatry"                                             </span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [68] "psychologist, clinical"                                 </span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [69] "public health or welfare agency"                        </span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [70] "pulmonary disease"                                      </span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [71] "radiation oncology"                                     </span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [72] "registered dietitian or nutrition professional"         </span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [73] "rheumatology"                                           </span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [74] "sleep medicine"                                         </span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [75] "speech language pathologist"                            </span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [76] "sports medicine"                                        </span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [77] "surgical oncology"                                      </span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [78] "thoracic surgery"                                       </span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [79] "undefined physician type"                               </span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [80] "undersea and hyperbaric medicine"                       </span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [81] "unknown supplier/provider specialty"                    </span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [82] "urology"                                                </span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [83] "vascular surgery"</span></span></code></pre></div>
+<p><br></p>
+<p>If you’re searching for one in particular, just supply the <code>specialty</code> argument:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiac surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 5</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty &lt;chr&gt; "cardiac surgery"</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ issued    &lt;date&gt; 2022-07-11</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ modified  &lt;date&gt; 2022-07-11</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ released  &lt;date&gt; 2022-07-14</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ csv_url   &lt;chr&gt; "https://data.cms.gov/provider-data/sites/default/files/reso…</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 5</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty &lt;chr&gt; "cardiac surgery"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ issued    &lt;date&gt; 2022-07-11</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ modified  &lt;date&gt; 2022-07-11</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ released  &lt;date&gt; 2022-07-14</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ csv_url   &lt;chr&gt; "https://data.cms.gov/provider-data/sites/default/files/reso…</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="downloading-a-dataset">Downloading A Dataset<a class="anchor" aria-label="anchor" href="#downloading-a-dataset"></a>
 </h2>
 <p>Each dataset has approximately 43k rows and is roughly 4.5 to 5 MB.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_tail</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 10 × 15</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    zip_code new_top_code new_p…¹ new_p…² new_p…³ new_c…⁴ new_c…⁵ new_c…⁶ est_t…⁷</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;           &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 99919           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 99921           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 99922           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 99923           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 99925           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 99926           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 99927           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 99928           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 99929           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 99950           99203    74.8    234.    117.    18.7    58.4    29.2   99213</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 6 more variables: est_price_min &lt;dbl&gt;, est_price_max &lt;dbl&gt;,</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   est_price_mode &lt;dbl&gt;, est_copay_min &lt;dbl&gt;, est_copay_max &lt;dbl&gt;,</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   est_copay_mode &lt;dbl&gt;, and abbreviated variable names ¹​new_price_min,</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ²​new_price_max, ³​new_price_mode, ⁴​new_copay_min, ⁵​new_copay_max,</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁶​new_copay_mode, ⁷​est_top_code</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 10 × 16</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty     zip_c…¹ new_t…² new_p…³ new_p…⁴ new_p…⁵ new_c…⁶ new_c…⁷ new_c…⁸</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 vascular sur… 99919     99203    74.8    234.    117.    18.7    58.4    29.2</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 vascular sur… 99921     99203    74.8    234.    117.    18.7    58.4    29.2</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 vascular sur… 99922     99203    74.8    234.    117.    18.7    58.4    29.2</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 vascular sur… 99923     99203    74.8    234.    117.    18.7    58.4    29.2</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 vascular sur… 99925     99203    74.8    234.    117.    18.7    58.4    29.2</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 vascular sur… 99926     99203    74.8    234.    117.    18.7    58.4    29.2</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 vascular sur… 99927     99203    74.8    234.    117.    18.7    58.4    29.2</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 vascular sur… 99928     99203    74.8    234.    117.    18.7    58.4    29.2</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 vascular sur… 99929     99203    74.8    234.    117.    18.7    58.4    29.2</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 vascular sur… 99950     99203    74.8    234.    117.    18.7    58.4    29.2</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 7 more variables: est_top_code &lt;int&gt;, est_price_min &lt;dbl&gt;,</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   est_price_max &lt;dbl&gt;, est_price_mode &lt;dbl&gt;, est_copay_min &lt;dbl&gt;,</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   est_copay_max &lt;dbl&gt;, est_copay_mode &lt;dbl&gt;, and abbreviated variable names</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ¹​zip_code, ²​new_top_code, ³​new_price_min, ⁴​new_price_max, ⁵​new_price_mode,</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁶​new_copay_min, ⁷​new_copay_max, ⁸​new_copay_mode</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="geocoding-with-zipcoder">Geocoding with <code>zipcodeR</code>
 <a class="anchor" aria-label="anchor" href="#geocoding-with-zipcoder"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_tail</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">geo</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="5%">
-<col width="14%">
+<col width="13%">
 <col width="2%">
 <col width="3%">
-<col width="4%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
 <col width="5%">
 <col width="4%">
+<col width="4%">
+<col width="4%">
 <col width="5%">
+<col width="4%">
+<col width="4%">
 <col width="5%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
 <col width="5%">
-<col width="5%">
-<col width="5%">
+<col width="4%">
+<col width="4%">
 <col width="5%">
 </colgroup>
 <thead><tr class="header">
@@ -769,6 +856,7 @@
 <th align="left">county</th>
 <th align="left">state</th>
 <th align="left">zip_code</th>
+<th align="left">specialty</th>
 <th align="right">new_top_code</th>
 <th align="right">new_price_min</th>
 <th align="right">new_price_max</th>
@@ -790,6 +878,7 @@
 <td align="left">Yukon-Koyukuk Census Area</td>
 <td align="left">AK</td>
 <td align="left">99774</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -810,6 +899,7 @@
 <td align="left">Fairbanks North Star Borough</td>
 <td align="left">AK</td>
 <td align="left">99775</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -830,6 +920,7 @@
 <td align="left">Southeast Fairbanks Census Area</td>
 <td align="left">AK</td>
 <td align="left">99776</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -850,6 +941,7 @@
 <td align="left">Yukon-Koyukuk Census Area</td>
 <td align="left">AK</td>
 <td align="left">99777</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -870,6 +962,7 @@
 <td align="left">Nome Census Area</td>
 <td align="left">AK</td>
 <td align="left">99778</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -890,6 +983,7 @@
 <td align="left">Southeast Fairbanks Census Area</td>
 <td align="left">AK</td>
 <td align="left">99779</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -910,6 +1004,7 @@
 <td align="left">Southeast Fairbanks Census Area</td>
 <td align="left">AK</td>
 <td align="left">99780</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -930,6 +1025,7 @@
 <td align="left">Yukon-Koyukuk Census Area</td>
 <td align="left">AK</td>
 <td align="left">99781</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -950,6 +1046,7 @@
 <td align="left">North Slope Borough</td>
 <td align="left">AK</td>
 <td align="left">99782</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -970,6 +1067,7 @@
 <td align="left">Nome Census Area</td>
 <td align="left">AK</td>
 <td align="left">99783</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -990,6 +1088,7 @@
 <td align="left">Nome Census Area</td>
 <td align="left">AK</td>
 <td align="left">99784</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1010,6 +1109,7 @@
 <td align="left">Nome Census Area</td>
 <td align="left">AK</td>
 <td align="left">99785</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1030,6 +1130,7 @@
 <td align="left">Northwest Arctic Borough</td>
 <td align="left">AK</td>
 <td align="left">99786</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1050,6 +1151,7 @@
 <td align="left">Yukon-Koyukuk Census Area</td>
 <td align="left">AK</td>
 <td align="left">99788</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1070,6 +1172,7 @@
 <td align="left">North Slope Borough</td>
 <td align="left">AK</td>
 <td align="left">99789</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1090,6 +1193,7 @@
 <td align="left">Yukon-Koyukuk Census Area</td>
 <td align="left">AK</td>
 <td align="left">99790</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1110,6 +1214,7 @@
 <td align="left">North Slope Borough</td>
 <td align="left">AK</td>
 <td align="left">99791</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1130,6 +1235,7 @@
 <td align="left">Juneau City and Borough</td>
 <td align="left">AK</td>
 <td align="left">99801</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1150,6 +1256,7 @@
 <td align="left">City and Borough of Juneau</td>
 <td align="left">AK</td>
 <td align="left">99802</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1170,6 +1277,7 @@
 <td align="left">City and Borough of Juneau</td>
 <td align="left">AK</td>
 <td align="left">99803</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1190,6 +1298,7 @@
 <td align="left">City and Borough of Juneau</td>
 <td align="left">AK</td>
 <td align="left">99811</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1210,6 +1319,7 @@
 <td align="left">City and Borough of Juneau</td>
 <td align="left">AK</td>
 <td align="left">99812</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1230,6 +1340,7 @@
 <td align="left">Hoonah-Angoon Census Area</td>
 <td align="left">AK</td>
 <td align="left">99820</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1250,6 +1361,7 @@
 <td align="left">City and Borough of Juneau</td>
 <td align="left">AK</td>
 <td align="left">99821</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1270,6 +1382,7 @@
 <td align="left">Juneau City and Borough</td>
 <td align="left">AK</td>
 <td align="left">99824</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1290,6 +1403,7 @@
 <td align="left">Hoonah-Angoon Census Area</td>
 <td align="left">AK</td>
 <td align="left">99825</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1310,6 +1424,7 @@
 <td align="left">Hoonah-Angoon Census Area</td>
 <td align="left">AK</td>
 <td align="left">99826</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1330,6 +1445,7 @@
 <td align="left">Haines Borough</td>
 <td align="left">AK</td>
 <td align="left">99827</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1350,6 +1466,7 @@
 <td align="left">Hoonah-Angoon Census Area</td>
 <td align="left">AK</td>
 <td align="left">99829</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1370,6 +1487,7 @@
 <td align="left">Petersburg Census Area</td>
 <td align="left">AK</td>
 <td align="left">99830</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1390,6 +1508,7 @@
 <td align="left">Hoonah-Angoon Census Area</td>
 <td align="left">AK</td>
 <td align="left">99832</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1410,6 +1529,7 @@
 <td align="left">Petersburg Census Area</td>
 <td align="left">AK</td>
 <td align="left">99833</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1430,6 +1550,7 @@
 <td align="left">Sitka City and Borough</td>
 <td align="left">AK</td>
 <td align="left">99835</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1450,6 +1571,7 @@
 <td align="left">Petersburg Census Area</td>
 <td align="left">AK</td>
 <td align="left">99836</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1470,6 +1592,7 @@
 <td align="left">Skagway Municipality</td>
 <td align="left">AK</td>
 <td align="left">99840</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1490,6 +1613,7 @@
 <td align="left">Hoonah-Angoon Census Area</td>
 <td align="left">AK</td>
 <td align="left">99841</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1510,6 +1634,7 @@
 <td align="left">City and Borough of Juneau</td>
 <td align="left">AK</td>
 <td align="left">99850</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1530,6 +1655,7 @@
 <td align="left">Ketchikan Gateway Borough</td>
 <td align="left">AK</td>
 <td align="left">99901</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1550,6 +1676,7 @@
 <td align="left">Wrangell City and Borough</td>
 <td align="left">AK</td>
 <td align="left">99903</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1570,6 +1697,7 @@
 <td align="left">Prince of Wales-Hyder Census Area</td>
 <td align="left">AK</td>
 <td align="left">99918</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1590,6 +1718,7 @@
 <td align="left">Prince of Wales-Hyder Census Area</td>
 <td align="left">AK</td>
 <td align="left">99919</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1610,6 +1739,7 @@
 <td align="left">Prince of Wales-Hyder Census Area</td>
 <td align="left">AK</td>
 <td align="left">99921</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1630,6 +1760,7 @@
 <td align="left">Prince of Wales-Hyder Census Area</td>
 <td align="left">AK</td>
 <td align="left">99922</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1650,6 +1781,7 @@
 <td align="left">Prince of Wales-Hyder Census Area</td>
 <td align="left">AK</td>
 <td align="left">99923</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1670,6 +1802,7 @@
 <td align="left">Prince of Wales-Hyder Census Area</td>
 <td align="left">AK</td>
 <td align="left">99925</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1690,6 +1823,7 @@
 <td align="left">Prince of Wales-Outer Ketchikan Borough</td>
 <td align="left">AK</td>
 <td align="left">99926</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1710,6 +1844,7 @@
 <td align="left">Prince of Wales-Hyder Census Area</td>
 <td align="left">AK</td>
 <td align="left">99927</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1730,6 +1865,7 @@
 <td align="left">Ketchikan Gateway Borough</td>
 <td align="left">AK</td>
 <td align="left">99928</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1750,6 +1886,7 @@
 <td align="left">Wrangell City and Borough</td>
 <td align="left">AK</td>
 <td align="left">99929</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1770,6 +1907,7 @@
 <td align="left">Prince of Wales-Outer Ketchikan Borough</td>
 <td align="left">AK</td>
 <td align="left">99950</td>
+<td align="left">vascular surgery</td>
 <td align="right">99203</td>
 <td align="right">74.816</td>
 <td align="right">233.632</td>
@@ -1793,7 +1931,7 @@
 <h2 id="summary-statistics-by-state">Summary Statistics by State<a class="anchor" aria-label="anchor" href="#summary-statistics-by-state"></a>
 </h2>
 <p>Current average prices by state for an office visit by a <strong>New Patient</strong> to a <strong>Vascular Surgeon</strong>:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -2362,7 +2500,7 @@
 </table>
 <p><br></p>
 <p>Current average prices by state for an office visit by an <strong>Established Patient</strong> to a <strong>Cardiologist</strong>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
