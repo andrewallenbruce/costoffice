@@ -17,7 +17,8 @@ Suggests:
     roxyglobals (>= 0.2.1),
     knitr,
     rmarkdown,
-    lobstr
+    lobstr,
+    covr
 Encoding: UTF-8
 Roxygen: list(
     markdown = TRUE,
