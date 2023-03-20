@@ -257,8 +257,8 @@ search_datasets(specialty = "vascular surgery") |>
 
 ## Summary Statistics by State
 
-Current average prices by state for an office visit by a New Patient to
-a Vascular Surgeon:
+Current average prices by state for an office visit by a **New Patient**
+to a **Vascular Surgeon**:
 
 ``` r
 search_datasets(specialty = "vascular surgery") |> 
@@ -333,8 +333,8 @@ search_datasets(specialty = "vascular surgery") |>
 
 <br>
 
-Current average prices by state for an office visit by an Established
-Patient to a Cardiologist:
+Current average prices by state for an office visit by an **Established
+Patient** to a **Cardiologist**:
 
 ``` r
 search_datasets(specialty = "cardiology") |> 

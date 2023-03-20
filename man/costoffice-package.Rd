@@ -12,6 +12,7 @@ Provides various functions to enable downloading CMS physician office visit cost
 Useful links:
 \itemize{
   \item \url{https://github.com/andrewallenbruce/costoffice}
+  \item \url{https://andrewallenbruce.github.io/costoffice/}
   \item Report bugs at \url{https://github.com/andrewallenbruce/costoffice/issues}
 }
 

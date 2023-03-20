@@ -5,4 +5,3 @@ template:
   bslib:
     code_font: {google: "JetBrains Mono"}
     pkgdown-nav-height: 100px
-

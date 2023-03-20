@@ -1,0 +1,160 @@
+---
+title: "costoffice"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{costoffice}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = FALSE,
+  echo      = TRUE,
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
+)
+```
+
+```{r setup}
+library(costoffice)
+```
+
+<br>
+
+## Retrieve Dataset Info with `search_datasets()`
+
+<br>
+
+`search_datasets()` retrieves information on the 83 data sets, separated by physician specialty. If you're searching for one specialty in particular, just supply the `specialty` argument:
+
+<br>
+
+```{r}
+search_datasets(specialty = "cardiac surgery") |> 
+  tidytable::glimpse()
+```
+
+<br>
+
+The result contains three dates related to the last time the data was updated and the download link for the csv file.
+
+<br>
+
+To retrieve information on all of the data sets (83 specialties in total), 
+simply call `search_datasets()` with no arguments:
+
+<br>
+
+```{r}
+search_datasets() |> knitr::kable()
+```
+
+<br>
+
+## Downloading A Dataset
+
+<br>
+`costoffice` uses Mark Fairbanks' excellent `tidytable` package underneath the hood (with it using `data.table` under it's hood), resulting in much smaller download sizes and lightning fast data operations.
+
+<br>
+
+Each individual data set has approximately 43k rows and is roughly between 4.5 to 5 MB on disk/in memory.
+
+<br>
+
+```{r}
+search_datasets(specialty = "vascular surgery") |> 
+  download_dataset() |> 
+  tidytable::slice_tail(n = 10)
+```
+
+
+<br>
+
+## Geocoding with `zipcodeR`
+
+<br>
+
+`costoffice` includes a subset of zip code data from Gavin Rozzi's amazing `zipcodeR` package:
+
+<br>
+
+```{r}
+data("zipcode_db")
+zipcode_db |> 
+  tidytable::slice_head() |> 
+  knitr::kable()
+```
+
+<br>
+
+Putting `use_zipcoder()` in the pipe chain will add this information to the data table:
+
+<br>
+
+
+```{r}
+search_datasets(specialty = "vascular surgery") |> 
+  download_dataset() |> 
+  tidytable::slice_tail(n = 10) |> 
+  use_zipcoder() |> 
+  tidytable::select(-geo) |> 
+  knitr::kable()
+```
+
+
+<br>
+
+## Summary Statistics by State
+
+<br>
+
+Current average prices by state for an office visit by a **New Patient** to a **Vascular Surgeon**:
+
+<br>
+
+```{r}
+search_datasets(specialty = "vascular surgery") |> 
+  download_dataset() |> 
+  use_zipcoder() |> 
+  tidytable::select(state, tidytable::starts_with("new_")) |> 
+  tidytable::summarise(avg_min = mean(new_price_min),
+                       avg_max = mean(new_price_max),
+                       avg_mode = mean(new_price_mode),
+                       avg_copay_min = mean(new_copay_min),
+                       avg_copay_max = mean(new_copay_max),
+                       avg_copay_mode = mean(new_copay_mode),
+                       .by = c(state, new_top_code)) |> 
+  knitr::kable()
+```
+
+
+<br>
+
+Current average prices by state for an office visit by an **Established Patient** to a **Cardiologist**:
+
+<br>
+
+```{r}
+search_datasets(specialty = "cardiology") |> 
+  download_dataset() |> 
+  use_zipcoder() |> 
+  tidytable::select(state, tidytable::starts_with("est_")) |> 
+  tidytable::summarise(avg_min = mean(est_price_min),
+                       avg_max = mean(est_price_max),
+                       avg_mode = mean(est_price_mode),
+                       avg_copay_min = mean(est_copay_min),
+                       avg_copay_max = mean(est_copay_max),
+                       avg_copay_mode = mean(est_copay_mode),
+                       .by = c(state, est_top_code)) |> 
+  knitr::kable()
+```
+
+
+<br>
