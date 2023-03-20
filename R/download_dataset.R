@@ -36,7 +36,10 @@ download_dataset <- function(df) {
   est_price_mode = mode_medicare_pricing_for_established_patient,
   est_copay_min = min_copay_for_established_patient,
   est_copay_max = max_copay_for_established_patient,
-  est_copay_mode = mode_copay_for_established_patient)
+  est_copay_mode = mode_copay_for_established_patient) |>
+    tidytable::mutate(specialty = df$specialty, .before = zip_code)
+
+
   return(results)
 }
 

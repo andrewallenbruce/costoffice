@@ -52,7 +52,7 @@ simply call `search_datasets()` with no arguments:
 <br>
 
 ```{r}
-search_datasets() |> knitr::kable()
+search_datasets()
 ```
 
 <br>
@@ -64,18 +64,29 @@ search_datasets() |> knitr::kable()
 
 <br>
 
-Each individual data set has approximately 43k rows and is roughly between 4.5 to 5 MB on disk/in memory.
+Each individual data set has approximately 43k rows and is roughly 8 MB on disk/in memory.
 
 <br>
 
 ```{r}
-search_datasets(specialty = "vascular surgery") |> 
-  download_dataset() |> 
-  tidytable::slice_tail(n = 10)
+cardio <- search_datasets(specialty = "cardiology") |> download_dataset()
+
+dim(cardio)
+
+lobstr::obj_size(cardio)
 ```
 
 
 <br>
+
+
+```{r}
+cardio |> 
+  tidytable::slice_sample(n = 10) |> 
+  knitr::kable()
+```
+
+
 
 ## Geocoding with `zipcodeR`
 
@@ -102,7 +113,7 @@ Putting `use_zipcoder()` in the pipe chain will add this information to the data
 ```{r}
 search_datasets(specialty = "vascular surgery") |> 
   download_dataset() |> 
-  tidytable::slice_tail(n = 10) |> 
+  tidytable::slice_sample(n = 10) |> 
   use_zipcoder() |> 
   tidytable::select(-geo) |> 
   knitr::kable()
@@ -115,7 +126,7 @@ search_datasets(specialty = "vascular surgery") |>
 
 <br>
 
-Current average prices by state for an office visit by a **New Patient** to a **Vascular Surgeon**:
+Current average prices & copays by state for an office visit by a **New Patient** to a **Vascular Surgeon**:
 
 <br>
 
@@ -124,20 +135,22 @@ search_datasets(specialty = "vascular surgery") |>
   download_dataset() |> 
   use_zipcoder() |> 
   tidytable::select(state, tidytable::starts_with("new_")) |> 
-  tidytable::summarise(avg_min = mean(new_price_min),
-                       avg_max = mean(new_price_max),
-                       avg_mode = mean(new_price_mode),
-                       avg_copay_min = mean(new_copay_min),
-                       avg_copay_max = mean(new_copay_max),
-                       avg_copay_mode = mean(new_copay_mode),
+  tidytable::summarise(avg_min_price = round(mean(new_price_min), 2),
+                       avg_max_price = round(mean(new_price_max), 2),
+                       avg_mode_price = round(mean(new_price_mode), 2),
+                       avg_copay_min = round(mean(new_copay_min), 2),
+                       avg_copay_max = round(mean(new_copay_max), 2),
+                       avg_copay_mode = round(mean(new_copay_mode), 2),
                        .by = c(state, new_top_code)) |> 
+  tidytable::select(-new_top_code) |> 
+  tidytable::drop_na() |> 
   knitr::kable()
 ```
 
 
 <br>
 
-Current average prices by state for an office visit by an **Established Patient** to a **Cardiologist**:
+Current average prices & copays by state for an office visit by an **Established Patient** to a **Cardiologist**:
 
 <br>
 
@@ -146,13 +159,15 @@ search_datasets(specialty = "cardiology") |>
   download_dataset() |> 
   use_zipcoder() |> 
   tidytable::select(state, tidytable::starts_with("est_")) |> 
-  tidytable::summarise(avg_min = mean(est_price_min),
-                       avg_max = mean(est_price_max),
-                       avg_mode = mean(est_price_mode),
-                       avg_copay_min = mean(est_copay_min),
-                       avg_copay_max = mean(est_copay_max),
-                       avg_copay_mode = mean(est_copay_mode),
+  tidytable::summarise(avg_min_price = round(mean(est_price_min), 2),
+                       avg_max_price = round(mean(est_price_max), 2),
+                       avg_mode_price = round(mean(est_price_mode), 2),
+                       avg_copay_min = round(mean(est_copay_min), 2),
+                       avg_copay_max = round(mean(est_copay_max), 2),
+                       avg_copay_mode = round(mean(est_copay_mode), 2),
                        .by = c(state, est_top_code)) |> 
+  tidytable::select(-est_top_code) |> 
+  tidytable::drop_na() |> 
   knitr::kable()
 ```
 

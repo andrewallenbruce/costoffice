@@ -65,6 +65,13 @@ search_datasets() |> knitr::kable()
 
 <br>
 
+```{r}
+search_datasets()$specialty
+```
+
+
+<br>
+
 If you're searching for one in particular, just supply the `specialty` argument:
 
 ```{r}
