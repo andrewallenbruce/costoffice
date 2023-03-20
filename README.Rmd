@@ -51,8 +51,6 @@ remotes::install_github("andrewallenbruce/costoffice")
 
 ```{r echo=TRUE}
 library(costoffice)
-library(data.table)
-library(tidytable)
 ```
 
 <br>
@@ -112,6 +110,7 @@ dt
 
 
 ```{r}
+library(zipcodeR)
 dt |> 
   dplyr::mutate(zip_code = purrr::map_chr(.data$zip_code, zipcodeR::normalize_zip)) |>  
   dplyr::mutate(zip_info = purrr::map_df(.data$zip_code, zipcodeR::reverse_zipcode), .after = zip_code) |>

@@ -61,3 +61,5 @@ search_datasets <- function(specialty = NULL) {
   }
   return(results)
 }
+
+.datatable.aware <- TRUE
