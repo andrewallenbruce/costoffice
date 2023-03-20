@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# costoffice 0.0.0.9006 (2023-03-20)
+
+- Same as previous version.
+
+
 # costoffice 0.0.0.9005 (2023-03-20)
 
 * download_dataset() now adds specialty col
