@@ -69,10 +69,13 @@ Each individual data set has approximately 43k rows and is roughly 8 MB on disk/
 <br>
 
 ```{r}
-cardio <- search_datasets(specialty = "cardiology") |> download_dataset()
+cardio <- search_datasets(specialty = "cardiology") |> 
+  download_dataset()
+nrow(cardio)
+```
 
-dim(cardio)
 
+```{r}
 lobstr::obj_size(cardio)
 ```
 

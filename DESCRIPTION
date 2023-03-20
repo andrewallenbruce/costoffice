@@ -16,7 +16,8 @@ Suggests:
     zipcodeR,
     roxyglobals (>= 0.2.1),
     knitr,
-    rmarkdown
+    rmarkdown,
+    lobstr
 Encoding: UTF-8
 Roxygen: list(
     markdown = TRUE,
