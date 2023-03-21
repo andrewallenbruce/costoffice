@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# costoffice 0.0.0.9010 (2023-03-21)
+
+- Same as previous version.
+
+
 # costoffice 0.0.0.9009 (2023-03-21)
 
 - Same as previous version.
