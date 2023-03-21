@@ -64,12 +64,6 @@ simply call `search_datasets()` with no arguments:
 search_datasets() |> knitr::kable()
 ```
 
-<br>
-
-```{r}
-search_datasets()$specialty
-```
-
 
 <br>
 
@@ -101,7 +95,6 @@ search_datasets(specialty = "vascular surgery") |>
   download_dataset() |> 
   tidytable::slice_tail(n = 50) |> 
   use_zipcoder() |> 
-  tidytable::select(-geo) |> 
   knitr::kable()
 ```
 
@@ -115,14 +108,15 @@ Current average prices by state for an office visit by a **New Patient** to a **
 search_datasets(specialty = "vascular surgery") |> 
   download_dataset() |> 
   use_zipcoder() |> 
-  tidytable::select(state, tidytable::starts_with("new_")) |> 
-  tidytable::summarise(avg_min = mean(new_price_min),
-                       avg_max = mean(new_price_max),
-                       avg_mode = mean(new_price_mode),
-                       avg_copay_min = mean(new_copay_min),
-                       avg_copay_max = mean(new_copay_max),
-                       avg_copay_mode = mean(new_copay_mode),
-                       .by = c(state, new_top_code)) |> 
+  tidytable::select(specialty, 
+                    state, 
+                    tidytable::starts_with("new_")) |> 
+  tidytable::summarise(avg_price_mode = round(mean(new_price_mode), 2),
+                       avg_copay_mode = round(mean(new_copay_mode), 2),
+                       .by = c(specialty, 
+                               state, 
+                               new_code)) |> 
+  tidytable::drop_na() |> 
   knitr::kable()
 ```
 
@@ -134,14 +128,15 @@ Current average prices by state for an office visit by an **Established Patient*
 search_datasets(specialty = "cardiology") |> 
   download_dataset() |> 
   use_zipcoder() |> 
-  tidytable::select(state, tidytable::starts_with("est_")) |> 
-  tidytable::summarise(avg_min = mean(est_price_min),
-                       avg_max = mean(est_price_max),
-                       avg_mode = mean(est_price_mode),
-                       avg_copay_min = mean(est_copay_min),
-                       avg_copay_max = mean(est_copay_max),
-                       avg_copay_mode = mean(est_copay_mode),
-                       .by = c(state, est_top_code)) |> 
+  tidytable::select(specialty, 
+                    state, 
+                    tidytable::starts_with("est_")) |> 
+  tidytable::summarise(avg_price_mode = round(mean(est_price_mode), 2),
+                       avg_copay_mode = round(mean(est_copay_mode), 2),
+                       .by = c(specialty, 
+                               state, 
+                               est_code)) |> 
+  tidytable::drop_na() |> 
   knitr::kable()
 ```
 

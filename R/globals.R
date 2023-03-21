@@ -23,6 +23,10 @@ utils::globalVariables(c(
   "keyword", # <search_datasets>
   "distribution", # <search_datasets>
   "distribution.downloadURL", # <search_datasets>
+  "city", # <use_zipcoder>
+  "county", # <use_zipcoder>
+  "state", # <use_zipcoder>
+  "zip_code", # <use_zipcoder>
   ".data", # <use_zipcoder_tidytable>
   "zip_code", # <use_zipcoder_tidytable>
   "zip_info", # <use_zipcoder_tidytable>
@@ -35,11 +39,5 @@ utils::globalVariables(c(
   "bounds_east", # <use_zipcoder_tidytable>
   "bounds_north", # <use_zipcoder_tidytable>
   "bounds_south", # <use_zipcoder_tidytable>
-  "lat", # <use_zipcoder>
-  "lng", # <use_zipcoder>
-  "city", # <use_zipcoder>
-  "county", # <use_zipcoder>
-  "state", # <use_zipcoder>
-  "zip_code", # <use_zipcoder>
   NULL
 ))

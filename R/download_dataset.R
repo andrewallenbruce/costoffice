@@ -20,17 +20,21 @@
 
 download_dataset <- function(df) {
 
+  .datatable.aware <- TRUE
+
   results <- tidytable::fread(df$csv_url,
-             colClasses = c(zip_code = "character")) |>
+             colClasses = c(zip_code = "character",
+  most_utilized_procedure_code_for_new_patient = "character",
+  most_utilized_procedure_code_for_established_patient = "character")) |>
   tidytable::select(zip_code,
-  new_top_code = most_utilized_procedure_code_for_new_patient,
+  new_code = most_utilized_procedure_code_for_new_patient,
   new_price_min = min_medicare_pricing_for_new_patient,
   new_price_max = max_medicare_pricing_for_new_patient,
   new_price_mode = mode_medicare_pricing_for_new_patient,
   new_copay_min = min_copay_for_new_patient,
   new_copay_max = max_copay_for_new_patient,
   new_copay_mode = mode_copay_for_new_patient,
-  est_top_code = most_utilized_procedure_code_for_established_patient,
+  est_code = most_utilized_procedure_code_for_established_patient,
   est_price_min = min_medicare_pricing_for_established_patient,
   est_price_max = max_medicare_pricing_for_established_patient,
   est_price_mode = mode_medicare_pricing_for_established_patient,

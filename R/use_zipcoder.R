@@ -1,3 +1,33 @@
+#' Add Geocoding Info to dataset via zipcodeR database
+#'
+#' @description A list of enrollment applications pending CMS contractor
+#'    review for physicians & non-physicians.
+#'
+#' ## Links
+#' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
+#'
+#' @param df tidytable from `download_dataset()`
+#' @return A `tidytable`
+#'
+#' @examples
+#' search_datasets(specialty = "vascular surgery") |>
+#' download_dataset() |>
+#' tidytable::slice_tail(n = 5) |>
+#' use_zipcoder()
+#' @autoglobal
+#' @export
+use_zipcoder <- function(df) {
+
+  .datatable.aware <- TRUE
+
+  results <- df |>
+    tidytable::left_join(costoffice::zipcode_db) |>
+    #tidytable::nest(geo = c(lat, lng, tidytable::starts_with("bounds"))) |>
+    tidytable::select(city, county, state, zip_code, tidytable::everything())
+
+  return(results)
+}
+
 #' Download A Physician Office Visit Costs Data set
 #'
 #' @description A list of enrollment applications pending CMS contractor
@@ -42,10 +72,7 @@ use_zipcoder_tidytable <- function(df) {
                   bounds_north,
                   bounds_south,
                   tidytable::contains("new"),
-                  tidytable::contains("est")) |>
-    tidytable::nest(geo = c(lat,
-                            lng,
-    tidytable::starts_with("bounds")))
+                  tidytable::contains("est"))
 
 
   return(results)
@@ -53,32 +80,4 @@ use_zipcoder_tidytable <- function(df) {
 
 .datatable.aware <- TRUE
 
-#' Add Geocoding Info to dataset via zipcodeR database
-#'
-#' @description A list of enrollment applications pending CMS contractor
-#'    review for physicians & non-physicians.
-#'
-#' ## Links
-#' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
-#'
-#' @param df tidytable from `download_dataset()`
-#' @return A `tidytable`
-#'
-#' @examples
-#' search_datasets(specialty = "vascular surgery") |>
-#' download_dataset() |>
-#' tidytable::slice_tail(n = 5) |>
-#' use_zipcoder()
-#' @autoglobal
-#' @export
-use_zipcoder <- function(df) {
 
-  results <- df |>
-    tidytable::left_join(costoffice::zipcode_db) |>
-    tidytable::nest(geo = c(lat, lng, tidytable::starts_with("bounds"))) |>
-    tidytable::select(city, county, state, zip_code, tidytable::everything())
-
-  return(results)
-}
-
-.datatable.aware <- TRUE

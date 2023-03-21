@@ -143,96 +143,6 @@ search_datasets() |> knitr::kable()
 
 <br>
 
-``` r
-search_datasets()$specialty
-```
-
-    #>  [1] "addiction medicine"                                     
-    #>  [2] "advanced heart failure and transplant cardiology"       
-    #>  [3] "allergy/ immunology"                                    
-    #>  [4] "anesthesiology"                                         
-    #>  [5] "cardiac surgery"                                        
-    #>  [6] "cardiology"                                             
-    #>  [7] "certified clinical nurse specialist"                    
-    #>  [8] "certified nurse midwife"                                
-    #>  [9] "certified registered nurse anesthetist (crna)"          
-    #> [10] "clinic or group practice"                               
-    #> [11] "clinical cardiac electrophysiology"                     
-    #> [12] "clinical laboratory"                                    
-    #> [13] "colorectal surgery (proctology)"                        
-    #> [14] "critical care (intensivists)"                           
-    #> [15] "dentist"                                                
-    #> [16] "dermatology"                                            
-    #> [17] "diagnostic radiology"                                   
-    #> [18] "emergency medicine"                                     
-    #> [19] "endocrinology"                                          
-    #> [20] "family practice"                                        
-    #> [21] "gastroenterology"                                       
-    #> [22] "general practice"                                       
-    #> [23] "general surgery"                                        
-    #> [24] "geriatric medicine"                                     
-    #> [25] "geriatric psychiatry"                                   
-    #> [26] "gynecological oncology"                                 
-    #> [27] "hand surgery"                                           
-    #> [28] "hematology"                                             
-    #> [29] "hematology-oncology"                                    
-    #> [30] "hematopoietic cell transplantation and cellular therapy"
-    #> [31] "hospice and palliative care"                            
-    #> [32] "hospitalist"                                            
-    #> [33] "infectious disease"                                     
-    #> [34] "internal medicine"                                      
-    #> [35] "interventional cardiology"                              
-    #> [36] "interventional pain management"                         
-    #> [37] "interventional radiology"                               
-    #> [38] "licensed clinical social worker"                        
-    #> [39] "mammography center"                                     
-    #> [40] "maxillofacial surgery"                                  
-    #> [41] "medical genetics and genomics"                          
-    #> [42] "medical oncology"                                       
-    #> [43] "medical toxicology"                                     
-    #> [44] "nephrology"                                             
-    #> [45] "neurology"                                              
-    #> [46] "neuropsychiatry"                                        
-    #> [47] "neurosurgery"                                           
-    #> [48] "nuclear medicine"                                       
-    #> [49] "nurse practitioner"                                     
-    #> [50] "obstetrics &amp; gynecology"                            
-    #> [51] "ophthalmology"                                          
-    #> [52] "optometry"                                              
-    #> [53] "oral surgery (dentist only)"                            
-    #> [54] "orthopedic surgery"                                     
-    #> [55] "osteopathic manipulative medicine"                      
-    #> [56] "otolaryngology"                                         
-    #> [57] "pain management"                                        
-    #> [58] "pathology"                                              
-    #> [59] "pediatric medicine"                                     
-    #> [60] "peripheral vascular disease"                            
-    #> [61] "physical medicine and rehabilitation"                   
-    #> [62] "physical therapist in private practice"                 
-    #> [63] "physician assistant"                                    
-    #> [64] "plastic and reconstructive surgery"                     
-    #> [65] "podiatry"                                               
-    #> [66] "preventive medicine"                                    
-    #> [67] "psychiatry"                                             
-    #> [68] "psychologist, clinical"                                 
-    #> [69] "public health or welfare agency"                        
-    #> [70] "pulmonary disease"                                      
-    #> [71] "radiation oncology"                                     
-    #> [72] "registered dietitian or nutrition professional"         
-    #> [73] "rheumatology"                                           
-    #> [74] "sleep medicine"                                         
-    #> [75] "speech language pathologist"                            
-    #> [76] "sports medicine"                                        
-    #> [77] "surgical oncology"                                      
-    #> [78] "thoracic surgery"                                       
-    #> [79] "undefined physician type"                               
-    #> [80] "undersea and hyperbaric medicine"                       
-    #> [81] "unknown supplier/provider specialty"                    
-    #> [82] "urology"                                                
-    #> [83] "vascular surgery"
-
-<br>
-
 If you’re searching for one in particular, just supply the `specialty`
 argument:
 
@@ -261,22 +171,22 @@ search_datasets(specialty = "vascular surgery") |>
 ```
 
     #> # A tidytable: 10 × 16
-    #>    specialty     zip_c…¹ new_t…² new_p…³ new_p…⁴ new_p…⁵ new_c…⁶ new_c…⁷ new_c…⁸
-    #>    <chr>         <chr>     <int>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-    #>  1 vascular sur… 99919     99203    74.8    234.    117.    18.7    58.4    29.2
-    #>  2 vascular sur… 99921     99203    74.8    234.    117.    18.7    58.4    29.2
-    #>  3 vascular sur… 99922     99203    74.8    234.    117.    18.7    58.4    29.2
-    #>  4 vascular sur… 99923     99203    74.8    234.    117.    18.7    58.4    29.2
-    #>  5 vascular sur… 99925     99203    74.8    234.    117.    18.7    58.4    29.2
-    #>  6 vascular sur… 99926     99203    74.8    234.    117.    18.7    58.4    29.2
-    #>  7 vascular sur… 99927     99203    74.8    234.    117.    18.7    58.4    29.2
-    #>  8 vascular sur… 99928     99203    74.8    234.    117.    18.7    58.4    29.2
-    #>  9 vascular sur… 99929     99203    74.8    234.    117.    18.7    58.4    29.2
-    #> 10 vascular sur… 99950     99203    74.8    234.    117.    18.7    58.4    29.2
-    #> # … with 7 more variables: est_top_code <int>, est_price_min <dbl>,
+    #>    specialty     zip_c…¹ new_c…² new_p…³ new_p…⁴ new_p…⁵ new_c…⁶ new_c…⁷ new_c…⁸
+    #>    <chr>         <chr>   <chr>     <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
+    #>  1 vascular sur… 99919   99203      74.8    234.    117.    18.7    58.4    29.2
+    #>  2 vascular sur… 99921   99203      74.8    234.    117.    18.7    58.4    29.2
+    #>  3 vascular sur… 99922   99203      74.8    234.    117.    18.7    58.4    29.2
+    #>  4 vascular sur… 99923   99203      74.8    234.    117.    18.7    58.4    29.2
+    #>  5 vascular sur… 99925   99203      74.8    234.    117.    18.7    58.4    29.2
+    #>  6 vascular sur… 99926   99203      74.8    234.    117.    18.7    58.4    29.2
+    #>  7 vascular sur… 99927   99203      74.8    234.    117.    18.7    58.4    29.2
+    #>  8 vascular sur… 99928   99203      74.8    234.    117.    18.7    58.4    29.2
+    #>  9 vascular sur… 99929   99203      74.8    234.    117.    18.7    58.4    29.2
+    #> 10 vascular sur… 99950   99203      74.8    234.    117.    18.7    58.4    29.2
+    #> # … with 7 more variables: est_code <chr>, est_price_min <dbl>,
     #> #   est_price_max <dbl>, est_price_mode <dbl>, est_copay_min <dbl>,
     #> #   est_copay_max <dbl>, est_copay_mode <dbl>, and abbreviated variable names
-    #> #   ¹​zip_code, ²​new_top_code, ³​new_price_min, ⁴​new_price_max, ⁵​new_price_mode,
+    #> #   ¹​zip_code, ²​new_code, ³​new_price_min, ⁴​new_price_max, ⁵​new_price_mode,
     #> #   ⁶​new_copay_min, ⁷​new_copay_max, ⁸​new_copay_mode
 
 <br>
@@ -288,62 +198,61 @@ search_datasets(specialty = "vascular surgery") |>
   download_dataset() |> 
   tidytable::slice_tail(n = 50) |> 
   use_zipcoder() |> 
-  tidytable::select(-geo) |> 
   knitr::kable()
 ```
 
-| city            | county                                  | state | zip_code | specialty        | new_top_code | new_price_min | new_price_max | new_price_mode | new_copay_min | new_copay_max | new_copay_mode | est_top_code | est_price_min | est_price_max | est_price_mode | est_copay_min | est_copay_max | est_copay_mode |
-|:----------------|:----------------------------------------|:------|:---------|:-----------------|-------------:|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|-------------:|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|
-| Stevens Village | Yukon-Koyukuk Census Area               | AK    | 99774    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Fairbanks       | Fairbanks North Star Borough            | AK    | 99775    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Tanacross       | Southeast Fairbanks Census Area         | AK    | 99776    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Tanana          | Yukon-Koyukuk Census Area               | AK    | 99777    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Teller          | Nome Census Area                        | AK    | 99778    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Tok             | Southeast Fairbanks Census Area         | AK    | 99779    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Tok             | Southeast Fairbanks Census Area         | AK    | 99780    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Venetie         | Yukon-Koyukuk Census Area               | AK    | 99781    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Wainwright      | North Slope Borough                     | AK    | 99782    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Wales           | Nome Census Area                        | AK    | 99783    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| White Mountain  | Nome Census Area                        | AK    | 99784    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Brevig Mission  | Nome Census Area                        | AK    | 99785    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Ambler          | Northwest Arctic Borough                | AK    | 99786    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Chalkyitsik     | Yukon-Koyukuk Census Area               | AK    | 99788    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Nuiqsut         | North Slope Borough                     | AK    | 99789    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Fairbanks       | Yukon-Koyukuk Census Area               | AK    | 99790    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Atqasuk         | North Slope Borough                     | AK    | 99791    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Juneau          | Juneau City and Borough                 | AK    | 99801    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Juneau          | City and Borough of Juneau              | AK    | 99802    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Juneau          | City and Borough of Juneau              | AK    | 99803    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Juneau          | City and Borough of Juneau              | AK    | 99811    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Juneau          | City and Borough of Juneau              | AK    | 99812    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Angoon          | Hoonah-Angoon Census Area               | AK    | 99820    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Auke Bay        | City and Borough of Juneau              | AK    | 99821    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Douglas         | Juneau City and Borough                 | AK    | 99824    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Elfin Cove      | Hoonah-Angoon Census Area               | AK    | 99825    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Gustavus        | Hoonah-Angoon Census Area               | AK    | 99826    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Haines          | Haines Borough                          | AK    | 99827    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Hoonah          | Hoonah-Angoon Census Area               | AK    | 99829    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Kake            | Petersburg Census Area                  | AK    | 99830    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Pelican         | Hoonah-Angoon Census Area               | AK    | 99832    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Petersburg      | Petersburg Census Area                  | AK    | 99833    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Sitka           | Sitka City and Borough                  | AK    | 99835    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Port Alexander  | Petersburg Census Area                  | AK    | 99836    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Skagway         | Skagway Municipality                    | AK    | 99840    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Tenakee Springs | Hoonah-Angoon Census Area               | AK    | 99841    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Juneau          | City and Borough of Juneau              | AK    | 99850    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Ketchikan       | Ketchikan Gateway Borough               | AK    | 99901    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Meyers Chuck    | Wrangell City and Borough               | AK    | 99903    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Coffman Cove    | Prince of Wales-Hyder Census Area       | AK    | 99918    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Thorne Bay      | Prince of Wales-Hyder Census Area       | AK    | 99919    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Craig           | Prince of Wales-Hyder Census Area       | AK    | 99921    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Hydaburg        | Prince of Wales-Hyder Census Area       | AK    | 99922    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Hyder           | Prince of Wales-Hyder Census Area       | AK    | 99923    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Klawock         | Prince of Wales-Hyder Census Area       | AK    | 99925    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Metlakatla      | Prince of Wales-Outer Ketchikan Borough | AK    | 99926    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Point Baker     | Prince of Wales-Hyder Census Area       | AK    | 99927    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Ward Cove       | Ketchikan Gateway Borough               | AK    | 99928    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Wrangell        | Wrangell City and Borough               | AK    | 99929    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
-| Ketchikan       | Prince of Wales-Outer Ketchikan Borough | AK    | 99950    | vascular surgery |        99203 |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 |        99213 |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |
+| city            | county                                  | state | zip_code | specialty        | new_code | new_price_min | new_price_max | new_price_mode | new_copay_min | new_copay_max | new_copay_mode | est_code | est_price_min | est_price_max | est_price_mode | est_copay_min | est_copay_max | est_copay_mode |    lat |      lng | bounds_west | bounds_east | bounds_north | bounds_south |
+|:----------------|:----------------------------------------|:------|:---------|:-----------------|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|-------:|---------:|------------:|------------:|-------------:|-------------:|
+| Stevens Village | Yukon-Koyukuk Census Area               | AK    | 99774    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 67.000 | -149.000 |   -149.1666 |   -148.9731 |     66.05727 |     65.99105 |
+| Fairbanks       | Fairbanks North Star Borough            | AK    | 99775    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 64.860 | -147.820 |   -147.8313 |   -147.8169 |     64.86201 |     64.85493 |
+| Tanacross       | Southeast Fairbanks Census Area         | AK    | 99776    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 63.385 | -143.347 |   -143.5985 |   -143.2727 |     63.42951 |     63.35797 |
+| Tanana          | Yukon-Koyukuk Census Area               | AK    | 99777    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 65.000 | -155.000 |   -152.2302 |   -151.9220 |     65.27328 |     65.16815 |
+| Teller          | Nome Census Area                        | AK    | 99778    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 65.260 | -166.340 |   -166.9534 |   -165.6498 |     65.44442 |     64.88255 |
+| Tok             | Southeast Fairbanks Census Area         | AK    | 99779    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |     NA |       NA |          NA |          NA |           NA |           NA |
+| Tok             | Southeast Fairbanks Census Area         | AK    | 99780    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 63.000 | -142.000 |   -144.1504 |   -141.8093 |     63.49844 |     62.85613 |
+| Venetie         | Yukon-Koyukuk Census Area               | AK    | 99781    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 68.000 | -145.000 |   -147.2488 |   -145.1673 |     68.11005 |     66.96208 |
+| Wainwright      | North Slope Borough                     | AK    | 99782    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 70.000 | -161.000 |   -160.1063 |   -159.8087 |     70.68557 |     70.61122 |
+| Wales           | Nome Census Area                        | AK    | 99783    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 65.000 | -168.000 |   -168.1210 |   -167.8139 |     65.76203 |     65.55808 |
+| White Mountain  | Nome Census Area                        | AK    | 99784    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 64.600 | -163.600 |   -163.4308 |   -163.3879 |     64.68913 |     64.67156 |
+| Brevig Mission  | Nome Census Area                        | AK    | 99785    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 66.000 | -167.000 |   -166.5311 |   -166.4606 |     65.35140 |     65.32694 |
+| Ambler          | Northwest Arctic Borough                | AK    | 99786    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 67.080 | -157.860 |   -158.1938 |   -154.1323 |     68.04026 |     66.30205 |
+| Chalkyitsik     | Yukon-Koyukuk Census Area               | AK    | 99788    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 66.000 | -143.000 |   -143.8434 |   -143.7109 |     66.67571 |     66.62125 |
+| Nuiqsut         | North Slope Borough                     | AK    | 99789    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 70.220 | -150.990 |   -152.8811 |   -150.8346 |     70.43145 |     69.64461 |
+| Fairbanks       | Yukon-Koyukuk Census Area               | AK    | 99790    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 64.846 | -147.722 |   -148.9245 |   -147.8373 |     65.64674 |     65.21107 |
+| Atqasuk         | North Slope Borough                     | AK    | 99791    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 70.000 | -158.000 |   -157.5409 |   -155.8996 |     70.92612 |     70.20212 |
+| Juneau          | Juneau City and Borough                 | AK    | 99801    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 58.000 | -134.000 |   -135.0468 |   -133.1764 |     58.86994 |     57.79505 |
+| Juneau          | City and Borough of Juneau              | AK    | 99802    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |     NA |       NA |          NA |          NA |           NA |           NA |
+| Juneau          | City and Borough of Juneau              | AK    | 99803    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |     NA |       NA |          NA |          NA |           NA |           NA |
+| Juneau          | City and Borough of Juneau              | AK    | 99811    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |     NA |       NA |          NA |          NA |           NA |           NA |
+| Juneau          | City and Borough of Juneau              | AK    | 99812    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |     NA |       NA |          NA |          NA |           NA |           NA |
+| Angoon          | Hoonah-Angoon Census Area               | AK    | 99820    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 58.000 | -134.000 |   -134.9182 |   -133.0840 |     58.28291 |     57.01325 |
+| Auke Bay        | City and Borough of Juneau              | AK    | 99821    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |     NA |       NA |          NA |          NA |           NA |           NA |
+| Douglas         | Juneau City and Borough                 | AK    | 99824    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 58.250 | -134.390 |   -134.4335 |   -134.3710 |     58.28844 |     58.25053 |
+| Elfin Cove      | Hoonah-Angoon Census Area               | AK    | 99825    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 58.180 | -136.320 |   -136.4060 |   -135.4067 |     58.31869 |     57.97906 |
+| Gustavus        | Hoonah-Angoon Census Area               | AK    | 99826    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 59.000 | -137.000 |   -137.9465 |   -135.3185 |     59.26530 |     58.20995 |
+| Haines          | Haines Borough                          | AK    | 99827    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 59.000 | -135.000 |   -136.4941 |   -135.0623 |     59.72963 |     58.20909 |
+| Hoonah          | Hoonah-Angoon Census Area               | AK    | 99829    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 58.000 | -135.700 |   -135.4682 |   -135.3783 |     58.13468 |     58.07797 |
+| Kake            | Petersburg Census Area                  | AK    | 99830    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 56.800 | -133.500 |   -134.4221 |   -133.7748 |     57.02448 |     56.61742 |
+| Pelican         | Hoonah-Angoon Census Area               | AK    | 99832    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 57.960 | -136.220 |   -136.4719 |   -135.9067 |     58.22218 |     57.83586 |
+| Petersburg      | Petersburg Census Area                  | AK    | 99833    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 57.000 | -133.000 |   -134.3224 |   -132.0510 |     57.42686 |     56.43192 |
+| Sitka           | Sitka City and Borough                  | AK    | 99835    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 57.000 | -136.000 |   -135.7137 |   -134.6163 |     57.61748 |     56.16154 |
+| Port Alexander  | Petersburg Census Area                  | AK    | 99836    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 56.220 | -134.640 |   -134.6667 |   -134.6221 |     56.27183 |     56.16960 |
+| Skagway         | Skagway Municipality                    | AK    | 99840    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 59.600 | -135.400 |   -135.7226 |   -134.9933 |     59.79963 |     59.34062 |
+| Tenakee Springs | Hoonah-Angoon Census Area               | AK    | 99841    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 57.775 | -135.201 |   -135.3169 |   -135.0522 |     57.81748 |     57.77394 |
+| Juneau          | City and Borough of Juneau              | AK    | 99850    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |     NA |       NA |          NA |          NA |           NA |           NA |
+| Ketchikan       | Ketchikan Gateway Borough               | AK    | 99901    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 55.600 | -131.400 |   -133.2566 |   -129.9795 |     56.40738 |     54.66448 |
+| Meyers Chuck    | Wrangell City and Borough               | AK    | 99903    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 56.000 | -131.500 |   -132.3002 |   -131.8716 |     56.09563 |     55.63661 |
+| Coffman Cove    | Prince of Wales-Hyder Census Area       | AK    | 99918    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 56.010 | -132.830 |   -132.9055 |   -132.5660 |     56.04426 |     55.85769 |
+| Thorne Bay      | Prince of Wales-Hyder Census Area       | AK    | 99919    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 55.600 | -132.400 |   -132.6417 |   -132.3755 |     55.75541 |     55.53326 |
+| Craig           | Prince of Wales-Hyder Census Area       | AK    | 99921    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 55.490 | -133.130 |   -133.8217 |   -131.9526 |     56.22040 |     54.68963 |
+| Hydaburg        | Prince of Wales-Hyder Census Area       | AK    | 99922    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 55.200 | -132.900 |   -133.2838 |   -132.8006 |     55.38444 |     55.19380 |
+| Hyder           | Prince of Wales-Hyder Census Area       | AK    | 99923    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 56.000 | -131.000 |   -130.0752 |   -130.0043 |     56.03867 |     55.90772 |
+| Klawock         | Prince of Wales-Hyder Census Area       | AK    | 99925    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 55.550 | -133.080 |   -133.1284 |   -132.8321 |     55.63883 |     55.46796 |
+| Metlakatla      | Prince of Wales-Outer Ketchikan Borough | AK    | 99926    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 55.100 | -131.400 |   -131.6679 |   -131.2939 |     55.30097 |     54.98619 |
+| Point Baker     | Prince of Wales-Hyder Census Area       | AK    | 99927    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 56.352 | -133.629 |   -133.6832 |   -133.0640 |     56.35881 |     56.15497 |
+| Ward Cove       | Ketchikan Gateway Borough               | AK    | 99928    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |     NA |       NA |          NA |          NA |           NA |           NA |
+| Wrangell        | Wrangell City and Borough               | AK    | 99929    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 | 56.000 | -132.000 |   -132.7234 |   -130.9979 |     56.90331 |     55.91256 |
+| Ketchikan       | Prince of Wales-Outer Ketchikan Borough | AK    | 99950    | vascular surgery | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |          95.16 |         5.594 |        47.686 |          23.79 |     NA |       NA |          NA |          NA |           NA |           NA |
 
 <br>
 
@@ -356,72 +265,72 @@ to a **Vascular Surgeon**:
 search_datasets(specialty = "vascular surgery") |> 
   download_dataset() |> 
   use_zipcoder() |> 
-  tidytable::select(state, tidytable::starts_with("new_")) |> 
-  tidytable::summarise(avg_min = mean(new_price_min),
-                       avg_max = mean(new_price_max),
-                       avg_mode = mean(new_price_mode),
-                       avg_copay_min = mean(new_copay_min),
-                       avg_copay_max = mean(new_copay_max),
-                       avg_copay_mode = mean(new_copay_mode),
-                       .by = c(state, new_top_code)) |> 
+  tidytable::select(specialty, 
+                    state, 
+                    tidytable::starts_with("new_")) |> 
+  tidytable::summarise(avg_price_mode = round(mean(new_price_mode), 2),
+                       avg_copay_mode = round(mean(new_copay_mode), 2),
+                       .by = c(specialty, 
+                               state, 
+                               new_code)) |> 
+  tidytable::drop_na() |> 
   knitr::kable()
 ```
 
-| state | new_top_code |  avg_min |  avg_max |  avg_mode | avg_copay_min | avg_copay_max | avg_copay_mode |
-|:------|-------------:|---------:|---------:|----------:|--------------:|--------------:|---------------:|
-| NA    |        99203 | 58.55011 | 178.0044 |  90.13161 |      14.63753 |      44.50110 |       22.53290 |
-| AK    |        99203 | 74.81600 | 233.6320 | 116.68800 |      18.70400 |      58.40800 |       29.17200 |
-| AL    |        99203 | 55.54400 | 170.6160 |  85.95200 |      13.88600 |      42.65400 |       21.48800 |
-| AR    |        99203 | 53.13600 | 163.6720 |  82.31200 |      13.28400 |      40.91800 |       20.57800 |
-| AZ    |        99203 | 57.31200 | 174.6720 |  88.33600 |      14.32800 |      43.66800 |       22.08400 |
-| CA    |        99203 | 63.96274 | 191.4808 |  97.69472 |      15.99069 |      47.87020 |       24.42368 |
-| CO    |        99203 | 60.06400 | 181.0080 |  92.04800 |      15.01600 |      45.25200 |       23.01200 |
-| CT    |        99203 | 63.47200 | 190.8720 |  97.18400 |      15.86800 |      47.71800 |       24.29600 |
-| DC    |        99203 | 68.56800 | 204.5680 | 104.59200 |      17.14200 |      51.14200 |       26.14800 |
-| DE    |        99203 | 59.80000 | 180.9520 |  91.84800 |      14.95000 |      45.23800 |       22.96200 |
-| FL    |        99203 | 59.50686 | 181.9566 |  91.91565 |      14.87672 |      45.48916 |       22.97891 |
-| GA    |        99203 | 56.19265 | 172.1172 |  86.82782 |      14.04816 |      43.02929 |       21.70696 |
-| HI    |        99203 | 63.01600 | 188.1120 |  96.11200 |      15.75400 |      47.02800 |       24.02800 |
-| IA    |        99203 | 54.88000 | 167.7120 |  84.67200 |      13.72000 |      41.92800 |       21.16800 |
-| ID    |        99203 | 53.93600 | 165.4400 |  83.36800 |      13.48400 |      41.36000 |       20.84200 |
-| IL    |        99203 | 58.51602 | 178.9383 |  90.37385 |      14.62900 |      44.73458 |       22.59346 |
-| IN    |        99203 | 54.76800 | 167.5440 |  84.54400 |      13.69200 |      41.88600 |       21.13600 |
-| KS    |        99203 | 54.99200 | 168.0720 |  84.85600 |      13.74800 |      42.01800 |       21.21400 |
-| KY    |        99203 | 54.72000 | 168.4160 |  84.75200 |      13.68000 |      42.10400 |       21.18800 |
-| LA    |        99203 | 56.35087 | 173.6683 |  87.37184 |      14.08772 |      43.41706 |       21.84296 |
-| MA    |        99203 | 62.85904 | 189.0272 |  96.23768 |      15.71476 |      47.25680 |       24.05942 |
-| MD    |        99203 | 63.44152 | 191.1060 |  97.23305 |      15.86038 |      47.77650 |       24.30826 |
-| ME    |        99203 | 55.76780 | 170.4254 |  86.05939 |      13.94195 |      42.60636 |       21.51485 |
-| MI    |        99203 | 57.26866 | 175.2421 |  88.46181 |      14.31717 |      43.81053 |       22.11545 |
-| MN    |        99203 | 57.95200 | 174.8400 |  88.84000 |      14.48800 |      43.71000 |       22.21000 |
-| MO    |        99203 | 54.98135 | 169.0726 |  85.12273 |      13.74534 |      42.26815 |       21.28068 |
-| MS    |        99203 | 53.50400 | 165.0880 |  82.96000 |      13.37600 |      41.27200 |       20.74000 |
-| MT    |        99203 | 59.12000 | 179.2880 |  90.90400 |      14.78000 |      44.82200 |       22.72600 |
-| NC    |        99203 | 56.51200 | 172.6560 |  87.20800 |      14.12800 |      43.16400 |       21.80200 |
-| ND    |        99203 | 57.75200 | 174.5680 |  88.61600 |      14.43800 |      43.64200 |       22.15400 |
-| NE    |        99203 | 54.43200 | 166.1440 |  83.92000 |      13.60800 |      41.53600 |       20.98000 |
-| NH    |        99203 | 60.13600 | 181.5520 |  92.25600 |      15.03400 |      45.38800 |       23.06400 |
-| NJ    |        99203 | 65.56033 | 196.1567 | 100.12798 |      16.39008 |      49.03919 |       25.03199 |
-| NM    |        99203 | 56.40000 | 173.3200 |  87.31200 |      14.10000 |      43.33000 |       21.82800 |
-| NV    |        99203 | 60.19200 | 183.0160 |  92.69600 |      15.04800 |      45.75400 |       23.17400 |
-| NY    |        99203 | 62.47486 | 189.1462 |  96.00561 |      15.61871 |      47.28656 |       24.00140 |
-| OH    |        99203 | 56.74400 | 173.9440 |  87.72800 |      14.18600 |      43.48600 |       21.93200 |
-| OK    |        99203 | 54.97600 | 168.9040 |  85.07200 |      13.74400 |      42.22600 |       21.26800 |
-| OR    |        99203 | 57.36956 | 174.1255 |  88.22323 |      14.34239 |      43.53137 |       22.05581 |
-| PA    |        99203 | 57.96446 | 176.5596 |  89.31989 |      14.49112 |      44.13989 |       22.32997 |
-| PR    |        99203 | 59.39200 | 179.9520 |  91.28000 |      14.84800 |      44.98800 |       22.82000 |
-| RI    |        99203 | 61.15200 | 184.8880 |  93.88000 |      15.28800 |      46.22200 |       23.47000 |
-| SC    |        99203 | 55.43200 | 169.7600 |  85.63200 |      13.85800 |      42.44000 |       21.40800 |
-| SD    |        99203 | 57.53600 | 173.8400 |  88.26400 |      14.38400 |      43.46000 |       22.06600 |
-| TN    |        99203 | 54.58400 | 167.1920 |  84.32000 |      13.64600 |      41.79800 |       21.08000 |
-| TX    |        99203 | 57.48533 | 174.6063 |  88.43434 |      14.37133 |      43.65158 |       22.10859 |
-| UT    |        99203 | 56.18400 | 171.8240 |  86.74400 |      14.04600 |      42.95600 |       21.68600 |
-| VA    |        99203 | 59.81039 | 181.0333 |  91.87380 |      14.95260 |      45.25831 |       22.96845 |
-| VT    |        99203 | 58.12800 | 175.8320 |  89.24000 |      14.53200 |      43.95800 |       22.31000 |
-| WA    |        99203 | 60.09151 | 181.2114 |  92.12345 |      15.02288 |      45.30284 |       23.03086 |
-| WI    |        99203 | 55.63200 | 169.1600 |  85.60800 |      13.90800 |      42.29000 |       21.40200 |
-| WV    |        99203 | 55.31200 | 170.8160 |  85.84800 |      13.82800 |      42.70400 |       21.46200 |
-| WY    |        99203 | 58.77600 | 178.1120 |  90.33600 |      14.69400 |      44.52800 |       22.58400 |
+| specialty        | state | new_code | avg_price_mode | avg_copay_mode |
+|:-----------------|:------|:---------|---------------:|---------------:|
+| vascular surgery | AK    | 99203    |         116.69 |          29.17 |
+| vascular surgery | AL    | 99203    |          85.95 |          21.49 |
+| vascular surgery | AR    | 99203    |          82.31 |          20.58 |
+| vascular surgery | AZ    | 99203    |          88.34 |          22.08 |
+| vascular surgery | CA    | 99203    |          97.69 |          24.42 |
+| vascular surgery | CO    | 99203    |          92.05 |          23.01 |
+| vascular surgery | CT    | 99203    |          97.18 |          24.30 |
+| vascular surgery | DC    | 99203    |         104.59 |          26.15 |
+| vascular surgery | DE    | 99203    |          91.85 |          22.96 |
+| vascular surgery | FL    | 99203    |          91.92 |          22.98 |
+| vascular surgery | GA    | 99203    |          86.83 |          21.71 |
+| vascular surgery | HI    | 99203    |          96.11 |          24.03 |
+| vascular surgery | IA    | 99203    |          84.67 |          21.17 |
+| vascular surgery | ID    | 99203    |          83.37 |          20.84 |
+| vascular surgery | IL    | 99203    |          90.37 |          22.59 |
+| vascular surgery | IN    | 99203    |          84.54 |          21.14 |
+| vascular surgery | KS    | 99203    |          84.86 |          21.21 |
+| vascular surgery | KY    | 99203    |          84.75 |          21.19 |
+| vascular surgery | LA    | 99203    |          87.37 |          21.84 |
+| vascular surgery | MA    | 99203    |          96.24 |          24.06 |
+| vascular surgery | MD    | 99203    |          97.23 |          24.31 |
+| vascular surgery | ME    | 99203    |          86.06 |          21.51 |
+| vascular surgery | MI    | 99203    |          88.46 |          22.12 |
+| vascular surgery | MN    | 99203    |          88.84 |          22.21 |
+| vascular surgery | MO    | 99203    |          85.12 |          21.28 |
+| vascular surgery | MS    | 99203    |          82.96 |          20.74 |
+| vascular surgery | MT    | 99203    |          90.90 |          22.73 |
+| vascular surgery | NC    | 99203    |          87.21 |          21.80 |
+| vascular surgery | ND    | 99203    |          88.62 |          22.15 |
+| vascular surgery | NE    | 99203    |          83.92 |          20.98 |
+| vascular surgery | NH    | 99203    |          92.26 |          23.06 |
+| vascular surgery | NJ    | 99203    |         100.13 |          25.03 |
+| vascular surgery | NM    | 99203    |          87.31 |          21.83 |
+| vascular surgery | NV    | 99203    |          92.70 |          23.17 |
+| vascular surgery | NY    | 99203    |          96.01 |          24.00 |
+| vascular surgery | OH    | 99203    |          87.73 |          21.93 |
+| vascular surgery | OK    | 99203    |          85.07 |          21.27 |
+| vascular surgery | OR    | 99203    |          88.22 |          22.06 |
+| vascular surgery | PA    | 99203    |          89.32 |          22.33 |
+| vascular surgery | PR    | 99203    |          91.28 |          22.82 |
+| vascular surgery | RI    | 99203    |          93.88 |          23.47 |
+| vascular surgery | SC    | 99203    |          85.63 |          21.41 |
+| vascular surgery | SD    | 99203    |          88.26 |          22.07 |
+| vascular surgery | TN    | 99203    |          84.32 |          21.08 |
+| vascular surgery | TX    | 99203    |          88.43 |          22.11 |
+| vascular surgery | UT    | 99203    |          86.74 |          21.69 |
+| vascular surgery | VA    | 99203    |          91.87 |          22.97 |
+| vascular surgery | VT    | 99203    |          89.24 |          22.31 |
+| vascular surgery | WA    | 99203    |          92.12 |          23.03 |
+| vascular surgery | WI    | 99203    |          85.61 |          21.40 |
+| vascular surgery | WV    | 99203    |          85.85 |          21.46 |
+| vascular surgery | WY    | 99203    |          90.34 |          22.58 |
 
 <br>
 
@@ -432,72 +341,72 @@ Patient** to a **Cardiologist**:
 search_datasets(specialty = "cardiology") |> 
   download_dataset() |> 
   use_zipcoder() |> 
-  tidytable::select(state, tidytable::starts_with("est_")) |> 
-  tidytable::summarise(avg_min = mean(est_price_min),
-                       avg_max = mean(est_price_max),
-                       avg_mode = mean(est_price_mode),
-                       avg_copay_min = mean(est_copay_min),
-                       avg_copay_max = mean(est_copay_max),
-                       avg_copay_mode = mean(est_copay_mode),
-                       .by = c(state, est_top_code)) |> 
+  tidytable::select(specialty, 
+                    state, 
+                    tidytable::starts_with("est_")) |> 
+  tidytable::summarise(avg_price_mode = round(mean(est_price_mode), 2),
+                       avg_copay_mode = round(mean(est_copay_mode), 2),
+                       .by = c(specialty, 
+                               state, 
+                               est_code)) |> 
+  tidytable::drop_na() |> 
   knitr::kable()
 ```
 
-| state | est_top_code |  avg_min |  avg_max |  avg_mode | avg_copay_min | avg_copay_max | avg_copay_mode |
-|:------|-------------:|---------:|---------:|----------:|--------------:|--------------:|---------------:|
-| NA    |        99214 | 18.19982 | 145.4331 | 104.12394 |      4.549956 |      36.35828 |       26.03099 |
-| AK    |        99214 | 22.37600 | 190.7440 | 135.84800 |      5.594000 |      47.68600 |       33.96200 |
-| AL    |        99214 | 16.93600 | 139.0880 |  99.33600 |      4.234000 |      34.77200 |       24.83400 |
-| AR    |        99214 | 16.26400 | 133.8480 |  95.60800 |      4.066000 |      33.46200 |       23.90200 |
-| AZ    |        99214 | 17.74400 | 142.6480 | 102.07200 |      4.436000 |      35.66200 |       25.51800 |
-| CA    |        99214 | 20.48726 | 157.1162 | 112.92056 |      5.121814 |      39.27906 |       28.23014 |
-| CO    |        99214 | 18.98400 | 148.2000 | 106.32800 |      4.746000 |      37.05000 |       26.58200 |
-| CT    |        99214 | 20.08800 | 156.1840 | 112.09600 |      5.022000 |      39.04600 |       28.02400 |
-| DC    |        99214 | 21.87200 | 167.2480 | 120.20000 |      5.468000 |      41.81200 |       30.05000 |
-| DE    |        99214 | 18.72000 | 147.8880 | 105.98400 |      4.680000 |      36.97200 |       26.49600 |
-| FL    |        99214 | 18.06239 | 147.6902 | 105.47837 |      4.515597 |      36.92256 |       26.36959 |
-| GA    |        99214 | 17.22544 | 140.3960 | 100.33747 |      4.306360 |      35.09901 |       25.08437 |
-| HI    |        99214 | 20.25600 | 154.3680 | 111.00800 |      5.064000 |      38.59200 |       27.75200 |
-| IA    |        99214 | 17.04000 | 137.3680 |  98.29600 |      4.260000 |      34.34200 |       24.57400 |
-| ID    |        99214 | 16.64800 | 135.4400 |  96.84000 |      4.162000 |      33.86000 |       24.21000 |
-| IL    |        99214 | 17.84426 | 145.5157 | 103.97222 |      4.461064 |      36.37892 |       25.99305 |
-| IN    |        99214 | 16.96000 | 137.1600 |  98.12000 |      4.240000 |      34.29000 |       24.53000 |
-| KS    |        99214 | 17.06400 | 137.6240 |  98.47200 |      4.266000 |      34.40600 |       24.61800 |
-| KY    |        99214 | 16.65600 | 137.3440 |  98.06400 |      4.164000 |      34.33600 |       24.51600 |
-| LA    |        99214 | 16.94879 | 141.0495 | 100.60521 |      4.237197 |      35.26238 |       25.15130 |
-| MA    |        99214 | 19.92195 | 154.7662 | 111.09154 |      4.980486 |      38.69155 |       27.77288 |
-| MD    |        99214 | 19.92944 | 156.0376 | 111.90210 |      4.982360 |      39.00940 |       27.97552 |
-| ME    |        99214 | 17.24430 | 139.3399 |  99.67418 |      4.311074 |      34.83496 |       24.91855 |
-| MI    |        99214 | 17.51825 | 142.7475 | 102.01384 |      4.379562 |      35.68688 |       25.50346 |
-| MN    |        99214 | 18.41600 | 143.5680 | 103.04800 |      4.604000 |      35.89200 |       25.76200 |
-| MO    |        99214 | 16.75576 | 137.8893 |  98.47124 |      4.188940 |      34.47233 |       24.61781 |
-| MS    |        99214 | 16.25600 | 134.7440 |  96.17600 |      4.064000 |      33.68600 |       24.04400 |
-| MT    |        99214 | 18.41600 | 146.4160 | 104.87200 |      4.604000 |      36.60400 |       26.21800 |
-| NC    |        99214 | 17.43200 | 140.9840 | 100.83200 |      4.358000 |      35.24600 |       25.20800 |
-| ND    |        99214 | 18.26400 | 143.2160 | 102.73600 |      4.566000 |      35.80400 |       25.68400 |
-| NE    |        99214 | 17.00000 | 136.3120 |  97.60000 |      4.250000 |      34.07800 |       24.40000 |
-| NH    |        99214 | 18.89600 | 148.4400 | 106.44000 |      4.724000 |      37.11000 |       26.61000 |
-| NJ    |        99214 | 20.91854 | 160.6245 | 115.40896 |      5.229634 |      40.15613 |       28.85224 |
-| NM    |        99214 | 17.10400 | 141.0240 | 100.67200 |      4.276000 |      35.25600 |       25.16800 |
-| NV    |        99214 | 18.54400 | 149.0000 | 106.60000 |      4.636000 |      37.25000 |       26.65000 |
-| NY    |        99214 | 19.37964 | 154.0527 | 110.31778 |      4.844909 |      38.51317 |       27.57945 |
-| OH    |        99214 | 17.31200 | 141.6640 | 101.20000 |      4.328000 |      35.41600 |       25.30000 |
-| OK    |        99214 | 16.80000 | 137.8320 |  98.45600 |      4.200000 |      34.45800 |       24.61400 |
-| OR    |        99214 | 17.98889 | 142.6490 | 102.21768 |      4.497222 |      35.66224 |       25.55442 |
-| PA    |        99214 | 17.93197 | 144.1224 | 103.12717 |      4.482993 |      36.03061 |       25.78179 |
-| PR    |        99214 | 18.52800 | 146.9680 | 105.28000 |      4.632000 |      36.74200 |       26.32000 |
-| RI    |        99214 | 19.15200 | 151.0800 | 108.28800 |      4.788000 |      37.77000 |       27.07200 |
-| SC    |        99214 | 17.06400 | 138.6960 |  99.16000 |      4.266000 |      34.67400 |       24.79000 |
-| SD    |        99214 | 18.24000 | 142.7200 | 102.40800 |      4.560000 |      35.68000 |       25.60200 |
-| TN    |        99214 | 16.86400 | 136.8240 |  97.84800 |      4.216000 |      34.20600 |       24.46200 |
-| TX    |        99214 | 17.98123 | 142.9479 | 102.40835 |      4.495307 |      35.73696 |       25.60209 |
-| UT    |        99214 | 17.30400 | 140.3040 | 100.32800 |      4.326000 |      35.07600 |       25.08200 |
-| VA    |        99214 | 18.70496 | 147.9312 | 106.00909 |      4.676240 |      36.98280 |       26.50227 |
-| VT    |        99214 | 18.32000 | 144.0880 | 103.32000 |      4.580000 |      36.02200 |       25.83000 |
-| WA    |        99214 | 18.97468 | 148.3786 | 106.44473 |      4.743670 |      37.09464 |       26.61118 |
-| WI    |        99214 | 17.46400 | 138.8000 |  99.45600 |      4.366000 |      34.70000 |       24.86400 |
-| WV    |        99214 | 16.61600 | 138.8320 |  98.99200 |      4.154000 |      34.70800 |       24.74800 |
-| WY    |        99214 | 18.37600 | 145.6160 | 104.33600 |      4.594000 |      36.40400 |       26.08400 |
+| specialty  | state | est_code | avg_price_mode | avg_copay_mode |
+|:-----------|:------|:---------|---------------:|---------------:|
+| cardiology | AK    | 99214    |         135.85 |          33.96 |
+| cardiology | AL    | 99214    |          99.34 |          24.83 |
+| cardiology | AR    | 99214    |          95.61 |          23.90 |
+| cardiology | AZ    | 99214    |         102.07 |          25.52 |
+| cardiology | CA    | 99214    |         112.92 |          28.23 |
+| cardiology | CO    | 99214    |         106.33 |          26.58 |
+| cardiology | CT    | 99214    |         112.10 |          28.02 |
+| cardiology | DC    | 99214    |         120.20 |          30.05 |
+| cardiology | DE    | 99214    |         105.98 |          26.50 |
+| cardiology | FL    | 99214    |         105.48 |          26.37 |
+| cardiology | GA    | 99214    |         100.34 |          25.08 |
+| cardiology | HI    | 99214    |         111.01 |          27.75 |
+| cardiology | IA    | 99214    |          98.30 |          24.57 |
+| cardiology | ID    | 99214    |          96.84 |          24.21 |
+| cardiology | IL    | 99214    |         103.97 |          25.99 |
+| cardiology | IN    | 99214    |          98.12 |          24.53 |
+| cardiology | KS    | 99214    |          98.47 |          24.62 |
+| cardiology | KY    | 99214    |          98.06 |          24.52 |
+| cardiology | LA    | 99214    |         100.61 |          25.15 |
+| cardiology | MA    | 99214    |         111.09 |          27.77 |
+| cardiology | MD    | 99214    |         111.90 |          27.98 |
+| cardiology | ME    | 99214    |          99.67 |          24.92 |
+| cardiology | MI    | 99214    |         102.01 |          25.50 |
+| cardiology | MN    | 99214    |         103.05 |          25.76 |
+| cardiology | MO    | 99214    |          98.47 |          24.62 |
+| cardiology | MS    | 99214    |          96.18 |          24.04 |
+| cardiology | MT    | 99214    |         104.87 |          26.22 |
+| cardiology | NC    | 99214    |         100.83 |          25.21 |
+| cardiology | ND    | 99214    |         102.74 |          25.68 |
+| cardiology | NE    | 99214    |          97.60 |          24.40 |
+| cardiology | NH    | 99214    |         106.44 |          26.61 |
+| cardiology | NJ    | 99214    |         115.41 |          28.85 |
+| cardiology | NM    | 99214    |         100.67 |          25.17 |
+| cardiology | NV    | 99214    |         106.60 |          26.65 |
+| cardiology | NY    | 99214    |         110.32 |          27.58 |
+| cardiology | OH    | 99214    |         101.20 |          25.30 |
+| cardiology | OK    | 99214    |          98.46 |          24.61 |
+| cardiology | OR    | 99214    |         102.22 |          25.55 |
+| cardiology | PA    | 99214    |         103.13 |          25.78 |
+| cardiology | PR    | 99214    |         105.28 |          26.32 |
+| cardiology | RI    | 99214    |         108.29 |          27.07 |
+| cardiology | SC    | 99214    |          99.16 |          24.79 |
+| cardiology | SD    | 99214    |         102.41 |          25.60 |
+| cardiology | TN    | 99214    |          97.85 |          24.46 |
+| cardiology | TX    | 99214    |         102.41 |          25.60 |
+| cardiology | UT    | 99214    |         100.33 |          25.08 |
+| cardiology | VA    | 99214    |         106.01 |          26.50 |
+| cardiology | VT    | 99214    |         103.32 |          25.83 |
+| cardiology | WA    | 99214    |         106.44 |          26.61 |
+| cardiology | WI    | 99214    |          99.46 |          24.86 |
+| cardiology | WV    | 99214    |          98.99 |          24.75 |
+| cardiology | WY    | 99214    |         104.34 |          26.08 |
 
 <br>
 

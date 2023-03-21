@@ -15,6 +15,8 @@
 
 search_datasets <- function(specialty = NULL) {
 
+  .datatable.aware <- TRUE
+
   url <- "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items"
 
   request <- httr2::request(url)
