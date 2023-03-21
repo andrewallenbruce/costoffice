@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# costoffice 0.0.0.9008 (2023-03-21)
+
+* vignette updated
+
+
 # costoffice 0.0.0.9007 (2023-03-20)
 
 * codecov gh action
