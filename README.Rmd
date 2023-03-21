@@ -60,7 +60,9 @@ simply call `search_datasets()` with no arguments:
 
 
 ```{r}
-search_datasets() |> knitr::kable()
+search_datasets() |>
+  tidytable::slice_sample(n = 10) |> 
+  knitr::kable()
 ```
 
 
@@ -81,7 +83,8 @@ Each dataset has approximately 43k rows and is roughly 4.5 to 5 MB.
 ```{r}
 search_datasets(specialty = "vascular surgery") |> 
   download_dataset() |> 
-  tidytable::slice_tail(n = 10)
+  tidytable::slice_sample(n = 10) |> 
+  knitr::kable()
 ```
 
 <br>
@@ -92,7 +95,7 @@ search_datasets(specialty = "vascular surgery") |>
 ```{r}
 search_datasets(specialty = "vascular surgery") |> 
   download_dataset() |> 
-  tidytable::slice_tail(n = 50) |> 
+  tidytable::slice_sample(n = 10) |> 
   use_zipcoder() |> 
   knitr::kable()
 ```
@@ -101,7 +104,7 @@ search_datasets(specialty = "vascular surgery") |>
 
 ## Summary Statistics by State
 
-Current average prices by state for an office visit by a **New Patient** to a **Vascular Surgeon**:
+Current average prices by state for a **New Patient** office visit to a **Vascular Surgeon**:
 
 ```{r}
 search_datasets(specialty = "vascular surgery") |> 
@@ -121,7 +124,7 @@ search_datasets(specialty = "vascular surgery") |>
 
 <br>
 
-Current average prices by state for an office visit by an **Established Patient** to a **Cardiologist**:
+Current average prices by state for an **Established Patient** office visit to a **Cardiologist**:
 
 ```{r}
 search_datasets(specialty = "cardiology") |> 
@@ -141,7 +144,7 @@ search_datasets(specialty = "cardiology") |>
 
 <br>
 
-Current average prices by state for an office visit by an **Established Patient** to a **Cardiologist**:
+Current average prices by city & state for an **Established Patient** office visit to a **Cardiologist**:
 
 ```{r}
 costoffice::search_datasets(specialty = "cardiology") |> 
@@ -158,6 +161,7 @@ costoffice::search_datasets(specialty = "cardiology") |>
                                city,
                                state, 
                                est_code)) |> 
+  tidytable::arrange(state) |> 
   knitr::kable()
 ```
 
