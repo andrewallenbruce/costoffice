@@ -22,8 +22,11 @@ use_zipcoder <- function(df) {
 
   results <- df |>
     tidytable::left_join(costoffice::zipcode_db) |>
-    #tidytable::nest(geo = c(lat, lng, tidytable::starts_with("bounds"))) |>
-    tidytable::select(city, county, state, zip_code, tidytable::everything())
+    tidytable::select(city,
+                      county,
+                      state,
+                      zip_code,
+                      tidytable::everything())
 
   return(results)
 }

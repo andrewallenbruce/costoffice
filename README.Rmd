@@ -26,7 +26,6 @@ knitr::opts_chunk$set(
 [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Code Size](https://img.shields.io/github/languages/code-size/andrewallenbruce/costoffice.svg)](https://github.com/andrewallenbruce/costoffice)
 [![Last Commit](https://img.shields.io/github/last-commit/andrewallenbruce/costoffice.svg)](https://github.com/andrewallenbruce/costoffice/commits/main)
-[![Codecov](https://codecov.io/gh/andrewallenbruce/costoffice/branch/main/graph/badge.svg)](https://codecov.io/gh/andrewallenbruce/costoffice)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/costoffice/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/costoffice)
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/costoffice/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/costoffice?branch=main)
 <!-- badges: end -->
@@ -137,6 +136,28 @@ search_datasets(specialty = "cardiology") |>
                                state, 
                                est_code)) |> 
   tidytable::drop_na() |> 
+  knitr::kable()
+```
+
+<br>
+
+Current average prices by state for an office visit by an **Established Patient** to a **Cardiologist**:
+
+```{r}
+costoffice::search_datasets(specialty = "cardiology") |> 
+  costoffice::download_dataset() |> 
+  costoffice::use_zipcoder() |> 
+  tidytable::drop_na() |> 
+  tidytable::select(specialty, 
+                    city,
+                    state, 
+                    tidytable::starts_with("est_")) |> 
+  tidytable::summarise(avg_price_mode = round(mean(est_price_mode), 2),
+                       avg_copay_mode = round(mean(est_copay_mode), 2),
+                       .by = c(specialty,
+                               city,
+                               state, 
+                               est_code)) |> 
   knitr::kable()
 ```
 

@@ -25,7 +25,9 @@ download_dataset <- function(df) {
   results <- tidytable::fread(df$csv_url,
              colClasses = c(zip_code = "character",
   most_utilized_procedure_code_for_new_patient = "character",
-  most_utilized_procedure_code_for_established_patient = "character")) |>
+  most_utilized_procedure_code_for_established_patient = "character"))
+
+  results <- results |>
   tidytable::select(zip_code,
   new_code = most_utilized_procedure_code_for_new_patient,
   new_price_min = min_medicare_pricing_for_new_patient,
@@ -46,5 +48,3 @@ download_dataset <- function(df) {
 
   return(results)
 }
-
-.datatable.aware <- TRUE
