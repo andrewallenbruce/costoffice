@@ -8,6 +8,8 @@ search_datasets(specialty = NULL, keyword = NULL)
 }
 \arguments{
 \item{specialty}{Provider's medical specialty}
+
+\item{keyword}{Provider's medical specialty}
 }
 \value{
 A \code{tidytable}

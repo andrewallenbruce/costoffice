@@ -114,7 +114,7 @@ search_datasets(specialty = "cardiac surgery") |> tidytable::glimpse()
 
 ## Downloading A Dataset
 
-Each dataset has approximately 43k rows and is roughly 4.5 to 5 MB.
+Each dataset has approximately 43k rows and is roughly 8 MB.
 
 ``` r
 search_datasets(specialty = "vascular surgery") |> 
@@ -125,16 +125,16 @@ search_datasets(specialty = "vascular surgery") |>
 
 | specialty        | zip_code | new_code | new_price_min | new_price_max | new_price_mode | new_copay_min | new_copay_max | new_copay_mode | est_code | est_price_min | est_price_max | est_price_mode | est_copay_min | est_copay_max | est_copay_mode |
 |:-----------------|:---------|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|
-| vascular surgery | 31006    | 99203    |        55.192 |       169.736 |         85.456 |        13.798 |        42.434 |         21.364 | 99213    |        16.800 |       138.360 |         69.448 |         4.200 |        34.590 |         17.362 |
-| vascular surgery | 75062    | 99203    |        59.432 |       179.712 |         91.224 |        14.858 |        44.928 |         22.806 | 99213    |        18.752 |       147.312 |         74.448 |         4.688 |        36.828 |         18.612 |
-| vascular surgery | 72845    | 99203    |        53.136 |       163.672 |         82.312 |        13.284 |        40.918 |         20.578 | 99213    |        16.264 |       133.848 |         67.144 |         4.066 |        33.462 |         16.786 |
-| vascular surgery | 55057    | 99203    |        57.952 |       174.840 |         88.840 |        14.488 |        43.710 |         22.210 | 99213    |        18.416 |       143.568 |         72.624 |         4.604 |        35.892 |         18.156 |
-| vascular surgery | 62257    | 99203    |        59.056 |       180.968 |         91.328 |        14.764 |        45.242 |         22.832 | 99213    |        17.848 |       146.800 |         73.792 |         4.462 |        36.700 |         18.448 |
-| vascular surgery | 08231    | 99203    |        64.368 |       193.064 |         98.424 |        16.092 |        48.266 |         24.606 | 99213    |        20.448 |       158.016 |         80.120 |         5.112 |        39.504 |         20.030 |
-| vascular surgery | 08834    | 99203    |        66.456 |       198.480 |        101.408 |        16.614 |        49.620 |         25.352 | 99213    |        21.272 |       162.584 |         82.584 |         5.318 |        40.646 |         20.646 |
-| vascular surgery | 14533    | 99203    |        57.176 |       174.056 |         88.064 |        14.294 |        43.514 |         22.016 | 99213    |        17.760 |       142.280 |         71.712 |         4.440 |        35.570 |         17.928 |
-| vascular surgery | 63855    | 99203    |        54.200 |       167.176 |         84.040 |        13.550 |        41.794 |         21.010 | 99213    |        16.432 |       136.288 |         68.328 |         4.108 |        34.072 |         17.082 |
-| vascular surgery | 11690    | 99203    |        71.808 |       216.008 |        110.064 |        17.952 |        54.002 |         27.516 | 99213    |        22.160 |       174.920 |         88.600 |         5.540 |        43.730 |         22.150 |
+| vascular surgery | 49629    | 99203    |        56.392 |       172.800 |         87.160 |        14.098 |        43.200 |         21.790 | 99213    |        17.248 |       140.864 |         70.808 |         4.312 |        35.216 |         17.702 |
+| vascular surgery | 77244    | 99203    |        60.648 |       183.872 |         93.232 |        15.162 |        45.968 |         23.308 | 99213    |        18.936 |       150.280 |         75.864 |         4.734 |        37.570 |         18.966 |
+| vascular surgery | 25402    | 99203    |        55.312 |       170.816 |         85.848 |        13.828 |        42.704 |         21.462 | 99213    |        16.616 |       138.832 |         69.568 |         4.154 |        34.708 |         17.392 |
+| vascular surgery | 33921    | 99203    |        61.368 |       187.008 |         94.648 |        15.342 |        46.752 |         23.662 | 99213    |        18.680 |       151.656 |         76.408 |         4.670 |        37.914 |         19.102 |
+| vascular surgery | 67416    | 99203    |        54.992 |       168.072 |         84.856 |        13.748 |        42.018 |         21.214 | 99213    |        17.064 |       137.624 |         69.248 |         4.266 |        34.406 |         17.312 |
+| vascular surgery | 32403    | 99203    |        58.400 |       178.792 |         90.248 |        14.600 |        44.698 |         22.562 | 99213    |        17.744 |       145.288 |         73.056 |         4.436 |        36.322 |         18.264 |
+| vascular surgery | 78415    | 99203    |        56.752 |       172.600 |         87.360 |        14.188 |        43.150 |         21.840 | 99213    |        17.720 |       141.296 |         71.240 |         4.430 |        35.324 |         17.810 |
+| vascular surgery | 65014    | 99203    |        54.200 |       167.176 |         84.040 |        13.550 |        41.794 |         21.010 | 99213    |        16.432 |       136.288 |         68.328 |         4.108 |        34.072 |         17.082 |
+| vascular surgery | 54754    | 99203    |        55.632 |       169.160 |         85.608 |        13.908 |        42.290 |         21.402 | 99213    |        17.464 |       138.800 |         69.984 |         4.366 |        34.700 |         17.496 |
+| vascular surgery | 30077    | 99203    |        58.880 |       178.512 |         90.512 |        14.720 |        44.628 |         22.628 | 99213    |        18.368 |       145.864 |         73.632 |         4.592 |        36.466 |         18.408 |
 
 <br>
 
@@ -148,18 +148,18 @@ search_datasets(specialty = "vascular surgery") |>
   knitr::kable()
 ```
 
-| city         | county            | state | zip_code | specialty        | new_code | new_price_min | new_price_max | new_price_mode | new_copay_min | new_copay_max | new_copay_mode | est_code | est_price_min | est_price_max | est_price_mode | est_copay_min | est_copay_max | est_copay_mode |    lat |      lng | bounds_west | bounds_east | bounds_north | bounds_south |
-|:-------------|:------------------|:------|:---------|:-----------------|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|-------:|---------:|------------:|------------:|-------------:|-------------:|
-| Alexandria   | Fairfax County    | VA    | 22312    | vascular surgery | 99203    |        68.568 |       204.568 |        104.592 |        17.142 |        51.142 |         26.148 | 99213    |        21.872 |       167.248 |         84.992 |         5.468 |        41.812 |         21.248 | 38.820 |  -77.150 |   -77.17709 |   -77.12823 |     38.84254 |     38.77999 |
-| Jacksonville | Duval County      | FL    | 32290    | vascular surgery | 99203    |        58.400 |       178.792 |         90.248 |        14.600 |        44.698 |         22.562 | 99213    |        17.744 |       145.288 |         73.056 |         4.436 |        36.322 |         18.264 |     NA |       NA |          NA |          NA |           NA |           NA |
-| Moyers       | Pushmataha County | OK    | 74557    | vascular surgery | 99203    |        54.976 |       168.904 |         85.072 |        13.744 |        42.226 |         21.268 | 99213    |        16.800 |       137.832 |         69.216 |         4.200 |        34.458 |         17.304 | 34.400 |  -95.700 |   -95.77943 |   -95.57155 |     34.50683 |     34.28521 |
-| Carmel       | Hamilton County   | IN    | 46032    | vascular surgery | 99203    |        54.768 |       167.544 |         84.544 |        13.692 |        41.886 |         21.136 | 99213    |        16.960 |       137.160 |         68.992 |         4.240 |        34.290 |         17.248 | 39.970 |  -86.180 |   -86.24025 |   -86.11243 |     40.01470 |     39.92605 |
-| Jacks Creek  | Chester County    | TN    | 38347    | vascular surgery | 99203    |        54.584 |       167.192 |         84.320 |        13.646 |        41.798 |         21.080 | 99213    |        16.864 |       136.824 |         68.784 |         4.216 |        34.206 |         17.196 | 35.470 |  -88.500 |   -88.52324 |   -88.47384 |     35.49810 |     35.45388 |
-| Salley       | Aiken County      | SC    | 29137    | vascular surgery | 99203    |        55.432 |       169.760 |         85.632 |        13.858 |        42.440 |         21.408 | 99213    |        17.064 |       138.696 |         69.736 |         4.266 |        34.674 |         17.434 | 33.600 |  -81.300 |   -81.48734 |   -81.18724 |     33.69444 |     33.52228 |
-| Dittmer      | Jefferson County  | MO    | 63023    | vascular surgery | 99203    |        58.160 |       176.776 |         89.528 |        14.540 |        44.194 |         22.382 | 99213    |        18.080 |       144.400 |         72.824 |         4.520 |        36.100 |         18.206 | 38.300 |  -90.700 |   -90.78019 |   -90.61166 |     38.37740 |     38.16115 |
-| Salem        | Marion County     | IL    | 62881    | vascular surgery | 99203    |        56.936 |       174.632 |         88.056 |        14.234 |        43.658 |         22.014 | 99213    |        17.320 |       142.112 |         71.408 |         4.330 |        35.528 |         17.852 | 38.600 |  -88.900 |   -89.03114 |   -88.80858 |     38.73544 |     38.53822 |
-| Miranda      | Humboldt County   | CA    | 95553    | vascular surgery | 99203    |        60.864 |       183.392 |         93.256 |        15.216 |        45.848 |         23.314 | 99213    |        19.296 |       150.360 |         76.096 |         4.824 |        37.590 |         19.024 | 40.234 | -123.819 |  -124.03373 |  -123.76122 |     40.31693 |     40.15550 |
-| Broadway     | Union County      | OH    | 43007    | vascular surgery | 99203    |        56.744 |       173.944 |         87.728 |        14.186 |        43.486 |         21.932 | 99213    |        17.312 |       141.664 |         71.200 |         4.328 |        35.416 |         17.800 |     NA |       NA |          NA |          NA |           NA |           NA |
+| city          | county          | state | zip_code | specialty        | new_code | new_price_min | new_price_max | new_price_mode | new_copay_min | new_copay_max | new_copay_mode | est_code | est_price_min | est_price_max | est_price_mode | est_copay_min | est_copay_max | est_copay_mode |   lat |    lng | bounds_west | bounds_east | bounds_north | bounds_south |
+|:--------------|:----------------|:------|:---------|:-----------------|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|------:|-------:|------------:|------------:|-------------:|-------------:|
+| Amesbury      | Essex County    | MA    | 01913    | vascular surgery | 99203    |        61.328 |       185.128 |         94.072 |        15.332 |        46.282 |         23.518 | 99213    |        19.312 |       151.472 |         76.608 |         4.828 |        37.868 |         19.152 | 42.85 | -70.95 |   -71.00487 |   -70.89983 |     42.88662 |     42.81971 |
+| Ames          | Dodge County    | NE    | 68621    | vascular surgery | 99203    |        54.432 |       166.144 |         83.920 |        13.608 |        41.536 |         20.980 | 99213    |        17.000 |       136.312 |         68.624 |         4.250 |        34.078 |         17.156 | 41.51 | -96.63 |   -96.70339 |   -96.55868 |     41.55365 |     41.42608 |
+| Alexander     | Saline County   | AR    | 72002    | vascular surgery | 99203    |        53.136 |       163.672 |         82.312 |        13.284 |        40.918 |         20.578 | 99213    |        16.264 |       133.848 |         67.144 |         4.066 |        33.462 |         16.786 | 34.70 | -92.60 |   -92.67188 |   -92.40090 |     34.75934 |     34.56209 |
+| Novi          | Oakland County  | MI    | 48376    | vascular surgery | 99203    |        60.648 |       184.656 |         93.480 |        15.162 |        46.164 |         23.370 | 99213    |        18.560 |       150.008 |         75.608 |         4.640 |        37.502 |         18.902 |    NA |     NA |          NA |          NA |           NA |           NA |
+| Madison       | Dane County     | WI    | 53744    | vascular surgery | 99203    |        55.632 |       169.160 |         85.608 |        13.908 |        42.290 |         21.402 | 99213    |        17.464 |       138.800 |         69.984 |         4.366 |        34.700 |         17.496 |    NA |     NA |          NA |          NA |           NA |           NA |
+| Crawford      | McLennan County | TX    | 76638    | vascular surgery | 99203    |        56.752 |       172.600 |         87.360 |        14.188 |        43.150 |         21.840 | 99213    |        17.720 |       141.296 |         71.240 |         4.430 |        35.324 |         17.810 | 31.60 | -97.40 |   -97.58657 |   -97.29413 |     31.62047 |     31.48459 |
+| Shermans Dale | Perry County    | PA    | 17090    | vascular surgery | 99203    |        57.024 |       174.056 |         87.960 |        14.256 |        43.514 |         21.990 | 99213    |        17.592 |       142.080 |         71.536 |         4.398 |        35.520 |         17.884 | 40.34 | -77.19 |   -77.26339 |   -77.11654 |     40.40224 |     40.28374 |
+| Holdrege      | Phelps County   | NE    | 68949    | vascular surgery | 99203    |        54.432 |       166.144 |         83.920 |        13.608 |        41.536 |         20.980 | 99213    |        17.000 |       136.312 |         68.624 |         4.250 |        34.078 |         17.156 | 40.50 | -99.30 |   -99.59523 |   -99.19842 |     40.62799 |     40.25987 |
+| Tallman       | Rockland County | NY    | 10982    | vascular surgery | 99203    |        71.496 |       215.024 |        109.584 |        17.874 |        53.756 |         27.396 | 99213    |        22.056 |       174.064 |         88.176 |         5.514 |        43.516 |         22.044 |    NA |     NA |          NA |          NA |           NA |           NA |
+| Peterboro     | Madison County  | NY    | 13134    | vascular surgery | 99203    |        57.176 |       174.056 |         88.064 |        14.294 |        43.514 |         22.016 | 99213    |        17.760 |       142.280 |         71.712 |         4.440 |        35.570 |         17.928 | 42.93 | -75.67 |   -75.68789 |   -75.68079 |     42.97047 |     42.96485 |
 
 <br>
 
@@ -323,20 +323,23 @@ est_cardio |> knitr::kable()
 
 <br>
 
+## Visualizations
+
 ``` r
 p1 <- ggplot2::ggplot(est_cardio, 
-        ggplot2::aes(forcats::fct_reorder(state, 
-                                          avg_price_mode, 
-                                          median),
-                                          avg_price_mode)) + 
+        ggplot2::aes(
+          forcats::fct_reorder(state, 
+                               avg_price_mode, 
+                               median),
+                               avg_price_mode)) + 
   ggplot2::geom_pointrange(
     ggplot2::aes(ymin = avg_price_min, 
                  ymax = avg_price_max), 
     size = 0, 
-    colour = "darkgray", 
-    linewidth = 1) +
-  ggplot2::geom_point(color = "red", size = 3) +
-  ggplot2::geom_point(shape = "circle open", size = 5, color = "red") +
+    colour = "black", 
+    linewidth = 0.5) +
+  ggplot2::geom_point(color = "black", size = 3) +
+  #ggplot2::geom_point(shape = "circle open", size = 5, color = "red") +
   ggplot2::coord_flip() +
   ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
   ggplot2::labs(
@@ -344,12 +347,8 @@ p1 <- ggplot2::ggplot(est_cardio,
     y = "Minimum, Mode, Maximum",
     title = "",
     subtitle = "Price Ranges by State") +
-  ggplot2::theme_light()
-```
+  ggplot2::theme_minimal()
 
-<br>
-
-``` r
 p2 <- ggplot2::ggplot(est_cardio, ggplot2::aes(forcats::fct_reorder(state, 
                                           avg_copay_mode, 
                                           median),
@@ -363,10 +362,8 @@ p2 <- ggplot2::ggplot(est_cardio, ggplot2::aes(forcats::fct_reorder(state,
     y = "Average Minimum to Mode",
     title = "",
     subtitle = "Copay Ranges by State") +
-  ggplot2::theme_light()
-```
+  ggplot2::theme_minimal()
 
-``` r
 library(patchwork)
 (p1 + p2) +
   plot_annotation(
@@ -376,28 +373,34 @@ library(patchwork)
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+
+<br>
+
+``` r
+library(statebins)
+
+statebins(est_cardio, 
+          value_col = "avg_copay_mode",
+          name = "Average Medicare Copays",
+          ggplot2_scale_function = viridis::scale_fill_viridis,
+          direction = 1,
+          round = FALSE) +
+  ggplot2::labs(title = "Established Patient Office Visit Costs: Cardiology") +
+  theme_statebins()
+```
+
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+
+<br>
 
 ## Download All Datasets
 
 ``` r
-search_datasets() |>
-  dplyr::select(csv_url) |>
-  dplyr::slice_head(n = 10) |> # remove to download all sets
-  tibble::deframe() |>
-  rlang::set_names(basename) |>
-  purrr::map(download_dataset_purrr) |>
-  purrr::list_rbind(names_to = "filename") |>
-  tidytable::separate_wider_delim(filename,
-                                  delim = ".",
-                                  names = c("specialty", "ext")) |>
-  tidytable::mutate(ext = NULL) |>
-  use_zipcoder() |>
-  tidytable::drop_na() |>
-  tidytable::relocate(specialty)
+download_datasets(2)
 ```
 
-    #> # A tidytable: 331,040 × 25
+    #> # A tidytable: 66,208 × 25
     #>    specialty    city  county state zip_code new_code new_price_min new_price_max
     #>    <chr>        <chr> <chr>  <chr> <chr>    <chr>            <dbl>         <dbl>
     #>  1 Addiction_M… Agua… Aguad… PR    00602    99204             59.4          180.
@@ -410,7 +413,7 @@ search_datasets() |>
     #>  8 Addiction_M… Boqu… Cabo … PR    00622    99204             59.4          180.
     #>  9 Addiction_M… Cabo… Cabo … PR    00623    99204             59.4          180.
     #> 10 Addiction_M… Camuy Camuy… PR    00627    99204             59.4          180.
-    #> # ℹ 331,030 more rows
+    #> # ℹ 66,198 more rows
     #> # ℹ 17 more variables: new_price_mode <dbl>, new_copay_min <dbl>,
     #> #   new_copay_max <dbl>, new_copay_mode <dbl>, est_code <chr>,
     #> #   est_price_min <dbl>, est_price_max <dbl>, est_price_mode <dbl>,

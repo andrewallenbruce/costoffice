@@ -4,17 +4,17 @@
 \alias{search_datasets_arrow}
 \title{Search Physician Office Visit Costs Data sets by Specialty}
 \usage{
-search_datasets_arrow(specialty = NULL)
+search_datasets_arrow(specialty = NULL, keyword = NULL)
 }
 \arguments{
 \item{specialty}{Provider's medical specialty}
+
+\item{keyword}{Provider's medical specialty}
 }
 \value{
-A \code{tidytable}
+An \code{arrow} Table
 }
 \description{
-A list of enrollment applications pending CMS contractor
-review for physicians & non-physicians.
 \subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/provider-data/search?page-size=50&theme=Physician\%20office\%20visit\%20costs}{Physician Office Visit Costs (Data.CMS.gov)}

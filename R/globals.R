@@ -47,18 +47,19 @@ utils::globalVariables(c(
   "min_copay_for_established_patient", # <download_dataset_arrow>
   "max_copay_for_established_patient", # <download_dataset_arrow>
   "mode_copay_for_established_patient", # <download_dataset_arrow>
+  "csv_url", # <download_datasets>
+  "filename", # <download_datasets>
+  "specialty", # <download_datasets>
   "issued", # <search_datasets>
   "modified", # <search_datasets>
   "released", # <search_datasets>
   "theme", # <search_datasets>
-  "keyword", # <search_datasets>
   "distribution", # <search_datasets>
   "distribution.downloadURL", # <search_datasets>
   "issued", # <search_datasets_arrow>
   "modified", # <search_datasets_arrow>
   "released", # <search_datasets_arrow>
   "theme", # <search_datasets_arrow>
-  "keyword", # <search_datasets_arrow>
   "distribution", # <search_datasets_arrow>
   "distribution.downloadURL", # <search_datasets_arrow>
   "city", # <use_zipcoder>

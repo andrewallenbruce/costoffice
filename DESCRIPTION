@@ -18,9 +18,9 @@ Imports:
     stringr,
     tibble,
     tidyr,
-    vctrs
+    vctrs,
+    rlang
 Suggests:
-    zipcodeR,
     roxyglobals (>= 0.2.1),
     knitr,
     rmarkdown,

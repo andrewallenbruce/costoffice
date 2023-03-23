@@ -84,7 +84,7 @@ search_datasets(specialty = "cardiac surgery") |> tidytable::glimpse()
 
 ## Downloading A Dataset
 
-Each dataset has approximately 43k rows and is roughly 4.5 to 5 MB.
+Each dataset has approximately 43k rows and is roughly 8 MB.
 
 ```{r}
 search_datasets(specialty = "vascular surgery") |> 
@@ -156,20 +156,23 @@ est_cardio |> knitr::kable()
 
 <br>
 
-```{r}
+## Visualizations
+
+```{r, fig.asp=2}
 p1 <- ggplot2::ggplot(est_cardio, 
-        ggplot2::aes(forcats::fct_reorder(state, 
-                                          avg_price_mode, 
-                                          median),
-                                          avg_price_mode)) + 
+        ggplot2::aes(
+          forcats::fct_reorder(state, 
+                               avg_price_mode, 
+                               median),
+                               avg_price_mode)) + 
   ggplot2::geom_pointrange(
     ggplot2::aes(ymin = avg_price_min, 
                  ymax = avg_price_max), 
     size = 0, 
-    colour = "darkgray", 
-    linewidth = 1) +
-  ggplot2::geom_point(color = "red", size = 3) +
-  ggplot2::geom_point(shape = "circle open", size = 5, color = "red") +
+    colour = "black", 
+    linewidth = 0.5) +
+  ggplot2::geom_point(color = "black", size = 3) +
+  #ggplot2::geom_point(shape = "circle open", size = 5, color = "red") +
   ggplot2::coord_flip() +
   ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
   ggplot2::labs(
@@ -177,12 +180,8 @@ p1 <- ggplot2::ggplot(est_cardio,
     y = "Minimum, Mode, Maximum",
     title = "",
     subtitle = "Price Ranges by State") +
-  ggplot2::theme_light()
-```
+  ggplot2::theme_minimal()
 
-<br>
-
-```{r}
 p2 <- ggplot2::ggplot(est_cardio, ggplot2::aes(forcats::fct_reorder(state, 
                                           avg_copay_mode, 
                                           median),
@@ -196,11 +195,8 @@ p2 <- ggplot2::ggplot(est_cardio, ggplot2::aes(forcats::fct_reorder(state,
     y = "Average Minimum to Mode",
     title = "",
     subtitle = "Copay Ranges by State") +
-  ggplot2::theme_light()
-```
+  ggplot2::theme_minimal()
 
-
-```{r, fig.asp=2}
 library(patchwork)
 (p1 + p2) +
   plot_annotation(
@@ -211,24 +207,29 @@ library(patchwork)
 ```
 
 
+<br>
+
+```{r, fig.asp=1.1}
+library(statebins)
+
+statebins(est_cardio, 
+          value_col = "avg_copay_mode",
+          name = "Average Medicare Copays",
+          ggplot2_scale_function = viridis::scale_fill_viridis,
+          direction = 1,
+          round = FALSE) +
+  ggplot2::labs(title = "Established Patient Office Visit Costs: Cardiology") +
+  theme_statebins()
+```
+
+<br>
+
 ## Download All Datasets
 
 ```{r}
-search_datasets() |>
-  dplyr::select(csv_url) |>
-  dplyr::slice_head(n = 10) |> # remove to download all sets
-  tibble::deframe() |>
-  rlang::set_names(basename) |>
-  purrr::map(download_dataset_purrr) |>
-  purrr::list_rbind(names_to = "filename") |>
-  tidytable::separate_wider_delim(filename,
-                                  delim = ".",
-                                  names = c("specialty", "ext")) |>
-  tidytable::mutate(ext = NULL) |>
-  use_zipcoder() |>
-  tidytable::drop_na() |>
-  tidytable::relocate(specialty)
+download_datasets(2)
 ```
+
 
 <br>
 

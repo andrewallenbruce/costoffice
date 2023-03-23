@@ -164,3 +164,38 @@ download_dataset_arrow <- function(specialty) {
 
   return(results)
 }
+
+#' Download A Physician Office Visit Costs Data set
+#'
+#' ## Links
+#' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
+#'
+#' @param n number of datasets to download, number between 1-83
+#' @return An `arrow` Table object
+#'
+#' @examples
+#' \dontrun{
+#' download_datasets(n = 2)
+#' }
+#' @autoglobal
+#' @export
+download_datasets <- function(n) {
+
+  results <- search_datasets() |>
+    dplyr::select(csv_url) |>
+    dplyr::slice_head(n = n) |> # remove to download all sets
+    tibble::deframe() |>
+    rlang::set_names(basename) |>
+    purrr::map(download_dataset_purrr) |>
+    purrr::list_rbind(names_to = "filename") |>
+    tidytable::separate_wider_delim(filename,
+                                    delim = ".",
+                                    names = c("specialty", "ext")) |>
+    tidytable::mutate(ext = NULL) |>
+    use_zipcoder() |>
+    tidytable::drop_na() |>
+    tidytable::relocate(specialty)
+
+  return(results)
+
+}

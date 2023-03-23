@@ -7,6 +7,7 @@
 #' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
 #'
 #' @param specialty Provider's medical specialty
+#' @param keyword Provider's medical specialty
 #' @return A `tidytable`
 #' @examples
 #' search_datasets()
@@ -63,19 +64,17 @@ search_datasets <- function(specialty = NULL, keyword = NULL) {
 
 #' Search Physician Office Visit Costs Data sets by Specialty
 #'
-#' @description A list of enrollment applications pending CMS contractor
-#'    review for physicians & non-physicians.
-#'
 #' ## Links
 #' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
 #'
 #' @param specialty Provider's medical specialty
-#' @return A `tidytable`
+#' @param keyword Provider's medical specialty
+#' @return An `arrow` Table
 #' @examples
 #' search_datasets_arrow()
 #' @autoglobal
 #' @export
-search_datasets_arrow <- function(specialty = NULL) {
+search_datasets_arrow <- function(specialty = NULL, keyword = NULL) {
 
   url <- "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items"
 
@@ -110,8 +109,12 @@ search_datasets_arrow <- function(specialty = NULL) {
                       `distribution.@type` = NULL) |>
     dplyr::relocate(specialty)
 
+  if (!is.null(keyword)) {
+    results <- results |> dplyr::filter(stringr::str_detect(specialty, {{ keyword }}))
+  }
+
   if (!is.null(specialty)) {
-    results <- results |> dplyr::filter(stringr::str_detect(specialty, {{ specialty }}))
+    results <- results |> dplyr::filter(specialty == {{ specialty }})
   }
   return(results)
 }
