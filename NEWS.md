@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# costoffice 0.0.0.9013 (2023-03-23)
+
+* download_datasets() function
+* statebins dataviz example
+* viz options
+
+
 # costoffice 0.0.0.9012 (2023-03-23)
 
 * update readme
