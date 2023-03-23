@@ -13,7 +13,7 @@
 #' @autoglobal
 #' @export
 
-search_datasets <- function(specialty = NULL) {
+search_datasets <- function(specialty = NULL, keyword = NULL) {
 
   url <- "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items"
 
@@ -48,8 +48,12 @@ search_datasets <- function(specialty = NULL) {
                       `distribution.@type` = NULL) |>
     tidytable::relocate(specialty)
 
+  if (!is.null(keyword)) {
+    results <- results |> tidytable::filter(stringr::str_detect(specialty, {{ keyword }}))
+  }
+
   if (!is.null(specialty)) {
-    results <- results |> tidytable::filter(stringr::str_detect(specialty, {{ specialty }}))
+    results <- results |> tidytable::filter(specialty == {{ specialty }})
   }
   return(results)
 }

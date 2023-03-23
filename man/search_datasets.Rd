@@ -4,7 +4,7 @@
 \alias{search_datasets}
 \title{Search Physician Office Visit Costs Data sets by Specialty}
 \usage{
-search_datasets(specialty = NULL)
+search_datasets(specialty = NULL, keyword = NULL)
 }
 \arguments{
 \item{specialty}{Provider's medical specialty}

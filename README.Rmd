@@ -63,6 +63,14 @@ simply call `search_datasets()` with no arguments:
 search_datasets()
 ```
 
+<br>
+
+Search specialties by keyword:
+
+```{r}
+search_datasets(keyword = "medicine")
+```
+
 
 <br>
 
