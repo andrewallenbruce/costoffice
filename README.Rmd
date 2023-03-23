@@ -132,23 +132,84 @@ search_datasets(specialty = "vascular surgery") |>
 Current average prices by state for an **Established Patient** office visit to a **Cardiologist**:
 
 ```{r}
-search_datasets(specialty = "cardiology") |> 
+est_cardio <- search_datasets(specialty = "cardiology") |> 
   download_dataset() |> 
   use_zipcoder() |> 
   tidytable::select(specialty, 
                     state, 
                     tidytable::starts_with("est_")) |> 
-  tidytable::summarise(avg_price_mode = round(mean(est_price_mode), 2),
-                       avg_copay_mode = round(mean(est_copay_mode), 2),
+  tidytable::summarise(
+    avg_price_min = round(mean(est_price_min), 2),
+    avg_price_mode = round(mean(est_price_mode), 2),
+    avg_price_max = round(mean(est_price_max), 2),
+    avg_copay_min = round(mean(est_copay_min), 2),
+    avg_copay_mode = round(mean(est_copay_mode), 2),
+    avg_copay_max = round(mean(est_copay_min), 2),
                        .by = c(specialty, 
                                state, 
                                est_code)) |> 
-  tidytable::drop_na() |> 
-  knitr::kable()
+  tidytable::drop_na()
+
+est_cardio |> knitr::kable()
 ```
 
 
 <br>
+
+```{r}
+p1 <- ggplot2::ggplot(est_cardio, 
+        ggplot2::aes(forcats::fct_reorder(state, 
+                                          avg_price_mode, 
+                                          median),
+                                          avg_price_mode)) + 
+  ggplot2::geom_pointrange(
+    ggplot2::aes(ymin = avg_price_min, 
+                 ymax = avg_price_max), 
+    size = 0, 
+    colour = "darkgray", 
+    linewidth = 1) +
+  ggplot2::geom_point(color = "red", size = 3) +
+  ggplot2::geom_point(shape = "circle open", size = 5, color = "red") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
+  ggplot2::labs(
+    x = "", 
+    y = "Minimum, Mode, Maximum",
+    title = "",
+    subtitle = "Price Ranges by State") +
+  ggplot2::theme_light()
+```
+
+<br>
+
+```{r}
+p2 <- ggplot2::ggplot(est_cardio, ggplot2::aes(forcats::fct_reorder(state, 
+                                          avg_copay_mode, 
+                                          median),
+                                          avg_copay_mode)) + 
+  ggplot2::geom_pointrange(ggplot2::aes(ymin = avg_copay_min, 
+                 ymax = avg_copay_mode)) +
+  ggplot2::coord_flip() +
+  ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
+  ggplot2::labs(
+    x = "", 
+    y = "Average Minimum to Mode",
+    title = "",
+    subtitle = "Copay Ranges by State") +
+  ggplot2::theme_light()
+```
+
+
+```{r, fig.asp=2}
+library(patchwork)
+(p1 + p2) +
+  plot_annotation(
+    title = "Cardiology: Established Patient Office Visit Costs",
+    caption = "Source: data.cms.gov/provider-data",
+    theme = ggplot2::theme(plot.title = ggplot2::element_text(size = 16))
+  )
+```
+
 
 ## Download All Datasets
 
