@@ -107,23 +107,42 @@
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 clinic or group practice             2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 73 more rows</span></span></code></pre></div>
 <p><br></p>
-<p>If you’re searching for one in particular, just supply the <code>specialty</code> argument:</p>
+<p>Search specialties by keyword:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"medicine"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 12 × 5</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty                            issued     modified   released   csv_url</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                                &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;  </span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 addiction medicine                   2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 emergency medicine                   2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 geriatric medicine                   2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 internal medicine                    2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 nuclear medicine                     2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 osteopathic manipulative medicine    2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 pediatric medicine                   2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 physical medicine and rehabilitation 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 preventive medicine                  2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 sleep medicine                       2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 sports medicine                      2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 undersea and hyperbaric medicine     2022-07-11 2022-07-11 2022-07-14 https:…</span></span></code></pre></div>
+<p><br></p>
+<p>If you’re searching for one in particular, just supply the <code>specialty</code> argument:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiac surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 5</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty &lt;chr&gt; "cardiac surgery"</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ issued    &lt;date&gt; 2022-07-11</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ modified  &lt;date&gt; 2022-07-11</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ released  &lt;date&gt; 2022-07-14</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ csv_url   &lt;chr&gt; "https://data.cms.gov/provider-data/sites/default/files/reso…</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 5</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ specialty &lt;chr&gt; "cardiac surgery"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ issued    &lt;date&gt; 2022-07-11</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ modified  &lt;date&gt; 2022-07-11</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ released  &lt;date&gt; 2022-07-14</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ csv_url   &lt;chr&gt; "https://data.cms.gov/provider-data/sites/default/files/reso…</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="downloading-a-dataset">Downloading A Dataset<a class="anchor" aria-label="anchor" href="#downloading-a-dataset"></a>
 </h2>
 <p>Each dataset has approximately 43k rows and is roughly 4.5 to 5 MB.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -168,183 +187,183 @@
 <tbody>
 <tr class="odd">
 <td align="left">vascular surgery</td>
-<td align="left">01088</td>
+<td align="left">96706</td>
 <td align="left">99203</td>
-<td align="right">61.328</td>
-<td align="right">185.128</td>
-<td align="right">94.072</td>
-<td align="right">15.332</td>
-<td align="right">46.282</td>
-<td align="right">23.518</td>
+<td align="right">63.016</td>
+<td align="right">188.112</td>
+<td align="right">96.112</td>
+<td align="right">15.754</td>
+<td align="right">47.028</td>
+<td align="right">24.028</td>
 <td align="left">99213</td>
-<td align="right">19.312</td>
-<td align="right">151.472</td>
-<td align="right">76.608</td>
-<td align="right">4.828</td>
-<td align="right">37.868</td>
-<td align="right">19.152</td>
+<td align="right">20.256</td>
+<td align="right">154.368</td>
+<td align="right">78.416</td>
+<td align="right">5.064</td>
+<td align="right">38.592</td>
+<td align="right">19.604</td>
 </tr>
 <tr class="even">
 <td align="left">vascular surgery</td>
-<td align="left">71711</td>
+<td align="left">67518</td>
 <td align="left">99203</td>
-<td align="right">53.136</td>
-<td align="right">163.672</td>
-<td align="right">82.312</td>
-<td align="right">13.284</td>
-<td align="right">40.918</td>
-<td align="right">20.578</td>
+<td align="right">54.992</td>
+<td align="right">168.072</td>
+<td align="right">84.856</td>
+<td align="right">13.748</td>
+<td align="right">42.018</td>
+<td align="right">21.214</td>
 <td align="left">99213</td>
-<td align="right">16.264</td>
-<td align="right">133.848</td>
-<td align="right">67.144</td>
-<td align="right">4.066</td>
-<td align="right">33.462</td>
-<td align="right">16.786</td>
-</tr>
-<tr class="odd">
-<td align="left">vascular surgery</td>
-<td align="left">35079</td>
-<td align="left">99203</td>
-<td align="right">55.544</td>
-<td align="right">170.616</td>
-<td align="right">85.952</td>
-<td align="right">13.886</td>
-<td align="right">42.654</td>
-<td align="right">21.488</td>
-<td align="left">99213</td>
-<td align="right">16.936</td>
-<td align="right">139.088</td>
-<td align="right">69.848</td>
-<td align="right">4.234</td>
-<td align="right">34.772</td>
-<td align="right">17.462</td>
-</tr>
-<tr class="even">
-<td align="left">vascular surgery</td>
-<td align="left">41542</td>
-<td align="left">99203</td>
-<td align="right">54.720</td>
-<td align="right">168.416</td>
-<td align="right">84.752</td>
-<td align="right">13.680</td>
-<td align="right">42.104</td>
-<td align="right">21.188</td>
-<td align="left">99213</td>
-<td align="right">16.656</td>
-<td align="right">137.344</td>
-<td align="right">68.920</td>
-<td align="right">4.164</td>
-<td align="right">34.336</td>
-<td align="right">17.230</td>
-</tr>
-<tr class="odd">
-<td align="left">vascular surgery</td>
-<td align="left">39121</td>
-<td align="left">99203</td>
-<td align="right">53.504</td>
-<td align="right">165.088</td>
-<td align="right">82.960</td>
-<td align="right">13.376</td>
-<td align="right">41.272</td>
-<td align="right">20.740</td>
-<td align="left">99213</td>
-<td align="right">16.256</td>
-<td align="right">134.744</td>
-<td align="right">67.544</td>
-<td align="right">4.064</td>
-<td align="right">33.686</td>
-<td align="right">16.886</td>
-</tr>
-<tr class="even">
-<td align="left">vascular surgery</td>
-<td align="left">43947</td>
-<td align="left">99203</td>
-<td align="right">56.744</td>
-<td align="right">173.944</td>
-<td align="right">87.728</td>
-<td align="right">14.186</td>
-<td align="right">43.486</td>
-<td align="right">21.932</td>
-<td align="left">99213</td>
+<td align="right">17.064</td>
+<td align="right">137.624</td>
+<td align="right">69.248</td>
+<td align="right">4.266</td>
+<td align="right">34.406</td>
 <td align="right">17.312</td>
-<td align="right">141.664</td>
-<td align="right">71.200</td>
-<td align="right">4.328</td>
-<td align="right">35.416</td>
-<td align="right">17.800</td>
 </tr>
 <tr class="odd">
 <td align="left">vascular surgery</td>
-<td align="left">59535</td>
+<td align="left">67622</td>
 <td align="left">99203</td>
-<td align="right">59.120</td>
-<td align="right">179.288</td>
-<td align="right">90.904</td>
-<td align="right">14.780</td>
-<td align="right">44.822</td>
-<td align="right">22.726</td>
+<td align="right">54.992</td>
+<td align="right">168.072</td>
+<td align="right">84.856</td>
+<td align="right">13.748</td>
+<td align="right">42.018</td>
+<td align="right">21.214</td>
 <td align="left">99213</td>
-<td align="right">18.416</td>
-<td align="right">146.416</td>
-<td align="right">73.912</td>
-<td align="right">4.604</td>
-<td align="right">36.604</td>
-<td align="right">18.478</td>
+<td align="right">17.064</td>
+<td align="right">137.624</td>
+<td align="right">69.248</td>
+<td align="right">4.266</td>
+<td align="right">34.406</td>
+<td align="right">17.312</td>
 </tr>
 <tr class="even">
 <td align="left">vascular surgery</td>
-<td align="left">30034</td>
+<td align="left">19496</td>
 <td align="left">99203</td>
-<td align="right">58.880</td>
-<td align="right">178.512</td>
-<td align="right">90.512</td>
-<td align="right">14.720</td>
-<td align="right">44.628</td>
-<td align="right">22.628</td>
+<td align="right">62.800</td>
+<td align="right">189.432</td>
+<td align="right">96.312</td>
+<td align="right">15.700</td>
+<td align="right">47.358</td>
+<td align="right">24.078</td>
 <td align="left">99213</td>
-<td align="right">18.368</td>
-<td align="right">145.864</td>
-<td align="right">73.632</td>
-<td align="right">4.592</td>
-<td align="right">36.466</td>
-<td align="right">18.408</td>
+<td align="right">19.680</td>
+<td align="right">154.624</td>
+<td align="right">78.224</td>
+<td align="right">4.920</td>
+<td align="right">38.656</td>
+<td align="right">19.556</td>
 </tr>
 <tr class="odd">
 <td align="left">vascular surgery</td>
-<td align="left">94289</td>
+<td align="left">15220</td>
 <td align="left">99203</td>
-<td align="right">61.528</td>
-<td align="right">185.296</td>
-<td align="right">94.248</td>
-<td align="right">15.382</td>
-<td align="right">46.324</td>
-<td align="right">23.562</td>
+<td align="right">57.024</td>
+<td align="right">174.056</td>
+<td align="right">87.960</td>
+<td align="right">14.256</td>
+<td align="right">43.514</td>
+<td align="right">21.990</td>
 <td align="left">99213</td>
-<td align="right">19.528</td>
-<td align="right">151.944</td>
-<td align="right">76.912</td>
-<td align="right">4.882</td>
-<td align="right">37.986</td>
-<td align="right">19.228</td>
+<td align="right">17.592</td>
+<td align="right">142.080</td>
+<td align="right">71.536</td>
+<td align="right">4.398</td>
+<td align="right">35.520</td>
+<td align="right">17.884</td>
 </tr>
 <tr class="even">
 <td align="left">vascular surgery</td>
-<td align="left">93385</td>
+<td align="left">73169</td>
 <td align="left">99203</td>
-<td align="right">61.336</td>
-<td align="right">185.104</td>
-<td align="right">94.064</td>
-<td align="right">15.334</td>
-<td align="right">46.276</td>
-<td align="right">23.516</td>
+<td align="right">54.976</td>
+<td align="right">168.904</td>
+<td align="right">85.072</td>
+<td align="right">13.744</td>
+<td align="right">42.226</td>
+<td align="right">21.268</td>
 <td align="left">99213</td>
-<td align="right">19.368</td>
-<td align="right">151.616</td>
-<td align="right">76.688</td>
-<td align="right">4.842</td>
-<td align="right">37.904</td>
-<td align="right">19.172</td>
+<td align="right">16.800</td>
+<td align="right">137.832</td>
+<td align="right">69.216</td>
+<td align="right">4.200</td>
+<td align="right">34.458</td>
+<td align="right">17.304</td>
+</tr>
+<tr class="odd">
+<td align="left">vascular surgery</td>
+<td align="left">77841</td>
+<td align="left">99203</td>
+<td align="right">56.752</td>
+<td align="right">172.600</td>
+<td align="right">87.360</td>
+<td align="right">14.188</td>
+<td align="right">43.150</td>
+<td align="right">21.840</td>
+<td align="left">99213</td>
+<td align="right">17.720</td>
+<td align="right">141.296</td>
+<td align="right">71.240</td>
+<td align="right">4.430</td>
+<td align="right">35.324</td>
+<td align="right">17.810</td>
+</tr>
+<tr class="even">
+<td align="left">vascular surgery</td>
+<td align="left">84660</td>
+<td align="left">99203</td>
+<td align="right">56.184</td>
+<td align="right">171.824</td>
+<td align="right">86.744</td>
+<td align="right">14.046</td>
+<td align="right">42.956</td>
+<td align="right">21.686</td>
+<td align="left">99213</td>
+<td align="right">17.304</td>
+<td align="right">140.304</td>
+<td align="right">70.584</td>
+<td align="right">4.326</td>
+<td align="right">35.076</td>
+<td align="right">17.646</td>
+</tr>
+<tr class="odd">
+<td align="left">vascular surgery</td>
+<td align="left">25149</td>
+<td align="left">99203</td>
+<td align="right">55.312</td>
+<td align="right">170.816</td>
+<td align="right">85.848</td>
+<td align="right">13.828</td>
+<td align="right">42.704</td>
+<td align="right">21.462</td>
+<td align="left">99213</td>
+<td align="right">16.616</td>
+<td align="right">138.832</td>
+<td align="right">69.568</td>
+<td align="right">4.154</td>
+<td align="right">34.708</td>
+<td align="right">17.392</td>
+</tr>
+<tr class="even">
+<td align="left">vascular surgery</td>
+<td align="left">32147</td>
+<td align="left">99203</td>
+<td align="right">58.400</td>
+<td align="right">178.792</td>
+<td align="right">90.248</td>
+<td align="right">14.600</td>
+<td align="right">44.698</td>
+<td align="right">22.562</td>
+<td align="left">99213</td>
+<td align="right">17.744</td>
+<td align="right">145.288</td>
+<td align="right">73.056</td>
+<td align="right">4.436</td>
+<td align="right">36.322</td>
+<td align="right">18.264</td>
 </tr>
 </tbody>
 </table>
@@ -354,16 +373,16 @@
 <h2 id="geocoding-with-zipcoder">Geocoding with <code>zipcodeR</code>
 <a class="anchor" aria-label="anchor" href="#geocoding-with-zipcoder"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="4%">
-<col width="6%">
+<col width="5%">
 <col width="2%">
 <col width="2%">
 <col width="5%">
@@ -417,241 +436,79 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">Clifford</td>
-<td align="left">Lapeer County</td>
-<td align="left">MI</td>
-<td align="left">48727</td>
+<td align="left">Talking Rock</td>
+<td align="left">Pickens County</td>
+<td align="left">GA</td>
+<td align="left">30175</td>
 <td align="left">vascular surgery</td>
 <td align="left">99203</td>
-<td align="right">56.392</td>
-<td align="right">172.800</td>
-<td align="right">87.160</td>
-<td align="right">14.098</td>
-<td align="right">43.200</td>
-<td align="right">21.790</td>
-<td align="left">99213</td>
-<td align="right">17.248</td>
-<td align="right">140.864</td>
-<td align="right">70.808</td>
-<td align="right">4.312</td>
-<td align="right">35.216</td>
-<td align="right">17.702</td>
-<td align="right">43.32</td>
-<td align="right">-83.18</td>
-<td align="right">-83.23646</td>
-<td align="right">-83.11903</td>
-<td align="right">43.36908</td>
-<td align="right">43.26757</td>
-</tr>
-<tr class="even">
-<td align="left">Corvallis</td>
-<td align="left">Ravalli County</td>
-<td align="left">MT</td>
-<td align="left">59828</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">59.120</td>
-<td align="right">179.288</td>
-<td align="right">90.904</td>
-<td align="right">14.780</td>
-<td align="right">44.822</td>
-<td align="right">22.726</td>
-<td align="left">99213</td>
-<td align="right">18.416</td>
-<td align="right">146.416</td>
-<td align="right">73.912</td>
-<td align="right">4.604</td>
-<td align="right">36.604</td>
-<td align="right">18.478</td>
-<td align="right">46.30</td>
-<td align="right">-114.00</td>
-<td align="right">-114.15560</td>
-<td align="right">-113.77160</td>
-<td align="right">46.42728</td>
-<td align="right">46.24083</td>
-</tr>
-<tr class="odd">
-<td align="left">Springfield</td>
-<td align="left">Greene County</td>
-<td align="left">MO</td>
-<td align="left">65809</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">54.200</td>
-<td align="right">167.176</td>
-<td align="right">84.040</td>
-<td align="right">13.550</td>
-<td align="right">41.794</td>
-<td align="right">21.010</td>
-<td align="left">99213</td>
-<td align="right">16.432</td>
-<td align="right">136.288</td>
-<td align="right">68.328</td>
-<td align="right">4.108</td>
-<td align="right">34.072</td>
-<td align="right">17.082</td>
-<td align="right">37.17</td>
-<td align="right">-93.19</td>
-<td align="right">-93.23100</td>
-<td align="right">-93.13323</td>
-<td align="right">37.20955</td>
-<td align="right">37.10623</td>
-</tr>
-<tr class="even">
-<td align="left">Blue Springs</td>
-<td align="left">Gage County</td>
-<td align="left">NE</td>
-<td align="left">68318</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">54.432</td>
-<td align="right">166.144</td>
-<td align="right">83.920</td>
-<td align="right">13.608</td>
-<td align="right">41.536</td>
-<td align="right">20.980</td>
-<td align="left">99213</td>
-<td align="right">17.000</td>
-<td align="right">136.312</td>
-<td align="right">68.624</td>
-<td align="right">4.250</td>
-<td align="right">34.078</td>
-<td align="right">17.156</td>
-<td align="right">40.10</td>
-<td align="right">-96.60</td>
-<td align="right">-96.78470</td>
-<td align="right">-96.53792</td>
-<td align="right">40.20435</td>
-<td align="right">40.10262</td>
-</tr>
-<tr class="odd">
-<td align="left">Collins</td>
-<td align="left">Covington County</td>
-<td align="left">MS</td>
-<td align="left">39428</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">53.504</td>
-<td align="right">165.088</td>
-<td align="right">82.960</td>
-<td align="right">13.376</td>
-<td align="right">41.272</td>
-<td align="right">20.740</td>
-<td align="left">99213</td>
-<td align="right">16.256</td>
-<td align="right">134.744</td>
-<td align="right">67.544</td>
-<td align="right">4.064</td>
-<td align="right">33.686</td>
-<td align="right">16.886</td>
-<td align="right">31.60</td>
-<td align="right">-89.60</td>
-<td align="right">-89.75580</td>
-<td align="right">-89.40027</td>
-<td align="right">31.77159</td>
-<td align="right">31.53595</td>
-</tr>
-<tr class="even">
-<td align="left">Silver Bay</td>
-<td align="left">Lake County</td>
-<td align="left">MN</td>
-<td align="left">55614</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">57.952</td>
-<td align="right">174.840</td>
-<td align="right">88.840</td>
-<td align="right">14.488</td>
-<td align="right">43.710</td>
-<td align="right">22.210</td>
-<td align="left">99213</td>
-<td align="right">18.416</td>
-<td align="right">143.568</td>
-<td align="right">72.624</td>
-<td align="right">4.604</td>
-<td align="right">35.892</td>
-<td align="right">18.156</td>
-<td align="right">47.40</td>
-<td align="right">-91.30</td>
-<td align="right">-91.63966</td>
-<td align="right">-91.01855</td>
-<td align="right">47.53453</td>
-<td align="right">47.18394</td>
-</tr>
-<tr class="odd">
-<td align="left">Butler</td>
-<td align="left">Custer County</td>
-<td align="left">OK</td>
-<td align="left">73625</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">54.976</td>
-<td align="right">168.904</td>
-<td align="right">85.072</td>
-<td align="right">13.744</td>
-<td align="right">42.226</td>
-<td align="right">21.268</td>
+<td align="right">55.192</td>
+<td align="right">169.736</td>
+<td align="right">85.456</td>
+<td align="right">13.798</td>
+<td align="right">42.434</td>
+<td align="right">21.364</td>
 <td align="left">99213</td>
 <td align="right">16.800</td>
-<td align="right">137.832</td>
-<td align="right">69.216</td>
+<td align="right">138.360</td>
+<td align="right">69.448</td>
 <td align="right">4.200</td>
-<td align="right">34.458</td>
-<td align="right">17.304</td>
-<td align="right">35.60</td>
-<td align="right">-99.30</td>
-<td align="right">-99.32362</td>
-<td align="right">-99.06640</td>
-<td align="right">35.80149</td>
-<td align="right">35.53837</td>
+<td align="right">34.590</td>
+<td align="right">17.362</td>
+<td align="right">34.500</td>
+<td align="right">-84.500</td>
+<td align="right">-84.65452</td>
+<td align="right">-84.38035</td>
+<td align="right">34.64022</td>
+<td align="right">34.46176</td>
 </tr>
 <tr class="even">
-<td align="left">Grover Beach</td>
-<td align="left">San Luis Obispo County</td>
-<td align="left">CA</td>
-<td align="left">93433</td>
+<td align="left">Basalt</td>
+<td align="left">Eagle County</td>
+<td align="left">CO</td>
+<td align="left">81621</td>
 <td align="left">vascular surgery</td>
 <td align="left">99203</td>
-<td align="right">61.480</td>
-<td align="right">184.856</td>
-<td align="right">94.104</td>
-<td align="right">15.370</td>
-<td align="right">46.214</td>
-<td align="right">23.526</td>
+<td align="right">60.064</td>
+<td align="right">181.008</td>
+<td align="right">92.048</td>
+<td align="right">15.016</td>
+<td align="right">45.252</td>
+<td align="right">23.012</td>
 <td align="left">99213</td>
-<td align="right">19.560</td>
-<td align="right">151.616</td>
-<td align="right">76.792</td>
-<td align="right">4.890</td>
-<td align="right">37.904</td>
-<td align="right">19.198</td>
-<td align="right">35.12</td>
-<td align="right">-120.62</td>
-<td align="right">-120.64014</td>
-<td align="right">-120.60476</td>
-<td align="right">35.13437</td>
-<td align="right">35.10548</td>
+<td align="right">18.984</td>
+<td align="right">148.200</td>
+<td align="right">75.000</td>
+<td align="right">4.746</td>
+<td align="right">37.050</td>
+<td align="right">18.750</td>
+<td align="right">39.400</td>
+<td align="right">-106.900</td>
+<td align="right">-107.15523</td>
+<td align="right">-106.50921</td>
+<td align="right">39.48476</td>
+<td align="right">39.23101</td>
 </tr>
 <tr class="odd">
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">83447</td>
+<td align="left">Yuma</td>
+<td align="left">Yuma County</td>
+<td align="left">AZ</td>
+<td align="left">85369</td>
 <td align="left">vascular surgery</td>
 <td align="left">99203</td>
-<td align="right">53.936</td>
-<td align="right">165.440</td>
-<td align="right">83.368</td>
-<td align="right">13.484</td>
-<td align="right">41.360</td>
-<td align="right">20.842</td>
+<td align="right">57.312</td>
+<td align="right">174.672</td>
+<td align="right">88.336</td>
+<td align="right">14.328</td>
+<td align="right">43.668</td>
+<td align="right">22.084</td>
 <td align="left">99213</td>
-<td align="right">16.648</td>
-<td align="right">135.440</td>
-<td align="right">68.048</td>
-<td align="right">4.162</td>
-<td align="right">33.860</td>
-<td align="right">17.012</td>
+<td align="right">17.744</td>
+<td align="right">142.648</td>
+<td align="right">71.864</td>
+<td align="right">4.436</td>
+<td align="right">35.662</td>
+<td align="right">17.966</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
@@ -660,31 +517,193 @@
 <td align="right">NA</td>
 </tr>
 <tr class="even">
-<td align="left">Baltimore</td>
-<td align="left">Baltimore County</td>
-<td align="left">MD</td>
-<td align="left">21209</td>
+<td align="left">Frazeysburg</td>
+<td align="left">Muskingum County</td>
+<td align="left">OH</td>
+<td align="left">43822</td>
 <td align="left">vascular surgery</td>
 <td align="left">99203</td>
-<td align="right">63.640</td>
-<td align="right">191.952</td>
-<td align="right">97.608</td>
-<td align="right">15.910</td>
-<td align="right">47.988</td>
-<td align="right">24.402</td>
+<td align="right">56.744</td>
+<td align="right">173.944</td>
+<td align="right">87.728</td>
+<td align="right">14.186</td>
+<td align="right">43.486</td>
+<td align="right">21.932</td>
 <td align="left">99213</td>
-<td align="right">19.912</td>
-<td align="right">156.576</td>
-<td align="right">79.216</td>
-<td align="right">4.978</td>
-<td align="right">39.144</td>
-<td align="right">19.804</td>
-<td align="right">39.37</td>
-<td align="right">-76.68</td>
-<td align="right">-76.70723</td>
-<td align="right">-76.63941</td>
-<td align="right">39.39774</td>
-<td align="right">39.33820</td>
+<td align="right">17.312</td>
+<td align="right">141.664</td>
+<td align="right">71.200</td>
+<td align="right">4.328</td>
+<td align="right">35.416</td>
+<td align="right">17.800</td>
+<td align="right">40.200</td>
+<td align="right">-82.200</td>
+<td align="right">-82.28578</td>
+<td align="right">-82.03662</td>
+<td align="right">40.28707</td>
+<td align="right">40.06257</td>
+</tr>
+<tr class="odd">
+<td align="left">Delray Beach</td>
+<td align="left">Palm Beach County</td>
+<td align="left">FL</td>
+<td align="left">33483</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">61.368</td>
+<td align="right">187.008</td>
+<td align="right">94.648</td>
+<td align="right">15.342</td>
+<td align="right">46.752</td>
+<td align="right">23.662</td>
+<td align="left">99213</td>
+<td align="right">18.680</td>
+<td align="right">151.656</td>
+<td align="right">76.408</td>
+<td align="right">4.670</td>
+<td align="right">37.914</td>
+<td align="right">19.102</td>
+<td align="right">26.460</td>
+<td align="right">-80.060</td>
+<td align="right">-80.07631</td>
+<td align="right">-80.04659</td>
+<td align="right">26.50739</td>
+<td align="right">26.42056</td>
+</tr>
+<tr class="even">
+<td align="left">Chicago</td>
+<td align="left">Cook County</td>
+<td align="left">IL</td>
+<td align="left">60660</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">63.000</td>
+<td align="right">191.320</td>
+<td align="right">96.992</td>
+<td align="right">15.750</td>
+<td align="right">47.830</td>
+<td align="right">24.248</td>
+<td align="left">99213</td>
+<td align="right">19.296</td>
+<td align="right">155.264</td>
+<td align="right">78.336</td>
+<td align="right">4.824</td>
+<td align="right">38.816</td>
+<td align="right">19.584</td>
+<td align="right">41.980</td>
+<td align="right">-87.660</td>
+<td align="right">-87.68147</td>
+<td align="right">-87.64885</td>
+<td align="right">41.99919</td>
+<td align="right">41.98177</td>
+</tr>
+<tr class="odd">
+<td align="left">Gallatin</td>
+<td align="left">Cherokee County</td>
+<td align="left">TX</td>
+<td align="left">75764</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">56.752</td>
+<td align="right">172.600</td>
+<td align="right">87.360</td>
+<td align="right">14.188</td>
+<td align="right">43.150</td>
+<td align="right">21.840</td>
+<td align="left">99213</td>
+<td align="right">17.720</td>
+<td align="right">141.296</td>
+<td align="right">71.240</td>
+<td align="right">4.430</td>
+<td align="right">35.324</td>
+<td align="right">17.810</td>
+<td align="right">31.923</td>
+<td align="right">-95.145</td>
+<td align="right">-95.15808</td>
+<td align="right">-95.13537</td>
+<td align="right">31.90656</td>
+<td align="right">31.87959</td>
+</tr>
+<tr class="even">
+<td align="left">Camptonville</td>
+<td align="left">Yuba County</td>
+<td align="left">CA</td>
+<td align="left">95922</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">60.864</td>
+<td align="right">183.392</td>
+<td align="right">93.256</td>
+<td align="right">15.216</td>
+<td align="right">45.848</td>
+<td align="right">23.314</td>
+<td align="left">99213</td>
+<td align="right">19.296</td>
+<td align="right">150.360</td>
+<td align="right">76.096</td>
+<td align="right">4.824</td>
+<td align="right">37.590</td>
+<td align="right">19.024</td>
+<td align="right">39.600</td>
+<td align="right">-121.000</td>
+<td align="right">-121.16333</td>
+<td align="right">-120.90435</td>
+<td align="right">39.60680</td>
+<td align="right">39.36807</td>
+</tr>
+<tr class="odd">
+<td align="left">Tallahassee</td>
+<td align="left">Leon County</td>
+<td align="left">FL</td>
+<td align="left">32308</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">58.400</td>
+<td align="right">178.792</td>
+<td align="right">90.248</td>
+<td align="right">14.600</td>
+<td align="right">44.698</td>
+<td align="right">22.562</td>
+<td align="left">99213</td>
+<td align="right">17.744</td>
+<td align="right">145.288</td>
+<td align="right">73.056</td>
+<td align="right">4.436</td>
+<td align="right">36.322</td>
+<td align="right">18.264</td>
+<td align="right">30.490</td>
+<td align="right">-84.250</td>
+<td align="right">-84.27708</td>
+<td align="right">-84.15861</td>
+<td align="right">30.50179</td>
+<td align="right">30.44310</td>
+</tr>
+<tr class="even">
+<td align="left">Fayette</td>
+<td align="left">Seneca County</td>
+<td align="left">NY</td>
+<td align="left">13065</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">57.176</td>
+<td align="right">174.056</td>
+<td align="right">88.064</td>
+<td align="right">14.294</td>
+<td align="right">43.514</td>
+<td align="right">22.016</td>
+<td align="left">99213</td>
+<td align="right">17.760</td>
+<td align="right">142.280</td>
+<td align="right">71.712</td>
+<td align="right">4.440</td>
+<td align="right">35.570</td>
+<td align="right">17.928</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 </tr>
 </tbody>
 </table>
@@ -694,7 +713,7 @@
 <h2 id="summary-statistics-by-state">Summary Statistics by State<a class="anchor" aria-label="anchor" href="#summary-statistics-by-state"></a>
 </h2>
 <p>Current average prices by state for a <strong>New Patient</strong> office visit to a <strong>Vascular Surgeon</strong>:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1092,7 +1111,7 @@
 </table>
 <p><br></p>
 <p>Current average prices by state for an <strong>Established Patient</strong> office visit to a <strong>Cardiologist</strong>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1106,13 +1125,387 @@
 <span>                               <span class="va">est_code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in data.table::fread(...): input= must be a single character string containing a file name, a system command containing at least one space, a URL starting 'http[s]://', 'ftp[s]://' or 'file://', or, the input data itself containing at least one \n or \r</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">specialty</th>
+<th align="left">state</th>
+<th align="left">est_code</th>
+<th align="right">avg_price_mode</th>
+<th align="right">avg_copay_mode</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">AK</td>
+<td align="left">99214</td>
+<td align="right">135.85</td>
+<td align="right">33.96</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">AL</td>
+<td align="left">99214</td>
+<td align="right">99.34</td>
+<td align="right">24.83</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">AR</td>
+<td align="left">99214</td>
+<td align="right">95.61</td>
+<td align="right">23.90</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">AZ</td>
+<td align="left">99214</td>
+<td align="right">102.07</td>
+<td align="right">25.52</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">CA</td>
+<td align="left">99214</td>
+<td align="right">112.92</td>
+<td align="right">28.23</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">CO</td>
+<td align="left">99214</td>
+<td align="right">106.33</td>
+<td align="right">26.58</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">CT</td>
+<td align="left">99214</td>
+<td align="right">112.10</td>
+<td align="right">28.02</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">DC</td>
+<td align="left">99214</td>
+<td align="right">120.20</td>
+<td align="right">30.05</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">DE</td>
+<td align="left">99214</td>
+<td align="right">105.98</td>
+<td align="right">26.50</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">FL</td>
+<td align="left">99214</td>
+<td align="right">105.48</td>
+<td align="right">26.37</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">GA</td>
+<td align="left">99214</td>
+<td align="right">100.34</td>
+<td align="right">25.08</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">HI</td>
+<td align="left">99214</td>
+<td align="right">111.01</td>
+<td align="right">27.75</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">IA</td>
+<td align="left">99214</td>
+<td align="right">98.30</td>
+<td align="right">24.57</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">ID</td>
+<td align="left">99214</td>
+<td align="right">96.84</td>
+<td align="right">24.21</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">IL</td>
+<td align="left">99214</td>
+<td align="right">103.97</td>
+<td align="right">25.99</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">IN</td>
+<td align="left">99214</td>
+<td align="right">98.12</td>
+<td align="right">24.53</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">KS</td>
+<td align="left">99214</td>
+<td align="right">98.47</td>
+<td align="right">24.62</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">KY</td>
+<td align="left">99214</td>
+<td align="right">98.06</td>
+<td align="right">24.52</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">LA</td>
+<td align="left">99214</td>
+<td align="right">100.61</td>
+<td align="right">25.15</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">MA</td>
+<td align="left">99214</td>
+<td align="right">111.09</td>
+<td align="right">27.77</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">MD</td>
+<td align="left">99214</td>
+<td align="right">111.90</td>
+<td align="right">27.98</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">ME</td>
+<td align="left">99214</td>
+<td align="right">99.67</td>
+<td align="right">24.92</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">MI</td>
+<td align="left">99214</td>
+<td align="right">102.01</td>
+<td align="right">25.50</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">MN</td>
+<td align="left">99214</td>
+<td align="right">103.05</td>
+<td align="right">25.76</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">MO</td>
+<td align="left">99214</td>
+<td align="right">98.47</td>
+<td align="right">24.62</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">MS</td>
+<td align="left">99214</td>
+<td align="right">96.18</td>
+<td align="right">24.04</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">MT</td>
+<td align="left">99214</td>
+<td align="right">104.87</td>
+<td align="right">26.22</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">NC</td>
+<td align="left">99214</td>
+<td align="right">100.83</td>
+<td align="right">25.21</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">ND</td>
+<td align="left">99214</td>
+<td align="right">102.74</td>
+<td align="right">25.68</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">NE</td>
+<td align="left">99214</td>
+<td align="right">97.60</td>
+<td align="right">24.40</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">NH</td>
+<td align="left">99214</td>
+<td align="right">106.44</td>
+<td align="right">26.61</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">NJ</td>
+<td align="left">99214</td>
+<td align="right">115.41</td>
+<td align="right">28.85</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">NM</td>
+<td align="left">99214</td>
+<td align="right">100.67</td>
+<td align="right">25.17</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">NV</td>
+<td align="left">99214</td>
+<td align="right">106.60</td>
+<td align="right">26.65</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">NY</td>
+<td align="left">99214</td>
+<td align="right">110.32</td>
+<td align="right">27.58</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">OH</td>
+<td align="left">99214</td>
+<td align="right">101.20</td>
+<td align="right">25.30</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">OK</td>
+<td align="left">99214</td>
+<td align="right">98.46</td>
+<td align="right">24.61</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">OR</td>
+<td align="left">99214</td>
+<td align="right">102.22</td>
+<td align="right">25.55</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">PA</td>
+<td align="left">99214</td>
+<td align="right">103.13</td>
+<td align="right">25.78</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">PR</td>
+<td align="left">99214</td>
+<td align="right">105.28</td>
+<td align="right">26.32</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">RI</td>
+<td align="left">99214</td>
+<td align="right">108.29</td>
+<td align="right">27.07</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">SC</td>
+<td align="left">99214</td>
+<td align="right">99.16</td>
+<td align="right">24.79</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">SD</td>
+<td align="left">99214</td>
+<td align="right">102.41</td>
+<td align="right">25.60</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">TN</td>
+<td align="left">99214</td>
+<td align="right">97.85</td>
+<td align="right">24.46</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">TX</td>
+<td align="left">99214</td>
+<td align="right">102.41</td>
+<td align="right">25.60</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">UT</td>
+<td align="left">99214</td>
+<td align="right">100.33</td>
+<td align="right">25.08</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">VA</td>
+<td align="left">99214</td>
+<td align="right">106.01</td>
+<td align="right">26.50</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">VT</td>
+<td align="left">99214</td>
+<td align="right">103.32</td>
+<td align="right">25.83</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">WA</td>
+<td align="left">99214</td>
+<td align="right">106.44</td>
+<td align="right">26.61</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">WI</td>
+<td align="left">99214</td>
+<td align="right">99.46</td>
+<td align="right">24.86</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">WV</td>
+<td align="left">99214</td>
+<td align="right">98.99</td>
+<td align="right">24.75</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">WY</td>
+<td align="left">99214</td>
+<td align="right">104.34</td>
+<td align="right">26.08</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="download-all-datasets">Download All Datasets<a class="anchor" aria-label="anchor" href="#download-all-datasets"></a>
 </h2>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">csv_url</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># remove to download all sets</span></span>
@@ -1127,62 +1520,62 @@
 <span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="va">specialty</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 331,040 × 25</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty    city  county state zip_code new_code new_price_min new_price_max</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt;         &lt;dbl&gt;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Addiction_M… Agua… Aguad… PR    00602    99204             59.4          180.</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Addiction_M… Agua… Aguad… PR    00603    99204             59.4          180.</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Addiction_M… Mari… Maric… PR    00606    99204             59.4          180.</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Addiction_M… Anas… Aasco… PR    00610    99204             59.4          180.</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 Addiction_M… Arec… Areci… PR    00612    99204             59.4          180.</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Addiction_M… Baja… Areci… PR    00616    99204             59.4          180.</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Addiction_M… Barc… Barce… PR    00617    99204             59.4          180.</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 Addiction_M… Boqu… Cabo … PR    00622    99204             59.4          180.</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 Addiction_M… Cabo… Cabo … PR    00623    99204             59.4          180.</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 Addiction_M… Camuy Camuy… PR    00627    99204             59.4          180.</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 331,030 more rows</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 17 more variables: new_price_mode &lt;dbl&gt;, new_copay_min &lt;dbl&gt;,</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   new_copay_max &lt;dbl&gt;, new_copay_mode &lt;dbl&gt;, est_code &lt;chr&gt;,</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   est_price_min &lt;dbl&gt;, est_price_max &lt;dbl&gt;, est_price_mode &lt;dbl&gt;,</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   est_copay_min &lt;dbl&gt;, est_copay_max &lt;dbl&gt;, est_copay_mode &lt;dbl&gt;, lat &lt;dbl&gt;,</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   lng &lt;dbl&gt;, bounds_west &lt;dbl&gt;, bounds_east &lt;dbl&gt;, bounds_north &lt;dbl&gt;,</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   bounds_south &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 331,040 × 25</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty    city  county state zip_code new_code new_price_min new_price_max</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt;         &lt;dbl&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Addiction_M… Agua… Aguad… PR    00602    99204             59.4          180.</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Addiction_M… Agua… Aguad… PR    00603    99204             59.4          180.</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Addiction_M… Mari… Maric… PR    00606    99204             59.4          180.</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Addiction_M… Anas… Aasco… PR    00610    99204             59.4          180.</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 Addiction_M… Arec… Areci… PR    00612    99204             59.4          180.</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Addiction_M… Baja… Areci… PR    00616    99204             59.4          180.</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Addiction_M… Barc… Barce… PR    00617    99204             59.4          180.</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 Addiction_M… Boqu… Cabo … PR    00622    99204             59.4          180.</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 Addiction_M… Cabo… Cabo … PR    00623    99204             59.4          180.</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 Addiction_M… Camuy Camuy… PR    00627    99204             59.4          180.</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 331,030 more rows</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 17 more variables: new_price_mode &lt;dbl&gt;, new_copay_min &lt;dbl&gt;,</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   new_copay_max &lt;dbl&gt;, new_copay_mode &lt;dbl&gt;, est_code &lt;chr&gt;,</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   est_price_min &lt;dbl&gt;, est_price_max &lt;dbl&gt;, est_price_mode &lt;dbl&gt;,</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   est_copay_min &lt;dbl&gt;, est_copay_max &lt;dbl&gt;, est_copay_mode &lt;dbl&gt;, lat &lt;dbl&gt;,</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   lng &lt;dbl&gt;, bounds_west &lt;dbl&gt;, bounds_east &lt;dbl&gt;, bounds_north &lt;dbl&gt;,</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   bounds_south &lt;dbl&gt;</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="download-arrow-table-objects">Download <code>arrow</code> Table Objects<a class="anchor" aria-label="anchor" href="#download-arrow-table-objects"></a>
 </h2>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/download_dataset_arrow.html">download_dataset_arrow</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"addiction medicine"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/use_zipcoder_arrow.html">use_zipcoder_arrow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Table (query)</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; city: string</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; county: string</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; state: string</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; zip_code: string</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_code: string</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_price_min: double</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_price_max: double</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_price_mode: double</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_copay_min: double</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_copay_max: double</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_copay_mode: double</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_code: string</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_price_min: double</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_price_max: double</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_price_mode: double</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_copay_min: double</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_copay_max: double</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_copay_mode: double</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; specialty: string</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lat: double</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lng: double</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bounds_west: double</span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bounds_east: double</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bounds_north: double</span></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bounds_south: double</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; See $.data for the source Arrow object</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Table (query)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; city: string</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; county: string</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; state: string</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; zip_code: string</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_code: string</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_price_min: double</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_price_max: double</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_price_mode: double</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_copay_min: double</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_copay_max: double</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; new_copay_mode: double</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_code: string</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_price_min: double</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_price_max: double</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_price_mode: double</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_copay_min: double</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_copay_max: double</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; est_copay_mode: double</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; specialty: string</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lat: double</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lng: double</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bounds_west: double</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bounds_east: double</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bounds_north: double</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; bounds_south: double</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; See $.data for the source Arrow object</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">

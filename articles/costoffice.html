@@ -226,23 +226,240 @@ MB on disk/in memory.</p>
 <p><br></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cardio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in data.table::fread(...): input= must be a single character string containing a file name, a system command containing at least one space, a URL starting 'http[s]://', 'ftp[s]://' or 'file://', or, the input data itself containing at least one \n or \r</span></span></code></pre>
+<span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">cardio</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; [1] 42959</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">cardio</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in nrow(cardio): object 'cardio' not found</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">cardio</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in ncol(cardio): object 'cardio' not found</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">#&gt; [1] 16</span></span></code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">lobstr</span><span class="fu">::</span><span class="fu"><a href="https://lobstr.r-lib.org/reference/obj_size.html" class="external-link">obj_size</a></span><span class="op">(</span><span class="va">cardio</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in list2(...): object 'cardio' not found</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; 7.91 MB</span></span></code></pre>
 <p><br></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cardio</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in is.data.frame(.df): object 'cardio' not found</span></span></code></pre>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="5%">
+<col width="4%">
+<col width="4%">
+<col width="6%">
+<col width="6%">
+<col width="7%">
+<col width="6%">
+<col width="6%">
+<col width="7%">
+<col width="4%">
+<col width="6%">
+<col width="6%">
+<col width="7%">
+<col width="6%">
+<col width="6%">
+<col width="7%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">specialty</th>
+<th align="left">zip_code</th>
+<th align="left">new_code</th>
+<th align="right">new_price_min</th>
+<th align="right">new_price_max</th>
+<th align="right">new_price_mode</th>
+<th align="right">new_copay_min</th>
+<th align="right">new_copay_max</th>
+<th align="right">new_copay_mode</th>
+<th align="left">est_code</th>
+<th align="right">est_price_min</th>
+<th align="right">est_price_max</th>
+<th align="right">est_price_mode</th>
+<th align="right">est_copay_min</th>
+<th align="right">est_copay_max</th>
+<th align="right">est_copay_mode</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">48141</td>
+<td align="left">99204</td>
+<td align="right">60.648</td>
+<td align="right">184.656</td>
+<td align="right">139.768</td>
+<td align="right">15.162</td>
+<td align="right">46.164</td>
+<td align="right">34.942</td>
+<td align="left">99214</td>
+<td align="right">18.560</td>
+<td align="right">150.008</td>
+<td align="right">107.248</td>
+<td align="right">4.640</td>
+<td align="right">37.502</td>
+<td align="right">26.812</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">16740</td>
+<td align="left">99204</td>
+<td align="right">57.024</td>
+<td align="right">174.056</td>
+<td align="right">131.752</td>
+<td align="right">14.256</td>
+<td align="right">43.514</td>
+<td align="right">32.938</td>
+<td align="left">99214</td>
+<td align="right">17.592</td>
+<td align="right">142.080</td>
+<td align="right">101.624</td>
+<td align="right">4.398</td>
+<td align="right">35.520</td>
+<td align="right">25.406</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">94080</td>
+<td align="left">99204</td>
+<td align="right">69.920</td>
+<td align="right">206.384</td>
+<td align="right">156.784</td>
+<td align="right">17.480</td>
+<td align="right">51.596</td>
+<td align="right">39.196</td>
+<td align="left">99214</td>
+<td align="right">22.976</td>
+<td align="right">169.968</td>
+<td align="right">122.576</td>
+<td align="right">5.744</td>
+<td align="right">42.492</td>
+<td align="right">30.644</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">88254</td>
+<td align="left">99204</td>
+<td align="right">56.400</td>
+<td align="right">173.320</td>
+<td align="right">131.088</td>
+<td align="right">14.100</td>
+<td align="right">43.330</td>
+<td align="right">32.772</td>
+<td align="left">99214</td>
+<td align="right">17.104</td>
+<td align="right">141.024</td>
+<td align="right">100.672</td>
+<td align="right">4.276</td>
+<td align="right">35.256</td>
+<td align="right">25.168</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">70374</td>
+<td align="left">99204</td>
+<td align="right">56.016</td>
+<td align="right">172.784</td>
+<td align="right">130.624</td>
+<td align="right">14.004</td>
+<td align="right">43.196</td>
+<td align="right">32.656</td>
+<td align="left">99214</td>
+<td align="right">16.832</td>
+<td align="right">140.344</td>
+<td align="right">100.088</td>
+<td align="right">4.208</td>
+<td align="right">35.086</td>
+<td align="right">25.022</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">32247</td>
+<td align="left">99204</td>
+<td align="right">58.400</td>
+<td align="right">178.792</td>
+<td align="right">135.264</td>
+<td align="right">14.600</td>
+<td align="right">44.698</td>
+<td align="right">33.816</td>
+<td align="left">99214</td>
+<td align="right">17.744</td>
+<td align="right">145.288</td>
+<td align="right">103.760</td>
+<td align="right">4.436</td>
+<td align="right">36.322</td>
+<td align="right">25.940</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">31032</td>
+<td align="left">99204</td>
+<td align="right">55.192</td>
+<td align="right">169.736</td>
+<td align="right">128.376</td>
+<td align="right">13.798</td>
+<td align="right">42.434</td>
+<td align="right">32.094</td>
+<td align="left">99214</td>
+<td align="right">16.800</td>
+<td align="right">138.360</td>
+<td align="right">98.792</td>
+<td align="right">4.200</td>
+<td align="right">34.590</td>
+<td align="right">24.698</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">65270</td>
+<td align="left">99204</td>
+<td align="right">54.200</td>
+<td align="right">167.176</td>
+<td align="right">126.408</td>
+<td align="right">13.550</td>
+<td align="right">41.794</td>
+<td align="right">31.602</td>
+<td align="left">99214</td>
+<td align="right">16.432</td>
+<td align="right">136.288</td>
+<td align="right">97.264</td>
+<td align="right">4.108</td>
+<td align="right">34.072</td>
+<td align="right">24.316</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">79947</td>
+<td align="left">99204</td>
+<td align="right">56.752</td>
+<td align="right">172.600</td>
+<td align="right">130.712</td>
+<td align="right">14.188</td>
+<td align="right">43.150</td>
+<td align="right">32.678</td>
+<td align="left">99214</td>
+<td align="right">17.720</td>
+<td align="right">141.296</td>
+<td align="right">101.200</td>
+<td align="right">4.430</td>
+<td align="right">35.324</td>
+<td align="right">25.300</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">61729</td>
+<td align="left">99204</td>
+<td align="right">56.936</td>
+<td align="right">174.632</td>
+<td align="right">132.104</td>
+<td align="right">14.234</td>
+<td align="right">43.658</td>
+<td align="right">33.026</td>
+<td align="left">99214</td>
+<td align="right">17.320</td>
+<td align="right">142.112</td>
+<td align="right">101.496</td>
+<td align="right">4.330</td>
+<td align="right">35.528</td>
+<td align="right">25.374</td>
+</tr>
+</tbody>
+</table>
 <p><br><br></p>
 </div>
 <div class="section level2">
@@ -252,7 +469,7 @@ MB on disk/in memory.</p>
 <p><code>costoffice</code> includes a subset of zip code data from Gavin
 Rozzi’s amazing <code>zipcodeR</code> package:</p>
 <p><br></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"zipcode_db"</span><span class="op">)</span></span>
 <span><span class="va">zipcode_db</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -349,7 +566,7 @@ Rozzi’s amazing <code>zipcodeR</code> package:</p>
 <p>Putting <code><a href="../reference/use_zipcoder.html">use_zipcoder()</a></code> in the pipe chain will add this
 information to the data table:</p>
 <p><br></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -358,7 +575,7 @@ information to the data table:</p>
 <table style="width:100%;" class="table">
 <colgroup>
 <col width="4%">
-<col width="5%">
+<col width="6%">
 <col width="1%">
 <col width="2%">
 <col width="5%">
@@ -376,12 +593,12 @@ information to the data table:</p>
 <col width="4%">
 <col width="4%">
 <col width="4%">
-<col width="1%">
+<col width="2%">
 <col width="2%">
 <col width="3%">
 <col width="3%">
-<col width="4%">
-<col width="4%">
+<col width="3%">
+<col width="3%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">city</th>
@@ -412,226 +629,118 @@ information to the data table:</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">Howard City</td>
-<td align="left">Montcalm County</td>
-<td align="left">MI</td>
-<td align="left">49329</td>
+<td align="left">Shrub Oak</td>
+<td align="left">Westchester County</td>
+<td align="left">NY</td>
+<td align="left">10588</td>
 <td align="left">vascular surgery</td>
 <td align="left">99203</td>
-<td align="right">56.392</td>
-<td align="right">172.800</td>
-<td align="right">87.160</td>
-<td align="right">14.098</td>
-<td align="right">43.200</td>
-<td align="right">21.790</td>
+<td align="right">71.496</td>
+<td align="right">215.024</td>
+<td align="right">109.584</td>
+<td align="right">17.874</td>
+<td align="right">53.756</td>
+<td align="right">27.396</td>
 <td align="left">99213</td>
-<td align="right">17.248</td>
-<td align="right">140.864</td>
-<td align="right">70.808</td>
-<td align="right">4.312</td>
-<td align="right">35.216</td>
-<td align="right">17.702</td>
-<td align="right">43.40</td>
-<td align="right">-85.50</td>
-<td align="right">-85.68243</td>
-<td align="right">-85.32292</td>
-<td align="right">43.46831</td>
-<td align="right">43.33752</td>
+<td align="right">22.056</td>
+<td align="right">174.064</td>
+<td align="right">88.176</td>
+<td align="right">5.514</td>
+<td align="right">43.516</td>
+<td align="right">22.044</td>
+<td align="right">41.3300</td>
+<td align="right">-73.8300</td>
+<td align="right">-73.84602</td>
+<td align="right">-73.79712</td>
+<td align="right">41.35713</td>
+<td align="right">41.31905</td>
 </tr>
 <tr class="even">
-<td align="left">Scranton</td>
-<td align="left">Florence County</td>
-<td align="left">SC</td>
-<td align="left">29591</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">55.432</td>
-<td align="right">169.760</td>
-<td align="right">85.632</td>
-<td align="right">13.858</td>
-<td align="right">42.440</td>
-<td align="right">21.408</td>
-<td align="left">99213</td>
-<td align="right">17.064</td>
-<td align="right">138.696</td>
-<td align="right">69.736</td>
-<td align="right">4.266</td>
-<td align="right">34.674</td>
-<td align="right">17.434</td>
-<td align="right">33.90</td>
-<td align="right">-79.80</td>
-<td align="right">-79.90534</td>
-<td align="right">-79.61338</td>
-<td align="right">34.02364</td>
-<td align="right">33.87250</td>
-</tr>
-<tr class="odd">
-<td align="left">Memphis</td>
-<td align="left">Shelby County</td>
-<td align="left">TN</td>
-<td align="left">38108</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">54.584</td>
-<td align="right">167.192</td>
-<td align="right">84.320</td>
-<td align="right">13.646</td>
-<td align="right">41.798</td>
-<td align="right">21.080</td>
-<td align="left">99213</td>
-<td align="right">16.864</td>
-<td align="right">136.824</td>
-<td align="right">68.784</td>
-<td align="right">4.216</td>
-<td align="right">34.206</td>
-<td align="right">17.196</td>
-<td align="right">35.17</td>
-<td align="right">-89.96</td>
-<td align="right">-90.01804</td>
-<td align="right">-89.91215</td>
-<td align="right">35.19111</td>
-<td align="right">35.15682</td>
-</tr>
-<tr class="even">
-<td align="left">Portland</td>
-<td align="left">Multnomah County</td>
-<td align="left">OR</td>
-<td align="left">97233</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">60.520</td>
-<td align="right">182.224</td>
-<td align="right">92.696</td>
-<td align="right">15.130</td>
-<td align="right">45.556</td>
-<td align="right">23.174</td>
-<td align="left">99213</td>
-<td align="right">19.232</td>
-<td align="right">149.480</td>
-<td align="right">75.672</td>
-<td align="right">4.808</td>
-<td align="right">37.370</td>
-<td align="right">18.918</td>
-<td align="right">45.51</td>
-<td align="right">-122.50</td>
-<td align="right">-122.53892</td>
-<td align="right">-122.45365</td>
-<td align="right">45.52418</td>
-<td align="right">45.50405</td>
-</tr>
-<tr class="odd">
-<td align="left">Roy</td>
-<td align="left">Weber County</td>
-<td align="left">UT</td>
-<td align="left">84067</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">56.184</td>
-<td align="right">171.824</td>
-<td align="right">86.744</td>
-<td align="right">14.046</td>
-<td align="right">42.956</td>
-<td align="right">21.686</td>
-<td align="left">99213</td>
-<td align="right">17.304</td>
-<td align="right">140.304</td>
-<td align="right">70.584</td>
-<td align="right">4.326</td>
-<td align="right">35.076</td>
-<td align="right">17.646</td>
-<td align="right">41.18</td>
-<td align="right">-112.05</td>
-<td align="right">-112.08381</td>
-<td align="right">-112.01470</td>
-<td align="right">41.20534</td>
-<td align="right">41.15224</td>
-</tr>
-<tr class="even">
-<td align="left">Yawkey</td>
-<td align="left">Lincoln County</td>
-<td align="left">WV</td>
-<td align="left">25573</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">55.312</td>
-<td align="right">170.816</td>
-<td align="right">85.848</td>
-<td align="right">13.828</td>
-<td align="right">42.704</td>
-<td align="right">21.462</td>
-<td align="left">99213</td>
-<td align="right">16.616</td>
-<td align="right">138.832</td>
-<td align="right">69.568</td>
-<td align="right">4.154</td>
-<td align="right">34.708</td>
-<td align="right">17.392</td>
-<td align="right">38.21</td>
-<td align="right">-81.92</td>
-<td align="right">-81.99317</td>
-<td align="right">-81.91213</td>
-<td align="right">38.25832</td>
-<td align="right">38.18215</td>
-</tr>
-<tr class="odd">
-<td align="left">Pagosa Springs</td>
-<td align="left">Archuleta County</td>
-<td align="left">CO</td>
-<td align="left">81157</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">60.064</td>
-<td align="right">181.008</td>
-<td align="right">92.048</td>
-<td align="right">15.016</td>
-<td align="right">45.252</td>
-<td align="right">23.012</td>
-<td align="left">99213</td>
-<td align="right">18.984</td>
-<td align="right">148.200</td>
-<td align="right">75.000</td>
-<td align="right">4.746</td>
-<td align="right">37.050</td>
-<td align="right">18.750</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
-<td align="left">Young America</td>
-<td align="left">Carver County</td>
-<td align="left">MN</td>
-<td align="left">55394</td>
-<td align="left">vascular surgery</td>
-<td align="left">99203</td>
-<td align="right">57.952</td>
-<td align="right">174.840</td>
-<td align="right">88.840</td>
-<td align="right">14.488</td>
-<td align="right">43.710</td>
-<td align="right">22.210</td>
-<td align="left">99213</td>
-<td align="right">18.416</td>
-<td align="right">143.568</td>
-<td align="right">72.624</td>
-<td align="right">4.604</td>
-<td align="right">35.892</td>
-<td align="right">18.156</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">Conshohocken</td>
-<td align="left">Montgomery County</td>
+<td align="left">Pleasantville</td>
+<td align="left">Venango County</td>
 <td align="left">PA</td>
-<td align="left">19428</td>
+<td align="left">16341</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">57.024</td>
+<td align="right">174.056</td>
+<td align="right">87.960</td>
+<td align="right">14.256</td>
+<td align="right">43.514</td>
+<td align="right">21.990</td>
+<td align="left">99213</td>
+<td align="right">17.592</td>
+<td align="right">142.080</td>
+<td align="right">71.536</td>
+<td align="right">4.398</td>
+<td align="right">35.520</td>
+<td align="right">17.884</td>
+<td align="right">41.6000</td>
+<td align="right">-79.5000</td>
+<td align="right">-79.65936</td>
+<td align="right">-79.43913</td>
+<td align="right">41.62543</td>
+<td align="right">41.49684</td>
+</tr>
+<tr class="odd">
+<td align="left">Esom Hill</td>
+<td align="left">Cleburne County</td>
+<td align="left">GA</td>
+<td align="left">30138</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">55.192</td>
+<td align="right">169.736</td>
+<td align="right">85.456</td>
+<td align="right">13.798</td>
+<td align="right">42.434</td>
+<td align="right">21.364</td>
+<td align="left">99213</td>
+<td align="right">16.800</td>
+<td align="right">138.360</td>
+<td align="right">69.448</td>
+<td align="right">4.200</td>
+<td align="right">34.590</td>
+<td align="right">17.362</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">East Vassalboro</td>
+<td align="left">Kennebec County</td>
+<td align="left">ME</td>
+<td align="left">04935</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">55.176</td>
+<td align="right">169.016</td>
+<td align="right">85.248</td>
+<td align="right">13.794</td>
+<td align="right">42.254</td>
+<td align="right">21.312</td>
+<td align="left">99213</td>
+<td align="right">16.992</td>
+<td align="right">138.136</td>
+<td align="right">69.440</td>
+<td align="right">4.248</td>
+<td align="right">34.534</td>
+<td align="right">17.360</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">Philadelphia</td>
+<td align="left">Philadelphia County</td>
+<td align="left">PA</td>
+<td align="left">19144</td>
 <td align="left">vascular surgery</td>
 <td align="left">99203</td>
 <td align="right">62.800</td>
@@ -647,39 +756,147 @@ information to the data table:</p>
 <td align="right">4.920</td>
 <td align="right">38.656</td>
 <td align="right">19.556</td>
-<td align="right">40.08</td>
-<td align="right">-75.30</td>
-<td align="right">-75.34198</td>
-<td align="right">-75.24723</td>
-<td align="right">40.10630</td>
-<td align="right">40.05409</td>
+<td align="right">40.0300</td>
+<td align="right">-75.1800</td>
+<td align="right">-75.19972</td>
+<td align="right">-75.15406</td>
+<td align="right">40.05224</td>
+<td align="right">40.01639</td>
 </tr>
 <tr class="even">
-<td align="left">College Place</td>
-<td align="left">Walla Walla County</td>
-<td align="left">WA</td>
-<td align="left">99324</td>
+<td align="left">Germantown</td>
+<td align="left">Shelby County</td>
+<td align="left">TN</td>
+<td align="left">38138</td>
 <td align="left">vascular surgery</td>
 <td align="left">99203</td>
-<td align="right">58.968</td>
-<td align="right">178.296</td>
-<td align="right">90.520</td>
-<td align="right">14.742</td>
-<td align="right">44.574</td>
-<td align="right">22.630</td>
+<td align="right">54.584</td>
+<td align="right">167.192</td>
+<td align="right">84.320</td>
+<td align="right">13.646</td>
+<td align="right">41.798</td>
+<td align="right">21.080</td>
 <td align="left">99213</td>
-<td align="right">18.536</td>
-<td align="right">145.928</td>
-<td align="right">73.744</td>
-<td align="right">4.634</td>
-<td align="right">36.482</td>
-<td align="right">18.436</td>
-<td align="right">46.04</td>
-<td align="right">-118.39</td>
-<td align="right">-118.40956</td>
-<td align="right">-118.36151</td>
-<td align="right">46.06025</td>
-<td align="right">46.02752</td>
+<td align="right">16.864</td>
+<td align="right">136.824</td>
+<td align="right">68.784</td>
+<td align="right">4.216</td>
+<td align="right">34.206</td>
+<td align="right">17.196</td>
+<td align="right">35.0800</td>
+<td align="right">-89.7900</td>
+<td align="right">-89.84564</td>
+<td align="right">-89.73838</td>
+<td align="right">35.12140</td>
+<td align="right">35.04721</td>
+</tr>
+<tr class="odd">
+<td align="left">Campbell</td>
+<td align="left">Steuben County</td>
+<td align="left">NY</td>
+<td align="left">14821</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">57.176</td>
+<td align="right">174.056</td>
+<td align="right">88.064</td>
+<td align="right">14.294</td>
+<td align="right">43.514</td>
+<td align="right">22.016</td>
+<td align="left">99213</td>
+<td align="right">17.760</td>
+<td align="right">142.280</td>
+<td align="right">71.712</td>
+<td align="right">4.440</td>
+<td align="right">35.570</td>
+<td align="right">17.928</td>
+<td align="right">42.2000</td>
+<td align="right">-77.2000</td>
+<td align="right">-77.31570</td>
+<td align="right">-77.10874</td>
+<td align="right">42.30770</td>
+<td align="right">42.15887</td>
+</tr>
+<tr class="even">
+<td align="left">Verona Beach</td>
+<td align="left">Oneida County</td>
+<td align="left">NY</td>
+<td align="left">13162</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">57.176</td>
+<td align="right">174.056</td>
+<td align="right">88.064</td>
+<td align="right">14.294</td>
+<td align="right">43.514</td>
+<td align="right">22.016</td>
+<td align="left">99213</td>
+<td align="right">17.760</td>
+<td align="right">142.280</td>
+<td align="right">71.712</td>
+<td align="right">4.440</td>
+<td align="right">35.570</td>
+<td align="right">17.928</td>
+<td align="right">43.1911</td>
+<td align="right">-75.7297</td>
+<td align="right">-75.73786</td>
+<td align="right">-75.69369</td>
+<td align="right">43.19629</td>
+<td align="right">43.16413</td>
+</tr>
+<tr class="odd">
+<td align="left">Techny</td>
+<td align="left">Cook County</td>
+<td align="left">IL</td>
+<td align="left">60082</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">63.000</td>
+<td align="right">191.320</td>
+<td align="right">96.992</td>
+<td align="right">15.750</td>
+<td align="right">47.830</td>
+<td align="right">24.248</td>
+<td align="left">99213</td>
+<td align="right">19.296</td>
+<td align="right">155.264</td>
+<td align="right">78.336</td>
+<td align="right">4.824</td>
+<td align="right">38.816</td>
+<td align="right">19.584</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Essexville</td>
+<td align="left">Bay County</td>
+<td align="left">MI</td>
+<td align="left">48732</td>
+<td align="left">vascular surgery</td>
+<td align="left">99203</td>
+<td align="right">56.392</td>
+<td align="right">172.800</td>
+<td align="right">87.160</td>
+<td align="right">14.098</td>
+<td align="right">43.200</td>
+<td align="right">21.790</td>
+<td align="left">99213</td>
+<td align="right">17.248</td>
+<td align="right">140.864</td>
+<td align="right">70.808</td>
+<td align="right">4.312</td>
+<td align="right">35.216</td>
+<td align="right">17.702</td>
+<td align="right">43.6100</td>
+<td align="right">-83.7800</td>
+<td align="right">-83.85765</td>
+<td align="right">-83.69921</td>
+<td align="right">43.67510</td>
+<td align="right">43.56546</td>
 </tr>
 </tbody>
 </table>
@@ -692,7 +909,7 @@ information to the data table:</p>
 <p>Current average prices &amp; copays by state for an office visit by a
 <strong>New Patient</strong> to a <strong>Vascular Surgeon</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1086,7 +1303,7 @@ information to the data table:</p>
 an <strong>Established Patient</strong> to a
 <strong>Cardiologist</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1100,7 +1317,381 @@ an <strong>Established Patient</strong> to a
 <span>                               <span class="va">est_code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in data.table::fread(...): input= must be a single character string containing a file name, a system command containing at least one space, a URL starting 'http[s]://', 'ftp[s]://' or 'file://', or, the input data itself containing at least one \n or \r</span></span></code></pre>
+<table class="table">
+<thead><tr class="header">
+<th align="left">specialty</th>
+<th align="left">state</th>
+<th align="left">est_code</th>
+<th align="right">avg_price_mode</th>
+<th align="right">avg_copay_mode</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">AK</td>
+<td align="left">99214</td>
+<td align="right">135.85</td>
+<td align="right">33.96</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">AL</td>
+<td align="left">99214</td>
+<td align="right">99.34</td>
+<td align="right">24.83</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">AR</td>
+<td align="left">99214</td>
+<td align="right">95.61</td>
+<td align="right">23.90</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">AZ</td>
+<td align="left">99214</td>
+<td align="right">102.07</td>
+<td align="right">25.52</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">CA</td>
+<td align="left">99214</td>
+<td align="right">112.92</td>
+<td align="right">28.23</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">CO</td>
+<td align="left">99214</td>
+<td align="right">106.33</td>
+<td align="right">26.58</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">CT</td>
+<td align="left">99214</td>
+<td align="right">112.10</td>
+<td align="right">28.02</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">DC</td>
+<td align="left">99214</td>
+<td align="right">120.20</td>
+<td align="right">30.05</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">DE</td>
+<td align="left">99214</td>
+<td align="right">105.98</td>
+<td align="right">26.50</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">FL</td>
+<td align="left">99214</td>
+<td align="right">105.48</td>
+<td align="right">26.37</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">GA</td>
+<td align="left">99214</td>
+<td align="right">100.34</td>
+<td align="right">25.08</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">HI</td>
+<td align="left">99214</td>
+<td align="right">111.01</td>
+<td align="right">27.75</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">IA</td>
+<td align="left">99214</td>
+<td align="right">98.30</td>
+<td align="right">24.57</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">ID</td>
+<td align="left">99214</td>
+<td align="right">96.84</td>
+<td align="right">24.21</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">IL</td>
+<td align="left">99214</td>
+<td align="right">103.97</td>
+<td align="right">25.99</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">IN</td>
+<td align="left">99214</td>
+<td align="right">98.12</td>
+<td align="right">24.53</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">KS</td>
+<td align="left">99214</td>
+<td align="right">98.47</td>
+<td align="right">24.62</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">KY</td>
+<td align="left">99214</td>
+<td align="right">98.06</td>
+<td align="right">24.52</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">LA</td>
+<td align="left">99214</td>
+<td align="right">100.61</td>
+<td align="right">25.15</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">MA</td>
+<td align="left">99214</td>
+<td align="right">111.09</td>
+<td align="right">27.77</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">MD</td>
+<td align="left">99214</td>
+<td align="right">111.90</td>
+<td align="right">27.98</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">ME</td>
+<td align="left">99214</td>
+<td align="right">99.67</td>
+<td align="right">24.92</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">MI</td>
+<td align="left">99214</td>
+<td align="right">102.01</td>
+<td align="right">25.50</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">MN</td>
+<td align="left">99214</td>
+<td align="right">103.05</td>
+<td align="right">25.76</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">MO</td>
+<td align="left">99214</td>
+<td align="right">98.47</td>
+<td align="right">24.62</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">MS</td>
+<td align="left">99214</td>
+<td align="right">96.18</td>
+<td align="right">24.04</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">MT</td>
+<td align="left">99214</td>
+<td align="right">104.87</td>
+<td align="right">26.22</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">NC</td>
+<td align="left">99214</td>
+<td align="right">100.83</td>
+<td align="right">25.21</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">ND</td>
+<td align="left">99214</td>
+<td align="right">102.74</td>
+<td align="right">25.68</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">NE</td>
+<td align="left">99214</td>
+<td align="right">97.60</td>
+<td align="right">24.40</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">NH</td>
+<td align="left">99214</td>
+<td align="right">106.44</td>
+<td align="right">26.61</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">NJ</td>
+<td align="left">99214</td>
+<td align="right">115.41</td>
+<td align="right">28.85</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">NM</td>
+<td align="left">99214</td>
+<td align="right">100.67</td>
+<td align="right">25.17</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">NV</td>
+<td align="left">99214</td>
+<td align="right">106.60</td>
+<td align="right">26.65</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">NY</td>
+<td align="left">99214</td>
+<td align="right">110.32</td>
+<td align="right">27.58</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">OH</td>
+<td align="left">99214</td>
+<td align="right">101.20</td>
+<td align="right">25.30</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">OK</td>
+<td align="left">99214</td>
+<td align="right">98.46</td>
+<td align="right">24.61</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">OR</td>
+<td align="left">99214</td>
+<td align="right">102.22</td>
+<td align="right">25.55</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">PA</td>
+<td align="left">99214</td>
+<td align="right">103.13</td>
+<td align="right">25.78</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">PR</td>
+<td align="left">99214</td>
+<td align="right">105.28</td>
+<td align="right">26.32</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">RI</td>
+<td align="left">99214</td>
+<td align="right">108.29</td>
+<td align="right">27.07</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">SC</td>
+<td align="left">99214</td>
+<td align="right">99.16</td>
+<td align="right">24.79</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">SD</td>
+<td align="left">99214</td>
+<td align="right">102.41</td>
+<td align="right">25.60</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">TN</td>
+<td align="left">99214</td>
+<td align="right">97.85</td>
+<td align="right">24.46</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">TX</td>
+<td align="left">99214</td>
+<td align="right">102.41</td>
+<td align="right">25.60</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">UT</td>
+<td align="left">99214</td>
+<td align="right">100.33</td>
+<td align="right">25.08</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">VA</td>
+<td align="left">99214</td>
+<td align="right">106.01</td>
+<td align="right">26.50</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">VT</td>
+<td align="left">99214</td>
+<td align="right">103.32</td>
+<td align="right">25.83</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">WA</td>
+<td align="left">99214</td>
+<td align="right">106.44</td>
+<td align="right">26.61</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">WI</td>
+<td align="left">99214</td>
+<td align="right">99.46</td>
+<td align="right">24.86</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">WV</td>
+<td align="left">99214</td>
+<td align="right">98.99</td>
+<td align="right">24.75</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">WY</td>
+<td align="left">99214</td>
+<td align="right">104.34</td>
+<td align="right">26.08</td>
+</tr>
+</tbody>
+</table>
 <p><br><br></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
