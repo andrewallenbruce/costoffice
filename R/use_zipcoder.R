@@ -6,19 +6,19 @@
 #' ## Links
 #' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
 #'
-#' @param df tidytable from `download_dataset()`
+#' @param df `tidytable` from `download_dataset()`
 #' @return A `tidytable`
 #'
 #' @examples
+#' \dontrun{
 #' search_datasets(specialty = "vascular surgery") |>
 #' download_dataset() |>
-#' tidytable::slice_tail(n = 5) |>
+#' tidytable::slice_sample(n = 10) |>
 #' use_zipcoder()
+#' }
 #' @autoglobal
 #' @export
 use_zipcoder <- function(df) {
-
-  .datatable.aware <- TRUE
 
   results <- df |>
     tidytable::left_join(costoffice::zipcode_db) |>
@@ -31,56 +31,34 @@ use_zipcoder <- function(df) {
   return(results)
 }
 
-#' Download A Physician Office Visit Costs Data set
-#'
-#' @description A list of enrollment applications pending CMS contractor
-#'    review for physicians & non-physicians.
+.datatable.aware <- TRUE
+
+#' Add Geocoding Info to dataset via zipcodeR database
 #'
 #' ## Links
 #' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
 #'
-#' @param df `tidytable` from `download_dataset()`
-#' @return A `tidytable`
+#' @param df An `arrow` Table object from `download_dataset_arrow()`
+#' @return An `arrow` Table object
 #' @examples
 #' \dontrun{
-#' search_datasets(specialty = "vascular surgery") |>
-#' download_dataset() |>
-#' use_zipcoder() |>
-#' tidytable::slice_head(n = 10)
+#' search_datasets_arrow(specialty = "vascular surgery") |>
+#' download_dataset_arrow() |>
+#' use_zipcoder_arrow()
 #' }
 #' @autoglobal
-#' @noRd
+#' @export
 
-use_zipcoder_tidytable <- function(df) {
-
-  zipcodeR::zip_code_db
+use_zipcoder_arrow <- function(df) {
 
   results <- df |>
-    tidytable::mutate(
-      zip_code = tidytable::map_chr(.data$zip_code,
-                 zipcodeR::normalize_zip)) |>
-    tidytable::mutate(
-      zip_info = tidytable::map_df(.data$zip_code,
-                 zipcodeR::reverse_zipcode),
-                      .after = zip_code) |>
-    tidytable::unnest_wider(zip_info) |>
-    tidytable::select(city = major_city,
+    dplyr::left_join(costoffice::zipcode_db) |>
+    dplyr::select(city,
                   county,
                   state,
                   zip_code,
-                  lat,
-                  lng,
-                  bounds_west,
-                  bounds_east,
-                  bounds_north,
-                  bounds_south,
-                  tidytable::contains("new"),
-                  tidytable::contains("est"))
-
+                  dplyr::everything())
 
   return(results)
 }
-
-.datatable.aware <- TRUE
-
 

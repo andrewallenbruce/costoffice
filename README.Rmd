@@ -60,9 +60,7 @@ simply call `search_datasets()` with no arguments:
 
 
 ```{r}
-search_datasets() |>
-  tidytable::slice_sample(n = 10) |> 
-  knitr::kable()
+search_datasets()
 ```
 
 
@@ -90,7 +88,6 @@ search_datasets(specialty = "vascular surgery") |>
 <br>
 
 ## Geocoding with `zipcodeR`
-
 
 ```{r}
 search_datasets(specialty = "vascular surgery") |> 
@@ -142,31 +139,37 @@ search_datasets(specialty = "cardiology") |>
   knitr::kable()
 ```
 
+
 <br>
 
-Current average prices by city & state for an **Established Patient** office visit to a **Cardiologist**:
+## Download All Datasets
 
 ```{r}
-costoffice::search_datasets(specialty = "cardiology") |> 
-  costoffice::download_dataset() |> 
-  costoffice::use_zipcoder() |> 
-  tidytable::drop_na() |> 
-  tidytable::select(specialty, 
-                    city,
-                    state, 
-                    tidytable::starts_with("est_")) |> 
-  tidytable::summarise(avg_price_mode = round(mean(est_price_mode), 2),
-                       avg_copay_mode = round(mean(est_copay_mode), 2),
-                       .by = c(specialty,
-                               city,
-                               state, 
-                               est_code)) |> 
-  tidytable::arrange(state) |> 
-  knitr::kable()
+search_datasets() |>
+  dplyr::select(csv_url) |>
+  dplyr::slice_head(n = 10) |> # remove to download all sets
+  tibble::deframe() |>
+  rlang::set_names(basename) |>
+  purrr::map(download_dataset_purrr) |>
+  purrr::list_rbind(names_to = "filename") |>
+  tidytable::separate_wider_delim(filename,
+                                  delim = ".",
+                                  names = c("specialty", "ext")) |>
+  tidytable::mutate(ext = NULL) |>
+  use_zipcoder() |>
+  tidytable::drop_na() |>
+  tidytable::relocate(specialty)
 ```
 
 <br>
 
+## Download `arrow` Table Objects
+
+```{r}
+download_dataset_arrow(specialty = "addiction medicine") |> 
+  use_zipcoder_arrow()
+```
+<br>
 
 ## Code of Conduct
 

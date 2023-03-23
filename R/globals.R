@@ -16,6 +16,37 @@ utils::globalVariables(c(
   "min_copay_for_established_patient", # <download_dataset>
   "max_copay_for_established_patient", # <download_dataset>
   "mode_copay_for_established_patient", # <download_dataset>
+  "zip_code", # <download_dataset_purrr>
+  "most_utilized_procedure_code_for_new_patient", # <download_dataset_purrr>
+  "min_medicare_pricing_for_new_patient", # <download_dataset_purrr>
+  "max_medicare_pricing_for_new_patient", # <download_dataset_purrr>
+  "mode_medicare_pricing_for_new_patient", # <download_dataset_purrr>
+  "min_copay_for_new_patient", # <download_dataset_purrr>
+  "max_copay_for_new_patient", # <download_dataset_purrr>
+  "mode_copay_for_new_patient", # <download_dataset_purrr>
+  "most_utilized_procedure_code_for_established_patient", # <download_dataset_purrr>
+  "min_medicare_pricing_for_established_patient", # <download_dataset_purrr>
+  "max_medicare_pricing_for_established_patient", # <download_dataset_purrr>
+  "mode_medicare_pricing_for_established_patient", # <download_dataset_purrr>
+  "min_copay_for_established_patient", # <download_dataset_purrr>
+  "max_copay_for_established_patient", # <download_dataset_purrr>
+  "mode_copay_for_established_patient", # <download_dataset_purrr>
+  "csv_url", # <download_dataset_arrow>
+  "zip_code", # <download_dataset_arrow>
+  "most_utilized_procedure_code_for_new_patient", # <download_dataset_arrow>
+  "min_medicare_pricing_for_new_patient", # <download_dataset_arrow>
+  "max_medicare_pricing_for_new_patient", # <download_dataset_arrow>
+  "mode_medicare_pricing_for_new_patient", # <download_dataset_arrow>
+  "min_copay_for_new_patient", # <download_dataset_arrow>
+  "max_copay_for_new_patient", # <download_dataset_arrow>
+  "mode_copay_for_new_patient", # <download_dataset_arrow>
+  "most_utilized_procedure_code_for_established_patient", # <download_dataset_arrow>
+  "min_medicare_pricing_for_established_patient", # <download_dataset_arrow>
+  "max_medicare_pricing_for_established_patient", # <download_dataset_arrow>
+  "mode_medicare_pricing_for_established_patient", # <download_dataset_arrow>
+  "min_copay_for_established_patient", # <download_dataset_arrow>
+  "max_copay_for_established_patient", # <download_dataset_arrow>
+  "mode_copay_for_established_patient", # <download_dataset_arrow>
   "issued", # <search_datasets>
   "modified", # <search_datasets>
   "released", # <search_datasets>
@@ -23,21 +54,20 @@ utils::globalVariables(c(
   "keyword", # <search_datasets>
   "distribution", # <search_datasets>
   "distribution.downloadURL", # <search_datasets>
+  "issued", # <search_datasets_arrow>
+  "modified", # <search_datasets_arrow>
+  "released", # <search_datasets_arrow>
+  "theme", # <search_datasets_arrow>
+  "keyword", # <search_datasets_arrow>
+  "distribution", # <search_datasets_arrow>
+  "distribution.downloadURL", # <search_datasets_arrow>
   "city", # <use_zipcoder>
   "county", # <use_zipcoder>
   "state", # <use_zipcoder>
   "zip_code", # <use_zipcoder>
-  ".data", # <use_zipcoder_tidytable>
-  "zip_code", # <use_zipcoder_tidytable>
-  "zip_info", # <use_zipcoder_tidytable>
-  "major_city", # <use_zipcoder_tidytable>
-  "county", # <use_zipcoder_tidytable>
-  "state", # <use_zipcoder_tidytable>
-  "lat", # <use_zipcoder_tidytable>
-  "lng", # <use_zipcoder_tidytable>
-  "bounds_west", # <use_zipcoder_tidytable>
-  "bounds_east", # <use_zipcoder_tidytable>
-  "bounds_north", # <use_zipcoder_tidytable>
-  "bounds_south", # <use_zipcoder_tidytable>
+  "city", # <use_zipcoder_arrow>
+  "county", # <use_zipcoder_arrow>
+  "state", # <use_zipcoder_arrow>
+  "zip_code", # <use_zipcoder_arrow>
   NULL
 ))

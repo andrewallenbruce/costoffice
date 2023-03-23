@@ -11,7 +11,14 @@ Depends:
 Imports: 
     clock,
     httr2,
-    tidytable
+    tidytable,
+    arrow,
+    dplyr,
+    purrr,
+    stringr,
+    tibble,
+    tidyr,
+    vctrs
 Suggests:
     zipcodeR,
     roxyglobals (>= 0.2.1),
