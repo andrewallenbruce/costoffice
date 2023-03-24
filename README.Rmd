@@ -18,7 +18,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `costoffice`
+# `costoffice` <a href="https://andrewallenbruce.github.io/costoffice/"><img src="man/figures/logo.svg" align="right" height="139" /></a>
+
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/andrewallenbruce/costoffice/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/costoffice/actions/workflows/R-CMD-check.yaml)
