@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `costoffice` <a href="https://andrewallenbruce.github.io/costoffice/"><img src="man/figures/logo.png" align="right" height="139" /></a>
+# `costoffice` <a href="https://andrewallenbruce.github.io/costoffice/"><img src="man/figures/logo.png" align="right" height="200" /></a>
 
 
 <!-- badges: start -->
