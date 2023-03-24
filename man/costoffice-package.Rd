@@ -6,6 +6,8 @@
 \alias{costoffice-package}
 \title{costoffice: Download Physician Office Visit Cost Data}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Provides various functions to enable downloading CMS physician office visit cost data.
 }
 \seealso{
