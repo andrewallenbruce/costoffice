@@ -4,13 +4,17 @@
 \alias{download_datasets}
 \title{Download A Physician Office Visit Costs Data set}
 \usage{
-download_datasets(n)
+download_datasets(specialty = NULL, keyword = NULL, zipcoder = TRUE)
 }
 \arguments{
-\item{n}{number of datasets to download, number between 1-83}
+\item{specialty}{search for exact medical specialty, e.g. 'cardiology'}
+
+\item{keyword}{search for partial matches, e.g. 'medicine'}
+
+\item{zipcoder}{if TRUE, adds geocoding information from \code{use_zipcoder()} function}
 }
 \value{
-An \code{arrow} Table object
+A \code{tidytable} data.table
 }
 \description{
 \subsection{Links}{
@@ -21,6 +25,6 @@ An \code{arrow} Table object
 }
 \examples{
 \dontrun{
-download_datasets(n = 2)
+download_datasets(keyword = "medicine")
 }
 }

@@ -3,26 +3,30 @@
 \name{search_datasets}
 \alias{search_datasets}
 \title{Search Physician Office Visit Costs Data sets by Specialty}
+\source{
+\href{https://data.cms.gov/provider-data/search?page-size=50&theme=Physician\%20office\%20visit\%20costs}{Physician Office Visit Costs (Data.CMS.gov)}
+}
 \usage{
 search_datasets(specialty = NULL, keyword = NULL)
 }
 \arguments{
-\item{specialty}{Provider's medical specialty}
+\item{specialty}{search for exact medical specialty, e.g. 'cardiology'}
 
-\item{keyword}{Provider's medical specialty}
+\item{keyword}{search for partial matches, e.g. 'medicine'}
 }
 \value{
-A \code{tidytable}
+A \code{tidytable} containing the specialty of the provider, the title of the dataset, the dates that the dataset was issued, modified, and released, and the link to download the csv file
 }
 \description{
-A list of enrollment applications pending CMS contractor
-review for physicians & non-physicians.
-\subsection{Links}{
-\itemize{
-\item \href{https://data.cms.gov/provider-data/search?page-size=50&theme=Physician\%20office\%20visit\%20costs}{Physician Office Visit Costs (Data.CMS.gov)}
-}
-}
+Returns information pertaining to 83 datasets separated by medical specialty, describing physician office visit costs per zip code for new and established patients.
 }
 \examples{
+# The `specialty` argument will only return _exact_ matches
+search_datasets(specialty = "cardiac surgery")
+
+# The `keyword` argument will return _partial_ matches
+search_datasets(keyword = "medicine")
+
+# Calling the function with no arguments will return the entire dataset
 search_datasets()
 }

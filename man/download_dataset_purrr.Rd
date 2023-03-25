@@ -24,7 +24,7 @@ review for physicians & non-physicians.
 \examples{
 \dontrun{
 search_datasets(specialty = "addiction medicine") |>
-download_dataset() |>
+download_dataset_purr() |>
 tidytable::slice_head(n = 10)
 }
 }

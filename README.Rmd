@@ -46,19 +46,53 @@ devtools::install_github("andrewallenbruce/costoffice")
 remotes::install_github("andrewallenbruce/costoffice")
 ```
 
-<br>
-
-## Retrieve Dataset Info
-
 ```{r echo=TRUE}
 library(costoffice)
 ```
 
 <br>
 
-To retrieve information on all of the data sets (83 specialties in total), 
-simply call `search_datasets()` with no arguments:
+## Purpose
 
+The `costoffice` package contains functions enabling the user to access the latest __Physician Office Visit Costs__ datasets from [Data.CMS.gov](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs). 
+
+There are 83 datasets in total, the name corresponding to a medical specialty(primary taxonomy). Each one contains:
+
+  * the most utilized procedure code (HCPCS Level II aka CPT code)
+  * the minimum, maximum, and mode price Medicare paid for the code and
+  * the minimum, maximum, and mode copay the patient paid for the visit
+  
+per zip code, for new and established patients both.
+
+<br>
+
+## `search_datasets()`
+
+Call this function to return dataset information and the url to download a csv file of the data.
+
+<br>
+
+Use the `specialty` argument to return only _exact_ matches:
+
+```{r}
+search_datasets(specialty = "cardiac surgery")
+```
+
+<br>
+
+> Return a vector of the exact names of the medical specialties by simply calling `search_datasets()$specialty`.
+
+<br>
+
+Use the `keyword` argument to return _partial_ matches:
+
+```{r}
+search_datasets(keyword = "medicine")
+```
+
+<br>
+
+Calling the function with no arguments will return the entire dataset:
 
 ```{r}
 search_datasets()
@@ -66,45 +100,36 @@ search_datasets()
 
 <br>
 
-Search specialties by keyword:
+## `download_dataset()`
+
+Once you've found the dataset that you're interested in, simply insert the `download_dataset()` function into your pipeline to retrieve the csv:
 
 ```{r}
-search_datasets(keyword = "medicine")
-```
-
-
-<br>
-
-If you're searching for one in particular, just supply the `specialty` argument:
-
-```{r}
-search_datasets(specialty = "cardiac surgery") |> tidytable::glimpse()
+search_datasets(specialty = "vascular surgery") |> 
+  download_dataset() |> 
+  head()
 ```
 
 <br>
 
-## Downloading A Dataset
-
-Each dataset has approximately 43k rows and is roughly 8 MB.
+## `use_zipcoder()`
 
 ```{r}
 search_datasets(specialty = "vascular surgery") |> 
   download_dataset() |> 
   tidytable::slice_sample(n = 10) |> 
-  knitr::kable()
+  use_zipcoder()
 ```
 
 <br>
 
-## Geocoding with `zipcodeR`
+## `download_datasets()`
 
 ```{r}
-search_datasets(specialty = "vascular surgery") |> 
-  download_dataset() |> 
-  tidytable::slice_sample(n = 10) |> 
-  use_zipcoder() |> 
-  knitr::kable()
+download_datasets(keyword = "medicine")
 ```
+
+
 
 <br>
 
@@ -223,23 +248,6 @@ statebins(est_cardio,
   theme_statebins()
 ```
 
-<br>
-
-## Download All Datasets
-
-```{r}
-download_datasets(2)
-```
-
-
-<br>
-
-## Download `arrow` Table Objects
-
-```{r}
-download_dataset_arrow(specialty = "addiction medicine") |> 
-  use_zipcoder_arrow()
-```
 <br>
 
 ## Code of Conduct

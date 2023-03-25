@@ -37,129 +37,187 @@ devtools::install_github("andrewallenbruce/costoffice")
 remotes::install_github("andrewallenbruce/costoffice")
 ```
 
-<br>
-
-## Retrieve Dataset Info
-
 ``` r
 library(costoffice)
 ```
 
 <br>
 
-To retrieve information on all of the data sets (83 specialties in
-total), simply call `search_datasets()` with no arguments:
+## Purpose
 
-``` r
-search_datasets()
-```
+The `costoffice` package contains functions enabling the user to access
+the latest **Physician Office Visit Costs** datasets from
+[Data.CMS.gov](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs).
 
-    #> # A tidytable: 83 × 5
-    #>    specialty                            issued     modified   released   csv_url
-    #>    <chr>                                <date>     <date>     <date>     <chr>  
-    #>  1 addiction medicine                   2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  2 advanced heart failure and transpla… 2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  3 allergy/ immunology                  2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  4 anesthesiology                       2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  5 cardiac surgery                      2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  6 cardiology                           2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  7 certified clinical nurse specialist  2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  8 certified nurse midwife              2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  9 certified registered nurse anesthet… 2022-07-11 2022-07-11 2022-07-14 https:…
-    #> 10 clinic or group practice             2022-07-11 2022-07-11 2022-07-14 https:…
-    #> # ℹ 73 more rows
+There are 83 datasets in total, the name corresponding to a medical
+specialty(primary taxonomy). Each one contains:
+
+- the most utilized procedure code (HCPCS Level II aka CPT code)
+- the minimum, maximum, and mode price Medicare paid for the code and
+- the minimum, maximum, and mode copay the patient paid for the visit
+
+per zip code, for new and established patients both.
 
 <br>
 
-Search specialties by keyword:
+## `search_datasets()`
+
+Call this function to return dataset information and the url to download
+a csv file of the data.
+
+<br>
+
+Use the `specialty` argument to return only *exact* matches:
+
+``` r
+search_datasets(specialty = "cardiac surgery")
+```
+
+    #> # A tidytable: 1 × 6
+    #>   specialty       title                 issued     modified   released   csv_url
+    #>   <chr>           <chr>                 <date>     <date>     <date>     <chr>  
+    #> 1 cardiac surgery Cardiac Surgery Offi… 2022-07-11 2022-07-11 2022-07-14 https:…
+
+<br>
+
+> Return a vector of the exact names of the medical specialties by
+> simply calling `search_datasets()$specialty`.
+
+<br>
+
+Use the `keyword` argument to return *partial* matches:
 
 ``` r
 search_datasets(keyword = "medicine")
 ```
 
-    #> # A tidytable: 12 × 5
-    #>    specialty                            issued     modified   released   csv_url
-    #>    <chr>                                <date>     <date>     <date>     <chr>  
-    #>  1 addiction medicine                   2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  2 emergency medicine                   2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  3 geriatric medicine                   2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  4 internal medicine                    2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  5 nuclear medicine                     2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  6 osteopathic manipulative medicine    2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  7 pediatric medicine                   2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  8 physical medicine and rehabilitation 2022-07-11 2022-07-11 2022-07-14 https:…
-    #>  9 preventive medicine                  2022-07-11 2022-07-11 2022-07-14 https:…
-    #> 10 sleep medicine                       2022-07-11 2022-07-11 2022-07-14 https:…
-    #> 11 sports medicine                      2022-07-11 2022-07-11 2022-07-14 https:…
-    #> 12 undersea and hyperbaric medicine     2022-07-11 2022-07-11 2022-07-14 https:…
+    #> # A tidytable: 12 × 6
+    #>    specialty                      title issued     modified   released   csv_url
+    #>    <chr>                          <chr> <date>     <date>     <date>     <chr>  
+    #>  1 addiction medicine             Addi… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  2 emergency medicine             Emer… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  3 geriatric medicine             Geri… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  4 internal medicine              Inte… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  5 nuclear medicine               Nucl… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  6 osteopathic manipulative medi… Oste… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  7 pediatric medicine             Pedi… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  8 physical medicine and rehabil… Phys… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  9 preventive medicine            Prev… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #> 10 sleep medicine                 Slee… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #> 11 sports medicine                Spor… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #> 12 undersea and hyperbaric medic… Unde… 2022-07-11 2022-07-11 2022-07-14 https:…
 
 <br>
 
-If you’re searching for one in particular, just supply the `specialty`
-argument:
+Calling the function with no arguments will return the entire dataset:
 
 ``` r
-search_datasets(specialty = "cardiac surgery") |> tidytable::glimpse()
+search_datasets()
 ```
 
-    #> Rows: 1
-    #> Columns: 5
-    #> $ specialty <chr> "cardiac surgery"
-    #> $ issued    <date> 2022-07-11
-    #> $ modified  <date> 2022-07-11
-    #> $ released  <date> 2022-07-14
-    #> $ csv_url   <chr> "https://data.cms.gov/provider-data/sites/default/files/reso…
+    #> # A tidytable: 83 × 6
+    #>    specialty                      title issued     modified   released   csv_url
+    #>    <chr>                          <chr> <date>     <date>     <date>     <chr>  
+    #>  1 addiction medicine             Addi… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  2 advanced heart failure and tr… Adva… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  3 allergy/ immunology            Alle… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  4 anesthesiology                 Anes… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  5 cardiac surgery                Card… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  6 cardiology                     Card… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  7 certified clinical nurse spec… Cert… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  8 certified nurse midwife        Cert… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #>  9 certified registered nurse an… Cert… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #> 10 clinic or group practice       Clin… 2022-07-11 2022-07-11 2022-07-14 https:…
+    #> # ℹ 73 more rows
 
 <br>
 
-## Downloading A Dataset
+## `download_dataset()`
 
-Each dataset has approximately 43k rows and is roughly 8 MB.
+Once you’ve found the dataset that you’re interested in, simply insert
+the `download_dataset()` function into your pipeline to retrieve the
+csv:
+
+``` r
+search_datasets(specialty = "vascular surgery") |> 
+  download_dataset() |> 
+  head()
+```
+
+    #> # A tidytable: 6 × 16
+    #>   specialty        zip_code new_code new_price_min new_price_max new_price_mode
+    #>   <chr>            <chr>    <chr>            <dbl>         <dbl>          <dbl>
+    #> 1 vascular surgery 00210    99203             60.1          182.           92.3
+    #> 2 vascular surgery 00211    99203             60.1          182.           92.3
+    #> 3 vascular surgery 00212    99203             60.1          182.           92.3
+    #> 4 vascular surgery 00213    99203             60.1          182.           92.3
+    #> 5 vascular surgery 00214    99203             60.1          182.           92.3
+    #> 6 vascular surgery 00215    99203             60.1          182.           92.3
+    #> # ℹ 10 more variables: new_copay_min <dbl>, new_copay_max <dbl>,
+    #> #   new_copay_mode <dbl>, est_code <chr>, est_price_min <dbl>,
+    #> #   est_price_max <dbl>, est_price_mode <dbl>, est_copay_min <dbl>,
+    #> #   est_copay_max <dbl>, est_copay_mode <dbl>
+
+<br>
+
+## `use_zipcoder()`
 
 ``` r
 search_datasets(specialty = "vascular surgery") |> 
   download_dataset() |> 
   tidytable::slice_sample(n = 10) |> 
-  knitr::kable()
+  use_zipcoder()
 ```
 
-| specialty        | zip_code | new_code | new_price_min | new_price_max | new_price_mode | new_copay_min | new_copay_max | new_copay_mode | est_code | est_price_min | est_price_max | est_price_mode | est_copay_min | est_copay_max | est_copay_mode |
-|:-----------------|:---------|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|
-| vascular surgery | 29565    | 99203    |        55.432 |       169.760 |         85.632 |        13.858 |        42.440 |         21.408 | 99213    |        17.064 |       138.696 |         69.736 |         4.266 |        34.674 |         17.434 |
-| vascular surgery | 99506    | 99203    |        74.816 |       233.632 |        116.688 |        18.704 |        58.408 |         29.172 | 99213    |        22.376 |       190.744 |         95.160 |         5.594 |        47.686 |         23.790 |
-| vascular surgery | 49327    | 99203    |        56.392 |       172.800 |         87.160 |        14.098 |        43.200 |         21.790 | 99213    |        17.248 |       140.864 |         70.808 |         4.312 |        35.216 |         17.702 |
-| vascular surgery | 49893    | 99203    |        56.392 |       172.800 |         87.160 |        14.098 |        43.200 |         21.790 | 99213    |        17.248 |       140.864 |         70.808 |         4.312 |        35.216 |         17.702 |
-| vascular surgery | 46118    | 99203    |        54.768 |       167.544 |         84.544 |        13.692 |        41.886 |         21.136 | 99213    |        16.960 |       137.160 |         68.992 |         4.240 |        34.290 |         17.248 |
-| vascular surgery | 52317    | 99203    |        54.880 |       167.712 |         84.672 |        13.720 |        41.928 |         21.168 | 99213    |        17.040 |       137.368 |         69.120 |         4.260 |        34.342 |         17.280 |
-| vascular surgery | 48067    | 99203    |        60.648 |       184.656 |         93.480 |        15.162 |        46.164 |         23.370 | 99213    |        18.560 |       150.008 |         75.608 |         4.640 |        37.502 |         18.902 |
-| vascular surgery | 05072    | 99203    |        58.128 |       175.832 |         89.240 |        14.532 |        43.958 |         22.310 | 99213    |        18.320 |       144.088 |         72.808 |         4.580 |        36.022 |         18.202 |
-| vascular surgery | 48802    | 99203    |        56.392 |       172.800 |         87.160 |        14.098 |        43.200 |         21.790 | 99213    |        17.248 |       140.864 |         70.808 |         4.312 |        35.216 |         17.702 |
-| vascular surgery | 15551    | 99203    |        57.024 |       174.056 |         87.960 |        14.256 |        43.514 |         21.990 | 99213    |        17.592 |       142.080 |         71.536 |         4.398 |        35.520 |         17.884 |
+    #> # A tidytable: 10 × 28
+    #>    city     county state zip_code specialty new_code new_price_min new_price_max
+    #>    <chr>    <chr>  <chr> <chr>    <chr>     <chr>            <dbl>         <dbl>
+    #>  1 Fort La… Browa… FL    33329    vascular… 99203             61.4          187.
+    #>  2 La Honda San M… CA    94020    vascular… 99203             69.9          206.
+    #>  3 New York New Y… NY    10179    vascular… 99203             69.5          209.
+    #>  4 Sherwood Frank… TN    37376    vascular… 99203             54.6          167.
+    #>  5 Jones M… Westm… PA    15646    vascular… 99203             57.0          174.
+    #>  6 Yale     Guthr… IA    50277    vascular… 99203             54.9          168.
+    #>  7 Baptist… Hunte… NJ    08803    vascular… 99203             66.5          198.
+    #>  8 Hampton… Rocki… NH    03844    vascular… 99203             60.1          182.
+    #>  9 Black C… Outag… WI    54106    vascular… 99203             55.6          169.
+    #> 10 Fort Be… Chatt… GA    31905    vascular… 99203             55.2          170.
+    #> # ℹ 20 more variables: new_price_mode <dbl>, new_copay_min <dbl>,
+    #> #   new_copay_max <dbl>, new_copay_mode <dbl>, est_code <chr>,
+    #> #   est_price_min <dbl>, est_price_max <dbl>, est_price_mode <dbl>,
+    #> #   est_copay_min <dbl>, est_copay_max <dbl>, est_copay_mode <dbl>, lat <dbl>,
+    #> #   lng <dbl>, bounds_west <dbl>, bounds_east <dbl>, bounds_north <dbl>,
+    #> #   bounds_south <dbl>, demographics <list>, is_zcta <lgl>,
+    #> #   zcta_crosswalk <list>
 
 <br>
 
-## Geocoding with `zipcodeR`
+## `download_datasets()`
 
 ``` r
-search_datasets(specialty = "vascular surgery") |> 
-  download_dataset() |> 
-  tidytable::slice_sample(n = 10) |> 
-  use_zipcoder() |> 
-  knitr::kable()
+download_datasets(keyword = "medicine")
 ```
 
-| city           | county             | state | zip_code | specialty        | new_code | new_price_min | new_price_max | new_price_mode | new_copay_min | new_copay_max | new_copay_mode | est_code | est_price_min | est_price_max | est_price_mode | est_copay_min | est_copay_max | est_copay_mode |   lat |    lng | bounds_west | bounds_east | bounds_north | bounds_south |
-|:---------------|:-------------------|:------|:---------|:-----------------|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|:---------|--------------:|--------------:|---------------:|--------------:|--------------:|---------------:|------:|-------:|------------:|------------:|-------------:|-------------:|
-| Inglis         | Levy County        | FL    | 34449    | vascular surgery | 99203    |        58.400 |       178.792 |         90.248 |        14.600 |        44.698 |         22.562 | 99213    |        17.744 |       145.288 |         73.056 |         4.436 |        36.322 |         18.264 | 29.20 | -82.70 |   -82.81567 |   -82.55465 |     29.16315 |     28.97764 |
-| Peoria         | Peoria County      | IL    | 61655    | vascular surgery | 99203    |        56.936 |       174.632 |         88.056 |        14.234 |        43.658 |         22.014 | 99213    |        17.320 |       142.112 |         71.408 |         4.330 |        35.528 |         17.852 |    NA |     NA |          NA |          NA |           NA |           NA |
-| Albrightsville | Carbon County      | PA    | 18210    | vascular surgery | 99203    |        57.024 |       174.056 |         87.960 |        14.256 |        43.514 |         21.990 | 99213    |        17.592 |       142.080 |         71.536 |         4.398 |        35.520 |         17.884 | 41.00 | -75.60 |   -75.66729 |   -75.47362 |     41.04708 |     40.95465 |
-| Shiloh         | Richland County    | OH    | 44878    | vascular surgery | 99203    |        56.744 |       173.944 |         87.728 |        14.186 |        43.486 |         21.932 | 99213    |        17.312 |       141.664 |         71.200 |         4.328 |        35.416 |         17.800 | 40.90 | -82.50 |   -82.62278 |   -82.38186 |     41.01028 |     40.86031 |
-| New York       | New York County    | NY    | 10185    | vascular surgery | 99203    |        69.456 |       208.728 |        106.376 |        17.364 |        52.182 |         26.594 | 99213    |        21.656 |       169.664 |         85.968 |         5.414 |        42.416 |         21.492 |    NA |     NA |          NA |          NA |           NA |           NA |
-| Pasadena       | Los Angeles County | CA    | 91191    | vascular surgery | 99203    |        65.184 |       194.872 |         99.504 |        16.296 |        48.718 |         24.876 | 99213    |        20.896 |       159.824 |         81.144 |         5.224 |        39.956 |         20.286 |    NA |     NA |          NA |          NA |           NA |           NA |
-| Denton         | Denton County      | TX    | 76206    | vascular surgery | 99203    |        56.752 |       172.600 |         87.360 |        14.188 |        43.150 |         21.840 | 99213    |        17.720 |       141.296 |         71.240 |         4.430 |        35.324 |         17.810 |    NA |     NA |          NA |          NA |           NA |           NA |
-| North Rose     | Wayne County       | NY    | 14516    | vascular surgery | 99203    |        57.176 |       174.056 |         88.064 |        14.294 |        43.514 |         22.016 | 99213    |        17.760 |       142.280 |         71.712 |         4.440 |        35.570 |         17.928 | 43.21 | -76.92 |   -76.99205 |   -76.83527 |     43.25233 |     43.15063 |
-| Plymouth       | Washington County  | NC    | 27962    | vascular surgery | 99203    |        56.512 |       172.656 |         87.208 |        14.128 |        43.164 |         21.802 | 99213    |        17.432 |       140.984 |         70.952 |         4.358 |        35.246 |         17.738 | 35.80 | -76.70 |   -76.84701 |   -76.62531 |     35.92424 |     35.70527 |
-| Wyoming        | Wyoming County     | WV    | 24898    | vascular surgery | 99203    |        55.312 |       170.816 |         85.848 |        13.828 |        42.704 |         21.462 | 99213    |        16.616 |       138.832 |         69.568 |         4.154 |        34.708 |         17.392 | 37.60 | -81.50 |   -81.61344 |   -81.58915 |     37.60821 |     37.58113 |
+    #> # A tidytable: 397,248 × 28
+    #>    specialty    city  county state zip_code new_code new_price_min new_price_max
+    #>    <chr>        <chr> <chr>  <chr> <chr>    <chr>            <dbl>         <dbl>
+    #>  1 Addiction_M… Agua… Aguad… PR    00602    99204             59.4          180.
+    #>  2 Addiction_M… Agua… Aguad… PR    00603    99204             59.4          180.
+    #>  3 Addiction_M… Mari… Maric… PR    00606    99204             59.4          180.
+    #>  4 Addiction_M… Anas… Aasco… PR    00610    99204             59.4          180.
+    #>  5 Addiction_M… Arec… Areci… PR    00612    99204             59.4          180.
+    #>  6 Addiction_M… Baja… Areci… PR    00616    99204             59.4          180.
+    #>  7 Addiction_M… Barc… Barce… PR    00617    99204             59.4          180.
+    #>  8 Addiction_M… Boqu… Cabo … PR    00622    99204             59.4          180.
+    #>  9 Addiction_M… Cabo… Cabo … PR    00623    99204             59.4          180.
+    #> 10 Addiction_M… Camuy Camuy… PR    00627    99204             59.4          180.
+    #> # ℹ 397,238 more rows
+    #> # ℹ 20 more variables: new_price_mode <dbl>, new_copay_min <dbl>,
+    #> #   new_copay_max <dbl>, new_copay_mode <dbl>, est_code <chr>,
+    #> #   est_price_min <dbl>, est_price_max <dbl>, est_price_mode <dbl>,
+    #> #   est_copay_min <dbl>, est_copay_max <dbl>, est_copay_mode <dbl>, lat <dbl>,
+    #> #   lng <dbl>, bounds_west <dbl>, bounds_east <dbl>, bounds_north <dbl>,
+    #> #   bounds_south <dbl>, demographics <list>, is_zcta <lgl>, …
 
 <br>
 
@@ -373,7 +431,7 @@ library(patchwork)
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
 
 <br>
 
@@ -390,74 +448,7 @@ statebins(est_cardio,
   theme_statebins()
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
-
-<br>
-
-## Download All Datasets
-
-``` r
-download_datasets(2)
-```
-
-    #> # A tidytable: 66,208 × 25
-    #>    specialty    city  county state zip_code new_code new_price_min new_price_max
-    #>    <chr>        <chr> <chr>  <chr> <chr>    <chr>            <dbl>         <dbl>
-    #>  1 Addiction_M… Agua… Aguad… PR    00602    99204             59.4          180.
-    #>  2 Addiction_M… Agua… Aguad… PR    00603    99204             59.4          180.
-    #>  3 Addiction_M… Mari… Maric… PR    00606    99204             59.4          180.
-    #>  4 Addiction_M… Anas… Aasco… PR    00610    99204             59.4          180.
-    #>  5 Addiction_M… Arec… Areci… PR    00612    99204             59.4          180.
-    #>  6 Addiction_M… Baja… Areci… PR    00616    99204             59.4          180.
-    #>  7 Addiction_M… Barc… Barce… PR    00617    99204             59.4          180.
-    #>  8 Addiction_M… Boqu… Cabo … PR    00622    99204             59.4          180.
-    #>  9 Addiction_M… Cabo… Cabo … PR    00623    99204             59.4          180.
-    #> 10 Addiction_M… Camuy Camuy… PR    00627    99204             59.4          180.
-    #> # ℹ 66,198 more rows
-    #> # ℹ 17 more variables: new_price_mode <dbl>, new_copay_min <dbl>,
-    #> #   new_copay_max <dbl>, new_copay_mode <dbl>, est_code <chr>,
-    #> #   est_price_min <dbl>, est_price_max <dbl>, est_price_mode <dbl>,
-    #> #   est_copay_min <dbl>, est_copay_max <dbl>, est_copay_mode <dbl>, lat <dbl>,
-    #> #   lng <dbl>, bounds_west <dbl>, bounds_east <dbl>, bounds_north <dbl>,
-    #> #   bounds_south <dbl>
-
-<br>
-
-## Download `arrow` Table Objects
-
-``` r
-download_dataset_arrow(specialty = "addiction medicine") |> 
-  use_zipcoder_arrow()
-```
-
-    #> Table (query)
-    #> city: string
-    #> county: string
-    #> state: string
-    #> zip_code: string
-    #> new_code: string
-    #> new_price_min: double
-    #> new_price_max: double
-    #> new_price_mode: double
-    #> new_copay_min: double
-    #> new_copay_max: double
-    #> new_copay_mode: double
-    #> est_code: string
-    #> est_price_min: double
-    #> est_price_max: double
-    #> est_price_mode: double
-    #> est_copay_min: double
-    #> est_copay_max: double
-    #> est_copay_mode: double
-    #> specialty: string
-    #> lat: double
-    #> lng: double
-    #> bounds_west: double
-    #> bounds_east: double
-    #> bounds_north: double
-    #> bounds_south: double
-    #> 
-    #> See $.data for the source Arrow object
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
 
 <br>
 

@@ -49,11 +49,11 @@ utils::globalVariables(c(
   "mode_copay_for_established_patient", # <download_dataset_arrow>
   "csv_url", # <download_datasets>
   "filename", # <download_datasets>
-  "specialty", # <download_datasets>
   "issued", # <search_datasets>
   "modified", # <search_datasets>
   "released", # <search_datasets>
   "theme", # <search_datasets>
+  "title", # <search_datasets>
   "distribution", # <search_datasets>
   "distribution.downloadURL", # <search_datasets>
   "issued", # <search_datasets_arrow>

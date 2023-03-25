@@ -21,7 +21,7 @@
 use_zipcoder <- function(df) {
 
   results <- df |>
-    tidytable::left_join(costoffice::zipcode_db) |>
+    tidytable::left_join(costoffice::zip_db) |>
     tidytable::select(city,
                       county,
                       state,
@@ -52,7 +52,7 @@ use_zipcoder <- function(df) {
 use_zipcoder_arrow <- function(df) {
 
   results <- df |>
-    dplyr::left_join(costoffice::zipcode_db) |>
+    dplyr::left_join(costoffice::zip_db) |>
     dplyr::select(city,
                   county,
                   state,

@@ -63,7 +63,7 @@ download_dataset <- function(df) {
 #' @examples
 #' \dontrun{
 #' search_datasets(specialty = "addiction medicine") |>
-#' download_dataset() |>
+#' download_dataset_purr() |>
 #' tidytable::slice_head(n = 10)
 #' }
 #' @autoglobal
@@ -170,20 +170,24 @@ download_dataset_arrow <- function(specialty) {
 #' ## Links
 #' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
 #'
-#' @param n number of datasets to download, number between 1-83
-#' @return An `arrow` Table object
+#' @param specialty search for exact medical specialty, e.g. 'cardiology'
+#' @param keyword search for partial matches, e.g. 'medicine'
+#' @param zipcoder if TRUE, adds geocoding information from `use_zipcoder()` function
+#' @return A `tidytable` data.table
 #'
 #' @examples
 #' \dontrun{
-#' download_datasets(n = 2)
+#' download_datasets(keyword = "medicine")
 #' }
 #' @autoglobal
 #' @export
-download_datasets <- function(n) {
+download_datasets <- function(specialty = NULL,
+                              keyword   = NULL,
+                              zipcoder  = TRUE) {
 
-  results <- search_datasets() |>
-    dplyr::select(csv_url) |>
-    dplyr::slice_head(n = n) |> # remove to download all sets
+  results <- search_datasets(specialty = specialty,
+                             keyword   = keyword) |>
+    tidytable::select(csv_url) |>
     tibble::deframe() |>
     rlang::set_names(basename) |>
     purrr::map(download_dataset_purrr) |>
@@ -192,9 +196,15 @@ download_datasets <- function(n) {
                                     delim = ".",
                                     names = c("specialty", "ext")) |>
     tidytable::mutate(ext = NULL) |>
-    use_zipcoder() |>
     tidytable::drop_na() |>
     tidytable::relocate(specialty)
+
+  if (isTRUE(zipcoder)) {
+    results <- results |>
+      use_zipcoder() |>
+      tidytable::drop_na() |>
+      tidytable::relocate(specialty)
+  }
 
   return(results)
 
