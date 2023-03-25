@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# costoffice 0.0.0.9015 (2023-03-25)
+
+* updated internal `zip_db` raw dataset script
+* added specialty, keyword, & zipcoder arguments to `download_datasets()` function
+
+
 # costoffice 0.0.0.9014 (2023-03-23)
 
 * logo
