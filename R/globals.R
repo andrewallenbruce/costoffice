@@ -16,6 +16,10 @@ utils::globalVariables(c(
   "min_copay_for_established_patient", # <download_dataset>
   "max_copay_for_established_patient", # <download_dataset>
   "mode_copay_for_established_patient", # <download_dataset>
+  "new_code", # <download_dataset>
+  "stat", # <download_dataset>
+  "amount", # <download_dataset>
+  "est_code", # <download_dataset>
   "zip_code", # <download_dataset_purrr>
   "most_utilized_procedure_code_for_new_patient", # <download_dataset_purrr>
   "min_medicare_pricing_for_new_patient", # <download_dataset_purrr>
@@ -37,22 +41,6 @@ utils::globalVariables(c(
   "est_code", # <download_dataset_purrr>
   "csv_url", # <download_datasets>
   "filename", # <download_datasets>
-  "csv_url", # <download_dataset_arrow>
-  "zip_code", # <download_dataset_arrow>
-  "most_utilized_procedure_code_for_new_patient", # <download_dataset_arrow>
-  "min_medicare_pricing_for_new_patient", # <download_dataset_arrow>
-  "max_medicare_pricing_for_new_patient", # <download_dataset_arrow>
-  "mode_medicare_pricing_for_new_patient", # <download_dataset_arrow>
-  "min_copay_for_new_patient", # <download_dataset_arrow>
-  "max_copay_for_new_patient", # <download_dataset_arrow>
-  "mode_copay_for_new_patient", # <download_dataset_arrow>
-  "most_utilized_procedure_code_for_established_patient", # <download_dataset_arrow>
-  "min_medicare_pricing_for_established_patient", # <download_dataset_arrow>
-  "max_medicare_pricing_for_established_patient", # <download_dataset_arrow>
-  "mode_medicare_pricing_for_established_patient", # <download_dataset_arrow>
-  "min_copay_for_established_patient", # <download_dataset_arrow>
-  "max_copay_for_established_patient", # <download_dataset_arrow>
-  "mode_copay_for_established_patient", # <download_dataset_arrow>
   "issued", # <search_datasets>
   "modified", # <search_datasets>
   "released", # <search_datasets>
@@ -60,20 +48,11 @@ utils::globalVariables(c(
   "title", # <search_datasets>
   "distribution", # <search_datasets>
   "distribution.downloadURL", # <search_datasets>
-  "issued", # <search_datasets_arrow>
-  "modified", # <search_datasets_arrow>
-  "released", # <search_datasets_arrow>
-  "theme", # <search_datasets_arrow>
-  "distribution", # <search_datasets_arrow>
-  "distribution.downloadURL", # <search_datasets_arrow>
   "specialty", # <use_zipcoder>
   "city", # <use_zipcoder>
   "county", # <use_zipcoder>
   "state", # <use_zipcoder>
   "zip_code", # <use_zipcoder>
-  "city", # <use_zipcoder_arrow>
-  "county", # <use_zipcoder_arrow>
-  "state", # <use_zipcoder_arrow>
-  "zip_code", # <use_zipcoder_arrow>
+  "state_region", # <use_zipcoder>
   NULL
 ))

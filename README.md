@@ -29,19 +29,17 @@ You can install the development version of `costoffice` from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("andrewallenbruce/costoffice", dependencies = TRUE, build_vignettes = TRUE)
+devtools::install_github("andrewallenbruce/costoffice", build_vignettes = TRUE)
 ```
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("andrewallenbruce/costoffice", dependencies = TRUE, build_vignettes = TRUE)
+remotes::install_github("andrewallenbruce/costoffice", build_vignettes = TRUE)
 ```
 
 ``` r
 library(costoffice)
 ```
-
-<br>
 
 ## Purpose
 
@@ -49,21 +47,21 @@ The `costoffice` package contains functions enabling the user to access
 the latest **Physician Office Visit Costs** datasets from
 [Data.CMS.gov](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs).
 
-There are 83 datasets in total, the name corresponding to a medical
-specialty(primary taxonomy). Each one contains:
+There are 83 datasets in total, each representing a different medical
+specialty. Each one contains the:
 
-- the most utilized procedure code (HCPCS Level II aka CPT code)
-- the minimum, maximum, and mode price Medicare paid for the code and
-- the minimum, maximum, and mode copay the patient paid for the visit
+- Most Utilized Procedure Code (HCPCS Level II aka CPT code)
+- Minimum/Maximum/Mode Price Medicare Paid
+- Minimum/Maximum/Mode Copay the Patient Paid
 
-per zip code, for new and established patients both.
+by zip code, for new and established patients both.
 
 <br>
 
 ## `search_datasets()`
 
-Call this function to return dataset information and the url to download
-a csv file of the data.
+Returns dataset information such as title, dates concerning data
+freshness and, most importantly, a csv download url.
 
 <br>
 
@@ -163,50 +161,42 @@ search_datasets(specialty = "vascular surgery") |>
 ## `use_zipcoder()`
 
 ``` r
-search_datasets(specialty = "vascular surgery") |> 
-  download_dataset() |> 
-  tidytable::slice_sample(n = 10) |> 
+x <- search_datasets(specialty = "vascular surgery") |> 
+  download_dataset()
+  #tidytable::slice_sample(n = 10) |> 
   use_zipcoder()
 ```
 
-    #> # A tidytable: 10 × 14
-    #>    specialty   city  county state zip_code hcpcs patient cost    min   max  mode
-    #>    <chr>       <chr> <chr>  <chr> <chr>    <chr> <chr>   <chr> <dbl> <dbl> <dbl>
-    #>  1 vascular s… Brad… Manat… FL    34282    99203 new     price 58.4  179.   90.2
-    #>  2 vascular s… Lewi… Dento… TX    75067    99213 est     price 17.7  141.   71.2
-    #>  3 vascular s… Cent… Knox … NE    68724    99213 est     price 17    136.   68.6
-    #>  4 vascular s… Quit… Brisc… TX    79255    99203 new     copay 14.2   43.2  21.8
-    #>  5 vascular s… Bost… Morga… GA    30623    99203 new     price 55.2  170.   85.5
-    #>  6 vascular s… Byro… Dooly… GA    31007    99203 new     copay 13.8   42.4  21.4
-    #>  7 vascular s… Keni… Cook … IL    60043    99213 est     copay  4.82  38.8  19.6
-    #>  8 vascular s… Park… Summi… UT    84068    99203 new     price 56.2  172.   86.7
-    #>  9 vascular s… Herm… Custe… SD    57744    99203 new     copay 14.4   43.5  22.1
-    #> 10 vascular s… Rent… King … WA    98056    99203 new     price 65.5  195.   99.8
-    #> # ℹ 3 more variables: range <dbl>, state_name <chr>, state_region <fct>
+    #> Error in tidytable::left_join(df, zip_db): argument "df" is missing, with no default
 
 <br>
 
 ## `download_datasets()`
 
 ``` r
-download_datasets(keyword = "medicine")
+download_datasets(keyword = "medicine") |> 
+  summary_stats(condition = patient == "est",
+                group_vars = c(specialty, hcpcs, cost),
+                summary_vars = c(min, max, mode, range),
+                arr = cost)
 ```
 
-    #> # A tidytable: 2,009,808 × 14
-    #>    specialty   city  county state zip_code hcpcs patient cost    min   max  mode
-    #>    <chr>       <chr> <chr>  <chr> <chr>    <chr> <chr>   <chr> <dbl> <dbl> <dbl>
-    #>  1 Addiction_… Holt… Suffo… NY    00501    99204 new     copay  17.9  53.8  40.7
-    #>  2 Addiction_… Holt… Suffo… NY    00501    99204 new     price  71.5 215.  163. 
-    #>  3 Addiction_… Holt… Suffo… NY    00544    99204 new     copay  17.9  53.8  40.7
-    #>  4 Addiction_… Holt… Suffo… NY    00544    99204 new     price  71.5 215.  163. 
-    #>  5 Addiction_… Adju… Adjun… PR    00601    99204 new     copay  14.8  45.0  34.1
-    #>  6 Addiction_… Adju… Adjun… PR    00601    99204 new     price  59.4 180.  136. 
-    #>  7 Addiction_… Agua… Aguad… PR    00602    99204 new     copay  14.8  45.0  34.1
-    #>  8 Addiction_… Agua… Aguad… PR    00602    99204 new     price  59.4 180.  136. 
-    #>  9 Addiction_… Agua… Aguad… PR    00603    99204 new     copay  14.8  45.0  34.1
-    #> 10 Addiction_… Agua… Aguad… PR    00603    99204 new     price  59.4 180.  136. 
-    #> # ℹ 2,009,798 more rows
-    #> # ℹ 3 more variables: range <dbl>, state_name <chr>, state_region <fct>
+    #> # A tidytable: 24 × 12
+    #>    specialty     hcpcs cost  median_min mean_min median_max mean_max median_mode
+    #>    <chr>         <chr> <chr>      <dbl>    <dbl>      <dbl>    <dbl>       <dbl>
+    #>  1 Addiction_Me… 99214 price       17.6     18.1       142.     145.       101. 
+    #>  2 Emergency_Me… 99214 price       17.6     18.1       142.     145.       101. 
+    #>  3 Geriatric_Me… 99214 price       17.6     18.1       142.     145.       101. 
+    #>  4 Internal_Med… 99214 price       17.6     18.1       142.     145.       101. 
+    #>  5 Nuclear_Medi… 99214 price       17.6     18.1       142.     145.       101. 
+    #>  6 Osteopathic_… 99213 price       17.6     18.1       142.     145.        71.4
+    #>  7 Pediatric_Me… 99214 price       17.6     18.1       142.     145.       101. 
+    #>  8 Physical_Med… 99213 price       17.6     18.1       142.     145.        71.4
+    #>  9 Preventive_M… 99213 price       17.6     18.1       142.     145.        71.4
+    #> 10 Sleep_Medici… 99214 price       17.6     18.1       142.     145.       101. 
+    #> # ℹ 14 more rows
+    #> # ℹ 4 more variables: mean_mode <dbl>, median_range <dbl>, mean_range <dbl>,
+    #> #   n <int>
 
 <br>
 
@@ -216,34 +206,29 @@ Current average prices by state for a **New Patient** office visit to a
 **Vascular Surgeon**:
 
 ``` r
-download_datasets(specialty = "vascular surgery") |> 
-  tidytable::filter(patient == "new") |> 
-  tidytable::summarise(n = tidytable::n.(),
-    avg_min = round(mean(min), 2),
-                       avg_max = round(mean(max), 2),
-                       avg_mode = round(mean(mode), 2),
-                       avg_range = round(mean(range), 2),
-                       .by = c(specialty, 
-                               state, 
-                               hcpcs, 
-                               cost)) |> 
-  tidytable::arrange(cost)
+download_datasets(specialty = "vascular surgery") |>
+  summary_stats(condition = patient == "new",
+                group_vars = c(specialty, state, hcpcs, cost),
+                summary_vars = c(min, max, mode, range),
+                arr = cost)
 ```
 
-    #> # A tidytable: 104 × 9
-    #>    specialty        state hcpcs cost      n avg_min avg_max avg_mode avg_range
-    #>    <chr>            <chr> <chr> <chr> <int>   <dbl>   <dbl>    <dbl>     <dbl>
-    #>  1 Vascular_Surgery AK    99203 copay   274    18.7    58.4     29.2      39.7
-    #>  2 Vascular_Surgery AL    99203 copay   839    13.9    42.6     21.5      28.8
-    #>  3 Vascular_Surgery AR    99203 copay   710    13.3    40.9     20.6      27.6
-    #>  4 Vascular_Surgery AZ    99203 copay   568    14.3    43.7     22.1      29.3
-    #>  5 Vascular_Surgery CA    99203 copay  2654    16.0    47.9     24.4      31.9
-    #>  6 Vascular_Surgery CO    99203 copay   661    15.0    45.2     23.0      30.2
-    #>  7 Vascular_Surgery CT    99203 copay   438    15.9    47.7     24.3      31.8
-    #>  8 Vascular_Surgery DC    99203 copay   296    17.1    51.1     26.2      34  
-    #>  9 Vascular_Surgery DE    99203 copay    98    15.0    45.2     23.0      30.3
-    #> 10 Vascular_Surgery FL    99203 copay  1495    14.9    45.5     23.0      30.6
+    #> # A tidytable: 104 × 13
+    #>    specialty        state hcpcs cost  median_min mean_min median_max mean_max
+    #>    <chr>            <chr> <chr> <chr>      <dbl>    <dbl>      <dbl>    <dbl>
+    #>  1 Vascular_Surgery AK    99203 price       74.8     74.8       234.     234.
+    #>  2 Vascular_Surgery AL    99203 price       55.5     55.5       171.     171.
+    #>  3 Vascular_Surgery AR    99203 price       53.1     53.1       164.     164.
+    #>  4 Vascular_Surgery AZ    99203 price       57.3     57.3       175.     175.
+    #>  5 Vascular_Surgery CA    99203 price       63.6     64.0       190.     191.
+    #>  6 Vascular_Surgery CO    99203 price       60.1     60.1       181.     181.
+    #>  7 Vascular_Surgery CT    99203 price       63.5     63.5       191.     191.
+    #>  8 Vascular_Surgery DC    99203 price       68.6     68.6       205.     205.
+    #>  9 Vascular_Surgery DE    99203 price       59.8     59.8       181.     181.
+    #> 10 Vascular_Surgery FL    99203 price       58.4     59.5       179.     182.
     #> # ℹ 94 more rows
+    #> # ℹ 5 more variables: median_mode <dbl>, mean_mode <dbl>, median_range <dbl>,
+    #> #   mean_range <dbl>, n <int>
 
 <br>
 
@@ -252,35 +237,30 @@ visit to a **Cardiologist**:
 
 ``` r
 est_cardio <- download_datasets(specialty = "cardiology") |> 
-  tidytable::filter(patient == "new") |> 
-  tidytable::summarise(n = tidytable::n.(),
-    avg_min = round(mean(min), 2),
-                       avg_max = round(mean(max), 2),
-                       avg_mode = round(mean(mode), 2),
-                       avg_range = round(mean(range), 2),
-                       .by = c(specialty, 
-                               state, 
-                               hcpcs, 
-                               cost)) |> 
-  tidytable::arrange(cost)
+  summary_stats(condition = patient == "est",
+                group_vars = c(specialty, state, hcpcs, cost),
+                summary_vars = c(min, max, mode, range),
+                arr = cost)
 
 est_cardio
 ```
 
-    #> # A tidytable: 104 × 9
-    #>    specialty  state hcpcs cost      n avg_min avg_max avg_mode avg_range
-    #>    <chr>      <chr> <chr> <chr> <int>   <dbl>   <dbl>    <dbl>     <dbl>
-    #>  1 Cardiology AK    99204 copay   274    18.7    58.4     44.1      39.7
-    #>  2 Cardiology AL    99204 copay   839    13.9    42.6     32.3      28.8
-    #>  3 Cardiology AR    99204 copay   710    13.3    40.9     31.0      27.6
-    #>  4 Cardiology AZ    99204 copay   568    14.3    43.7     33.1      29.3
-    #>  5 Cardiology CA    99204 copay  2654    16.0    47.9     36.3      31.9
-    #>  6 Cardiology CO    99204 copay   661    15.0    45.2     34.3      30.2
-    #>  7 Cardiology CT    99204 copay   438    15.9    47.7     36.2      31.8
-    #>  8 Cardiology DC    99204 copay   296    17.1    51.1     38.8      34  
-    #>  9 Cardiology DE    99204 copay    98    15.0    45.2     34.3      30.3
-    #> 10 Cardiology FL    99204 copay  1495    14.9    45.5     34.4      30.6
+    #> # A tidytable: 104 × 13
+    #>    specialty  state hcpcs cost  median_min mean_min median_max mean_max
+    #>    <chr>      <chr> <chr> <chr>      <dbl>    <dbl>      <dbl>    <dbl>
+    #>  1 Cardiology AK    99214 price       22.4     22.4       191.     191.
+    #>  2 Cardiology AL    99214 price       16.9     16.9       139.     139.
+    #>  3 Cardiology AR    99214 price       16.3     16.3       134.     134.
+    #>  4 Cardiology AZ    99214 price       17.7     17.7       143.     143.
+    #>  5 Cardiology CA    99214 price       20.4     20.5       156.     157.
+    #>  6 Cardiology CO    99214 price       19.0     19.0       148.     148.
+    #>  7 Cardiology CT    99214 price       20.1     20.1       156.     156.
+    #>  8 Cardiology DC    99214 price       21.9     21.9       167.     167.
+    #>  9 Cardiology DE    99214 price       18.7     18.7       148.     148.
+    #> 10 Cardiology FL    99214 price       17.7     18.1       145.     148.
     #> # ℹ 94 more rows
+    #> # ℹ 5 more variables: median_mode <dbl>, mean_mode <dbl>, median_range <dbl>,
+    #> #   mean_range <dbl>, n <int>
 
 <br>
 
@@ -324,7 +304,11 @@ library(patchwork)
   )
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" />
+    #> Error in `ggplot2::geom_pointrange()`:
+    #> ! Problem while computing aesthetics.
+    #> ℹ Error occurred in the 1st layer.
+    #> Caused by error in `stopifnot()`:
+    #> ! object 'avg_mode' not found
 
 <br>
 
@@ -341,7 +325,11 @@ statebins(est_cardio |> tidytable::filter(cost == "copay"),
   theme_statebins()
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" />
+    #> Error in `geom_tile()`:
+    #> ! Problem while computing aesthetics.
+    #> ℹ Error occurred in the 1st layer.
+    #> Caused by error in `FUN()`:
+    #> ! object 'avg_mode' not found
 
 <br>
 

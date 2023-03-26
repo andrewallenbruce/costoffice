@@ -10,16 +10,16 @@ Depends:
     R (>= 2.10)
 Imports: 
     clock,
+    cli,
     httr2,
     tidytable,
-    arrow,
     dplyr,
     purrr,
     stringr,
     tibble,
-    tidyr,
     vctrs,
-    rlang
+    rlang,
+    stats
 Suggests:
     roxyglobals (>= 0.2.1),
     knitr,

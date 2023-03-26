@@ -39,36 +39,34 @@ You can install the development version of `costoffice` from [GitHub](https://gi
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("andrewallenbruce/costoffice", dependencies = TRUE, build_vignettes = TRUE)
+devtools::install_github("andrewallenbruce/costoffice", build_vignettes = TRUE)
 ```
 ``` r
 # install.packages("remotes")
-remotes::install_github("andrewallenbruce/costoffice", dependencies = TRUE, build_vignettes = TRUE)
+remotes::install_github("andrewallenbruce/costoffice", build_vignettes = TRUE)
 ```
 
 ```{r echo=TRUE}
 library(costoffice)
 ```
 
-<br>
-
 ## Purpose
 
 The `costoffice` package contains functions enabling the user to access the latest __Physician Office Visit Costs__ datasets from [Data.CMS.gov](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs). 
 
-There are 83 datasets in total, the name corresponding to a medical specialty(primary taxonomy). Each one contains:
+There are 83 datasets in total, each representing a different medical specialty. Each one contains the:
 
-  * the most utilized procedure code (HCPCS Level II aka CPT code)
-  * the minimum, maximum, and mode price Medicare paid for the code and
-  * the minimum, maximum, and mode copay the patient paid for the visit
+  * Most Utilized Procedure Code (HCPCS Level II aka CPT code)
+  * Minimum/Maximum/Mode Price Medicare Paid
+  * Minimum/Maximum/Mode Copay the Patient Paid
   
-per zip code, for new and established patients both.
+by zip code, for new and established patients both.
 
 <br>
 
 ## `search_datasets()`
 
-Call this function to return dataset information and the url to download a csv file of the data.
+Returns dataset information such as title, dates concerning data freshness and, most importantly, a csv download url.
 
 <br>
 
@@ -116,9 +114,9 @@ search_datasets(specialty = "vascular surgery") |>
 ## `use_zipcoder()`
 
 ```{r}
-search_datasets(specialty = "vascular surgery") |> 
-  download_dataset() |> 
-  tidytable::slice_sample(n = 10) |> 
+x <- search_datasets(specialty = "vascular surgery") |> 
+  download_dataset()
+  #tidytable::slice_sample(n = 10) |> 
   use_zipcoder()
 ```
 
@@ -127,29 +125,28 @@ search_datasets(specialty = "vascular surgery") |>
 ## `download_datasets()`
 
 ```{r}
-download_datasets(keyword = "medicine")
+download_datasets(keyword = "medicine") |> 
+  summary_stats(condition = patient == "est",
+                group_vars = c(specialty, hcpcs, cost),
+                summary_vars = c(min, max, mode, range),
+                arr = cost)
 ```
 
-
 <br>
+
+
+
 
 ## Summary Statistics by State
 
 Current average prices by state for a **New Patient** office visit to a **Vascular Surgeon**:
 
 ```{r}
-download_datasets(specialty = "vascular surgery") |> 
-  tidytable::filter(patient == "new") |> 
-  tidytable::summarise(n = tidytable::n.(),
-    avg_min = round(mean(min), 2),
-                       avg_max = round(mean(max), 2),
-                       avg_mode = round(mean(mode), 2),
-                       avg_range = round(mean(range), 2),
-                       .by = c(specialty, 
-                               state, 
-                               hcpcs, 
-                               cost)) |> 
-  tidytable::arrange(cost)
+download_datasets(specialty = "vascular surgery") |>
+  summary_stats(condition = patient == "new",
+                group_vars = c(specialty, state, hcpcs, cost),
+                summary_vars = c(min, max, mode, range),
+                arr = cost)
 ```
 
 <br>
@@ -158,17 +155,10 @@ Current average prices by state for an **Established Patient** office visit to a
 
 ```{r}
 est_cardio <- download_datasets(specialty = "cardiology") |> 
-  tidytable::filter(patient == "new") |> 
-  tidytable::summarise(n = tidytable::n.(),
-    avg_min = round(mean(min), 2),
-                       avg_max = round(mean(max), 2),
-                       avg_mode = round(mean(mode), 2),
-                       avg_range = round(mean(range), 2),
-                       .by = c(specialty, 
-                               state, 
-                               hcpcs, 
-                               cost)) |> 
-  tidytable::arrange(cost)
+  summary_stats(condition = patient == "est",
+                group_vars = c(specialty, state, hcpcs, cost),
+                summary_vars = c(min, max, mode, range),
+                arr = cost)
 
 est_cardio
 ```
@@ -178,7 +168,7 @@ est_cardio
 
 ## Visualizations
 
-```{r, fig.asp=2}
+```{r ggdot, fig.asp=2}
 p1 <- ggplot2::ggplot(est_cardio |> tidytable::filter(cost == "price"), 
       ggplot2::aes(forcats::fct_reorder(state, avg_mode, median), avg_mode)) + 
   ggplot2::geom_pointrange(ggplot2::aes(ymin = avg_min, ymax = avg_max), 
@@ -219,7 +209,7 @@ library(patchwork)
 
 <br>
 
-```{r, fig.asp=1.1}
+```{r statebin, fig.asp=1.1}
 library(statebins)
 
 statebins(est_cardio |> tidytable::filter(cost == "copay"), 

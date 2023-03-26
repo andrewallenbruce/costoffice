@@ -25,11 +25,22 @@ zip_db <- zip_code_db |>
                     lat,
                     lng,
                     tidytable::starts_with("bounds")) |>
-  tidytable::nest(demo = c("pop", "pop_density", "med_income")) |>
-  tidyr::nest(geo = c("lat", "lng", "bounds_west", "bounds_east", "bounds_north", "bounds_south")) |>
+  tidytable::nest(demo = c("pop",
+                           "pop_density",
+                           "med_income")) |>
+  tidyr::nest(geo = c("lat",
+                      "lng",
+                      "bounds_west",
+                      "bounds_east",
+                      "bounds_north",
+                      "bounds_south")) |>
   tidytable::mutate(is_zcta = zipcodeR::is_zcta(zip_code)) |>
-  tidytable::nest_join(zcta_crosswalk, by = c("zip_code" = "ZCTA5")) |>
-  tidytable::left_join(state_db, by = c("state" = "state_abb")) |>
-  tidytable::relocate(state_name, state_region, .after = state)
+  tidytable::nest_join(zcta_crosswalk,
+                       by = c("zip_code" = "ZCTA5")) |>
+  tidytable::left_join(state_db,
+                       by = c("state" = "state_abb")) |>
+  tidytable::relocate(state_name,
+                      state_region,
+                      .after = state)
 
 usethis::use_data(zip_db, overwrite = TRUE)

@@ -1,8 +1,5 @@
 #' Add Geocoding Info to dataset via zipcodeR database
 #'
-#' @description A list of enrollment applications pending CMS contractor
-#'    review for physicians & non-physicians.
-#'
 #' ## Links
 #' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
 #'
@@ -12,12 +9,10 @@
 #' @return A `tidytable`
 #'
 #' @examples
-#' \dontrun{
 #' search_datasets(specialty = "vascular surgery") |>
 #' download_dataset() |>
-#' tidytable::slice_sample(n = 10) |>
+#' tidytable::slice_sample(n = 5) |>
 #' use_zipcoder()
-#' }
 #' @autoglobal
 #' @export
 use_zipcoder <- function(df, drop_na = TRUE, full = FALSE) {
@@ -48,40 +43,13 @@ use_zipcoder <- function(df, drop_na = TRUE, full = FALSE) {
 
   }
 
-  if (isTRUE(drop_na)) {results <- results |>
-    tidytable::drop_na()}
+  if (isTRUE(drop_na)) {
+    results <- results |>
+      tidytable::drop_na()
+    }
 
   return(results)
 }
 
 .datatable.aware <- TRUE
-
-#' Add Geocoding Info to dataset via zipcodeR database
-#'
-#' ## Links
-#' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
-#'
-#' @param df An `arrow` Table object from `download_dataset_arrow()`
-#' @return An `arrow` Table object
-#' @examples
-#' \dontrun{
-#' search_datasets_arrow(specialty = "vascular surgery") |>
-#' download_dataset_arrow() |>
-#' use_zipcoder_arrow()
-#' }
-#' @autoglobal
-#' @noRd
-
-use_zipcoder_arrow <- function(df) {
-
-  results <- df |>
-    dplyr::left_join(costoffice::zip_db) |>
-    dplyr::select(city,
-                  county,
-                  state,
-                  zip_code,
-                  dplyr::everything())
-
-  return(results)
-}
 

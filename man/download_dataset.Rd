@@ -7,14 +7,12 @@
 download_dataset(df)
 }
 \arguments{
-\item{df}{tidytable from \code{search_datasets()}}
+\item{df}{A returned \code{tidytable} from \code{search_datasets()}}
 }
 \value{
-A \code{tidytable}
+A \code{tidytable} of available datasets and related information
 }
 \description{
-A list of enrollment applications pending CMS contractor
-review for physicians & non-physicians.
 \subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/provider-data/search?page-size=50&theme=Physician\%20office\%20visit\%20costs}{Physician Office Visit Costs (Data.CMS.gov)}
@@ -22,15 +20,8 @@ review for physicians & non-physicians.
 }
 }
 \examples{
-\dontrun{
 search_datasets(specialty = "vascular surgery") |>
 download_dataset() |>
 tidytable::slice_head(n = 10)
 }
-}
-\seealso{
-Other download: 
-\code{\link{download_dataset_purrr}()},
-\code{\link{download_datasets}()}
-}
-\concept{download}
+\concept{downloads}

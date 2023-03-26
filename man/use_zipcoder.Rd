@@ -17,8 +17,6 @@ use_zipcoder(df, drop_na = TRUE, full = FALSE)
 A \code{tidytable}
 }
 \description{
-A list of enrollment applications pending CMS contractor
-review for physicians & non-physicians.
 \subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/provider-data/search?page-size=50&theme=Physician\%20office\%20visit\%20costs}{Physician Office Visit Costs (Data.CMS.gov)}
@@ -26,10 +24,8 @@ review for physicians & non-physicians.
 }
 }
 \examples{
-\dontrun{
 search_datasets(specialty = "vascular surgery") |>
 download_dataset() |>
-tidytable::slice_sample(n = 10) |>
+tidytable::slice_sample(n = 5) |>
 use_zipcoder()
-}
 }

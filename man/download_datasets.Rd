@@ -35,9 +35,4 @@ A \code{tidytable} data.table
 download_datasets(keyword = "medicine")
 }
 }
-\seealso{
-Other download: 
-\code{\link{download_dataset_purrr}()},
-\code{\link{download_dataset}()}
-}
 \concept{download}
