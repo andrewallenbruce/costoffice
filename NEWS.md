@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# costoffice 0.0.0.9016 (2023-03-26)
+
+* download_dataset() tidier output
+* use_zipcoder() option for smaller data join
+
+
 # costoffice 0.0.0.9015 (2023-03-25)
 
 * updated internal `zip_db` raw dataset script
