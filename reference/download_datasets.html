@@ -78,21 +78,30 @@ Physician Office Visit Costs (Data.CMS.gov)
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_datasets</span><span class="op">(</span>specialty <span class="op">=</span> <span class="cn">NULL</span>, keyword <span class="op">=</span> <span class="cn">NULL</span>, zipcoder <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_datasets</span><span class="op">(</span></span>
+<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  keyword <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zipcoder <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  drop_na <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>specialty</dt>
-<dd><p>search for exact medical specialty, e.g. 'cardiology'</p></dd>
+<dd><p>Search for exact medical specialty, e.g. 'cardiology'</p></dd>
 
 
 <dt>keyword</dt>
-<dd><p>search for partial matches, e.g. 'medicine'</p></dd>
+<dd><p>Search for partial matches, e.g. 'medicine'</p></dd>
 
 
 <dt>zipcoder</dt>
-<dd><p>if TRUE, adds geocoding information from <code><a href="use_zipcoder.html">use_zipcoder()</a></code> function</p></dd>
+<dd><p>Adds information from <code><a href="use_zipcoder.html">use_zipcoder()</a></code>; default is TRUE</p></dd>
+
+
+<dt>drop_na</dt>
+<dd><p>Drop rows containing missing values; default is TRUE</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -100,6 +109,12 @@ Physician Office Visit Costs (Data.CMS.gov)
     
 
 <p>A <code>tidytable</code> data.table</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other download: 
+<code><a href="download_dataset_purrr.html">download_dataset_purrr</a>()</code>,
+<code><a href="download_dataset.html">download_dataset</a>()</code></p></div>
     </div>
 
     <div class="section level2">
