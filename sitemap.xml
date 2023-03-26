@@ -28,13 +28,7 @@
     <loc>https://andrewallenbruce.github.io/costoffice/reference/costoffice-package.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/costoffice/reference/df_types.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/costoffice/reference/download_dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/costoffice/reference/download_dataset_purrr.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/costoffice/reference/download_datasets.html</loc>
@@ -46,7 +40,7 @@
     <loc>https://andrewallenbruce.github.io/costoffice/reference/search_datasets.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/costoffice/reference/search_datasets_arrow.html</loc>
+    <loc>https://andrewallenbruce.github.io/costoffice/reference/summary_stats.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/costoffice/reference/use_zipcoder.html</loc>
