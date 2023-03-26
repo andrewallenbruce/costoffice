@@ -39,11 +39,11 @@ You can install the development version of `costoffice` from [GitHub](https://gi
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("andrewallenbruce/costoffice")
+devtools::install_github("andrewallenbruce/costoffice", dependencies = TRUE, build_vignettes = TRUE)
 ```
 ``` r
 # install.packages("remotes")
-remotes::install_github("andrewallenbruce/costoffice")
+remotes::install_github("andrewallenbruce/costoffice", dependencies = TRUE, build_vignettes = TRUE)
 ```
 
 ```{r echo=TRUE}
@@ -107,8 +107,9 @@ Once you've found the dataset that you're interested in, simply insert the `down
 ```{r}
 search_datasets(specialty = "vascular surgery") |> 
   download_dataset() |> 
-  head()
+  head(n = 10)
 ```
+
 
 <br>
 
@@ -130,7 +131,6 @@ download_datasets(keyword = "medicine")
 ```
 
 
-
 <br>
 
 ## Summary Statistics by State
@@ -138,19 +138,18 @@ download_datasets(keyword = "medicine")
 Current average prices by state for a **New Patient** office visit to a **Vascular Surgeon**:
 
 ```{r}
-search_datasets(specialty = "vascular surgery") |> 
-  download_dataset() |> 
-  use_zipcoder() |> 
-  tidytable::select(specialty, 
-                    state, 
-                    tidytable::starts_with("new_")) |> 
-  tidytable::summarise(avg_price_mode = round(mean(new_price_mode), 2),
-                       avg_copay_mode = round(mean(new_copay_mode), 2),
+download_datasets(specialty = "vascular surgery") |> 
+  tidytable::filter(patient == "new") |> 
+  tidytable::summarise(n = tidytable::n.(),
+    avg_min = round(mean(min), 2),
+                       avg_max = round(mean(max), 2),
+                       avg_mode = round(mean(mode), 2),
+                       avg_range = round(mean(range), 2),
                        .by = c(specialty, 
                                state, 
-                               new_code)) |> 
-  tidytable::drop_na() |> 
-  knitr::kable()
+                               hcpcs, 
+                               cost)) |> 
+  tidytable::arrange(cost)
 ```
 
 <br>
@@ -158,25 +157,20 @@ search_datasets(specialty = "vascular surgery") |>
 Current average prices by state for an **Established Patient** office visit to a **Cardiologist**:
 
 ```{r}
-est_cardio <- search_datasets(specialty = "cardiology") |> 
-  download_dataset() |> 
-  use_zipcoder() |> 
-  tidytable::select(specialty, 
-                    state, 
-                    tidytable::starts_with("est_")) |> 
-  tidytable::summarise(
-    avg_price_min = round(mean(est_price_min), 2),
-    avg_price_mode = round(mean(est_price_mode), 2),
-    avg_price_max = round(mean(est_price_max), 2),
-    avg_copay_min = round(mean(est_copay_min), 2),
-    avg_copay_mode = round(mean(est_copay_mode), 2),
-    avg_copay_max = round(mean(est_copay_min), 2),
+est_cardio <- download_datasets(specialty = "cardiology") |> 
+  tidytable::filter(patient == "new") |> 
+  tidytable::summarise(n = tidytable::n.(),
+    avg_min = round(mean(min), 2),
+                       avg_max = round(mean(max), 2),
+                       avg_mode = round(mean(mode), 2),
+                       avg_range = round(mean(range), 2),
                        .by = c(specialty, 
                                state, 
-                               est_code)) |> 
-  tidytable::drop_na()
+                               hcpcs, 
+                               cost)) |> 
+  tidytable::arrange(cost)
 
-est_cardio |> knitr::kable()
+est_cardio
 ```
 
 
@@ -185,20 +179,11 @@ est_cardio |> knitr::kable()
 ## Visualizations
 
 ```{r, fig.asp=2}
-p1 <- ggplot2::ggplot(est_cardio, 
-        ggplot2::aes(
-          forcats::fct_reorder(state, 
-                               avg_price_mode, 
-                               median),
-                               avg_price_mode)) + 
-  ggplot2::geom_pointrange(
-    ggplot2::aes(ymin = avg_price_min, 
-                 ymax = avg_price_max), 
-    size = 0, 
-    colour = "black", 
-    linewidth = 0.5) +
+p1 <- ggplot2::ggplot(est_cardio |> tidytable::filter(cost == "price"), 
+      ggplot2::aes(forcats::fct_reorder(state, avg_mode, median), avg_mode)) + 
+  ggplot2::geom_pointrange(ggplot2::aes(ymin = avg_min, ymax = avg_max), 
+    size = 0, colour = "black", linewidth = 0.5) +
   ggplot2::geom_point(color = "black", size = 3) +
-  #ggplot2::geom_point(shape = "circle open", size = 5, color = "red") +
   ggplot2::coord_flip() +
   ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
   ggplot2::labs(
@@ -208,17 +193,16 @@ p1 <- ggplot2::ggplot(est_cardio,
     subtitle = "Price Ranges by State") +
   ggplot2::theme_minimal()
 
-p2 <- ggplot2::ggplot(est_cardio, ggplot2::aes(forcats::fct_reorder(state, 
-                                          avg_copay_mode, 
-                                          median),
-                                          avg_copay_mode)) + 
-  ggplot2::geom_pointrange(ggplot2::aes(ymin = avg_copay_min, 
-                 ymax = avg_copay_mode)) +
+p2 <- ggplot2::ggplot(est_cardio |> tidytable::filter(cost == "copay"), 
+      ggplot2::aes(forcats::fct_reorder(state, avg_mode, median), avg_mode)) + 
+  ggplot2::geom_pointrange(ggplot2::aes(ymin = avg_min, ymax = avg_max), 
+    size = 0, colour = "black", linewidth = 0.5) +
+  ggplot2::geom_point(color = "black", size = 3) +
   ggplot2::coord_flip() +
   ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
   ggplot2::labs(
     x = "", 
-    y = "Average Minimum to Mode",
+    y = "Minimum, Mode, Maximum",
     title = "",
     subtitle = "Copay Ranges by State") +
   ggplot2::theme_minimal()
@@ -238,8 +222,8 @@ library(patchwork)
 ```{r, fig.asp=1.1}
 library(statebins)
 
-statebins(est_cardio, 
-          value_col = "avg_copay_mode",
+statebins(est_cardio |> tidytable::filter(cost == "copay"), 
+          value_col = "avg_mode",
           name = "Average Medicare Copays",
           ggplot2_scale_function = viridis::scale_fill_viridis,
           direction = 1,

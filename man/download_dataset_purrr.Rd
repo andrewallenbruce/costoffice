@@ -28,3 +28,9 @@ download_dataset_purr() |>
 tidytable::slice_head(n = 10)
 }
 }
+\seealso{
+Other download: 
+\code{\link{download_datasets}()},
+\code{\link{download_dataset}()}
+}
+\concept{download}

@@ -31,6 +31,12 @@ utils::globalVariables(c(
   "min_copay_for_established_patient", # <download_dataset_purrr>
   "max_copay_for_established_patient", # <download_dataset_purrr>
   "mode_copay_for_established_patient", # <download_dataset_purrr>
+  "new_code", # <download_dataset_purrr>
+  "stat", # <download_dataset_purrr>
+  "amount", # <download_dataset_purrr>
+  "est_code", # <download_dataset_purrr>
+  "csv_url", # <download_datasets>
+  "filename", # <download_datasets>
   "csv_url", # <download_dataset_arrow>
   "zip_code", # <download_dataset_arrow>
   "most_utilized_procedure_code_for_new_patient", # <download_dataset_arrow>
@@ -47,8 +53,6 @@ utils::globalVariables(c(
   "min_copay_for_established_patient", # <download_dataset_arrow>
   "max_copay_for_established_patient", # <download_dataset_arrow>
   "mode_copay_for_established_patient", # <download_dataset_arrow>
-  "csv_url", # <download_datasets>
-  "filename", # <download_datasets>
   "issued", # <search_datasets>
   "modified", # <search_datasets>
   "released", # <search_datasets>
@@ -62,6 +66,7 @@ utils::globalVariables(c(
   "theme", # <search_datasets_arrow>
   "distribution", # <search_datasets_arrow>
   "distribution.downloadURL", # <search_datasets_arrow>
+  "specialty", # <use_zipcoder>
   "city", # <use_zipcoder>
   "county", # <use_zipcoder>
   "state", # <use_zipcoder>

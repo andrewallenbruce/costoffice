@@ -9,13 +9,10 @@
 #'   \item{city}{Major city serving the ZIP code}
 #'   \item{county}{Name of county containing the ZIP code}
 #'   \item{state}{Two-digit state code for ZIP code location}
-#'   \item{lat}{Latitude of the centroid for the ZIP code}
-#'   \item{lng}{Longitude of the centroid for the ZIP code}
-#'   \item{bounds_west}{Bounding box coordinates}
-#'   \item{bounds_east}{Bounding box coordinates}
-#'   \item{bounds_north}{Bounding box coordinates}
-#'   \item{bounds_south}{Bounding box coordinates}
-#'   \item{demographics}{list column containing total population of zip code, zip code population density (persons per square mile), and median household income within the zip code}
+#'   \item{state_name}{State name for ZIP code location}
+#'   \item{state_region}{Region state belongs to for ZIP code location}
+#'   \item{demo}{list column containing total population of zip code, zip code population density (persons per square mile), and median household income within the zip code}
+#'   \item{geo}{list column containing latitude, longitude and bounding box coordinates of the centroid for the ZIP code}
 #'   \item{is_zcta}{logical; TRUE if zip code is a ZIP code tabulation area (ZCTA)}
 #'   \item{zcta_crosswalk}{list column containing 2010 Census tract code and GEOID (concatenation of 2010 state, county, and tract codes) for zip code, if a ZCTA}
 #' }
