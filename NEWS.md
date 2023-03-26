@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# costoffice 0.0.0.9017 (2023-03-26)
+
+* `summary_stats()` function
+* `df_size()` cli function
+* removed `_arrow()` functions
+
+
 # costoffice 0.0.0.9016 (2023-03-26)
 
 * download_dataset() tidier output
