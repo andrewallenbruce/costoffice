@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# costoffice 0.0.0.9018 (2023-03-27)
+
+* function tidying, plot experimentation, documentation improvement
+
+
 # costoffice 0.0.0.9017 (2023-03-26)
 
 * `summary_stats()` function
