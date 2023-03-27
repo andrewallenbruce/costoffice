@@ -41,6 +41,8 @@ remotes::install_github("andrewallenbruce/costoffice", build_vignettes = TRUE)
 library(costoffice)
 ```
 
+<br>
+
 ## Purpose
 
 The `costoffice` package contains functions enabling the user to access
@@ -179,8 +181,6 @@ vascular surgery
 
 <br>
 
-<br>
-
 Use the `keyword` argument to return *partial* matches:
 
 ``` r
@@ -231,8 +231,8 @@ search_datasets()
 ## `download_dataset()`
 
 Once you’ve found the dataset that you’re interested in, simply insert
-the `download_dataset()` function into your pipeline to retrieve the
-csv:
+the `download_dataset()` function into your pipeline to download the csv
+file, which is returned as a `tidytable`:
 
 ``` r
 search_datasets(specialty = "vascular surgery") |> 
@@ -258,6 +258,10 @@ search_datasets(specialty = "vascular surgery") |>
 
 ## `use_zipcoder()`
 
+`costoffice` includes a subset of zip code-related data from Gavin
+Rozzi’s amazing `zipcodeR` package. Piping the downloaded dataset into
+the `use_zipcoder()` function adds this information to the data frame.
+
 ``` r
 search_datasets(specialty = "vascular surgery") |> 
   download_dataset() |> 
@@ -268,22 +272,26 @@ search_datasets(specialty = "vascular surgery") |>
     #> # A tidytable: 10 × 18
     #>    specialty   city  county state zip_code hcpcs patient cost    min   max  mode
     #>    <chr>       <chr> <chr>  <chr> <chr>    <chr> <chr>   <chr> <dbl> <dbl> <dbl>
-    #>  1 vascular s… Walk… St. J… IN    46574    99203 new     copay  13.7  41.9  21.1
-    #>  2 vascular s… Rand… Lewis… WA    98377    99213 est     price  18.5 146.   73.7
-    #>  3 vascular s… Wolf… McCon… MT    59201    99203 new     copay  14.8  44.8  22.7
-    #>  4 vascular s… New … Verno… LA    71461    99203 new     price  56.0 173.   86.9
-    #>  5 vascular s… Buen… Mario… GA    31803    99203 new     copay  13.8  42.4  21.4
-    #>  6 vascular s… Farw… Dougl… MN    56327    99203 new     copay  14.5  43.7  22.2
-    #>  7 vascular s… Colu… Musco… GA    31909    99203 new     price  55.2 170.   85.5
-    #>  8 vascular s… Broo… Brook… SD    57007    99213 est     price  18.2 143.   72.2
-    #>  9 vascular s… Dall… Dalla… TX    75205    99203 new     price  59.4 180.   91.2
-    #> 10 vascular s… Balt… Balti… MD    21285    99203 new     copay  15.9  48.0  24.4
+    #>  1 vascular s… Crete Salin… NE    68333    99203 new     copay 13.6   41.5  21.0
+    #>  2 vascular s… Scra… Lacka… PA    18515    99203 new     price 57.0  174.   88.0
+    #>  3 vascular s… Camb… Washi… NY    12816    99213 est     copay  4.44  35.6  17.9
+    #>  4 vascular s… Frie… Crock… TN    38034    99203 new     price 54.6  167.   84.3
+    #>  5 vascular s… Youn… Mahon… OH    44505    99213 est     copay  4.33  35.4  17.8
+    #>  6 vascular s… Wray  Yuma … CO    80758    99213 est     price 19.0  148.   75  
+    #>  7 vascular s… San … Hays … TX    78667    99203 new     copay 14.2   43.2  21.8
+    #>  8 vascular s… Tucs… Pima … AZ    85721    99213 est     copay  4.44  35.7  18.0
+    #>  9 vascular s… Cent… Cole … MO    65023    99213 est     price 16.4  136.   68.3
+    #> 10 vascular s… Gall… Galli… OH    45631    99203 new     price 56.7  174.   87.7
     #> # ℹ 7 more variables: range <dbl>, state_name <chr>, state_region <fct>,
     #> #   demo <list>, geo <list>, is_zcta <lgl>, zcta_crosswalk <list>
 
 <br>
 
 ## `download_datasets()`
+
+The `download_datasets()` function wraps the previous three functions
+into a one-stop shop of sorts. Arguments from all three base functions
+are accessible as well.
 
 ``` r
 (x <- download_datasets(specialty = "vascular surgery") |> head())
@@ -299,6 +307,8 @@ search_datasets(specialty = "vascular surgery") |>
     #> 5 vascular su… Adju… Adjun… PR    00601    99203 new     copay  14.8  45.0  22.8
     #> 6 vascular su… Adju… Adjun… PR    00601    99203 new     price  59.4 180.   91.3
     #> # ℹ 3 more variables: range <dbl>, state_name <chr>, state_region <fct>
+
+<br>
 
 ``` r
 (y <- download_datasets(keyword = "anesthesiology") |> head())
@@ -318,6 +328,9 @@ search_datasets(specialty = "vascular surgery") |>
 <br>
 
 ## `summary_stats()`
+
+`summary_stats()` is a versatile summary function, tailored for the data
+this package accesses.
 
 Current average prices by state for a **New Patient** office visit to a
 **Vascular Surgeon**:
@@ -351,6 +364,56 @@ Current average prices by state for a **New Patient** office visit to a
 
 Average prices by state for an **Established Patient** office visit to a
 **Cardiologist**:
+
+``` r
+download_datasets(specialty = "cardiology", full = TRUE) |> 
+  tidytable::select(!c(geo, is_zcta, zcta_crosswalk)) |> 
+  tidytable::unnest(demo) |> 
+  tidytable::group_by(state, zip_code) |> 
+  tidytable::summarise(n = tidytable::n.(),
+                       pop = sum(pop, na.rm = TRUE))
+```
+
+    #> # A tidytable: 41,871 × 4
+    #> # Groups:      state
+    #>    state zip_code     n    pop
+    #>    <chr> <chr>    <int>  <int>
+    #>  1 AK    99501        4  70412
+    #>  2 AK    99502        4  96672
+    #>  3 AK    99503        4  58252
+    #>  4 AK    99504        4 163656
+    #>  5 AK    99505        4  24696
+    #>  6 AK    99506        4  30996
+    #>  7 AK    99507        4 151400
+    #>  8 AK    99508        4 143428
+    #>  9 AK    99509        4      0
+    #> 10 AK    99510        4   1412
+    #> # ℹ 41,861 more rows
+
+``` r
+costoffice::zip_db |> 
+  tidytable::unnest(demo) |> 
+  tidytable::group_by(state) |> 
+  tidytable::summarise(no_zips = tidytable::n.(),
+                       pop_sum = sum(pop, na.rm = TRUE),
+                       mean_pop_dens = mean(pop_density, na.rm = TRUE),
+                       med_income = median(med_income, na.rm = TRUE))
+```
+
+    #> # A tidytable: 52 × 5
+    #>    state no_zips  pop_sum mean_pop_dens med_income
+    #>    <chr>   <int>    <int>         <dbl>      <dbl>
+    #>  1 AK        274   709930          229.      48036
+    #>  2 AL        839  4779588          360.      38493
+    #>  3 AR        710  2916042          209.      36104
+    #>  4 AZ        568  6394519         1169.      42734
+    #>  5 CA       2654 37249542         3273.      56528
+    #>  6 CO        662  5029374          989.      51937
+    #>  7 CT        438  3574097         1627.      78122
+    #>  8 DC        296   601723        20318.      76948
+    #>  9 DE         98   897925         1780.      57292
+    #> 10 FL       1495 18801226         1955.      45593
+    #> # ℹ 42 more rows
 
 ``` r
 (cardio <- download_datasets(specialty = "cardiology") |> 

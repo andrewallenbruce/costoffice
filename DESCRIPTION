@@ -35,7 +35,6 @@ RoxygenNote: 7.2.3
 URL: https://github.com/andrewallenbruce/costoffice, https://andrewallenbruce.github.io/costoffice/
 BugReports: https://github.com/andrewallenbruce/costoffice/issues
 LazyData: true
-RdMacros: details
 Remotes: 
     anthonynorth/roxyglobals
 VignetteBuilder: knitr
