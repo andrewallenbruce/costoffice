@@ -9,8 +9,8 @@
 
 # costoffice 0.0.0.9016 (2023-03-26)
 
-* download_dataset() tidier output
-* use_zipcoder() option for smaller data join
+* `download_dataset()` tidier output
+* `use_zipcoder()` option for smaller data join
 
 
 # costoffice 0.0.0.9015 (2023-03-25)
@@ -26,7 +26,7 @@
 
 # costoffice 0.0.0.9013 (2023-03-23)
 
-* download_datasets() function
+* `download_datasets()` function
 * statebins dataviz example
 * viz options
 
@@ -68,7 +68,7 @@
 
 # costoffice 0.0.0.9005 (2023-03-20)
 
-* download_dataset() now adds specialty col
+* `download_dataset()` now adds specialty col
 
 
 # costoffice 0.0.0.9004 (2023-03-20)

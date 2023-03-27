@@ -79,8 +79,6 @@ Each individual data set has approximately 43k rows and is roughly 8 MB on disk/
 ```{r}
 cardio <- search_datasets(specialty = "cardiology") |> 
   download_dataset()
-nrow(cardio)
-ncol(cardio)
 ```
 
 
@@ -110,10 +108,8 @@ cardio |>
 <br>
 
 ```{r}
-data("zipcode_db")
-zipcode_db |> 
-  tidytable::slice_head() |> 
-  knitr::kable()
+data("zip_db")
+zip_db |> tidytable::slice_head()
 ```
 
 <br>

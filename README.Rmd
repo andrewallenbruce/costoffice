@@ -82,6 +82,13 @@ search_datasets(specialty = "cardiac surgery")
 
 <br>
 
+```{r details, echo = FALSE}
+search_datasets()$specialty |> 
+  details::details(summary = 'Available Medical Specialties')
+```
+
+<br>
+
 Use the `keyword` argument to return _partial_ matches:
 
 ```{r}
@@ -114,10 +121,10 @@ search_datasets(specialty = "vascular surgery") |>
 ## `use_zipcoder()`
 
 ```{r}
-x <- search_datasets(specialty = "vascular surgery") |> 
-  download_dataset()
-  #tidytable::slice_sample(n = 10) |> 
-  use_zipcoder()
+search_datasets(specialty = "vascular surgery") |> 
+  download_dataset() |> 
+  tidytable::slice_sample(n = 10) |> 
+  use_zipcoder(full = TRUE)
 ```
 
 <br>
@@ -125,103 +132,65 @@ x <- search_datasets(specialty = "vascular surgery") |>
 ## `download_datasets()`
 
 ```{r}
-download_datasets(keyword = "medicine") |> 
-  summary_stats(condition = patient == "est",
-                group_vars = c(specialty, hcpcs, cost),
-                summary_vars = c(min, max, mode, range),
-                arr = cost)
+(x <- download_datasets(specialty = "vascular surgery") |> head())
+```
+
+
+```{r}
+(y <- download_datasets(keyword = "anesthesiology") |> head())
 ```
 
 <br>
 
-
-
-
-## Summary Statistics by State
+## `summary_stats()`
 
 Current average prices by state for a **New Patient** office visit to a **Vascular Surgeon**:
 
 ```{r}
-download_datasets(specialty = "vascular surgery") |>
+(vasc <- download_datasets(specialty = "vascular surgery") |> 
   summary_stats(condition = patient == "new",
                 group_vars = c(specialty, state, hcpcs, cost),
                 summary_vars = c(min, max, mode, range),
-                arr = cost)
+                arr = cost))
 ```
 
 <br>
 
-Current average prices by state for an **Established Patient** office visit to a **Cardiologist**:
+Average prices by state for an **Established Patient** office visit to a **Cardiologist**:
 
 ```{r}
-est_cardio <- download_datasets(specialty = "cardiology") |> 
+(cardio <- download_datasets(specialty = "cardiology") |> 
   summary_stats(condition = patient == "est",
                 group_vars = c(specialty, state, hcpcs, cost),
                 summary_vars = c(min, max, mode, range),
-                arr = cost)
-
-est_cardio
+                arr = cost))
 ```
-
 
 <br>
 
-## Visualizations
+## Plots
 
-```{r ggdot, fig.asp=2}
-p1 <- ggplot2::ggplot(est_cardio |> tidytable::filter(cost == "price"), 
-      ggplot2::aes(forcats::fct_reorder(state, avg_mode, median), avg_mode)) + 
-  ggplot2::geom_pointrange(ggplot2::aes(ymin = avg_min, ymax = avg_max), 
-    size = 0, colour = "black", linewidth = 0.5) +
-  ggplot2::geom_point(color = "black", size = 3) +
+```{r boxplot, fig.asp=2}
+ggplot2::ggplot(vasc |> tidytable::filter(cost == "price"), 
+  ggplot2::aes(forcats::fct_reorder(state, mean_mode, median), mean_mode)) +
+  ggplot2::geom_point() +
   ggplot2::coord_flip() +
   ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
-  ggplot2::labs(
-    x = "", 
-    y = "Minimum, Mode, Maximum",
-    title = "",
-    subtitle = "Price Ranges by State") +
-  ggplot2::theme_minimal()
-
-p2 <- ggplot2::ggplot(est_cardio |> tidytable::filter(cost == "copay"), 
-      ggplot2::aes(forcats::fct_reorder(state, avg_mode, median), avg_mode)) + 
-  ggplot2::geom_pointrange(ggplot2::aes(ymin = avg_min, ymax = avg_max), 
-    size = 0, colour = "black", linewidth = 0.5) +
-  ggplot2::geom_point(color = "black", size = 3) +
-  ggplot2::coord_flip() +
-  ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
-  ggplot2::labs(
-    x = "", 
-    y = "Minimum, Mode, Maximum",
-    title = "",
-    subtitle = "Copay Ranges by State") +
-  ggplot2::theme_minimal()
-
-library(patchwork)
-(p1 + p2) +
-  plot_annotation(
-    title = "Cardiology: Established Patient Office Visit Costs",
-    caption = "Source: data.cms.gov/provider-data",
-    theme = ggplot2::theme(plot.title = ggplot2::element_text(size = 16))
-  )
+  ggplot2::labs(x = "", y = "",
+           title = "Established Patient Office Visit Costs: Vascular Surgery")
 ```
-
-
 <br>
 
-```{r statebin, fig.asp=1.1}
-library(statebins)
-
-statebins(est_cardio |> tidytable::filter(cost == "copay"), 
-          value_col = "avg_mode",
-          name = "Average Medicare Copays",
-          ggplot2_scale_function = viridis::scale_fill_viridis,
-          direction = 1,
-          round = FALSE) +
-  ggplot2::labs(title = "Established Patient Office Visit Costs: Cardiology") +
-  theme_statebins()
+```{r range, fig.asp=2}
+ggplot2::ggplot(data = vasc, ggplot2::aes(x = reorder(state, mean_mode), y = mean_mode)) +
+  ggplot2::geom_linerange(ggplot2::aes(ymin = mean_min, ymax = mean_max), 
+                          color = "#f3d478", linewidth = 4.5, alpha = 0.8) +
+  ggplot2::geom_point(fill = "#ed3324", color = "white", size = 2, shape = 21) +
+  ggplot2::coord_flip() +
+  ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
+  ggplot2::labs(x = "", y = "",
+           title = "Established Patient Office Visit Costs: Vascular Surgery")
 ```
-
 <br>
 
 ## Code of Conduct

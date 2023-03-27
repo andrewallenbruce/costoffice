@@ -5,6 +5,15 @@
 #' @param specialty search for exact medical specialty, e.g. 'cardiology'
 #' @param keyword search for partial matches, e.g. 'medicine'
 #' @return A `tidytable` containing the specialty of the provider, the title of the dataset, the dates that the dataset was issued, modified, and released, and the link to download the csv file
+#' @section Medical Specialties Available:
+#' \foldstart{[Click to View]}
+#'
+#' ```{r}
+#' search_datasets()$specialty
+#' ````
+#'
+#' \foldend
+#'
 #' @examples
 #' # The `specialty` argument will only return _exact_ matches
 #' search_datasets(specialty = "cardiac surgery")

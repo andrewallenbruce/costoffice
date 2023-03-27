@@ -143,6 +143,7 @@ download_dataset_purrr <- function(df) {
 #' @param keyword Search for partial matches, e.g. 'medicine'
 #' @param zipcoder Adds information from `use_zipcoder()`; default is TRUE
 #' @param drop_na Drop rows containing missing values; default is TRUE
+#' @param full Add full zip code information (demographics, geocodes, zcta crosswalk); default is FALSE
 #' @return A `tidytable` data.table
 #'
 #' @examples
@@ -155,7 +156,8 @@ download_dataset_purrr <- function(df) {
 download_datasets <- function(specialty = NULL,
                               keyword   = NULL,
                               zipcoder  = TRUE,
-                              drop_na   = TRUE) {
+                              drop_na   = TRUE,
+                              full      = FALSE) {
 
   results <- search_datasets(specialty = specialty,
                              keyword   = keyword) |>
@@ -167,11 +169,13 @@ download_datasets <- function(specialty = NULL,
     tidytable::separate_wider_delim(filename,
                                     delim = ".",
                                     names = c("specialty", "ext")) |>
-    tidytable::mutate(ext = NULL) |>
+    tidytable::mutate(ext = NULL,
+                      specialty = stringr::str_replace_all(specialty, "_", " "),
+                      specialty = stringr::str_to_lower(specialty)) |>
     tidytable::relocate(specialty)
 
   if (isTRUE(zipcoder)) {
-    results <- results |> use_zipcoder(drop_na = drop_na)
+    results <- results |> use_zipcoder(drop_na = drop_na, full = full)
   }
 
   df_size(results)
