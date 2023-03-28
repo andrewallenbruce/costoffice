@@ -98,7 +98,7 @@
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="purpose">Purpose<a class="anchor" aria-label="anchor" href="#purpose"></a>
+<h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
 <p>The <code>costoffice</code> package contains functions enabling the user to access the latest <strong>Physician Office Visit Costs</strong> datasets from <a href="https://data.cms.gov/provider-data/search?page-size=50&amp;theme=Physician%20office%20visit%20costs" class="external-link">Data.CMS.gov</a>.</p>
 <p>There are 83 datasets in total, each representing a different medical specialty. Each one contains the:</p>
@@ -261,19 +261,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 10 × 9</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty        zip_code hcpcs patient cost    min   max  mode range</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 vascular surgery 00210    99203 new     copay  15.0  45.4  23.1  30.4</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 vascular surgery 00210    99203 new     price  60.1 182.   92.3 121. </span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 vascular surgery 00211    99203 new     copay  15.0  45.4  23.1  30.4</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 vascular surgery 00211    99203 new     price  60.1 182.   92.3 121. </span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 vascular surgery 00212    99203 new     copay  15.0  45.4  23.1  30.4</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 vascular surgery 00212    99203 new     price  60.1 182.   92.3 121. </span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 vascular surgery 00213    99203 new     copay  15.0  45.4  23.1  30.4</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 vascular surgery 00213    99203 new     price  60.1 182.   92.3 121. </span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 vascular surgery 00214    99203 new     copay  15.0  45.4  23.1  30.4</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 vascular surgery 00214    99203 new     price  60.1 182.   92.3 121.</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in data.table::fread(...): File 'https://data.cms.gov/provider-data/sites/default/files/resources/9cc7e57be541ff848728f69c9226e31f_1657569984/Vascular_Surgery.csv' does not exist or is non-readable. getwd()=='C:/Users/andyb/Desktop/costoffice'</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -286,21 +274,7 @@
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span>full <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 10 × 18</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty   city  county state zip_code hcpcs patient cost    min   max  mode</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 vascular s… Crete Salin… NE    68333    99203 new     copay 13.6   41.5  21.0</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 vascular s… Scra… Lacka… PA    18515    99203 new     price 57.0  174.   88.0</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 vascular s… Camb… Washi… NY    12816    99213 est     copay  4.44  35.6  17.9</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 vascular s… Frie… Crock… TN    38034    99203 new     price 54.6  167.   84.3</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 vascular s… Youn… Mahon… OH    44505    99213 est     copay  4.33  35.4  17.8</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 vascular s… Wray  Yuma … CO    80758    99213 est     price 19.0  148.   75  </span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 vascular s… San … Hays … TX    78667    99203 new     copay 14.2   43.2  21.8</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 vascular s… Tucs… Pima … AZ    85721    99213 est     copay  4.44  35.7  18.0</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 vascular s… Cent… Cole … MO    65023    99213 est     price 16.4  136.   68.3</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 vascular s… Gall… Galli… OH    45631    99203 new     price 56.7  174.   87.7</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 7 more variables: range &lt;dbl&gt;, state_name &lt;chr&gt;, state_region &lt;fct&gt;,</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   demo &lt;list&gt;, geo &lt;list&gt;, is_zcta &lt;lgl&gt;, zcta_crosswalk &lt;list&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in data.table::fread(...): File 'https://data.cms.gov/provider-data/sites/default/files/resources/9cc7e57be541ff848728f69c9226e31f_1657569984/Vascular_Surgery.csv' does not exist or is non-readable. getwd()=='C:/Users/andyb/Desktop/costoffice'</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -310,29 +284,19 @@
 <p>The <code><a href="reference/download_datasets.html">download_datasets()</a></code> function wraps the previous three functions into a one-stop shop of sorts. Arguments from all three base functions are accessible as well.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/download_datasets.html">download_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 6 × 14</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   specialty    city  county state zip_code hcpcs patient cost    min   max  mode</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 vascular su… Holt… Suffo… NY    00501    99203 new     copay  17.9  53.8  27.4</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 vascular su… Holt… Suffo… NY    00501    99203 new     price  71.5 215.  110. </span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 vascular su… Holt… Suffo… NY    00544    99203 new     copay  17.9  53.8  27.4</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 vascular su… Holt… Suffo… NY    00544    99203 new     price  71.5 215.  110. </span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 vascular su… Adju… Adjun… PR    00601    99203 new     copay  14.8  45.0  22.8</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 vascular su… Adju… Adjun… PR    00601    99203 new     price  59.4 180.   91.3</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: range &lt;dbl&gt;, state_name &lt;chr&gt;, state_region &lt;fct&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `purrr::map()`:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ In index: 1.</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ With name: Vascular_Surgery.csv.</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Caused by error:</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! argument "x" is missing, with no default</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/download_datasets.html">download_datasets</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"anesthesiology"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 6 × 14</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   specialty    city  county state zip_code hcpcs patient cost    min   max  mode</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 anesthesiol… Holt… Suffo… NY    00501    99204 new     copay  17.9  53.8  40.7</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 anesthesiol… Holt… Suffo… NY    00501    99204 new     price  71.5 215.  163. </span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 anesthesiol… Holt… Suffo… NY    00544    99204 new     copay  17.9  53.8  40.7</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 anesthesiol… Holt… Suffo… NY    00544    99204 new     price  71.5 215.  163. </span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 anesthesiol… Adju… Adjun… PR    00601    99204 new     copay  14.8  45.0  34.1</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 anesthesiol… Adju… Adjun… PR    00601    99204 new     price  59.4 180.  136. </span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: range &lt;dbl&gt;, state_name &lt;chr&gt;, state_region &lt;fct&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `purrr::map()`:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ In index: 1.</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ With name: Anesthesiology.csv.</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Caused by error:</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! argument "x" is missing, with no default</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -347,22 +311,11 @@
 <span>                group_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">specialty</span>, <span class="va">state</span>, <span class="va">hcpcs</span>, <span class="va">cost</span><span class="op">)</span>,</span>
 <span>                summary_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">min</span>, <span class="va">max</span>, <span class="va">mode</span>, <span class="va">range</span><span class="op">)</span>,</span>
 <span>                arr <span class="op">=</span> <span class="va">cost</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 104 × 13</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty        state hcpcs cost  median_min mean_min median_max mean_max</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 vascular surgery AK    99203 price       74.8     74.8       234.     234.</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 vascular surgery AL    99203 price       55.5     55.5       171.     171.</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 vascular surgery AR    99203 price       53.1     53.1       164.     164.</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 vascular surgery AZ    99203 price       57.3     57.3       175.     175.</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 vascular surgery CA    99203 price       63.6     64.0       190.     191.</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 vascular surgery CO    99203 price       60.1     60.1       181.     181.</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 vascular surgery CT    99203 price       63.5     63.5       191.     191.</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 vascular surgery DC    99203 price       68.6     68.6       205.     205.</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 vascular surgery DE    99203 price       59.8     59.8       181.     181.</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 vascular surgery FL    99203 price       58.4     59.5       179.     182.</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 94 more rows</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 5 more variables: median_mode &lt;dbl&gt;, mean_mode &lt;dbl&gt;, median_range &lt;dbl&gt;,</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   mean_range &lt;dbl&gt;, n &lt;int&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `purrr::map()`:</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ In index: 1.</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ With name: Vascular_Surgery.csv.</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Caused by error:</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! argument "x" is missing, with no default</span></span></code></pre></div>
 <p><br></p>
 <p>Average prices by state for an <strong>Established Patient</strong> office visit to a <strong>Cardiologist</strong>:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
@@ -372,21 +325,11 @@
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">zip_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/summarize.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/n..html" class="external-link">n.</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>                       pop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">pop</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 41,871 × 4</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Groups:      state</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    state zip_code     n    pop</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 AK    99501        4  70412</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 AK    99502        4  96672</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 AK    99503        4  58252</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 AK    99504        4 163656</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 AK    99505        4  24696</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 AK    99506        4  30996</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 AK    99507        4 151400</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 AK    99508        4 143428</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 AK    99509        4      0</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 AK    99510        4   1412</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 41,861 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `purrr::map()`:</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ In index: 1.</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ With name: Cardiology.csv.</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Caused by error:</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! argument "x" is missing, with no default</span></span></code></pre></div>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">costoffice</span><span class="fu">::</span><span class="va"><a href="reference/zip_db.html">zip_db</a></span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">demo</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -415,22 +358,11 @@
 <span>                group_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">specialty</span>, <span class="va">state</span>, <span class="va">hcpcs</span>, <span class="va">cost</span><span class="op">)</span>,</span>
 <span>                summary_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">min</span>, <span class="va">max</span>, <span class="va">mode</span>, <span class="va">range</span><span class="op">)</span>,</span>
 <span>                arr <span class="op">=</span> <span class="va">cost</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 104 × 13</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty  state hcpcs cost  median_min mean_min median_max mean_max</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 cardiology AK    99214 price       22.4     22.4       191.     191.</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 cardiology AL    99214 price       16.9     16.9       139.     139.</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 cardiology AR    99214 price       16.3     16.3       134.     134.</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 cardiology AZ    99214 price       17.7     17.7       143.     143.</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 cardiology CA    99214 price       20.4     20.5       156.     157.</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 cardiology CO    99214 price       19.0     19.0       148.     148.</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 cardiology CT    99214 price       20.1     20.1       156.     156.</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 cardiology DC    99214 price       21.9     21.9       167.     167.</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 cardiology DE    99214 price       18.7     18.7       148.     148.</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 cardiology FL    99214 price       17.7     18.1       145.     148.</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 94 more rows</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 5 more variables: median_mode &lt;dbl&gt;, mean_mode &lt;dbl&gt;, median_range &lt;dbl&gt;,</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   mean_range &lt;dbl&gt;, n &lt;int&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `purrr::map()`:</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ In index: 1.</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ With name: Cardiology.csv.</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Caused by error:</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! argument "x" is missing, with no default</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -444,8 +376,9 @@
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu">label_dollar</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span>,</span>
 <span>           title <span class="op">=</span> <span class="st">"Established Patient Office Visit Costs: Vascular Surgery"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-boxplot-1.png" width="100%"><br></p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in is.data.frame(.df): object 'vasc' not found</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">vasc</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">mean_mode</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">mean_mode</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">geom_linerange</span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">aes</span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">mean_min</span>, ymax <span class="op">=</span> <span class="va">mean_max</span><span class="op">)</span>, </span>
 <span>                          color <span class="op">=</span> <span class="st">"#f3d478"</span>, linewidth <span class="op">=</span> <span class="fl">4.5</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
@@ -454,7 +387,8 @@
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu">label_dollar</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span>,</span>
 <span>           title <span class="op">=</span> <span class="st">"Established Patient Office Visit Costs: Vascular Surgery"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-range-1.png" width="100%"><br></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in ggplot2::ggplot(data = vasc, ggplot2::aes(x = reorder(state, : object 'vasc' not found</span></span></code></pre></div>
+<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
