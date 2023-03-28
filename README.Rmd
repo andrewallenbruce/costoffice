@@ -287,14 +287,11 @@ con <- duckdb::dbConnect(
   dbdir = "D:/cost_office_duckdb/cost_office.duckdb")
 
 dplyr::tbl(con, "psychiatry")
+
+duckdb::dbDisconnect(con, shutdown = TRUE)
 ```
 
 <br>
-
-```{r}
-duckdb::duckdb_shutdown(drv)
-```
-
 
 Size on disk:
 

@@ -272,16 +272,16 @@ search_datasets(specialty = "vascular surgery") |>
     #> # A tidytable: 10 × 18
     #>    specialty   city  county state zip_code hcpcs patient cost    min   max  mode
     #>    <chr>       <chr> <chr>  <chr> <chr>    <chr> <chr>   <chr> <dbl> <dbl> <dbl>
-    #>  1 vascular s… Yabu… Yabuc… PR    00767    99203 new     price 59.4  180.   91.3
-    #>  2 vascular s… Sing… Rocki… VA    22850    99213 est     price 18.3  146.   73.5
-    #>  3 vascular s… Wayne DuPag… IL    60184    99213 est     copay  4.85  38.5  19.4
-    #>  4 vascular s… Tefft Jaspe… IN    46380    99213 est     copay  4.24  34.3  17.2
-    #>  5 vascular s… Edwa… Eagle… CO    81632    99213 est     copay  4.75  37.0  18.8
-    #>  6 vascular s… Marcy Oneid… NY    13403    99213 est     price 17.8  142.   71.7
-    #>  7 vascular s… Bayp… Washi… MN    55003    99203 new     price 58.0  175.   88.8
-    #>  8 vascular s… New … Bowie… TX    75570    99203 new     copay 14.2   43.2  21.8
-    #>  9 vascular s… Holl… Erie … NY    14080    99213 est     copay  4.44  35.6  17.9
-    #> 10 vascular s… Brad… Washi… RI    02808    99203 new     copay 15.3   46.2  23.5
+    #>  1 vascular s… Rice  Navar… TX    75155    99203 new     copay 14.2   43.2  21.8
+    #>  2 vascular s… Bel … Charl… MD    20611    99203 new     price 60.8  184.   93.3
+    #>  3 vascular s… Leet… Alleg… PA    15056    99203 new     price 57.0  174.   88.0
+    #>  4 vascular s… Gann… Buffa… SD    57341    99203 new     price 57.5  174.   88.3
+    #>  5 vascular s… Harr… Glouc… NJ    08039    99203 new     price 64.4  193.   98.4
+    #>  6 vascular s… Broo… Wauke… WI    53005    99203 new     price 55.6  169.   85.6
+    #>  7 vascular s… Dover Mason… KY    41034    99213 est     price 16.7  137.   68.9
+    #>  8 vascular s… El N… Merce… CA    95317    99213 est     copay  4.82  37.6  19.0
+    #>  9 vascular s… Lanc… Garra… KY    40446    99213 est     price 16.7  137.   68.9
+    #> 10 vascular s… Arag… Polk … GA    30104    99203 new     price 55.2  170.   85.5
     #> # ℹ 7 more variables: range <dbl>, state_name <chr>, state_region <fct>,
     #> #   demo <list>, geo <list>, is_zcta <lgl>, zcta_crosswalk <list>
 
@@ -549,13 +549,11 @@ dplyr::tbl(con, "psychiatry")
     #> # ℹ more rows
     #> # ℹ 3 more variables: range <dbl>, state_name <chr>, state_region <chr>
 
-<br>
-
 ``` r
-duckdb::duckdb_shutdown(drv)
+duckdb::dbDisconnect(con, shutdown = TRUE)
 ```
 
-    #> Error in is(drv, "duckdb_driver"): object 'drv' not found
+<br>
 
 Size on disk:
 
