@@ -19,7 +19,8 @@ Imports:
     tibble,
     vctrs,
     rlang,
-    stats
+    stats,
+    duckdb
 Suggests:
     roxyglobals (>= 0.2.1),
     knitr,

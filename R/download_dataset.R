@@ -16,7 +16,13 @@
 #' @export
 download_dataset <- function(df) {
 
-  data <- tidytable::fread(file = df$csv_url,
+  csv <- df |> tidytable::select(csv_url) |>
+    tibble::deframe()
+
+  specialty <- df |> tidytable::select(specialty) |>
+    tibble::deframe()
+
+  data <- tidytable::fread(input = csv,
                            nThread = 4,
                            keepLeadingZeros = TRUE,
                            colClasses = c(zip_code = "character",
@@ -57,9 +63,10 @@ download_dataset <- function(df) {
                             values_to = "amount", names_sep = "_") |>
     tidytable::pivot_wider(names_from = stat, values_from = amount)
 
-  results <- tidytable::bind_rows(new, est) |>
+  results <- tidytable::bind_rows(new, est)
+  results <- results |>
     tidytable::mutate(range = max - min) |>
-    tidytable::mutate(specialty = df$specialty, .before = zip_code)
+    tidytable::mutate(specialty = specialty, .before = zip_code)
 
   df_size(results)
 
@@ -74,18 +81,10 @@ download_dataset <- function(df) {
 #' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
 #'
 #' @param df A returned `tidytable` from `search_datasets()`
-#' @param x specialty column
-#' @param zipcoder Adds information from `use_zipcoder()`; default is TRUE
-#' @param drop_na Drop rows containing missing values; default is TRUE
-#' @param full Add full zip code information (demographics, geocodes, zcta crosswalk); default is FALSE
 #' @return A `tidytable`
 #' @autoglobal
 #' @noRd
-download_dataset_purrr <- function(df,
-                                   x,
-                                   zipcoder = TRUE,
-                                   drop_na  = TRUE,
-                                   full     = FALSE) {
+download_dataset_purrr <- function(df) {
 
   data <- tidytable::fread(df, nThread = 4, keepLeadingZeros = TRUE,
                            colClasses = c(zip_code = "character",
@@ -123,6 +122,76 @@ download_dataset_purrr <- function(df,
   est <- tidytable::select(data, zip_code,
                                    hcpcs = est_code,
                                    tidytable::starts_with("est")) |>
+    tidytable::pivot_longer(tidytable::starts_with("est_"),
+                            names_to = c("patient", "cost", "stat"),
+                            values_to = "amount",
+                            names_sep = "_") |>
+    tidytable::pivot_wider(names_from = stat,
+                           values_from = amount)
+
+  results <- tidytable::bind_rows(new, est) |>
+    tidytable::mutate(range = max - min)
+
+  return(results)
+}
+
+.datatable.aware <- TRUE
+
+#' Download A Physician Office Visit Costs Data set
+#'
+#' ## Links
+#' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
+#'
+#' @param df A returned `tidytable` from `search_datasets()`
+#' @param x specialty column
+#' @param zipcoder Adds information from `use_zipcoder()`; default is TRUE
+#' @param drop_na Drop rows containing missing values; default is TRUE
+#' @param full Add full zip code information (demographics, geocodes, zcta crosswalk); default is FALSE
+#' @return A `tidytable`
+#' @autoglobal
+#' @noRd
+download_dataset_purrr2 <- function(df,
+                                   x,
+                                   zipcoder = TRUE,
+                                   drop_na  = TRUE,
+                                   full     = FALSE) {
+
+  data <- tidytable::fread(df, nThread = 4, keepLeadingZeros = TRUE,
+                           colClasses = c(zip_code = "character",
+                                          most_utilized_procedure_code_for_new_patient = "character",
+                                          most_utilized_procedure_code_for_established_patient = "character"))
+
+  data <- data |>
+    tidytable::select(
+      zip_code,
+      new_code       = most_utilized_procedure_code_for_new_patient,
+      new_price_min  = min_medicare_pricing_for_new_patient,
+      new_price_max  = max_medicare_pricing_for_new_patient,
+      new_price_mode = mode_medicare_pricing_for_new_patient,
+      new_copay_min  = min_copay_for_new_patient,
+      new_copay_max  = max_copay_for_new_patient,
+      new_copay_mode = mode_copay_for_new_patient,
+      est_code       = most_utilized_procedure_code_for_established_patient,
+      est_price_min  = min_medicare_pricing_for_established_patient,
+      est_price_max  = max_medicare_pricing_for_established_patient,
+      est_price_mode = mode_medicare_pricing_for_established_patient,
+      est_copay_min  = min_copay_for_established_patient,
+      est_copay_max  = max_copay_for_established_patient,
+      est_copay_mode = mode_copay_for_established_patient)
+
+  new <- tidytable::select(data, zip_code,
+                           hcpcs = new_code,
+                           tidytable::starts_with("new")) |>
+    tidytable::pivot_longer(tidytable::starts_with("new_"),
+                            names_to = c("patient", "cost", "stat"),
+                            values_to = "amount",
+                            names_sep = "_") |>
+    tidytable::pivot_wider(names_from = stat,
+                           values_from = amount)
+
+  est <- tidytable::select(data, zip_code,
+                           hcpcs = est_code,
+                           tidytable::starts_with("est")) |>
     tidytable::pivot_longer(tidytable::starts_with("est_"),
                             names_to = c("patient", "cost", "stat"),
                             values_to = "amount",
@@ -226,7 +295,7 @@ write_datasets <- function(specialty = NULL,
   paths <- gsub("/", "", res$specialty)
   paths <- paste0(dir, paths, ext)
 
-  dflst  <- purrr::map2(res$csv_url, res$specialty, download_dataset_purrr)
+  dflst  <- purrr::map2(res$csv_url, res$specialty, download_dataset_purrr2)
 
   tidytable::inv_gc()
 
