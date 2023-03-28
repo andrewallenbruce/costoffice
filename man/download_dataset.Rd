@@ -20,8 +20,10 @@ A \code{tidytable} of available datasets and related information
 }
 }
 \examples{
+\dontrun{
 search_datasets(specialty = "vascular surgery") |>
 download_dataset() |>
 tidytable::slice_head(n = 10)
+}
 }
 \concept{downloads}

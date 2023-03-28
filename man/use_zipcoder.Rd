@@ -24,8 +24,10 @@ A \code{tidytable}
 }
 }
 \examples{
+\dontrun{
 search_datasets(specialty = "vascular surgery") |>
 download_dataset() |>
 tidytable::slice_sample(n = 5) |>
 use_zipcoder()
+}
 }

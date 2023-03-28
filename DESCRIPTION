@@ -11,7 +11,6 @@ Depends:
 Imports: 
     clock,
     cli,
-    details,
     httr2,
     tidytable,
     dplyr,
@@ -25,6 +24,7 @@ Suggests:
     roxyglobals (>= 0.2.1),
     knitr,
     rmarkdown,
+    details,
     lobstr,
     covr
 Encoding: UTF-8

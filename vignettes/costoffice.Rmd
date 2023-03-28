@@ -27,11 +27,25 @@ library(costoffice)
 
 <br>
 
+## Motivation
+
+The `costoffice` package contains functions enabling the user to access the latest __Physician Office Visit Costs__ datasets from [Data.CMS.gov](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs). 
+
+There are 83 datasets in total, each representing a different medical specialty. Each one contains the:
+
+  * Most Utilized Procedure Code (HCPCS Level II aka CPT code)
+  * Minimum/Maximum/Mode Price Medicare Paid
+  * Minimum/Maximum/Mode Copay the Patient Paid
+  
+by zip code, for new and established patients both.
+
+<br>
+
 ## Retrieve Dataset Info with `search_datasets()`
 
 <br>
 
-`search_datasets()` retrieves information on the 83 data sets, separated by physician specialty. If you're searching for one specialty in particular, just supply the `specialty` argument:
+`search_datasets()` retrieves information on the 83 available data sets, separated by physician specialty. If you're searching for one specialty in particular, just supply the `specialty` argument:
 
 <br>
 

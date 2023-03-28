@@ -30,10 +30,12 @@ A \code{tidytable} containing the summary stats
 Returns a tidy table of summary stats
 }
 \examples{
+\dontrun{
 download_datasets(specialty = "vascular surgery") |>
 tidytable::slice_head(n = 10) |>
 summary_stats(condition = patient == "new",
               group_vars = c(specialty, state, hcpcs, cost),
               summary_vars = c(min, max, mode, range),
               arr = cost)
+}
 }

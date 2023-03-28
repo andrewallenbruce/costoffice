@@ -52,7 +52,7 @@ library(costoffice)
 
 <br>
 
-## Purpose
+## Motivation
 
 The `costoffice` package contains functions enabling the user to access the latest __Physician Office Visit Costs__ datasets from [Data.CMS.gov](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs). 
 

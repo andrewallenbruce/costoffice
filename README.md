@@ -43,7 +43,7 @@ library(costoffice)
 
 <br>
 
-## Purpose
+## Motivation
 
 The `costoffice` package contains functions enabling the user to access
 the latest **Physician Office Visit Costs** datasets from
@@ -240,19 +240,7 @@ search_datasets(specialty = "vascular surgery") |>
   head(n = 10)
 ```
 
-    #> # A tidytable: 10 × 9
-    #>    specialty        zip_code hcpcs patient cost    min   max  mode range
-    #>    <chr>            <chr>    <chr> <chr>   <chr> <dbl> <dbl> <dbl> <dbl>
-    #>  1 vascular surgery 00210    99203 new     copay  15.0  45.4  23.1  30.4
-    #>  2 vascular surgery 00210    99203 new     price  60.1 182.   92.3 121. 
-    #>  3 vascular surgery 00211    99203 new     copay  15.0  45.4  23.1  30.4
-    #>  4 vascular surgery 00211    99203 new     price  60.1 182.   92.3 121. 
-    #>  5 vascular surgery 00212    99203 new     copay  15.0  45.4  23.1  30.4
-    #>  6 vascular surgery 00212    99203 new     price  60.1 182.   92.3 121. 
-    #>  7 vascular surgery 00213    99203 new     copay  15.0  45.4  23.1  30.4
-    #>  8 vascular surgery 00213    99203 new     price  60.1 182.   92.3 121. 
-    #>  9 vascular surgery 00214    99203 new     copay  15.0  45.4  23.1  30.4
-    #> 10 vascular surgery 00214    99203 new     price  60.1 182.   92.3 121.
+    #> Error in data.table::fread(...): File 'https://data.cms.gov/provider-data/sites/default/files/resources/9cc7e57be541ff848728f69c9226e31f_1657569984/Vascular_Surgery.csv' does not exist or is non-readable. getwd()=='C:/Users/andyb/Desktop/costoffice'
 
 <br>
 
@@ -269,21 +257,7 @@ search_datasets(specialty = "vascular surgery") |>
   use_zipcoder(full = TRUE)
 ```
 
-    #> # A tidytable: 10 × 18
-    #>    specialty   city  county state zip_code hcpcs patient cost    min   max  mode
-    #>    <chr>       <chr> <chr>  <chr> <chr>    <chr> <chr>   <chr> <dbl> <dbl> <dbl>
-    #>  1 vascular s… Crete Salin… NE    68333    99203 new     copay 13.6   41.5  21.0
-    #>  2 vascular s… Scra… Lacka… PA    18515    99203 new     price 57.0  174.   88.0
-    #>  3 vascular s… Camb… Washi… NY    12816    99213 est     copay  4.44  35.6  17.9
-    #>  4 vascular s… Frie… Crock… TN    38034    99203 new     price 54.6  167.   84.3
-    #>  5 vascular s… Youn… Mahon… OH    44505    99213 est     copay  4.33  35.4  17.8
-    #>  6 vascular s… Wray  Yuma … CO    80758    99213 est     price 19.0  148.   75  
-    #>  7 vascular s… San … Hays … TX    78667    99203 new     copay 14.2   43.2  21.8
-    #>  8 vascular s… Tucs… Pima … AZ    85721    99213 est     copay  4.44  35.7  18.0
-    #>  9 vascular s… Cent… Cole … MO    65023    99213 est     price 16.4  136.   68.3
-    #> 10 vascular s… Gall… Galli… OH    45631    99203 new     price 56.7  174.   87.7
-    #> # ℹ 7 more variables: range <dbl>, state_name <chr>, state_region <fct>,
-    #> #   demo <list>, geo <list>, is_zcta <lgl>, zcta_crosswalk <list>
+    #> Error in data.table::fread(...): File 'https://data.cms.gov/provider-data/sites/default/files/resources/9cc7e57be541ff848728f69c9226e31f_1657569984/Vascular_Surgery.csv' does not exist or is non-readable. getwd()=='C:/Users/andyb/Desktop/costoffice'
 
 <br>
 
@@ -297,16 +271,11 @@ are accessible as well.
 (x <- download_datasets(specialty = "vascular surgery") |> head())
 ```
 
-    #> # A tidytable: 6 × 14
-    #>   specialty    city  county state zip_code hcpcs patient cost    min   max  mode
-    #>   <chr>        <chr> <chr>  <chr> <chr>    <chr> <chr>   <chr> <dbl> <dbl> <dbl>
-    #> 1 vascular su… Holt… Suffo… NY    00501    99203 new     copay  17.9  53.8  27.4
-    #> 2 vascular su… Holt… Suffo… NY    00501    99203 new     price  71.5 215.  110. 
-    #> 3 vascular su… Holt… Suffo… NY    00544    99203 new     copay  17.9  53.8  27.4
-    #> 4 vascular su… Holt… Suffo… NY    00544    99203 new     price  71.5 215.  110. 
-    #> 5 vascular su… Adju… Adjun… PR    00601    99203 new     copay  14.8  45.0  22.8
-    #> 6 vascular su… Adju… Adjun… PR    00601    99203 new     price  59.4 180.   91.3
-    #> # ℹ 3 more variables: range <dbl>, state_name <chr>, state_region <fct>
+    #> Error in `purrr::map()`:
+    #> ℹ In index: 1.
+    #> ℹ With name: Vascular_Surgery.csv.
+    #> Caused by error:
+    #> ! argument "x" is missing, with no default
 
 <br>
 
@@ -314,16 +283,11 @@ are accessible as well.
 (y <- download_datasets(keyword = "anesthesiology") |> head())
 ```
 
-    #> # A tidytable: 6 × 14
-    #>   specialty    city  county state zip_code hcpcs patient cost    min   max  mode
-    #>   <chr>        <chr> <chr>  <chr> <chr>    <chr> <chr>   <chr> <dbl> <dbl> <dbl>
-    #> 1 anesthesiol… Holt… Suffo… NY    00501    99204 new     copay  17.9  53.8  40.7
-    #> 2 anesthesiol… Holt… Suffo… NY    00501    99204 new     price  71.5 215.  163. 
-    #> 3 anesthesiol… Holt… Suffo… NY    00544    99204 new     copay  17.9  53.8  40.7
-    #> 4 anesthesiol… Holt… Suffo… NY    00544    99204 new     price  71.5 215.  163. 
-    #> 5 anesthesiol… Adju… Adjun… PR    00601    99204 new     copay  14.8  45.0  34.1
-    #> 6 anesthesiol… Adju… Adjun… PR    00601    99204 new     price  59.4 180.  136. 
-    #> # ℹ 3 more variables: range <dbl>, state_name <chr>, state_region <fct>
+    #> Error in `purrr::map()`:
+    #> ℹ In index: 1.
+    #> ℹ With name: Anesthesiology.csv.
+    #> Caused by error:
+    #> ! argument "x" is missing, with no default
 
 <br>
 
@@ -343,22 +307,11 @@ Current average prices by state for a **New Patient** office visit to a
                 arr = cost))
 ```
 
-    #> # A tidytable: 104 × 13
-    #>    specialty        state hcpcs cost  median_min mean_min median_max mean_max
-    #>    <chr>            <chr> <chr> <chr>      <dbl>    <dbl>      <dbl>    <dbl>
-    #>  1 vascular surgery AK    99203 price       74.8     74.8       234.     234.
-    #>  2 vascular surgery AL    99203 price       55.5     55.5       171.     171.
-    #>  3 vascular surgery AR    99203 price       53.1     53.1       164.     164.
-    #>  4 vascular surgery AZ    99203 price       57.3     57.3       175.     175.
-    #>  5 vascular surgery CA    99203 price       63.6     64.0       190.     191.
-    #>  6 vascular surgery CO    99203 price       60.1     60.1       181.     181.
-    #>  7 vascular surgery CT    99203 price       63.5     63.5       191.     191.
-    #>  8 vascular surgery DC    99203 price       68.6     68.6       205.     205.
-    #>  9 vascular surgery DE    99203 price       59.8     59.8       181.     181.
-    #> 10 vascular surgery FL    99203 price       58.4     59.5       179.     182.
-    #> # ℹ 94 more rows
-    #> # ℹ 5 more variables: median_mode <dbl>, mean_mode <dbl>, median_range <dbl>,
-    #> #   mean_range <dbl>, n <int>
+    #> Error in `purrr::map()`:
+    #> ℹ In index: 1.
+    #> ℹ With name: Vascular_Surgery.csv.
+    #> Caused by error:
+    #> ! argument "x" is missing, with no default
 
 <br>
 
@@ -374,21 +327,11 @@ download_datasets(specialty = "cardiology", full = TRUE) |>
                        pop = sum(pop, na.rm = TRUE))
 ```
 
-    #> # A tidytable: 41,871 × 4
-    #> # Groups:      state
-    #>    state zip_code     n    pop
-    #>    <chr> <chr>    <int>  <int>
-    #>  1 AK    99501        4  70412
-    #>  2 AK    99502        4  96672
-    #>  3 AK    99503        4  58252
-    #>  4 AK    99504        4 163656
-    #>  5 AK    99505        4  24696
-    #>  6 AK    99506        4  30996
-    #>  7 AK    99507        4 151400
-    #>  8 AK    99508        4 143428
-    #>  9 AK    99509        4      0
-    #> 10 AK    99510        4   1412
-    #> # ℹ 41,861 more rows
+    #> Error in `purrr::map()`:
+    #> ℹ In index: 1.
+    #> ℹ With name: Cardiology.csv.
+    #> Caused by error:
+    #> ! argument "x" is missing, with no default
 
 ``` r
 costoffice::zip_db |> 
@@ -423,22 +366,11 @@ costoffice::zip_db |>
                 arr = cost))
 ```
 
-    #> # A tidytable: 104 × 13
-    #>    specialty  state hcpcs cost  median_min mean_min median_max mean_max
-    #>    <chr>      <chr> <chr> <chr>      <dbl>    <dbl>      <dbl>    <dbl>
-    #>  1 cardiology AK    99214 price       22.4     22.4       191.     191.
-    #>  2 cardiology AL    99214 price       16.9     16.9       139.     139.
-    #>  3 cardiology AR    99214 price       16.3     16.3       134.     134.
-    #>  4 cardiology AZ    99214 price       17.7     17.7       143.     143.
-    #>  5 cardiology CA    99214 price       20.4     20.5       156.     157.
-    #>  6 cardiology CO    99214 price       19.0     19.0       148.     148.
-    #>  7 cardiology CT    99214 price       20.1     20.1       156.     156.
-    #>  8 cardiology DC    99214 price       21.9     21.9       167.     167.
-    #>  9 cardiology DE    99214 price       18.7     18.7       148.     148.
-    #> 10 cardiology FL    99214 price       17.7     18.1       145.     148.
-    #> # ℹ 94 more rows
-    #> # ℹ 5 more variables: median_mode <dbl>, mean_mode <dbl>, median_range <dbl>,
-    #> #   mean_range <dbl>, n <int>
+    #> Error in `purrr::map()`:
+    #> ℹ In index: 1.
+    #> ℹ With name: Cardiology.csv.
+    #> Caused by error:
+    #> ! argument "x" is missing, with no default
 
 <br>
 
@@ -454,7 +386,9 @@ ggplot2::ggplot(vasc |> tidytable::filter(cost == "price"),
            title = "Established Patient Office Visit Costs: Vascular Surgery")
 ```
 
-<img src="man/figures/README-boxplot-1.png" width="100%" /> <br>
+    #> Error in is.data.frame(.df): object 'vasc' not found
+
+<br>
 
 ``` r
 ggplot2::ggplot(data = vasc, ggplot2::aes(x = reorder(state, mean_mode), y = mean_mode)) +
@@ -467,7 +401,9 @@ ggplot2::ggplot(data = vasc, ggplot2::aes(x = reorder(state, mean_mode), y = mea
            title = "Established Patient Office Visit Costs: Vascular Surgery")
 ```
 
-<img src="man/figures/README-range-1.png" width="100%" /> <br>
+    #> Error in ggplot2::ggplot(data = vasc, ggplot2::aes(x = reorder(state, : object 'vasc' not found
+
+<br>
 
 ## Code of Conduct
 

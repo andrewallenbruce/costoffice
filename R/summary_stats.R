@@ -7,12 +7,14 @@
 #' @param arr column to arrange data by, i.e. `cost`
 #' @return A `tidytable` containing the summary stats
 #' @examples
+#' \dontrun{
 #' download_datasets(specialty = "vascular surgery") |>
 #' tidytable::slice_head(n = 10) |>
 #' summary_stats(condition = patient == "new",
 #'               group_vars = c(specialty, state, hcpcs, cost),
 #'               summary_vars = c(min, max, mode, range),
 #'               arr = cost)
+#' }
 #' @autoglobal
 #' @export
 summary_stats <- function(df,

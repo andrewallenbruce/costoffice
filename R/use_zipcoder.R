@@ -7,12 +7,13 @@
 #' @param drop_na Drop rows containing missing values; default is TRUE
 #' @param full Add full zip code information (demographics, geocodes, zcta crosswalk); default is FALSE
 #' @return A `tidytable`
-#'
 #' @examples
+#' \dontrun{
 #' search_datasets(specialty = "vascular surgery") |>
 #' download_dataset() |>
 #' tidytable::slice_sample(n = 5) |>
 #' use_zipcoder()
+#' }
 #' @autoglobal
 #' @export
 use_zipcoder <- function(df, drop_na = TRUE, full = FALSE) {
