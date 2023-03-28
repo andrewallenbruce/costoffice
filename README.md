@@ -272,16 +272,16 @@ search_datasets(specialty = "vascular surgery") |>
     #> # A tidytable: 10 × 18
     #>    specialty   city  county state zip_code hcpcs patient cost    min   max  mode
     #>    <chr>       <chr> <chr>  <chr> <chr>    <chr> <chr>   <chr> <dbl> <dbl> <dbl>
-    #>  1 vascular s… Mort… Scott… MS    39117    99203 new     price 53.5  165.   83.0
-    #>  2 vascular s… Tono… Nye C… NV    89049    99213 est     copay  4.64  37.2  18.8
-    #>  3 vascular s… Sout… Green… KY    41175    99213 est     price 16.7  137.   68.9
-    #>  4 vascular s… Tild… Rando… IL    62292    99213 est     copay  4.46  36.7  18.4
-    #>  5 vascular s… Peri… Gila … AZ    85542    99203 new     copay 14.3   43.7  22.1
-    #>  6 vascular s… Bedm… Somer… NJ    07921    99203 new     price 66.5  198.  101. 
-    #>  7 vascular s… Two … Wheat… MT    59085    99213 est     price 18.4  146.   73.9
-    #>  8 vascular s… Stoc… San J… CA    95204    99203 new     copay 15.2   45.8  23.3
-    #>  9 vascular s… Hart… Hartf… CT    06144    99213 est     price 20.1  156.   79.1
-    #> 10 vascular s… Mile… Custe… MT    59301    99203 new     copay 14.8   44.8  22.7
+    #>  1 vascular s… Yabu… Yabuc… PR    00767    99203 new     price 59.4  180.   91.3
+    #>  2 vascular s… Sing… Rocki… VA    22850    99213 est     price 18.3  146.   73.5
+    #>  3 vascular s… Wayne DuPag… IL    60184    99213 est     copay  4.85  38.5  19.4
+    #>  4 vascular s… Tefft Jaspe… IN    46380    99213 est     copay  4.24  34.3  17.2
+    #>  5 vascular s… Edwa… Eagle… CO    81632    99213 est     copay  4.75  37.0  18.8
+    #>  6 vascular s… Marcy Oneid… NY    13403    99213 est     price 17.8  142.   71.7
+    #>  7 vascular s… Bayp… Washi… MN    55003    99203 new     price 58.0  175.   88.8
+    #>  8 vascular s… New … Bowie… TX    75570    99203 new     copay 14.2   43.2  21.8
+    #>  9 vascular s… Holl… Erie … NY    14080    99213 est     copay  4.44  35.6  17.9
+    #> 10 vascular s… Brad… Washi… RI    02808    99203 new     copay 15.3   46.2  23.5
     #> # ℹ 7 more variables: range <dbl>, state_name <chr>, state_region <fct>,
     #> #   demo <list>, geo <list>, is_zcta <lgl>, zcta_crosswalk <list>
 
@@ -528,17 +528,34 @@ write_duckdb <- function(dir = "D:/cost_office_csvs/",
 con <- duckdb::dbConnect(
   drv = duckdb::duckdb(), 
   dbdir = "D:/cost_office_duckdb/cost_office.duckdb")
-```
 
-    #> Error: rapi_startup: Failed to open database: IO Error: Cannot open file "D:/cost_office_duckdb/cost_office.duckdb": The process cannot access the file because it is being used by another process.
-
-``` r
 dplyr::tbl(con, "psychiatry")
 ```
 
-    #> Error in dplyr::tbl(con, "psychiatry"): object 'con' not found
+    #> # Source:   table<psychiatry> [?? x 14]
+    #> # Database: DuckDB 0.7.1 [andyb@Windows 10 x64:R 4.2.2/D:/cost_office_duckdb/cost_office.duckdb]
+    #>    specialty  city   county state zip_code hcpcs patient cost    min   max  mode
+    #>    <chr>      <chr>  <chr>  <chr>    <int> <int> <chr>   <chr> <dbl> <dbl> <dbl>
+    #>  1 psychiatry Holts… Suffo… NY         501 99205 new     copay  17.9  53.8  53.8
+    #>  2 psychiatry Holts… Suffo… NY         501 99205 new     price  71.5 215.  215. 
+    #>  3 psychiatry Holts… Suffo… NY         544 99205 new     copay  17.9  53.8  53.8
+    #>  4 psychiatry Holts… Suffo… NY         544 99205 new     price  71.5 215.  215. 
+    #>  5 psychiatry Adjun… Adjun… PR         601 99205 new     copay  14.8  45.0  45.0
+    #>  6 psychiatry Adjun… Adjun… PR         601 99205 new     price  59.4 180.  180. 
+    #>  7 psychiatry Aguada Aguad… PR         602 99205 new     copay  14.8  45.0  45.0
+    #>  8 psychiatry Aguada Aguad… PR         602 99205 new     price  59.4 180.  180. 
+    #>  9 psychiatry Aguad… Aguad… PR         603 99205 new     copay  14.8  45.0  45.0
+    #> 10 psychiatry Aguad… Aguad… PR         603 99205 new     price  59.4 180.  180. 
+    #> # ℹ more rows
+    #> # ℹ 3 more variables: range <dbl>, state_name <chr>, state_region <chr>
 
 <br>
+
+``` r
+duckdb::duckdb_shutdown(drv)
+```
+
+    #> Error in is(drv, "duckdb_driver"): object 'drv' not found
 
 Size on disk:
 

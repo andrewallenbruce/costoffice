@@ -291,6 +291,11 @@ dplyr::tbl(con, "psychiatry")
 
 <br>
 
+```{r}
+duckdb::duckdb_shutdown(drv)
+```
+
+
 Size on disk:
 
 ```{r}
