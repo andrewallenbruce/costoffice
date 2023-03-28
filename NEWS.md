@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# costoffice 0.0.0.9020 (2023-03-28)
+
+* `write_duckdb()` function
+
+
 # costoffice 0.0.0.9019 (2023-03-28)
 
 * `write_datasets()` function
