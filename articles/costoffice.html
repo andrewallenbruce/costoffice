@@ -253,16 +253,150 @@ MB on disk/in memory.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cardio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in data.table::fread(...): File 'https://data.cms.gov/provider-data/sites/default/files/resources/22a5a5f11e55c744b3d153c01e947334_1657569939/Cardiology.csv' does not exist or is non-readable. getwd()=='/home/runner/work/costoffice/costoffice/vignettes'</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">lobstr</span><span class="fu">::</span><span class="fu"><a href="https://lobstr.r-lib.org/reference/obj_size.html" class="external-link">obj_size</a></span><span class="op">(</span><span class="va">cardio</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in list2(...): object 'cardio' not found</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; 14.78 MB</span></span></code></pre>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cardio</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in is.data.frame(.df): object 'cardio' not found</span></span></code></pre>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="15%">
+<col width="12%">
+<col width="8%">
+<col width="11%">
+<col width="8%">
+<col width="9%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">specialty</th>
+<th align="left">zip_code</th>
+<th align="left">hcpcs</th>
+<th align="left">patient</th>
+<th align="left">cost</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">mode</th>
+<th align="right">range</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">17375</td>
+<td align="left">99214</td>
+<td align="left">est</td>
+<td align="left">price</td>
+<td align="right">17.592</td>
+<td align="right">142.080</td>
+<td align="right">101.624</td>
+<td align="right">124.488</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">46926</td>
+<td align="left">99214</td>
+<td align="left">est</td>
+<td align="left">copay</td>
+<td align="right">4.240</td>
+<td align="right">34.290</td>
+<td align="right">24.530</td>
+<td align="right">30.050</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">92197</td>
+<td align="left">99204</td>
+<td align="left">new</td>
+<td align="left">copay</td>
+<td align="right">15.894</td>
+<td align="right">47.548</td>
+<td align="right">36.068</td>
+<td align="right">31.654</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">14083</td>
+<td align="left">99214</td>
+<td align="left">est</td>
+<td align="left">copay</td>
+<td align="right">4.440</td>
+<td align="right">35.570</td>
+<td align="right">25.464</td>
+<td align="right">31.130</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">83846</td>
+<td align="left">99214</td>
+<td align="left">est</td>
+<td align="left">price</td>
+<td align="right">16.648</td>
+<td align="right">135.440</td>
+<td align="right">96.840</td>
+<td align="right">118.792</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">32815</td>
+<td align="left">99214</td>
+<td align="left">est</td>
+<td align="left">copay</td>
+<td align="right">4.436</td>
+<td align="right">36.322</td>
+<td align="right">25.940</td>
+<td align="right">31.886</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">55763</td>
+<td align="left">99204</td>
+<td align="left">new</td>
+<td align="left">price</td>
+<td align="right">57.952</td>
+<td align="right">174.840</td>
+<td align="right">132.528</td>
+<td align="right">116.888</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">15683</td>
+<td align="left">99204</td>
+<td align="left">new</td>
+<td align="left">copay</td>
+<td align="right">14.256</td>
+<td align="right">43.514</td>
+<td align="right">32.938</td>
+<td align="right">29.258</td>
+</tr>
+<tr class="odd">
+<td align="left">cardiology</td>
+<td align="left">10028</td>
+<td align="left">99214</td>
+<td align="left">est</td>
+<td align="left">price</td>
+<td align="right">21.656</td>
+<td align="right">169.664</td>
+<td align="right">121.624</td>
+<td align="right">148.008</td>
+</tr>
+<tr class="even">
+<td align="left">cardiology</td>
+<td align="left">68152</td>
+<td align="left">99204</td>
+<td align="left">new</td>
+<td align="left">price</td>
+<td align="right">54.432</td>
+<td align="right">166.144</td>
+<td align="right">125.792</td>
+<td align="right">111.712</td>
+</tr>
+</tbody>
+</table>
 <p><br><br></p>
 </div>
 <div class="section level2">
@@ -272,7 +406,7 @@ MB on disk/in memory.</p>
 <p><code>costoffice</code> includes a subset of zip code data from Gavin
 Rozzi’s amazing <code>zipcodeR</code> package:</p>
 <p><br></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"zip_db"</span><span class="op">)</span></span>
 <span><span class="va">zip_db</span> <span class="op">|&gt;</span> <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tidytable: 5 × 10</span></span></span>
@@ -288,13 +422,208 @@ Rozzi’s amazing <code>zipcodeR</code> package:</p>
 <p>Putting <code><a href="../reference/use_zipcoder.html">use_zipcoder()</a></code> in the pipe chain will add this
 information to the data table:</p>
 <p><br></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in data.table::fread(...): File 'https://data.cms.gov/provider-data/sites/default/files/resources/9cc7e57be541ff848728f69c9226e31f_1657569984/Vascular_Surgery.csv' does not exist or is non-readable. getwd()=='/home/runner/work/costoffice/costoffice/vignettes'</span></span></code></pre>
+<table class="table">
+<colgroup>
+<col width="11%">
+<col width="11%">
+<col width="16%">
+<col width="3%">
+<col width="5%">
+<col width="3%">
+<col width="5%">
+<col width="3%">
+<col width="4%">
+<col width="5%">
+<col width="4%">
+<col width="5%">
+<col width="9%">
+<col width="9%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">specialty</th>
+<th align="left">city</th>
+<th align="left">county</th>
+<th align="left">state</th>
+<th align="left">zip_code</th>
+<th align="left">hcpcs</th>
+<th align="left">patient</th>
+<th align="left">cost</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">mode</th>
+<th align="right">range</th>
+<th align="left">state_name</th>
+<th align="left">state_region</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">vascular surgery</td>
+<td align="left">Columbus</td>
+<td align="left">Franklin County</td>
+<td align="left">OH</td>
+<td align="left">43221</td>
+<td align="left">99203</td>
+<td align="left">new</td>
+<td align="left">copay</td>
+<td align="right">14.186</td>
+<td align="right">43.486</td>
+<td align="right">21.932</td>
+<td align="right">29.300</td>
+<td align="left">Ohio</td>
+<td align="left">North Central</td>
+</tr>
+<tr class="even">
+<td align="left">vascular surgery</td>
+<td align="left">Pittsfield</td>
+<td align="left">Pike County</td>
+<td align="left">IL</td>
+<td align="left">62363</td>
+<td align="left">99213</td>
+<td align="left">est</td>
+<td align="left">copay</td>
+<td align="right">4.330</td>
+<td align="right">35.528</td>
+<td align="right">17.852</td>
+<td align="right">31.198</td>
+<td align="left">Illinois</td>
+<td align="left">North Central</td>
+</tr>
+<tr class="odd">
+<td align="left">vascular surgery</td>
+<td align="left">Wrangell</td>
+<td align="left">Wrangell City and Borough</td>
+<td align="left">AK</td>
+<td align="left">99929</td>
+<td align="left">99213</td>
+<td align="left">est</td>
+<td align="left">price</td>
+<td align="right">22.376</td>
+<td align="right">190.744</td>
+<td align="right">95.160</td>
+<td align="right">168.368</td>
+<td align="left">Alaska</td>
+<td align="left">West</td>
+</tr>
+<tr class="even">
+<td align="left">vascular surgery</td>
+<td align="left">Amston</td>
+<td align="left">Tolland County</td>
+<td align="left">CT</td>
+<td align="left">06231</td>
+<td align="left">99213</td>
+<td align="left">est</td>
+<td align="left">price</td>
+<td align="right">20.088</td>
+<td align="right">156.184</td>
+<td align="right">79.112</td>
+<td align="right">136.096</td>
+<td align="left">Connecticut</td>
+<td align="left">Northeast</td>
+</tr>
+<tr class="odd">
+<td align="left">vascular surgery</td>
+<td align="left">Seattle</td>
+<td align="left">King County</td>
+<td align="left">WA</td>
+<td align="left">98175</td>
+<td align="left">99203</td>
+<td align="left">new</td>
+<td align="left">price</td>
+<td align="right">65.504</td>
+<td align="right">195.256</td>
+<td align="right">99.848</td>
+<td align="right">129.752</td>
+<td align="left">Washington</td>
+<td align="left">West</td>
+</tr>
+<tr class="even">
+<td align="left">vascular surgery</td>
+<td align="left">Walterboro</td>
+<td align="left">Colleton County</td>
+<td align="left">SC</td>
+<td align="left">29488</td>
+<td align="left">99213</td>
+<td align="left">est</td>
+<td align="left">price</td>
+<td align="right">17.064</td>
+<td align="right">138.696</td>
+<td align="right">69.736</td>
+<td align="right">121.632</td>
+<td align="left">South Carolina</td>
+<td align="left">South</td>
+</tr>
+<tr class="odd">
+<td align="left">vascular surgery</td>
+<td align="left">Fruitland Park</td>
+<td align="left">Lake County</td>
+<td align="left">FL</td>
+<td align="left">34731</td>
+<td align="left">99213</td>
+<td align="left">est</td>
+<td align="left">price</td>
+<td align="right">17.744</td>
+<td align="right">145.288</td>
+<td align="right">73.056</td>
+<td align="right">127.544</td>
+<td align="left">Florida</td>
+<td align="left">South</td>
+</tr>
+<tr class="even">
+<td align="left">vascular surgery</td>
+<td align="left">Charleston</td>
+<td align="left">Kanawha County</td>
+<td align="left">WV</td>
+<td align="left">25361</td>
+<td align="left">99203</td>
+<td align="left">new</td>
+<td align="left">copay</td>
+<td align="right">13.828</td>
+<td align="right">42.704</td>
+<td align="right">21.462</td>
+<td align="right">28.876</td>
+<td align="left">West Virginia</td>
+<td align="left">South</td>
+</tr>
+<tr class="odd">
+<td align="left">vascular surgery</td>
+<td align="left">South Sioux City</td>
+<td align="left">Dakota County</td>
+<td align="left">NE</td>
+<td align="left">68776</td>
+<td align="left">99213</td>
+<td align="left">est</td>
+<td align="left">price</td>
+<td align="right">17.000</td>
+<td align="right">136.312</td>
+<td align="right">68.624</td>
+<td align="right">119.312</td>
+<td align="left">Nebraska</td>
+<td align="left">North Central</td>
+</tr>
+<tr class="even">
+<td align="left">vascular surgery</td>
+<td align="left">Plato</td>
+<td align="left">Texas County</td>
+<td align="left">MO</td>
+<td align="left">65552</td>
+<td align="left">99213</td>
+<td align="left">est</td>
+<td align="left">price</td>
+<td align="right">16.432</td>
+<td align="right">136.288</td>
+<td align="right">68.328</td>
+<td align="right">119.856</td>
+<td align="left">Missouri</td>
+<td align="left">North Central</td>
+</tr>
+</tbody>
+</table>
 <p><br><br></p>
 </div>
 <div class="section level2">
@@ -304,7 +633,7 @@ information to the data table:</p>
 <p>Current average prices &amp; copays by state for an office visit by a
 <strong>New Patient</strong> to a <strong>Vascular Surgeon</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -318,13 +647,15 @@ information to the data table:</p>
 <span>                               <span class="va">new_code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in data.table::fread(...): File 'https://data.cms.gov/provider-data/sites/default/files/resources/9cc7e57be541ff848728f69c9226e31f_1657569984/Vascular_Surgery.csv' does not exist or is non-readable. getwd()=='/home/runner/work/costoffice/costoffice/vignettes'</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tidyselect_locs()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `new_code` doesn't exist.</span></span></code></pre>
 <p><br></p>
 <p>Current average prices &amp; copays by state for an office visit by
 an <strong>Established Patient</strong> to a
 <strong>Cardiologist</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -338,7 +669,9 @@ an <strong>Established Patient</strong> to a
 <span>                               <span class="va">est_code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in data.table::fread(...): File 'https://data.cms.gov/provider-data/sites/default/files/resources/22a5a5f11e55c744b3d153c01e947334_1657569939/Cardiology.csv' does not exist or is non-readable. getwd()=='/home/runner/work/costoffice/costoffice/vignettes'</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tidyselect_locs()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `est_code` doesn't exist.</span></span></code></pre>
 <p><br><br></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
