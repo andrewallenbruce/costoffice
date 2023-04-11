@@ -2,12 +2,12 @@
 #'
 #' @description Returns information pertaining to 83 datasets separated by medical specialty, describing physician office visit costs per zip code for new and established patients.
 #' @source [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
-#' @param specialty search for exact medical specialty, e.g. 'cardiology'
+#' @param specialty search for exact medical specialty, any spaces replaced by an underscore, e.g. 'cardiac_surgery'.
 #' @param keyword search for partial matches, e.g. 'medicine'
-#' @return A `tidytable` containing the specialty of the provider, the title of the dataset, the dates that the dataset was issued, modified, and released, and the link to download the csv file
+#' @return A `tibble` containing the specialty of the provider, the title of the dataset, the dates that the dataset was issued, modified, and released, and the link to download the csv file
 #' @examples
 #' # The `specialty` argument will only return _exact_ matches
-#' search_datasets(specialty = "cardiac surgery")
+#' search_datasets(specialty = "cardiac_surgery")
 #'
 #' # The `keyword` argument will return _partial_ matches
 #' search_datasets(keyword = "medicine")
@@ -28,41 +28,42 @@ search_datasets <- function(specialty = NULL,
   results <- response |>
     httr2::resp_body_json(check_type = FALSE,
                           simplifyVector = TRUE) |>
-    tidytable::as_tidytable() |>
-    tidytable::mutate(issued = clock::date_parse(issued),
-                      modified = clock::date_parse(modified),
-                      released = clock::date_parse(released)) |>
-    tidytable::select(theme,
-                      title,
-                      specialty = keyword,
-                      issued,
-                      modified,
-                      released,
-                      distribution) |>
-    tidytable::unnest(theme, .drop = FALSE) |>
-    tidytable::filter(theme == "Physician office visit costs") |>
-    tidytable::unnest(specialty, .drop = FALSE) |>
-    tidytable::filter(specialty != "office visit cost") |>
-    tidytable::filter(specialty != "costs") |>
-    tidytable::unnest(distribution, names_sep = ".", .drop = FALSE) |>
-    tidytable::mutate(csv_url = distribution.downloadURL,
-                      theme = NULL,
-                      distribution.downloadURL = NULL,
-                      distribution.title = NULL,
-                      distribution.mediaType = NULL,
-                      `distribution.@type` = NULL) |>
-    tidytable::relocate(specialty)
+    dplyr::tibble() |>
+    dplyr::mutate(released = clock::date_parse(released)) |>
+    dplyr::select(theme,
+                  specialty = keyword,
+                  released,
+                  distribution) |>
+    tidyr::unnest(theme) |>
+    dplyr::filter(theme == "Physician office visit costs") |>
+    tidyr::unnest(specialty) |>
+    dplyr::filter(specialty != "office visit cost",
+                  specialty != "costs") |>
+    tidyr::unnest(distribution, names_sep = ".") |>
+    dplyr::mutate(csv_url = distribution.downloadURL,
+                  theme = NULL,
+                  distribution.downloadURL = NULL,
+                  distribution.title = NULL,
+                  distribution.mediaType = NULL,
+                  `distribution.@type` = NULL) |>
+    dplyr::mutate(specialty = stringr::str_remove_all(specialty, "/")) |>
+    dplyr::mutate(specialty = stringr::str_remove_all(specialty, stringr::fixed("("))) |>
+    dplyr::mutate(specialty = stringr::str_remove_all(specialty, stringr::fixed(")"))) |>
+    dplyr::mutate(specialty = stringr::str_remove_all(specialty, stringr::fixed(","))) |>
+    dplyr::mutate(specialty = stringr::str_remove_all(specialty, stringr::fixed("&amp;"))) |>
+    dplyr::mutate(specialty = stringr::str_replace_all(specialty, "-", "_")) |>
+    dplyr::mutate(specialty = stringr::str_replace_all(specialty, " ", "_")) |>
+    dplyr::mutate(specialty = stringr::str_replace_all(specialty, "__", "_")) |>
+    dplyr::relocate(specialty)
 
   if (!is.null(keyword)) {
     results <- results |>
-      tidytable::filter(stringr::str_detect(specialty, {{ keyword }}))
+      dplyr::filter(stringr::str_detect(specialty, {{ keyword }}))
   }
 
   if (!is.null(specialty)) {
     results <- results |>
-      tidytable::filter(specialty == {{ specialty }})
+      dplyr::filter(specialty == {{ specialty }})
   }
   return(results)
 }
-
-.datatable.aware <- TRUE

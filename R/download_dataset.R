@@ -16,19 +16,23 @@
 #' @export
 download_dataset <- function(df) {
 
-  csv <- df |> tidytable::select(csv_url) |>
+  csv <- df |>
+    dplyr::select(csv_url) |>
     tibble::deframe()
 
-  specialty <- df |> tidytable::select(specialty) |>
+  specialty <- df |>
+    dplyr::select(specialty) |>
     tibble::deframe()
 
   data <- tidytable::fread(input = csv,
                            nThread = 4,
                            keepLeadingZeros = TRUE,
-                           colClasses = c(zip_code = "character",
+                           colClasses = c(
+      zip_code = "character",
       most_utilized_procedure_code_for_new_patient = "character",
       most_utilized_procedure_code_for_established_patient = "character"))
 
+  # rename cols -------------------------------------------------------------
   data <- data |>
     tidytable::select(
       zip_code,
@@ -47,28 +51,68 @@ download_dataset <- function(df) {
       est_copay_max  = max_copay_for_established_patient,
       est_copay_mode = mode_copay_for_established_patient)
 
+  # add zip data ----------------------------------------------------------
+  data <- dplyr::left_join(data,
+                           costoffice::zip_db,
+                           by = c("zip_code")) |>
+    dplyr::select(zip_code,
+                  city,
+                  county,
+                  state,
+                  dplyr::everything()) |>
+    dplyr::mutate(county = dplyr::na_if(county, ""))
+
+  # create anti join --------------------------------------------------------
+  remove <- data |>
+    campfin::flag_na(county) |>
+    campfin::flag_dupes(zip_code) |>
+    dplyr::select(zip_code:state, na_flag:dupe_flag) |>
+    dplyr::filter(dupe_flag == TRUE) |>
+    dplyr::filter(is.na(county))
+
+  data <- dplyr::anti_join(data,
+                           remove,
+                           by = c(
+                             "zip_code",
+                             "city",
+                             "county",
+                             "state"))
+
+  # pivot - new patient ----------------------------------------------
   new <- data |> tidytable::select(zip_code,
+                                   city, county, state, region, division,
                                    hcpcs = new_code,
                                    tidytable::starts_with("new")) |>
     tidytable::pivot_longer(tidytable::starts_with("new_"),
-                            names_to = c("patient", "cost", "stat"),
-                            values_to = "amount", names_sep = "_") |>
-    tidytable::pivot_wider(names_from = stat, values_from = amount)
+                            names_to = c("patient",
+                                         "cost",
+                                         "stat"),
+                            values_to = "amount",
+                            names_sep = "_") |>
+    tidytable::pivot_wider(names_from = stat,
+                           values_from = amount)
 
+  # pivot - established patient --------------------------------------
   est <- data |> tidytable::select(zip_code,
+                                   city, county, state, region, division,
                                    hcpcs = est_code,
                                    tidytable::starts_with("est")) |>
     tidytable::pivot_longer(tidytable::starts_with("est_"),
-                            names_to = c("patient", "cost", "stat"),
-                            values_to = "amount", names_sep = "_") |>
-    tidytable::pivot_wider(names_from = stat, values_from = amount)
+                            names_to = c("patient",
+                                         "cost",
+                                         "stat"),
+                            values_to = "amount",
+                            names_sep = "_") |>
+    tidytable::pivot_wider(names_from = stat,
+                           values_from = amount)
 
+  # bind new & established --------------------------------------------------
   results <- tidytable::bind_rows(new, est)
+
   results <- results |>
     tidytable::mutate(range = max - min) |>
-    tidytable::mutate(specialty = specialty, .before = zip_code)
-
-  df_size(results)
+    tidytable::mutate(specialty = specialty,
+                      .before = zip_code)
 
   return(results)
 }
@@ -144,22 +188,15 @@ download_dataset_purrr <- function(df) {
 #'
 #' @param df A returned `tidytable` from `search_datasets()`
 #' @param x specialty column
-#' @param zipcoder Adds information from `use_zipcoder()`; default is TRUE
-#' @param drop_na Drop rows containing missing values; default is TRUE
-#' @param full Add full zip code information (demographics, geocodes, zcta crosswalk); default is FALSE
 #' @return A `tidytable`
 #' @autoglobal
 #' @noRd
-download_dataset_purrr2 <- function(df,
-                                   x,
-                                   zipcoder = TRUE,
-                                   drop_na  = TRUE,
-                                   full     = FALSE) {
+download_dataset_purrr2 <- function(df, x) {
 
   data <- tidytable::fread(df, nThread = 4, keepLeadingZeros = TRUE,
-                           colClasses = c(zip_code = "character",
-                                          most_utilized_procedure_code_for_new_patient = "character",
-                                          most_utilized_procedure_code_for_established_patient = "character"))
+          colClasses = c(zip_code = "character",
+          most_utilized_procedure_code_for_new_patient = "character",
+          most_utilized_procedure_code_for_established_patient = "character"))
 
   data <- data |>
     tidytable::select(
@@ -203,10 +240,6 @@ download_dataset_purrr2 <- function(df,
     tidytable::mutate(range = max - min) |>
     tidytable::mutate(specialty = x, .before = zip_code)
 
-  if (isTRUE(zipcoder)) {
-    results <- use_zipcoder(results, drop_na = drop_na, full = full)
-  }
-
   return(results)
 }
 
@@ -219,9 +252,6 @@ download_dataset_purrr2 <- function(df,
 #'
 #' @param specialty Search for exact medical specialty, e.g. 'cardiology'
 #' @param keyword Search for partial matches, e.g. 'medicine'
-#' @param zipcoder Adds information from `use_zipcoder()`; default is TRUE
-#' @param drop_na Drop rows containing missing values; default is TRUE
-#' @param full Add full zip code information (demographics, geocodes, zcta crosswalk); default is FALSE
 #' @return A `tidytable` data.table
 #'
 #' @examples
@@ -232,10 +262,7 @@ download_dataset_purrr2 <- function(df,
 #' @autoglobal
 #' @export
 download_datasets <- function(specialty = NULL,
-                              keyword   = NULL,
-                              zipcoder  = TRUE,
-                              drop_na   = TRUE,
-                              full      = FALSE) {
+                              keyword   = NULL) {
 
   results <- search_datasets(specialty = specialty,
                              keyword   = keyword) |>
@@ -252,56 +279,8 @@ download_datasets <- function(specialty = NULL,
                       specialty = stringr::str_to_lower(specialty)) |>
     tidytable::relocate(specialty)
 
-  if (isTRUE(zipcoder)) {
-    results <- results |> use_zipcoder(drop_na = drop_na, full = full)
-  }
-
   df_size(results)
   return(results)
-
-}
-
-.datatable.aware <- TRUE
-
-
-
-
-#' Download A Physician Office Visit Costs Data set
-#'
-#' ## Links
-#' * [Physician Office Visit Costs (Data.CMS.gov)](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs)
-#'
-#' @param specialty Search for exact medical specialty, e.g. 'cardiology'
-#' @param keyword Search for partial matches, e.g. 'medicine'
-#' @param dir Directory to save to
-#' @param ext File extension, default is ".csv"
-#' @return A `tidytable` data.table
-#' @examples
-#' \dontrun{
-#' write_datasets(keyword = "medicine")
-#' }
-#' @family download
-#' @autoglobal
-#' @export
-write_datasets <- function(specialty = NULL,
-                           keyword   = NULL,
-                           dir = "D:/cost_office_csvs/",
-                           ext = ".csv") {
-
-  res <- search_datasets(specialty = specialty,
-                         keyword   = keyword)
-
-  paths <- gsub(" ", "_", res$specialty)
-  paths <- gsub("/", "", res$specialty)
-  paths <- paste0(dir, paths, ext)
-
-  dflst  <- purrr::map2(res$csv_url, res$specialty, download_dataset_purrr2)
-
-  tidytable::inv_gc()
-
-  purrr::walk2(dflst, paths, tidytable::fwrite)
-
-  tidytable::inv_gc()
 
 }
 

@@ -10,19 +10,19 @@
 search_datasets(specialty = NULL, keyword = NULL)
 }
 \arguments{
-\item{specialty}{search for exact medical specialty, e.g. 'cardiology'}
+\item{specialty}{search for exact medical specialty, any spaces replaced by an underscore, e.g. 'cardiac_surgery'.}
 
 \item{keyword}{search for partial matches, e.g. 'medicine'}
 }
 \value{
-A \code{tidytable} containing the specialty of the provider, the title of the dataset, the dates that the dataset was issued, modified, and released, and the link to download the csv file
+A \code{tibble} containing the specialty of the provider, the title of the dataset, the dates that the dataset was issued, modified, and released, and the link to download the csv file
 }
 \description{
 Returns information pertaining to 83 datasets separated by medical specialty, describing physician office visit costs per zip code for new and established patients.
 }
 \examples{
 # The `specialty` argument will only return _exact_ matches
-search_datasets(specialty = "cardiac surgery")
+search_datasets(specialty = "cardiac_surgery")
 
 # The `keyword` argument will return _partial_ matches
 search_datasets(keyword = "medicine")

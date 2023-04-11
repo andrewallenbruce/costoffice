@@ -4,7 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse  = FALSE,
   echo      = TRUE,
@@ -50,7 +50,6 @@ remotes::install_github("andrewallenbruce/costoffice", build_vignettes = TRUE)
 library(costoffice)
 ```
 
-<br>
 
 ## Motivation
 
@@ -59,8 +58,8 @@ The `costoffice` package contains functions enabling the user to access the late
 There are 83 datasets in total, each representing a different medical specialty. Each one contains the:
 
   * Most Utilized Procedure Code (HCPCS Level II aka CPT code)
-  * Minimum/Maximum/Mode Price Medicare Paid
-  * Minimum/Maximum/Mode Copay the Patient Paid
+  * Price Medicare Paid (Minimum-Maximum-Mode)
+  * Copay the Patient Paid (Minimum-Maximum-Mode)
   
 by zip code, for new and established patients both.
 
@@ -68,16 +67,30 @@ by zip code, for new and established patients both.
 
 ## `search_datasets()`
 
-Returns dataset information such as title, dates concerning data freshness and, most importantly, a csv download url.
+Returns a data frame of each dataset's medical specialty, date of most recent release, and a download link for it's corresponding csv file:
 
 <br>
 
-Use the `specialty` argument to return only _exact_ matches:
-
 ```{r}
-search_datasets(specialty = "cardiac surgery")
+# Call with no arguments to return the entire data frame
+search_datasets()
 ```
 
+<br>
+
+If needed, there are two arguments to this function. Use the `specialty` argument to return only _exact_ matches (note the underscore in the names):
+
+```{r}
+search_datasets(specialty = "emergency_medicine")
+```
+
+<br>
+
+Use the `keyword` argument to return _partial_ matches:
+
+```{r}
+search_datasets(keyword = "medicine")
+```
 <br>
 
 > Return a vector of the exact names of the medical specialties by simply calling `search_datasets()$specialty`.
@@ -89,115 +102,46 @@ search_datasets()$specialty |>
   details::details(summary = 'Available Medical Specialties')
 ```
 
-Use the `keyword` argument to return _partial_ matches:
-
-```{r}
-search_datasets(keyword = "medicine")
-```
-
-<br>
-
-Calling the function with no arguments will return the entire dataset:
-
-```{r}
-search_datasets()
-```
 
 <br>
 
 ## `download_dataset()`
 
-Once you've found the dataset that you're interested in, simply insert the `download_dataset()` function into your pipeline to download the csv file, which is returned as a `tidytable`:
-
 ```{r}
-search_datasets(specialty = "vascular surgery") |> 
+search_datasets(specialty = "vascular_surgery") |> 
   download_dataset() |> 
-  head(n = 10)
+  dplyr::group_by(region, patient, cost) |> 
+  dplyr::summarise(min = mean(min, na.rm = TRUE),
+                   max = mean(max, na.rm = TRUE),
+                   mode = mean(mode, na.rm = TRUE),
+                   range = mean(range, na.rm = TRUE),
+                   .groups = "drop") |> 
+  dplyr::arrange(patient, cost)
 ```
 
 
 <br>
 
-## `use_zipcoder()`
+## TODO: Add Missing ZIP Codes
 
-`costoffice` includes a subset of zip code-related data from Gavin Rozzi's amazing `zipcodeR` package. Piping the downloaded dataset into the `use_zipcoder()` function adds this information to the data frame.
 
 ```{r}
-search_datasets(specialty = "vascular surgery") |> 
+search_datasets(specialty = "addiction_medicine") |> 
   download_dataset() |> 
-  tidytable::slice_sample(n = 10) |> 
-  use_zipcoder(full = TRUE)
+  dplyr::filter(is.na(state)) |> 
+  dplyr::select(zip_code)
 ```
 
-<br>
 
-## `download_datasets()`
-
-The `download_datasets()` function wraps the previous three functions into a one-stop shop of sorts. Arguments from all three base functions are accessible as well.
-
-```{r}
-(x <- download_datasets(specialty = "vascular surgery") |> head())
-```
-
-<br>
-
-```{r}
-(y <- download_datasets(keyword = "anesthesiology") |> head())
-```
-
-<br>
-
-## `summary_stats()`
-
-`summary_stats()` is a versatile summary function, tailored for the data this package accesses.
-
-Current average prices by state for a **New Patient** office visit to a **Vascular Surgeon**:
-
-```{r}
-(vasc <- download_datasets(specialty = "vascular surgery") |> 
+```{r, eval=FALSE, echo=FALSE}
+download_datasets(specialty = "vascular surgery") |> 
   summary_stats(condition = patient == "new",
                 group_vars = c(specialty, state, hcpcs, cost),
                 summary_vars = c(min, max, mode, range),
-                arr = cost))
+                arr = cost)
 ```
 
-<br>
-
-Average prices by state for an **Established Patient** office visit to a **Cardiologist**:
-
-```{r}
-download_datasets(specialty = "cardiology", full = TRUE) |> 
-  tidytable::select(!c(geo, is_zcta, zcta_crosswalk)) |> 
-  tidytable::unnest(demo) |> 
-  tidytable::group_by(state, zip_code) |> 
-  tidytable::summarise(n = tidytable::n.(),
-                       pop = sum(pop, na.rm = TRUE))
-```
-
-```{r}
-costoffice::zip_db |> 
-  tidytable::unnest(demo) |> 
-  tidytable::group_by(state) |> 
-  tidytable::summarise(no_zips = tidytable::n.(),
-                       pop_sum = sum(pop, na.rm = TRUE),
-                       mean_pop_dens = mean(pop_density, na.rm = TRUE),
-                       med_income = median(med_income, na.rm = TRUE))
-```
-
-
-```{r}
-(cardio <- download_datasets(specialty = "cardiology") |> 
-  summary_stats(condition = patient == "est",
-                group_vars = c(specialty, state, hcpcs, cost),
-                summary_vars = c(min, max, mode, range),
-                arr = cost))
-```
-
-<br>
-
-## Plots
-
-```{r boxplot, fig.asp=2}
+```{r boxplot, fig.asp=2, eval=FALSE, echo=FALSE}
 ggplot2::ggplot(vasc |> tidytable::filter(cost == "price"), 
   ggplot2::aes(forcats::fct_reorder(state, mean_mode, median), mean_mode)) +
   ggplot2::geom_point() +
@@ -206,101 +150,114 @@ ggplot2::ggplot(vasc |> tidytable::filter(cost == "price"),
   ggplot2::labs(x = "", y = "",
            title = "Established Patient Office Visit Costs: Vascular Surgery")
 ```
-<br>
 
-```{r range, fig.asp=2}
-ggplot2::ggplot(data = vasc, ggplot2::aes(x = reorder(state, mean_mode), y = mean_mode)) +
-  ggplot2::geom_linerange(ggplot2::aes(ymin = mean_min, ymax = mean_max), 
-                          color = "#f3d478", linewidth = 4.5, alpha = 0.8) +
-  ggplot2::geom_point(fill = "#ed3324", color = "white", size = 2, shape = 21) +
+```{r range, fig.asp=2, eval=FALSE, echo=FALSE}
+ggplot2::ggplot(vasc, 
+                ggplot2::aes(x = reorder(state, mean_mode), 
+                             y = mean_mode)) +
+  ggplot2::geom_linerange(ggplot2::aes(ymin = mean_min, 
+                                       ymax = mean_max), 
+                          color = "#f3d478", 
+                          linewidth = 4.5, 
+                          alpha = 0.8) +
+  ggplot2::geom_point(fill = "#ed3324", 
+                      color = "white", 
+                      size = 2, 
+                      shape = 21) +
   ggplot2::coord_flip() +
   ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
-  ggplot2::labs(x = "", y = "",
+  ggplot2::labs(x = "", 
+                y = "",
            title = "Established Patient Office Visit Costs: Vascular Surgery")
 ```
 
-<br>
-
-## `write_datasets()`
-
-```{r, eval=FALSE, echo=TRUE}
-write_datasets()
-```
-
-<br>
-
-```{r}
+```{r, eval=FALSE, echo=FALSE}
 fs::dir_info("D:/cost_office_csvs/") |> 
-  tidytable::select(path, size)
-```
-
-<br>
-
-Size on disk:
-
-```{r}
-fs::dir_info("D:/cost_office_csvs/") |> 
-  tidytable::select(path, size) |> 
-  tidytable::summarise(sum(size)) |> 
+  dplyr::select(path, size) |> 
+  dplyr::summarise(sum(size)) |> 
   tibble::deframe()
 ```
 
 <br>
 
-## `write_duckdb`
+## Create database with `duckdb`
 
-```{r, eval=FALSE, echo=FALSE}
-files <- list.files("D:/cost_office_csvs")
+```{r}
+# https://r4ds.hadley.nz/iteration.html#sec-save-database
+template <- search_datasets(specialty = "addiction_medicine") |> 
+  download_dataset() |> 
+  head()
 
-files <- paste0("D:/cost_office_csvs/", files)
+con <- DBI::dbConnect(duckdb::duckdb(), "D:/duckdb/costoffice.duckdb")
 
-name <- basename(files)
+DBI::dbCreateTable(con, "costoffice", template)
 
-name <- gsub(".csv", "", name)
-
-name <- gsub(" ", "-", name)
-
-con <- duckdb::dbConnect(drv = duckdb::duckdb(), 
-                         dbdir = "D:/cost_office_duckdb/cost_office.duckdb")
-
-purrr::pwalk(list(name = name, files = files), duckdb::duckdb_read_csv, conn = con)
-
-duckdb::dbListTables(con)
-
-dplyr::tbl(con, "psychiatry")
-
-duckdb::dbDisconnect(con)
+con |> dplyr::tbl("costoffice")
 ```
-
-```{r, eval=FALSE, echo=TRUE}
-write_duckdb <- function(dir = "D:/cost_office_csvs/",
-                         db_dir = "D:/cost_office_duckdb/",
-                         db_name = "cost_office.duckdb")
-```
-
 
 <br>
 
 ```{r}
-con <- duckdb::dbConnect(
-  drv = duckdb::duckdb(), 
-  dbdir = "D:/cost_office_duckdb/cost_office.duckdb")
+# Size on disk:
+fs::dir_info("D:/duckdb/") |> 
+  dplyr::select(path, size) |> 
+  dplyr::summarise(sum(size)) |> 
+  tibble::deframe()
+```
 
-dplyr::tbl(con, "psychiatry")
+<br>
 
+```{r}
+cert <- search_datasets(keyword = "certified")[1, ] |> 
+  download_dataset()
+
+DBI::dbAppendTable(con, "costoffice", cert)
+
+con |> dplyr::tbl("costoffice")
+```
+
+<br>
+
+```{r}
+# Size on disk:
+fs::dir_info("D:/duckdb/") |> 
+  dplyr::select(path, size) |> 
+  dplyr::summarise(sum(size)) |> 
+  tibble::deframe()
+```
+
+<br>
+
+```{r}
+cert2 <- search_datasets(keyword = "certified")[2, ] |> 
+  download_dataset()
+
+DBI::dbAppendTable(con, "costoffice", cert2)
+
+con |> dplyr::tbl("costoffice")
+```
+
+<br>
+
+```{r}
+# Size on disk:
+fs::dir_info("D:/duckdb/") |> 
+  dplyr::select(path, size) |> 
+  dplyr::summarise(sum(size)) |> 
+  tibble::deframe()
+```
+
+<br>
+
+```{r}
 duckdb::dbDisconnect(con, shutdown = TRUE)
 ```
 
-<br>
 
-Size on disk:
-
-```{r}
-fs::dir_info("D:/cost_office_duckdb/") |> 
-  tidytable::select(path, size) |> 
-  tidytable::summarise(sum(size)) |> 
-  tibble::deframe()
+```{r eval=FALSE, echo=FALSE}
+system("tree D:/duckdb")
 ```
+
 
 ## Code of Conduct
 

@@ -4,24 +4,12 @@
 \alias{download_datasets}
 \title{Download A Physician Office Visit Costs Data set}
 \usage{
-download_datasets(
-  specialty = NULL,
-  keyword = NULL,
-  zipcoder = TRUE,
-  drop_na = TRUE,
-  full = FALSE
-)
+download_datasets(specialty = NULL, keyword = NULL)
 }
 \arguments{
 \item{specialty}{Search for exact medical specialty, e.g. 'cardiology'}
 
 \item{keyword}{Search for partial matches, e.g. 'medicine'}
-
-\item{zipcoder}{Adds information from \code{use_zipcoder()}; default is TRUE}
-
-\item{drop_na}{Drop rows containing missing values; default is TRUE}
-
-\item{full}{Add full zip code information (demographics, geocodes, zcta crosswalk); default is FALSE}
 }
 \value{
 A \code{tidytable} data.table

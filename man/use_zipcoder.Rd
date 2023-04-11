@@ -4,14 +4,12 @@
 \alias{use_zipcoder}
 \title{Add Geocoding Info to dataset via zipcodeR database}
 \usage{
-use_zipcoder(df, drop_na = TRUE, full = FALSE)
+use_zipcoder(df, drop_na = TRUE)
 }
 \arguments{
 \item{df}{\code{tidytable} from \code{download_dataset()}}
 
 \item{drop_na}{Drop rows containing missing values; default is TRUE}
-
-\item{full}{Add full zip code information (demographics, geocodes, zcta crosswalk); default is FALSE}
 }
 \value{
 A \code{tidytable}

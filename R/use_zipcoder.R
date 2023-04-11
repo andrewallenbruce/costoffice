@@ -5,7 +5,6 @@
 #'
 #' @param df `tidytable` from `download_dataset()`
 #' @param drop_na Drop rows containing missing values; default is TRUE
-#' @param full Add full zip code information (demographics, geocodes, zcta crosswalk); default is FALSE
 #' @return A `tidytable`
 #' @examples
 #' \dontrun{
@@ -16,38 +15,13 @@
 #' }
 #' @autoglobal
 #' @export
-use_zipcoder <- function(df, drop_na = TRUE, full = FALSE) {
+use_zipcoder <- function(df, drop_na = TRUE) {
 
-  if (isTRUE(full)) {
+  results <- tidytable::left_join(df, costoffice::zip_db) |>
+             tidytable::select(specialty, city, county, state,
+                      zip_code, tidytable::everything())
 
-  results <- df |>
-    tidytable::left_join(costoffice::zip_db) |>
-    tidytable::select(specialty,
-                      city,
-                      county,
-                      state,
-                      zip_code,
-                      tidytable::everything())
-  } else {
-
-    zip_db <- costoffice::zip_db |>
-      tidytable::select(zip_code:state_region)
-
-    results <- df |>
-      tidytable::left_join(zip_db) |>
-      tidytable::select(specialty,
-                        city,
-                        county,
-                        state,
-                        zip_code,
-                        tidytable::everything())
-
-  }
-
-  if (isTRUE(drop_na)) {
-    results <- results |>
-      tidytable::drop_na()
-    }
+  if (isTRUE(drop_na)) {results <- tidytable::drop_na(results)}
 
   return(results)
 }
