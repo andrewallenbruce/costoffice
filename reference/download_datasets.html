@@ -78,13 +78,7 @@ Physician Office Visit Costs (Data.CMS.gov)
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_datasets</span><span class="op">(</span></span>
-<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  keyword <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zipcoder <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  drop_na <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  full <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_datasets</span><span class="op">(</span>specialty <span class="op">=</span> <span class="cn">NULL</span>, keyword <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -95,18 +89,6 @@ Physician Office Visit Costs (Data.CMS.gov)
 
 <dt>keyword</dt>
 <dd><p>Search for partial matches, e.g. 'medicine'</p></dd>
-
-
-<dt>zipcoder</dt>
-<dd><p>Adds information from <code><a href="use_zipcoder.html">use_zipcoder()</a></code>; default is TRUE</p></dd>
-
-
-<dt>drop_na</dt>
-<dd><p>Drop rows containing missing values; default is TRUE</p></dd>
-
-
-<dt>full</dt>
-<dd><p>Add full zip code information (demographics, geocodes, zcta crosswalk); default is FALSE</p></dd>
 
 </dl></div>
     <div class="section level2">

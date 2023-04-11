@@ -62,7 +62,7 @@ Physician Office Visit Costs (Data.CMS.gov)
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Download A Physician Office Visit Costs Data set</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/costoffice/blob/HEAD/R/download_dataset.R" class="external-link"><code>R/download_dataset.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/costoffice/blob/HEAD/R/write_dataset.R" class="external-link"><code>R/write_dataset.R</code></a></small>
       <div class="d-none name"><code>write_datasets.Rd</code></div>
     </div>
 
@@ -78,22 +78,13 @@ Physician Office Visit Costs (Data.CMS.gov)
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write_datasets</span><span class="op">(</span></span>
-<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  keyword <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  dir <span class="op">=</span> <span class="st">"D:/cost_office_csvs/"</span>,</span>
-<span>  ext <span class="op">=</span> <span class="st">".csv"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write_datasets</span><span class="op">(</span><span class="va">df</span>, dir <span class="op">=</span> <span class="st">"D:/cost_office_csvs/"</span>, ext <span class="op">=</span> <span class="st">".csv"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>specialty</dt>
-<dd><p>Search for exact medical specialty, e.g. 'cardiology'</p></dd>
-
-
-<dt>keyword</dt>
-<dd><p>Search for partial matches, e.g. 'medicine'</p></dd>
+    <dl><dt>df</dt>
+<dd><p>A returned <code>tidytable</code> from <code><a href="search_datasets.html">search_datasets()</a></code></p></dd>
 
 
 <dt>dir</dt>
@@ -119,7 +110,9 @@ Physician Office Visit Costs (Data.CMS.gov)
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">write_datasets</span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"medicine"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">write_datasets</span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span>,</span></span>
+<span class="r-in"><span>               dir <span class="op">=</span> <span class="st">"D:/cost_office_csvs/"</span>,</span></span>
+<span class="r-in"><span>               ext <span class="op">=</span> <span class="st">".csv"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

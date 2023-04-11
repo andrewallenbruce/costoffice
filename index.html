@@ -95,7 +95,6 @@
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/costoffice"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/andrewallenbruce/costoffice" class="external-link">costoffice</a></span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
@@ -104,8 +103,8 @@
 <p>There are 83 datasets in total, each representing a different medical specialty. Each one contains the:</p>
 <ul>
 <li>Most Utilized Procedure Code (HCPCS Level II aka CPT code)</li>
-<li>Minimum/Maximum/Mode Price Medicare Paid</li>
-<li>Minimum/Maximum/Mode Copay the Patient Paid</li>
+<li>Price Medicare Paid (Minimum-Maximum-Mode)</li>
+<li>Copay the Patient Paid (Minimum-Maximum-Mode)</li>
 </ul>
 <p>by zip code, for new and established patients both.</p>
 <p><br></p>
@@ -114,423 +113,304 @@
 <h2 id="search_datasets">
 <code>search_datasets()</code><a class="anchor" aria-label="anchor" href="#search_datasets"></a>
 </h2>
-<p>Returns dataset information such as title, dates concerning data freshness and, most importantly, a csv download url.</p>
+<p>Returns a data frame of each dataset’s medical specialty, date of most recent release, and a download link for it’s corresponding csv file:</p>
 <p><br></p>
-<p>Use the <code>specialty</code> argument to return only <em>exact</em> matches:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiac surgery"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 1 × 6</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   specialty       title                 issued     modified   released   csv_url</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;                 &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;  </span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 cardiac surgery Cardiac Surgery Offi… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Call with no arguments to return the entire data frame</span></span>
+<span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 83 × 3</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty                                        released   csv_url          </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                                            &lt;date&gt;     &lt;chr&gt;            </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 addiction_medicine                               2022-07-14 https://data.cms…</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 advanced_heart_failure_and_transplant_cardiology 2022-07-14 https://data.cms…</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 allergy_immunology                               2022-07-14 https://data.cms…</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 anesthesiology                                   2022-07-14 https://data.cms…</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 cardiac_surgery                                  2022-07-14 https://data.cms…</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 cardiology                                       2022-07-14 https://data.cms…</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 certified_clinical_nurse_specialist              2022-07-14 https://data.cms…</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 certified_nurse_midwife                          2022-07-14 https://data.cms…</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 certified_registered_nurse_anesthetist_crna      2022-07-14 https://data.cms…</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 clinic_or_group_practice                         2022-07-14 https://data.cms…</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 73 more rows</span></span></code></pre></div>
+<p><br></p>
+<p>If needed, there are two arguments to this function. Use the <code>specialty</code> argument to return only <em>exact</em> matches (note the underscore in the names):</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"emergency_medicine"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 3</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   specialty          released   csv_url                                         </span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;              &lt;date&gt;     &lt;chr&gt;                                           </span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 emergency_medicine 2022-07-14 https://data.cms.gov/provider-data/sites/defaul…</span></span></code></pre></div>
+<p><br></p>
+<p>Use the <code>keyword</code> argument to return <em>partial</em> matches:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"medicine"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 12 × 3</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty                            released   csv_url                      </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                                &lt;date&gt;     &lt;chr&gt;                        </span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 addiction_medicine                   2022-07-14 https://data.cms.gov/provide…</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 emergency_medicine                   2022-07-14 https://data.cms.gov/provide…</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 geriatric_medicine                   2022-07-14 https://data.cms.gov/provide…</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 internal_medicine                    2022-07-14 https://data.cms.gov/provide…</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 nuclear_medicine                     2022-07-14 https://data.cms.gov/provide…</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 osteopathic_manipulative_medicine    2022-07-14 https://data.cms.gov/provide…</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 pediatric_medicine                   2022-07-14 https://data.cms.gov/provide…</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 physical_medicine_and_rehabilitation 2022-07-14 https://data.cms.gov/provide…</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 preventive_medicine                  2022-07-14 https://data.cms.gov/provide…</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 sleep_medicine                       2022-07-14 https://data.cms.gov/provide…</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 sports_medicine                      2022-07-14 https://data.cms.gov/provide…</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 undersea_and_hyperbaric_medicine     2022-07-14 https://data.cms.gov/provide…</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p>Return a vector of the exact names of the medical specialties by simply calling <code>search_datasets()$specialty</code>.</p>
 </blockquote>
 <p><br></p>
 <details closed><summary><span title="Click to Expand"> Available Medical Specialties </span>
-</summary><div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>addiction medicine</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>advanced heart failure and transplant cardiology</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>allergy<span class="sc">/</span> immunology</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>anesthesiology</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>cardiac surgery</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>cardiology</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>certified clinical nurse specialist</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>certified nurse midwife</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>certified registered nurse <span class="fu">anesthetist</span> (crna)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>clinic or group practice</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>clinical cardiac electrophysiology</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>clinical laboratory</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>colorectal <span class="fu">surgery</span> (proctology)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>critical <span class="fu">care</span> (intensivists)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>dentist</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>dermatology</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>diagnostic radiology</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>emergency medicine</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>endocrinology</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>family practice</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>gastroenterology</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>general practice</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>general surgery</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>geriatric medicine</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>geriatric psychiatry</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>gynecological oncology</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>hand surgery</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>hematology</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>hematology<span class="sc">-</span>oncology</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>hematopoietic cell transplantation and cellular therapy</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>hospice and palliative care</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>hospitalist</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>infectious disease</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>internal medicine</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>interventional cardiology</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>interventional pain management</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>interventional radiology</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>licensed clinical social worker</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>mammography center</span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>maxillofacial surgery</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>medical genetics and genomics</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>medical oncology</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>medical toxicology</span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>nephrology</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>neurology</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>neuropsychiatry</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>neurosurgery</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>nuclear medicine</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>nurse practitioner</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>obstetrics <span class="sc">&amp;</span>amp; gynecology</span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>ophthalmology</span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>optometry</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>oral <span class="fu">surgery</span> (dentist only)</span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>orthopedic surgery</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>osteopathic manipulative medicine</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>otolaryngology</span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>pain management</span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>pathology</span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>pediatric medicine</span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>peripheral vascular disease</span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>physical medicine and rehabilitation</span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>physical therapist <span class="cf">in</span> private practice</span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>physician assistant</span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>plastic and reconstructive surgery</span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>podiatry</span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>preventive medicine</span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>psychiatry</span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>psychologist, clinical</span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>public health or welfare agency</span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>pulmonary disease</span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>radiation oncology</span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>registered dietitian or nutrition professional</span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>rheumatology</span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>sleep medicine</span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>speech language pathologist</span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>sports medicine</span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>surgical oncology</span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>thoracic surgery</span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>undefined physician type</span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>undersea and hyperbaric medicine</span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>unknown supplier<span class="sc">/</span>provider specialty</span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>urology</span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>vascular surgery</span></code></pre></div>
+</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">addiction_medicine</span></span>
+<span><span class="va">advanced_heart_failure_and_transplant_cardiology</span></span>
+<span><span class="va">allergy_immunology</span></span>
+<span><span class="va">anesthesiology</span></span>
+<span><span class="va">cardiac_surgery</span></span>
+<span><span class="va">cardiology</span></span>
+<span><span class="va">certified_clinical_nurse_specialist</span></span>
+<span><span class="va">certified_nurse_midwife</span></span>
+<span><span class="va">certified_registered_nurse_anesthetist_crna</span></span>
+<span><span class="va">clinic_or_group_practice</span></span>
+<span><span class="va">clinical_cardiac_electrophysiology</span></span>
+<span><span class="va">clinical_laboratory</span></span>
+<span><span class="va">colorectal_surgery_proctology</span></span>
+<span><span class="va">critical_care_intensivists</span></span>
+<span><span class="va">dentist</span></span>
+<span><span class="va">dermatology</span></span>
+<span><span class="va">diagnostic_radiology</span></span>
+<span><span class="va">emergency_medicine</span></span>
+<span><span class="va">endocrinology</span></span>
+<span><span class="va">family_practice</span></span>
+<span><span class="va">gastroenterology</span></span>
+<span><span class="va">general_practice</span></span>
+<span><span class="va">general_surgery</span></span>
+<span><span class="va">geriatric_medicine</span></span>
+<span><span class="va">geriatric_psychiatry</span></span>
+<span><span class="va">gynecological_oncology</span></span>
+<span><span class="va">hand_surgery</span></span>
+<span><span class="va">hematology</span></span>
+<span><span class="va">hematology_oncology</span></span>
+<span><span class="va">hematopoietic_cell_transplantation_and_cellular_therapy</span></span>
+<span><span class="va">hospice_and_palliative_care</span></span>
+<span><span class="va">hospitalist</span></span>
+<span><span class="va">infectious_disease</span></span>
+<span><span class="va">internal_medicine</span></span>
+<span><span class="va">interventional_cardiology</span></span>
+<span><span class="va">interventional_pain_management</span></span>
+<span><span class="va">interventional_radiology</span></span>
+<span><span class="va">licensed_clinical_social_worker</span></span>
+<span><span class="va">mammography_center</span></span>
+<span><span class="va">maxillofacial_surgery</span></span>
+<span><span class="va">medical_genetics_and_genomics</span></span>
+<span><span class="va">medical_oncology</span></span>
+<span><span class="va">medical_toxicology</span></span>
+<span><span class="va">nephrology</span></span>
+<span><span class="va">neurology</span></span>
+<span><span class="va">neuropsychiatry</span></span>
+<span><span class="va">neurosurgery</span></span>
+<span><span class="va">nuclear_medicine</span></span>
+<span><span class="va">nurse_practitioner</span></span>
+<span><span class="va">obstetrics_gynecology</span></span>
+<span><span class="va">ophthalmology</span></span>
+<span><span class="va">optometry</span></span>
+<span><span class="va">oral_surgery_dentist_only</span></span>
+<span><span class="va">orthopedic_surgery</span></span>
+<span><span class="va">osteopathic_manipulative_medicine</span></span>
+<span><span class="va">otolaryngology</span></span>
+<span><span class="va">pain_management</span></span>
+<span><span class="va">pathology</span></span>
+<span><span class="va">pediatric_medicine</span></span>
+<span><span class="va">peripheral_vascular_disease</span></span>
+<span><span class="va">physical_medicine_and_rehabilitation</span></span>
+<span><span class="va">physical_therapist_in_private_practice</span></span>
+<span><span class="va">physician_assistant</span></span>
+<span><span class="va">plastic_and_reconstructive_surgery</span></span>
+<span><span class="va">podiatry</span></span>
+<span><span class="va">preventive_medicine</span></span>
+<span><span class="va">psychiatry</span></span>
+<span><span class="va">psychologist_clinical</span></span>
+<span><span class="va">public_health_or_welfare_agency</span></span>
+<span><span class="va">pulmonary_disease</span></span>
+<span><span class="va">radiation_oncology</span></span>
+<span><span class="va">registered_dietitian_or_nutrition_professional</span></span>
+<span><span class="va">rheumatology</span></span>
+<span><span class="va">sleep_medicine</span></span>
+<span><span class="va">speech_language_pathologist</span></span>
+<span><span class="va">sports_medicine</span></span>
+<span><span class="va">surgical_oncology</span></span>
+<span><span class="va">thoracic_surgery</span></span>
+<span><span class="va">undefined_physician_type</span></span>
+<span><span class="va">undersea_and_hyperbaric_medicine</span></span>
+<span><span class="va">unknown_supplierprovider_specialty</span></span>
+<span><span class="va">urology</span></span>
+<span><span class="va">vascular_surgery</span></span></code></pre></div>
 </details><p><br></p>
-<p>Use the <code>keyword</code> argument to return <em>partial</em> matches:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"medicine"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 12 × 6</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty                      title issued     modified   released   csv_url</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                          &lt;chr&gt; &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;  </span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 addiction medicine             Addi… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 emergency medicine             Emer… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 geriatric medicine             Geri… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 internal medicine              Inte… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 nuclear medicine               Nucl… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 osteopathic manipulative medi… Oste… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 pediatric medicine             Pedi… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 physical medicine and rehabil… Phys… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 preventive medicine            Prev… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 sleep medicine                 Slee… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 sports medicine                Spor… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 undersea and hyperbaric medic… Unde… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span></code></pre></div>
-<p><br></p>
-<p>Calling the function with no arguments will return the entire dataset:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 83 × 6</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty                      title issued     modified   released   csv_url</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                          &lt;chr&gt; &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;  </span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 addiction medicine             Addi… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 advanced heart failure and tr… Adva… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 allergy/ immunology            Alle… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 anesthesiology                 Anes… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 cardiac surgery                Card… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 cardiology                     Card… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 certified clinical nurse spec… Cert… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 certified nurse midwife        Cert… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 certified registered nurse an… Cert… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 clinic or group practice       Clin… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 73 more rows</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="download_dataset">
 <code>download_dataset()</code><a class="anchor" aria-label="anchor" href="#download_dataset"></a>
 </h2>
-<p>Once you’ve found the dataset that you’re interested in, simply insert the <code><a href="reference/download_dataset.html">download_dataset()</a></code> function into your pipeline to download the csv file, which is returned as a <code>tidytable</code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular_surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 10 × 9</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty        zip_code hcpcs patient cost    min   max  mode range</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 vascular surgery 00210    99203 new     copay  15.0  45.4  23.1  30.4</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 vascular surgery 00210    99203 new     price  60.1 182.   92.3 121. </span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 vascular surgery 00211    99203 new     copay  15.0  45.4  23.1  30.4</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 vascular surgery 00211    99203 new     price  60.1 182.   92.3 121. </span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 vascular surgery 00212    99203 new     copay  15.0  45.4  23.1  30.4</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 vascular surgery 00212    99203 new     price  60.1 182.   92.3 121. </span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 vascular surgery 00213    99203 new     copay  15.0  45.4  23.1  30.4</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 vascular surgery 00213    99203 new     price  60.1 182.   92.3 121. </span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 vascular surgery 00214    99203 new     copay  15.0  45.4  23.1  30.4</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 vascular surgery 00214    99203 new     price  60.1 182.   92.3 121.</span></span></code></pre></div>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">region</span>, <span class="va">patient</span>, <span class="va">cost</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">min</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>                   max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">max</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>                   mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mode</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>                   range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">range</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>                   .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">patient</span>, <span class="va">cost</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 20 × 7</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    region    patient cost    min   max  mode range</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;fct&gt;     &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Northeast est     copay  4.75  37.6  19.0  32.8</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Midwest   est     copay  4.36  35.2  17.7  30.8</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 South     est     copay  4.39  35.5  17.9  31.2</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 West      est     copay  4.79  37.7  19.1  32.9</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 &lt;NA&gt;      est     copay  4.65  36.8  18.6  32.2</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Northeast est     price 19.0  150.   76.0 131. </span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Midwest   est     price 17.4  141.   70.8 123. </span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 South     est     price 17.6  142.   71.6 125. </span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 West      est     price 19.2  151.   76.2 132. </span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 &lt;NA&gt;      est     price 18.6  147.   74.4 129. </span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 Northeast new     copay 15.2   46.0  23.4  30.8</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 Midwest   new     copay 14.1   43.0  21.7  28.9</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 South     new     copay 14.3   43.6  22.0  29.3</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 West      new     copay 15.2   46.1  23.4  30.8</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 &lt;NA&gt;      new     copay 14.9   45.1  22.9  30.2</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16 Northeast new     price 60.8  184.   93.5 123. </span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17 Midwest   new     price 56.4  172.   86.9 116. </span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 South     new     price 57.0  174.   88.0 117. </span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19 West      new     price 61.0  184.   93.6 123. </span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20 &lt;NA&gt;      new     price 59.6  180.   91.5 121.</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="use_zipcoder">
-<code>use_zipcoder()</code><a class="anchor" aria-label="anchor" href="#use_zipcoder"></a>
+<h2 id="todo-add-missing-zip-codes">TODO: Add Missing ZIP Codes<a class="anchor" aria-label="anchor" href="#todo-add-missing-zip-codes"></a>
 </h2>
-<p><code>costoffice</code> includes a subset of zip code-related data from Gavin Rozzi’s amazing <code>zipcodeR</code> package. Piping the downloaded dataset into the <code><a href="reference/use_zipcoder.html">use_zipcoder()</a></code> function adds this information to the data frame.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"addiction_medicine"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span>full <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 10 × 18</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty   city  county state zip_code hcpcs patient cost    min   max  mode</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 vascular s… Rice  Navar… TX    75155    99203 new     copay 14.2   43.2  21.8</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 vascular s… Bel … Charl… MD    20611    99203 new     price 60.8  184.   93.3</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 vascular s… Leet… Alleg… PA    15056    99203 new     price 57.0  174.   88.0</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 vascular s… Gann… Buffa… SD    57341    99203 new     price 57.5  174.   88.3</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 vascular s… Harr… Glouc… NJ    08039    99203 new     price 64.4  193.   98.4</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 vascular s… Broo… Wauke… WI    53005    99203 new     price 55.6  169.   85.6</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 vascular s… Dover Mason… KY    41034    99213 est     price 16.7  137.   68.9</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 vascular s… El N… Merce… CA    95317    99213 est     copay  4.82  37.6  19.0</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 vascular s… Lanc… Garra… KY    40446    99213 est     price 16.7  137.   68.9</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 vascular s… Arag… Polk … GA    30104    99203 new     price 55.2  170.   85.5</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 7 more variables: range &lt;dbl&gt;, state_name &lt;chr&gt;, state_region &lt;fct&gt;,</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   demo &lt;list&gt;, geo &lt;list&gt;, is_zcta &lt;lgl&gt;, zcta_crosswalk &lt;list&gt;</span></span></code></pre></div>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">zip_code</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 492 × 1</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    zip_code</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;   </span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 00303   </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 00303   </span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 00304   </span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 00304   </span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 00323   </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 00323   </span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 00353   </span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 00353   </span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 00905   </span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 00905   </span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 482 more rows</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="download_datasets">
-<code>download_datasets()</code><a class="anchor" aria-label="anchor" href="#download_datasets"></a>
+<h2 id="create-database-with-duckdb">Create database with <code>duckdb</code>
+<a class="anchor" aria-label="anchor" href="#create-database-with-duckdb"></a>
 </h2>
-<p>The <code><a href="reference/download_datasets.html">download_datasets()</a></code> function wraps the previous three functions into a one-stop shop of sorts. Arguments from all three base functions are accessible as well.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/download_datasets.html">download_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 6 × 14</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   specialty    city  county state zip_code hcpcs patient cost    min   max  mode</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 vascular su… Holt… Suffo… NY    00501    99203 new     copay  17.9  53.8  27.4</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 vascular su… Holt… Suffo… NY    00501    99203 new     price  71.5 215.  110. </span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 vascular su… Holt… Suffo… NY    00544    99203 new     copay  17.9  53.8  27.4</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 vascular su… Holt… Suffo… NY    00544    99203 new     price  71.5 215.  110. </span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 vascular su… Adju… Adjun… PR    00601    99203 new     copay  14.8  45.0  22.8</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 vascular su… Adju… Adjun… PR    00601    99203 new     price  59.4 180.   91.3</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: range &lt;dbl&gt;, state_name &lt;chr&gt;, state_region &lt;fct&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># https://r4ds.hadley.nz/iteration.html#sec-save-database</span></span>
+<span><span class="va">template</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"addiction_medicine"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/duckdb/man/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"D:/duckdb/costoffice.duckdb"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbCreateTable.html" class="external-link">dbCreateTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"costoffice"</span>, <span class="va">template</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"costoffice"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Source:   table&lt;costoffice&gt; [0 x 14]</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Database: DuckDB 0.7.1 [andyb@Windows 10 x64:R 4.2.2/D:/duckdb/costoffice.duckdb]</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 14 variables: specialty &lt;chr&gt;, zip_code &lt;chr&gt;, city &lt;chr&gt;, county &lt;chr&gt;,</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   state &lt;chr&gt;, region &lt;chr&gt;, division &lt;chr&gt;, hcpcs &lt;chr&gt;, patient &lt;chr&gt;,</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   cost &lt;chr&gt;, min &lt;dbl&gt;, max &lt;dbl&gt;, mode &lt;dbl&gt;, range &lt;dbl&gt;</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/download_datasets.html">download_datasets</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"anesthesiology"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 6 × 14</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   specialty    city  county state zip_code hcpcs patient cost    min   max  mode</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 anesthesiol… Holt… Suffo… NY    00501    99204 new     copay  17.9  53.8  40.7</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 anesthesiol… Holt… Suffo… NY    00501    99204 new     price  71.5 215.  163. </span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 anesthesiol… Holt… Suffo… NY    00544    99204 new     copay  17.9  53.8  40.7</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 anesthesiol… Holt… Suffo… NY    00544    99204 new     price  71.5 215.  163. </span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 anesthesiol… Adju… Adjun… PR    00601    99204 new     copay  14.8  45.0  34.1</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 anesthesiol… Adju… Adjun… PR    00601    99204 new     price  59.4 180.  136. </span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: range &lt;dbl&gt;, state_name &lt;chr&gt;, state_region &lt;fct&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Size on disk:</span></span>
+<span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_info</a></span><span class="op">(</span><span class="st">"D:/duckdb/"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">path</span>, <span class="va">size</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12.6K</span></span></code></pre></div>
 <p><br></p>
-</div>
-<div class="section level2">
-<h2 id="summary_stats">
-<code>summary_stats()</code><a class="anchor" aria-label="anchor" href="#summary_stats"></a>
-</h2>
-<p><code><a href="reference/summary_stats.html">summary_stats()</a></code> is a versatile summary function, tailored for the data this package accesses.</p>
-<p>Current average prices by state for a <strong>New Patient</strong> office visit to a <strong>Vascular Surgeon</strong>:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">vasc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/download_datasets.html">download_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/summary_stats.html">summary_stats</a></span><span class="op">(</span>condition <span class="op">=</span> <span class="va">patient</span> <span class="op">==</span> <span class="st">"new"</span>,</span>
-<span>                group_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">specialty</span>, <span class="va">state</span>, <span class="va">hcpcs</span>, <span class="va">cost</span><span class="op">)</span>,</span>
-<span>                summary_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">min</span>, <span class="va">max</span>, <span class="va">mode</span>, <span class="va">range</span><span class="op">)</span>,</span>
-<span>                arr <span class="op">=</span> <span class="va">cost</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 104 × 13</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty        state hcpcs cost  median_min mean_min median_max mean_max</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 vascular surgery AK    99203 price       74.8     74.8       234.     234.</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 vascular surgery AL    99203 price       55.5     55.5       171.     171.</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 vascular surgery AR    99203 price       53.1     53.1       164.     164.</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 vascular surgery AZ    99203 price       57.3     57.3       175.     175.</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 vascular surgery CA    99203 price       63.6     64.0       190.     191.</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 vascular surgery CO    99203 price       60.1     60.1       181.     181.</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 vascular surgery CT    99203 price       63.5     63.5       191.     191.</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 vascular surgery DC    99203 price       68.6     68.6       205.     205.</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 vascular surgery DE    99203 price       59.8     59.8       181.     181.</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 vascular surgery FL    99203 price       58.4     59.5       179.     182.</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 94 more rows</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 5 more variables: median_mode &lt;dbl&gt;, mean_mode &lt;dbl&gt;, median_range &lt;dbl&gt;,</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   mean_range &lt;dbl&gt;, n &lt;int&gt;</span></span></code></pre></div>
-<p><br></p>
-<p>Average prices by state for an <strong>Established Patient</strong> office visit to a <strong>Cardiologist</strong>:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/download_datasets.html">download_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span>, full <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">geo</span>, <span class="va">is_zcta</span>, <span class="va">zcta_crosswalk</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">demo</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">zip_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/summarize.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/n..html" class="external-link">n.</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>                       pop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">pop</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 41,871 × 4</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Groups:      state</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    state zip_code     n    pop</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 AK    99501        4  70412</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 AK    99502        4  96672</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 AK    99503        4  58252</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 AK    99504        4 163656</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 AK    99505        4  24696</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 AK    99506        4  30996</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 AK    99507        4 151400</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 AK    99508        4 143428</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 AK    99509        4      0</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 AK    99510        4   1412</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 41,861 more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">costoffice</span><span class="fu">::</span><span class="va"><a href="reference/zip_db.html">zip_db</a></span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">demo</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/summarize.html" class="external-link">summarise</a></span><span class="op">(</span>no_zips <span class="op">=</span> <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/n..html" class="external-link">n.</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>                       pop_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">pop</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>                       mean_pop_dens <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">pop_density</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>                       med_income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">med_income</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 52 × 5</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    state no_zips  pop_sum mean_pop_dens med_income</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;   &lt;int&gt;    &lt;int&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 AK        274   709930          229.      48036</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 AL        839  4779588          360.      38493</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 AR        710  2916042          209.      36104</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 AZ        568  6394519         1169.      42734</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 CA       2654 37249542         3273.      56528</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 CO        662  5029374          989.      51937</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 CT        438  3574097         1627.      78122</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 DC        296   601723        20318.      76948</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 DE         98   897925         1780.      57292</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 FL       1495 18801226         1955.      45593</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 42 more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">cardio</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/download_datasets.html">download_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="reference/summary_stats.html">summary_stats</a></span><span class="op">(</span>condition <span class="op">=</span> <span class="va">patient</span> <span class="op">==</span> <span class="st">"est"</span>,</span>
-<span>                group_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">specialty</span>, <span class="va">state</span>, <span class="va">hcpcs</span>, <span class="va">cost</span><span class="op">)</span>,</span>
-<span>                summary_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">min</span>, <span class="va">max</span>, <span class="va">mode</span>, <span class="va">range</span><span class="op">)</span>,</span>
-<span>                arr <span class="op">=</span> <span class="va">cost</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 104 × 13</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty  state hcpcs cost  median_min mean_min median_max mean_max</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 cardiology AK    99214 price       22.4     22.4       191.     191.</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 cardiology AL    99214 price       16.9     16.9       139.     139.</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 cardiology AR    99214 price       16.3     16.3       134.     134.</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 cardiology AZ    99214 price       17.7     17.7       143.     143.</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 cardiology CA    99214 price       20.4     20.5       156.     157.</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 cardiology CO    99214 price       19.0     19.0       148.     148.</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 cardiology CT    99214 price       20.1     20.1       156.     156.</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 cardiology DC    99214 price       21.9     21.9       167.     167.</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 cardiology DE    99214 price       18.7     18.7       148.     148.</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 cardiology FL    99214 price       17.7     18.1       145.     148.</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 94 more rows</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 5 more variables: median_mode &lt;dbl&gt;, mean_mode &lt;dbl&gt;, median_range &lt;dbl&gt;,</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   mean_range &lt;dbl&gt;, n &lt;int&gt;</span></span></code></pre></div>
-<p><br></p>
-</div>
-<div class="section level2">
-<h2 id="plots">Plots<a class="anchor" aria-label="anchor" href="#plots"></a>
-</h2>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">ggplot</span><span class="op">(</span><span class="va">vasc</span> <span class="op">|&gt;</span> <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"price"</span><span class="op">)</span>, </span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">aes</span><span class="op">(</span><span class="fu">forcats</span><span class="fu">::</span><span class="fu">fct_reorder</span><span class="op">(</span><span class="va">state</span>, <span class="va">mean_mode</span>, <span class="va">median</span><span class="op">)</span>, <span class="va">mean_mode</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu">label_dollar</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span>,</span>
-<span>           title <span class="op">=</span> <span class="st">"Established Patient Office Visit Costs: Vascular Surgery"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-boxplot-1.png" width="100%"><br></p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">vasc</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">mean_mode</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">mean_mode</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">geom_linerange</span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">aes</span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">mean_min</span>, ymax <span class="op">=</span> <span class="va">mean_max</span><span class="op">)</span>, </span>
-<span>                          color <span class="op">=</span> <span class="st">"#f3d478"</span>, linewidth <span class="op">=</span> <span class="fl">4.5</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">geom_point</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#ed3324"</span>, color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">2</span>, shape <span class="op">=</span> <span class="fl">21</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">scale_y_continuous</span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu">label_dollar</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>, y <span class="op">=</span> <span class="st">""</span>,</span>
-<span>           title <span class="op">=</span> <span class="st">"Established Patient Office Visit Costs: Vascular Surgery"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-range-1.png" width="100%"></p>
-<p><br></p>
-</div>
-<div class="section level2">
-<h2 id="write_datasets">
-<code>write_datasets()</code><a class="anchor" aria-label="anchor" href="#write_datasets"></a>
-</h2>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/write_datasets.html">write_datasets</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_info</a></span><span class="op">(</span><span class="st">"D:/cost_office_csvs/"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">path</span>, <span class="va">size</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 83 × 2</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    path                                                                     size</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;fs::path&gt;                                                              &lt;fs:&gt;</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 D:/cost_office_csvs/addiction medicine.csv                              18.6M</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 …/cost_office_csvs/advanced heart failure and transplant cardiology.csv 23.4M</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 D:/cost_office_csvs/allergy immunology.csv                              18.7M</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 D:/cost_office_csvs/anesthesiology.csv                                  17.9M</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 D:/cost_office_csvs/cardiac surgery.csv                                 18.1M</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 D:/cost_office_csvs/cardiology.csv                                      17.3M</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 D:/cost_office_csvs/certified clinical nurse specialist.csv             21.3M</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 D:/cost_office_csvs/certified nurse midwife.csv                         19.3M</span></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 D:/cost_office_csvs/certified registered nurse anesthetist (crna).csv   22.8M</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 D:/cost_office_csvs/clinic or group practice.csv                        19.5M</span></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 73 more rows</span></span></code></pre></div>
-<p><br></p>
-<p>Size on disk:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_info</a></span><span class="op">(</span><span class="st">"D:/cost_office_csvs/"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">path</span>, <span class="va">size</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/summarize.html" class="external-link">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1.5G</span></span></code></pre></div>
-<p><br></p>
-</div>
-<div class="section level2">
-<h2 id="write_duckdb">
-<code>write_duckdb</code><a class="anchor" aria-label="anchor" href="#write_duckdb"></a>
-</h2>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>write_duckdb <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">dir =</span> <span class="st">"D:/cost_office_csvs/"</span>,</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">db_dir =</span> <span class="st">"D:/cost_office_duckdb/"</span>,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">db_name =</span> <span class="st">"cost_office.duckdb"</span>)</span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu">duckdb</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span></span>
-<span>  drv <span class="op">=</span> <span class="fu">duckdb</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/duckdb/man/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, </span>
-<span>  dbdir <span class="op">=</span> <span class="st">"D:/cost_office_duckdb/cost_office.duckdb"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">cert</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"certified"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"psychiatry"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Source:   table&lt;psychiatry&gt; [?? x 14]</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Database: DuckDB 0.7.1 [andyb@Windows 10 x64:R 4.2.2/D:/cost_office_duckdb/cost_office.duckdb]</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty  city   county state zip_code hcpcs patient cost    min   max  mode</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 psychiatry Holts… Suffo… NY         501 99205 new     copay  17.9  53.8  53.8</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 psychiatry Holts… Suffo… NY         501 99205 new     price  71.5 215.  215. </span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 psychiatry Holts… Suffo… NY         544 99205 new     copay  17.9  53.8  53.8</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 psychiatry Holts… Suffo… NY         544 99205 new     price  71.5 215.  215. </span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 psychiatry Adjun… Adjun… PR         601 99205 new     copay  14.8  45.0  45.0</span></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 psychiatry Adjun… Adjun… PR         601 99205 new     price  59.4 180.  180. </span></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 psychiatry Aguada Aguad… PR         602 99205 new     copay  14.8  45.0  45.0</span></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 psychiatry Aguada Aguad… PR         602 99205 new     price  59.4 180.  180. </span></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 psychiatry Aguad… Aguad… PR         603 99205 new     copay  14.8  45.0  45.0</span></span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 psychiatry Aguad… Aguad… PR         603 99205 new     price  59.4 180.  180. </span></span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ more rows</span></span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: range &lt;dbl&gt;, state_name &lt;chr&gt;, state_region &lt;chr&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">con</span>, shutdown <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbAppendTable.html" class="external-link">dbAppendTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"costoffice"</span>, <span class="va">cert</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"costoffice"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Source:   table&lt;costoffice&gt; [?? x 14]</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Database: DuckDB 0.7.1 [andyb@Windows 10 x64:R 4.2.2/D:/duckdb/costoffice.duckdb]</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty     zip_code city  county state region division hcpcs patient cost </span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 certified_cl… 00210    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     copay</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 certified_cl… 00210    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     price</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 certified_cl… 00211    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     copay</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 certified_cl… 00211    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     price</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 certified_cl… 00212    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     copay</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 certified_cl… 00212    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     price</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 certified_cl… 00213    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     copay</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 certified_cl… 00213    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     price</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 certified_cl… 00214    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     copay</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 certified_cl… 00214    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     price</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ more rows</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: min &lt;dbl&gt;, max &lt;dbl&gt;, mode &lt;dbl&gt;, range &lt;dbl&gt;</span></span></code></pre></div>
 <p><br></p>
-<p>Size on disk:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_info</a></span><span class="op">(</span><span class="st">"D:/cost_office_duckdb/"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">path</span>, <span class="va">size</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/summarize.html" class="external-link">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Size on disk:</span></span>
+<span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_info</a></span><span class="op">(</span><span class="st">"D:/duckdb/"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">path</span>, <span class="va">size</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 355M</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5.76M</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cert2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"certified"</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbAppendTable.html" class="external-link">dbAppendTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"costoffice"</span>, <span class="va">cert2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"costoffice"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Source:   table&lt;costoffice&gt; [?? x 14]</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Database: DuckDB 0.7.1 [andyb@Windows 10 x64:R 4.2.2/D:/duckdb/costoffice.duckdb]</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    specialty     zip_code city  county state region division hcpcs patient cost </span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 certified_cl… 00210    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     copay</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 certified_cl… 00210    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     price</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 certified_cl… 00211    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     copay</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 certified_cl… 00211    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     price</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 certified_cl… 00212    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     copay</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 certified_cl… 00212    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     price</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 certified_cl… 00213    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     copay</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 certified_cl… 00213    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     price</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 certified_cl… 00214    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     copay</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 certified_cl… 00214    Port… &lt;NA&gt;   NH    North… New Eng… 99204 new     price</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ more rows</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: min &lt;dbl&gt;, max &lt;dbl&gt;, mode &lt;dbl&gt;, range &lt;dbl&gt;</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Size on disk:</span></span>
+<span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_info</a></span><span class="op">(</span><span class="st">"D:/duckdb/"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">path</span>, <span class="va">size</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11.3M</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">duckdb</span><span class="fu">::</span><span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">con</span>, shutdown <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>

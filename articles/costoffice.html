@@ -118,14 +118,7 @@ searching for one specialty in particular, just supply the
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiac surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 6</span></span>
-<span><span class="co">#&gt; $ specialty <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "cardiac surgery"</span></span>
-<span><span class="co">#&gt; $ title     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Cardiac Surgery Office Visit Costs"</span></span>
-<span><span class="co">#&gt; $ issued    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2022-07-11</span></span>
-<span><span class="co">#&gt; $ modified  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2022-07-11</span></span>
-<span><span class="co">#&gt; $ released  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2022-07-14</span></span>
-<span><span class="co">#&gt; $ csv_url   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "https://data.cms.gov/provider-data/sites/default/files/reso…</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'tidyr'</span></span></code></pre>
 <p><br></p>
 <p>The result contains three dates related to the last time the data was
 updated and the download link for the csv file.</p>
@@ -136,107 +129,12 @@ arguments:</p>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tidytable: 83 × 6</span></span></span>
-<span><span class="co">#&gt;    specialty                      title issued     modified   released   csv_url</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> addiction medicine             Addi… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> advanced heart failure and tr… Adva… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> allergy/ immunology            Alle… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> anesthesiology                 Anes… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> cardiac surgery                Card… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> cardiology                     Card… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> certified clinical nurse spec… Cert… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> certified nurse midwife        Cert… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> certified registered nurse an… Cert… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> clinic or group practice       Clin… 2022-07-11 2022-07-11 2022-07-14 https:…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 73 more rows</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'tidyr'</span></span></code></pre>
 <p><br></p>
 <p>The 83 available specialties are as follows:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">specialty</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;  [1] "addiction medicine"                                     </span></span>
-<span><span class="co">#&gt;  [2] "advanced heart failure and transplant cardiology"       </span></span>
-<span><span class="co">#&gt;  [3] "allergy/ immunology"                                    </span></span>
-<span><span class="co">#&gt;  [4] "anesthesiology"                                         </span></span>
-<span><span class="co">#&gt;  [5] "cardiac surgery"                                        </span></span>
-<span><span class="co">#&gt;  [6] "cardiology"                                             </span></span>
-<span><span class="co">#&gt;  [7] "certified clinical nurse specialist"                    </span></span>
-<span><span class="co">#&gt;  [8] "certified nurse midwife"                                </span></span>
-<span><span class="co">#&gt;  [9] "certified registered nurse anesthetist (crna)"          </span></span>
-<span><span class="co">#&gt; [10] "clinic or group practice"                               </span></span>
-<span><span class="co">#&gt; [11] "clinical cardiac electrophysiology"                     </span></span>
-<span><span class="co">#&gt; [12] "clinical laboratory"                                    </span></span>
-<span><span class="co">#&gt; [13] "colorectal surgery (proctology)"                        </span></span>
-<span><span class="co">#&gt; [14] "critical care (intensivists)"                           </span></span>
-<span><span class="co">#&gt; [15] "dentist"                                                </span></span>
-<span><span class="co">#&gt; [16] "dermatology"                                            </span></span>
-<span><span class="co">#&gt; [17] "diagnostic radiology"                                   </span></span>
-<span><span class="co">#&gt; [18] "emergency medicine"                                     </span></span>
-<span><span class="co">#&gt; [19] "endocrinology"                                          </span></span>
-<span><span class="co">#&gt; [20] "family practice"                                        </span></span>
-<span><span class="co">#&gt; [21] "gastroenterology"                                       </span></span>
-<span><span class="co">#&gt; [22] "general practice"                                       </span></span>
-<span><span class="co">#&gt; [23] "general surgery"                                        </span></span>
-<span><span class="co">#&gt; [24] "geriatric medicine"                                     </span></span>
-<span><span class="co">#&gt; [25] "geriatric psychiatry"                                   </span></span>
-<span><span class="co">#&gt; [26] "gynecological oncology"                                 </span></span>
-<span><span class="co">#&gt; [27] "hand surgery"                                           </span></span>
-<span><span class="co">#&gt; [28] "hematology"                                             </span></span>
-<span><span class="co">#&gt; [29] "hematology-oncology"                                    </span></span>
-<span><span class="co">#&gt; [30] "hematopoietic cell transplantation and cellular therapy"</span></span>
-<span><span class="co">#&gt; [31] "hospice and palliative care"                            </span></span>
-<span><span class="co">#&gt; [32] "hospitalist"                                            </span></span>
-<span><span class="co">#&gt; [33] "infectious disease"                                     </span></span>
-<span><span class="co">#&gt; [34] "internal medicine"                                      </span></span>
-<span><span class="co">#&gt; [35] "interventional cardiology"                              </span></span>
-<span><span class="co">#&gt; [36] "interventional pain management"                         </span></span>
-<span><span class="co">#&gt; [37] "interventional radiology"                               </span></span>
-<span><span class="co">#&gt; [38] "licensed clinical social worker"                        </span></span>
-<span><span class="co">#&gt; [39] "mammography center"                                     </span></span>
-<span><span class="co">#&gt; [40] "maxillofacial surgery"                                  </span></span>
-<span><span class="co">#&gt; [41] "medical genetics and genomics"                          </span></span>
-<span><span class="co">#&gt; [42] "medical oncology"                                       </span></span>
-<span><span class="co">#&gt; [43] "medical toxicology"                                     </span></span>
-<span><span class="co">#&gt; [44] "nephrology"                                             </span></span>
-<span><span class="co">#&gt; [45] "neurology"                                              </span></span>
-<span><span class="co">#&gt; [46] "neuropsychiatry"                                        </span></span>
-<span><span class="co">#&gt; [47] "neurosurgery"                                           </span></span>
-<span><span class="co">#&gt; [48] "nuclear medicine"                                       </span></span>
-<span><span class="co">#&gt; [49] "nurse practitioner"                                     </span></span>
-<span><span class="co">#&gt; [50] "obstetrics &amp;amp; gynecology"                            </span></span>
-<span><span class="co">#&gt; [51] "ophthalmology"                                          </span></span>
-<span><span class="co">#&gt; [52] "optometry"                                              </span></span>
-<span><span class="co">#&gt; [53] "oral surgery (dentist only)"                            </span></span>
-<span><span class="co">#&gt; [54] "orthopedic surgery"                                     </span></span>
-<span><span class="co">#&gt; [55] "osteopathic manipulative medicine"                      </span></span>
-<span><span class="co">#&gt; [56] "otolaryngology"                                         </span></span>
-<span><span class="co">#&gt; [57] "pain management"                                        </span></span>
-<span><span class="co">#&gt; [58] "pathology"                                              </span></span>
-<span><span class="co">#&gt; [59] "pediatric medicine"                                     </span></span>
-<span><span class="co">#&gt; [60] "peripheral vascular disease"                            </span></span>
-<span><span class="co">#&gt; [61] "physical medicine and rehabilitation"                   </span></span>
-<span><span class="co">#&gt; [62] "physical therapist in private practice"                 </span></span>
-<span><span class="co">#&gt; [63] "physician assistant"                                    </span></span>
-<span><span class="co">#&gt; [64] "plastic and reconstructive surgery"                     </span></span>
-<span><span class="co">#&gt; [65] "podiatry"                                               </span></span>
-<span><span class="co">#&gt; [66] "preventive medicine"                                    </span></span>
-<span><span class="co">#&gt; [67] "psychiatry"                                             </span></span>
-<span><span class="co">#&gt; [68] "psychologist, clinical"                                 </span></span>
-<span><span class="co">#&gt; [69] "public health or welfare agency"                        </span></span>
-<span><span class="co">#&gt; [70] "pulmonary disease"                                      </span></span>
-<span><span class="co">#&gt; [71] "radiation oncology"                                     </span></span>
-<span><span class="co">#&gt; [72] "registered dietitian or nutrition professional"         </span></span>
-<span><span class="co">#&gt; [73] "rheumatology"                                           </span></span>
-<span><span class="co">#&gt; [74] "sleep medicine"                                         </span></span>
-<span><span class="co">#&gt; [75] "speech language pathologist"                            </span></span>
-<span><span class="co">#&gt; [76] "sports medicine"                                        </span></span>
-<span><span class="co">#&gt; [77] "surgical oncology"                                      </span></span>
-<span><span class="co">#&gt; [78] "thoracic surgery"                                       </span></span>
-<span><span class="co">#&gt; [79] "undefined physician type"                               </span></span>
-<span><span class="co">#&gt; [80] "undersea and hyperbaric medicine"                       </span></span>
-<span><span class="co">#&gt; [81] "unknown supplier/provider specialty"                    </span></span>
-<span><span class="co">#&gt; [82] "urology"                                                </span></span>
-<span><span class="co">#&gt; [83] "vascular surgery"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'tidyr'</span></span></code></pre>
 <p><br><br></p>
 </div>
 <div class="section level2">
@@ -253,150 +151,16 @@ MB on disk/in memory.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cardio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'tidyr'</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">lobstr</span><span class="fu">::</span><span class="fu"><a href="https://lobstr.r-lib.org/reference/obj_size.html" class="external-link">obj_size</a></span><span class="op">(</span><span class="va">cardio</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; 14.78 MB</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in list2(...): object 'cardio' not found</span></span></code></pre>
 <p><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cardio</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="15%">
-<col width="12%">
-<col width="8%">
-<col width="11%">
-<col width="8%">
-<col width="9%">
-<col width="11%">
-<col width="11%">
-<col width="11%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">specialty</th>
-<th align="left">zip_code</th>
-<th align="left">hcpcs</th>
-<th align="left">patient</th>
-<th align="left">cost</th>
-<th align="right">min</th>
-<th align="right">max</th>
-<th align="right">mode</th>
-<th align="right">range</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">cardiology</td>
-<td align="left">56450</td>
-<td align="left">99204</td>
-<td align="left">new</td>
-<td align="left">copay</td>
-<td align="right">14.488</td>
-<td align="right">43.710</td>
-<td align="right">33.132</td>
-<td align="right">29.222</td>
-</tr>
-<tr class="even">
-<td align="left">cardiology</td>
-<td align="left">48204</td>
-<td align="left">99214</td>
-<td align="left">est</td>
-<td align="left">copay</td>
-<td align="right">4.640</td>
-<td align="right">37.502</td>
-<td align="right">26.812</td>
-<td align="right">32.862</td>
-</tr>
-<tr class="odd">
-<td align="left">cardiology</td>
-<td align="left">47433</td>
-<td align="left">99214</td>
-<td align="left">est</td>
-<td align="left">price</td>
-<td align="right">16.960</td>
-<td align="right">137.160</td>
-<td align="right">98.120</td>
-<td align="right">120.200</td>
-</tr>
-<tr class="even">
-<td align="left">cardiology</td>
-<td align="left">07198</td>
-<td align="left">99214</td>
-<td align="left">est</td>
-<td align="left">copay</td>
-<td align="right">5.318</td>
-<td align="right">40.646</td>
-<td align="right">29.216</td>
-<td align="right">35.328</td>
-</tr>
-<tr class="odd">
-<td align="left">cardiology</td>
-<td align="left">02272</td>
-<td align="left">99214</td>
-<td align="left">est</td>
-<td align="left">copay</td>
-<td align="right">5.322</td>
-<td align="right">40.536</td>
-<td align="right">29.150</td>
-<td align="right">35.214</td>
-</tr>
-<tr class="even">
-<td align="left">cardiology</td>
-<td align="left">77340</td>
-<td align="left">99204</td>
-<td align="left">new</td>
-<td align="left">copay</td>
-<td align="right">14.188</td>
-<td align="right">43.150</td>
-<td align="right">32.678</td>
-<td align="right">28.962</td>
-</tr>
-<tr class="odd">
-<td align="left">cardiology</td>
-<td align="left">61844</td>
-<td align="left">99204</td>
-<td align="left">new</td>
-<td align="left">price</td>
-<td align="right">56.936</td>
-<td align="right">174.632</td>
-<td align="right">132.104</td>
-<td align="right">117.696</td>
-</tr>
-<tr class="even">
-<td align="left">cardiology</td>
-<td align="left">20758</td>
-<td align="left">99214</td>
-<td align="left">est</td>
-<td align="left">copay</td>
-<td align="right">4.978</td>
-<td align="right">39.144</td>
-<td align="right">28.060</td>
-<td align="right">34.166</td>
-</tr>
-<tr class="odd">
-<td align="left">cardiology</td>
-<td align="left">60007</td>
-<td align="left">99214</td>
-<td align="left">est</td>
-<td align="left">price</td>
-<td align="right">19.296</td>
-<td align="right">155.264</td>
-<td align="right">111.040</td>
-<td align="right">135.968</td>
-</tr>
-<tr class="even">
-<td align="left">cardiology</td>
-<td align="left">71315</td>
-<td align="left">99204</td>
-<td align="left">new</td>
-<td align="left">price</td>
-<td align="right">56.016</td>
-<td align="right">172.784</td>
-<td align="right">130.624</td>
-<td align="right">116.768</td>
-</tr>
-</tbody>
-</table>
+<pre><code><span><span class="co">#&gt; Error in is.data.frame(.df): object 'cardio' not found</span></span></code></pre>
 <p><br><br></p>
 </div>
 <div class="section level2">
@@ -406,224 +170,28 @@ MB on disk/in memory.</p>
 <p><code>costoffice</code> includes a subset of zip code data from Gavin
 Rozzi’s amazing <code>zipcodeR</code> package:</p>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"zip_db"</span><span class="op">)</span></span>
 <span><span class="va">zip_db</span> <span class="op">|&gt;</span> <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tidytable: 5 × 10</span></span></span>
-<span><span class="co">#&gt;   zip_code city     county state state_name state_region demo        geo        </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 35004    Moody    St. C… AL    Alabama    South        <span style="color: #949494;">&lt;tidytable&gt;</span> <span style="color: #949494;">&lt;tidytable&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 35005    Adamsvi… Jeffe… AL    Alabama    South        <span style="color: #949494;">&lt;tidytable&gt;</span> <span style="color: #949494;">&lt;tidytable&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 35006    Adger    Jeffe… AL    Alabama    South        <span style="color: #949494;">&lt;tidytable&gt;</span> <span style="color: #949494;">&lt;tidytable&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 35007    Alabast… Shelb… AL    Alabama    South        <span style="color: #949494;">&lt;tidytable&gt;</span> <span style="color: #949494;">&lt;tidytable&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 35010    Alexand… Talla… AL    Alabama    South        <span style="color: #949494;">&lt;tidytable&gt;</span> <span style="color: #949494;">&lt;tidytable&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: is_zcta &lt;lgl&gt;, zcta_crosswalk &lt;list&gt;</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tidytable: 5 × 6</span></span></span>
+<span><span class="co">#&gt;   zip_code city           county     state region division          </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 35004    Moody          St. Clair  AL    South  East South Central</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 35005    Adamsville     Jefferson  AL    South  East South Central</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 35006    Adger          Jefferson  AL    South  East South Central</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 35007    Alabaster      Shelby     AL    South  East South Central</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 35010    Alexander City Tallapoosa AL    South  East South Central</span></span></code></pre>
 <p><br></p>
 <p>Putting <code><a href="../reference/use_zipcoder.html">use_zipcoder()</a></code> in the pipe chain will add this
 information to the data table:</p>
 <p><br></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/slice.html" class="external-link">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="12%">
-<col width="10%">
-<col width="12%">
-<col width="4%">
-<col width="6%">
-<col width="4%">
-<col width="5%">
-<col width="4%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="8%">
-<col width="9%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">specialty</th>
-<th align="left">city</th>
-<th align="left">county</th>
-<th align="left">state</th>
-<th align="left">zip_code</th>
-<th align="left">hcpcs</th>
-<th align="left">patient</th>
-<th align="left">cost</th>
-<th align="right">min</th>
-<th align="right">max</th>
-<th align="right">mode</th>
-<th align="right">range</th>
-<th align="left">state_name</th>
-<th align="left">state_region</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">vascular surgery</td>
-<td align="left">Orange Grove</td>
-<td align="left">Jim Wells County</td>
-<td align="left">TX</td>
-<td align="left">78372</td>
-<td align="left">99203</td>
-<td align="left">new</td>
-<td align="left">copay</td>
-<td align="right">14.188</td>
-<td align="right">43.150</td>
-<td align="right">21.840</td>
-<td align="right">28.962</td>
-<td align="left">Texas</td>
-<td align="left">South</td>
-</tr>
-<tr class="even">
-<td align="left">vascular surgery</td>
-<td align="left">Holly Springs</td>
-<td align="left">Marshall County</td>
-<td align="left">MS</td>
-<td align="left">38634</td>
-<td align="left">99213</td>
-<td align="left">est</td>
-<td align="left">price</td>
-<td align="right">16.256</td>
-<td align="right">134.744</td>
-<td align="right">67.544</td>
-<td align="right">118.488</td>
-<td align="left">Mississippi</td>
-<td align="left">South</td>
-</tr>
-<tr class="odd">
-<td align="left">vascular surgery</td>
-<td align="left">Winfield</td>
-<td align="left">Scott County</td>
-<td align="left">TN</td>
-<td align="left">37892</td>
-<td align="left">99213</td>
-<td align="left">est</td>
-<td align="left">price</td>
-<td align="right">16.864</td>
-<td align="right">136.824</td>
-<td align="right">68.784</td>
-<td align="right">119.960</td>
-<td align="left">Tennessee</td>
-<td align="left">South</td>
-</tr>
-<tr class="even">
-<td align="left">vascular surgery</td>
-<td align="left">Canada</td>
-<td align="left">Pike County</td>
-<td align="left">KY</td>
-<td align="left">41519</td>
-<td align="left">99213</td>
-<td align="left">est</td>
-<td align="left">price</td>
-<td align="right">16.656</td>
-<td align="right">137.344</td>
-<td align="right">68.920</td>
-<td align="right">120.688</td>
-<td align="left">Kentucky</td>
-<td align="left">South</td>
-</tr>
-<tr class="odd">
-<td align="left">vascular surgery</td>
-<td align="left">Portsmouth</td>
-<td align="left">Portsmouth city</td>
-<td align="left">VA</td>
-<td align="left">23708</td>
-<td align="left">99213</td>
-<td align="left">est</td>
-<td align="left">copay</td>
-<td align="right">4.582</td>
-<td align="right">36.408</td>
-<td align="right">18.378</td>
-<td align="right">31.826</td>
-<td align="left">Virginia</td>
-<td align="left">South</td>
-</tr>
-<tr class="even">
-<td align="left">vascular surgery</td>
-<td align="left">Lowman</td>
-<td align="left">Boise County</td>
-<td align="left">ID</td>
-<td align="left">83637</td>
-<td align="left">99213</td>
-<td align="left">est</td>
-<td align="left">price</td>
-<td align="right">16.648</td>
-<td align="right">135.440</td>
-<td align="right">68.048</td>
-<td align="right">118.792</td>
-<td align="left">Idaho</td>
-<td align="left">West</td>
-</tr>
-<tr class="odd">
-<td align="left">vascular surgery</td>
-<td align="left">Villa Park</td>
-<td align="left">Orange County</td>
-<td align="left">CA</td>
-<td align="left">92861</td>
-<td align="left">99213</td>
-<td align="left">est</td>
-<td align="left">price</td>
-<td align="right">20.896</td>
-<td align="right">159.824</td>
-<td align="right">81.144</td>
-<td align="right">138.928</td>
-<td align="left">California</td>
-<td align="left">West</td>
-</tr>
-<tr class="even">
-<td align="left">vascular surgery</td>
-<td align="left">Dublin</td>
-<td align="left">Coahoma County</td>
-<td align="left">MS</td>
-<td align="left">38739</td>
-<td align="left">99213</td>
-<td align="left">est</td>
-<td align="left">price</td>
-<td align="right">16.256</td>
-<td align="right">134.744</td>
-<td align="right">67.544</td>
-<td align="right">118.488</td>
-<td align="left">Mississippi</td>
-<td align="left">South</td>
-</tr>
-<tr class="odd">
-<td align="left">vascular surgery</td>
-<td align="left">Flushing</td>
-<td align="left">Queens County</td>
-<td align="left">NY</td>
-<td align="left">11367</td>
-<td align="left">99213</td>
-<td align="left">est</td>
-<td align="left">copay</td>
-<td align="right">5.540</td>
-<td align="right">43.730</td>
-<td align="right">22.150</td>
-<td align="right">38.190</td>
-<td align="left">New York</td>
-<td align="left">Northeast</td>
-</tr>
-<tr class="even">
-<td align="left">vascular surgery</td>
-<td align="left">Modena</td>
-<td align="left">Iron County</td>
-<td align="left">UT</td>
-<td align="left">84753</td>
-<td align="left">99213</td>
-<td align="left">est</td>
-<td align="left">copay</td>
-<td align="right">4.326</td>
-<td align="right">35.076</td>
-<td align="right">17.646</td>
-<td align="right">30.750</td>
-<td align="left">Utah</td>
-<td align="left">West</td>
-</tr>
-</tbody>
-</table>
+<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'tidyr'</span></span></code></pre>
 <p><br><br></p>
 </div>
 <div class="section level2">
@@ -633,7 +201,7 @@ information to the data table:</p>
 <p>Current average prices &amp; copays by state for an office visit by a
 <strong>New Patient</strong> to a <strong>Vascular Surgeon</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"vascular surgery"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -647,15 +215,13 @@ information to the data table:</p>
 <span>                               <span class="va">new_code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tidyselect_locs()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `new_code` doesn't exist.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'tidyr'</span></span></code></pre>
 <p><br></p>
 <p>Current average prices &amp; copays by state for an office visit by
 an <strong>Established Patient</strong> to a
 <strong>Cardiologist</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiology"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/download_dataset.html">download_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/use_zipcoder.html">use_zipcoder</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -669,9 +235,7 @@ an <strong>Established Patient</strong> to a
 <span>                               <span class="va">est_code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidytable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytable/man/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tidyselect_locs()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `est_code` doesn't exist.</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'tidyr'</span></span></code></pre>
 <p><br><br></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
