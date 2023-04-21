@@ -11,6 +11,11 @@ Depends:
 Imports: 
     clock,
     cli,
+    campfin,
+    curl,
+    pins,
+    readr,
+    tidyr,
     httr2,
     tidytable,
     dplyr,

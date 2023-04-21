@@ -18,7 +18,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `costoffice` <a href="https://andrewallenbruce.github.io/costoffice/"><img src="man/figures/logo.png" align="right" height="200" /></a>
+# `{costoffice}`
+
+The `costoffice` package contains functions enabling the user to access the latest __Physician Office Visit Costs__ datasets from [Data.CMS.gov](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs). 
+
+There are 83 datasets in total, each representing a different medical specialty. Each one contains the:
+
+  * Most Utilized Procedure Code (HCPCS Level II aka CPT code)
+  * Price Medicare Paid (Minimum-Maximum-Mode)
+  * Copay the Patient Paid (Minimum-Maximum-Mode)
+  
+by ZIP code, for new and established patients both.
 
 
 <!-- badges: start -->
@@ -31,7 +41,6 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/costoffice/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/costoffice?branch=main)
 <!-- badges: end -->
 
-<br>
 
 ## Installation
 
@@ -50,26 +59,9 @@ remotes::install_github("andrewallenbruce/costoffice", build_vignettes = TRUE)
 library(costoffice)
 ```
 
-
-## Motivation
-
-The `costoffice` package contains functions enabling the user to access the latest __Physician Office Visit Costs__ datasets from [Data.CMS.gov](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs). 
-
-There are 83 datasets in total, each representing a different medical specialty. Each one contains the:
-
-  * Most Utilized Procedure Code (HCPCS Level II aka CPT code)
-  * Price Medicare Paid (Minimum-Maximum-Mode)
-  * Copay the Patient Paid (Minimum-Maximum-Mode)
-  
-by zip code, for new and established patients both.
-
-<br>
-
 ## `search_datasets()`
 
 Returns a data frame of each dataset's medical specialty, date of most recent release, and a download link for it's corresponding csv file:
-
-<br>
 
 ```{r}
 # Call with no arguments to return the entire data frame
@@ -93,7 +85,7 @@ search_datasets(keyword = "medicine")
 ```
 <br>
 
-> Return a vector of the exact names of the medical specialties by simply calling `search_datasets()$specialty`.
+> Return a vector of the exact names of the medical specialties by simply calling `search_datasets()$specialty`:
 
 <br>
 
@@ -102,162 +94,7 @@ search_datasets()$specialty |>
   details::details(summary = 'Available Medical Specialties')
 ```
 
-
 <br>
-
-## `download_dataset()`
-
-```{r}
-search_datasets(specialty = "vascular_surgery") |> 
-  download_dataset() |> 
-  dplyr::group_by(region, patient, cost) |> 
-  dplyr::summarise(min = mean(min, na.rm = TRUE),
-                   max = mean(max, na.rm = TRUE),
-                   mode = mean(mode, na.rm = TRUE),
-                   range = mean(range, na.rm = TRUE),
-                   .groups = "drop") |> 
-  dplyr::arrange(patient, cost)
-```
-
-
-<br>
-
-## TODO: Add Missing ZIP Codes
-
-
-```{r}
-search_datasets(specialty = "addiction_medicine") |> 
-  download_dataset() |> 
-  dplyr::filter(is.na(state)) |> 
-  dplyr::select(zip_code)
-```
-
-
-```{r, eval=FALSE, echo=FALSE}
-download_datasets(specialty = "vascular surgery") |> 
-  summary_stats(condition = patient == "new",
-                group_vars = c(specialty, state, hcpcs, cost),
-                summary_vars = c(min, max, mode, range),
-                arr = cost)
-```
-
-```{r boxplot, fig.asp=2, eval=FALSE, echo=FALSE}
-ggplot2::ggplot(vasc |> tidytable::filter(cost == "price"), 
-  ggplot2::aes(forcats::fct_reorder(state, mean_mode, median), mean_mode)) +
-  ggplot2::geom_point() +
-  ggplot2::coord_flip() +
-  ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
-  ggplot2::labs(x = "", y = "",
-           title = "Established Patient Office Visit Costs: Vascular Surgery")
-```
-
-```{r range, fig.asp=2, eval=FALSE, echo=FALSE}
-ggplot2::ggplot(vasc, 
-                ggplot2::aes(x = reorder(state, mean_mode), 
-                             y = mean_mode)) +
-  ggplot2::geom_linerange(ggplot2::aes(ymin = mean_min, 
-                                       ymax = mean_max), 
-                          color = "#f3d478", 
-                          linewidth = 4.5, 
-                          alpha = 0.8) +
-  ggplot2::geom_point(fill = "#ed3324", 
-                      color = "white", 
-                      size = 2, 
-                      shape = 21) +
-  ggplot2::coord_flip() +
-  ggplot2::scale_y_continuous(labels = scales::label_dollar()) +
-  ggplot2::labs(x = "", 
-                y = "",
-           title = "Established Patient Office Visit Costs: Vascular Surgery")
-```
-
-```{r, eval=FALSE, echo=FALSE}
-fs::dir_info("D:/cost_office_csvs/") |> 
-  dplyr::select(path, size) |> 
-  dplyr::summarise(sum(size)) |> 
-  tibble::deframe()
-```
-
-<br>
-
-## Create database with `duckdb`
-
-```{r}
-# https://r4ds.hadley.nz/iteration.html#sec-save-database
-template <- search_datasets(specialty = "addiction_medicine") |> 
-  download_dataset() |> 
-  head()
-
-con <- DBI::dbConnect(duckdb::duckdb(), "D:/duckdb/costoffice.duckdb")
-
-DBI::dbCreateTable(con, "costoffice", template)
-
-con |> dplyr::tbl("costoffice")
-```
-
-<br>
-
-```{r}
-# Size on disk:
-fs::dir_info("D:/duckdb/") |> 
-  dplyr::select(path, size) |> 
-  dplyr::summarise(sum(size)) |> 
-  tibble::deframe()
-```
-
-<br>
-
-```{r}
-cert <- search_datasets(keyword = "certified")[1, ] |> 
-  download_dataset()
-
-DBI::dbAppendTable(con, "costoffice", cert)
-
-con |> dplyr::tbl("costoffice")
-```
-
-<br>
-
-```{r}
-# Size on disk:
-fs::dir_info("D:/duckdb/") |> 
-  dplyr::select(path, size) |> 
-  dplyr::summarise(sum(size)) |> 
-  tibble::deframe()
-```
-
-<br>
-
-```{r}
-cert2 <- search_datasets(keyword = "certified")[2, ] |> 
-  download_dataset()
-
-DBI::dbAppendTable(con, "costoffice", cert2)
-
-con |> dplyr::tbl("costoffice")
-```
-
-<br>
-
-```{r}
-# Size on disk:
-fs::dir_info("D:/duckdb/") |> 
-  dplyr::select(path, size) |> 
-  dplyr::summarise(sum(size)) |> 
-  tibble::deframe()
-```
-
-<br>
-
-```{r}
-duckdb::dbDisconnect(con, shutdown = TRUE)
-```
-
-
-```{r eval=FALSE, echo=FALSE}
-system("tree D:/duckdb")
-```
-
 
 ## Code of Conduct
 

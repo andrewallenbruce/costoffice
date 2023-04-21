@@ -5,7 +5,7 @@ data("counties", package = "usa")
 data("states", package = "usa")
 data("zip_code_db", package = "zipcodeR")
 
-usazip <- usa::zipcodes |>
+usazip <- usa::zipcodes |> dplyr::filter(zip == "00303")
   dplyr::select(zip_code = zip,
                 city,
                 state)

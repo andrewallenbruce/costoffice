@@ -33,7 +33,7 @@ summary_stats <- function(df,
                       .by = ({{ group_vars }}) ) |>
   tidytable::arrange(tidytable::desc({{ arr }}))
 
-  df_size(results)
+  #df_size(results)
 
   return(results)
 }
