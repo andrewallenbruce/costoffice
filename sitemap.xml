@@ -25,16 +25,7 @@
     <loc>https://andrewallenbruce.github.io/costoffice/news/index.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/costoffice/reference/add_zip_data.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/costoffice/reference/costoffice-package.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/costoffice/reference/download_dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/costoffice/reference/download_datasets.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/costoffice/reference/index.html</loc>
@@ -44,15 +35,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/costoffice/reference/summary_stats.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/costoffice/reference/use_zipcoder.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/costoffice/reference/write_datasets.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/costoffice/reference/write_duckdb.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/costoffice/reference/zip_db.html</loc>

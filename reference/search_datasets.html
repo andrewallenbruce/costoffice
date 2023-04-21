@@ -44,7 +44,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Search Physician Office Visit Costs Data sets by Specialty</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/costoffice/blob/HEAD/R/search_datasets.R" class="external-link"><code>R/search_datasets.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/costoffice/blob/HEAD/R/new.R" class="external-link"><code>R/new.R</code></a></small>
       <div class="d-none name"><code>search_datasets.Rd</code></div>
     </div>
 
@@ -82,15 +82,45 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># The `specialty` argument will only return _exact_ matches</span></span></span>
 <span class="r-in"><span><span class="fu">search_datasets</span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"cardiac_surgery"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘tidyr’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   specialty       released   csv_url                                            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> cardiac_surgery 2022-07-14 https://data.cms.gov/provider-data/sites/default/f…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># The `keyword` argument will return _partial_ matches</span></span></span>
 <span class="r-in"><span><span class="fu">search_datasets</span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"medicine"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘tidyr’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    specialty                            released   csv_url                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> addiction_medicine                   2022-07-14 https://data.cms.gov/provide…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> emergency_medicine                   2022-07-14 https://data.cms.gov/provide…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> geriatric_medicine                   2022-07-14 https://data.cms.gov/provide…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> internal_medicine                    2022-07-14 https://data.cms.gov/provide…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> nuclear_medicine                     2022-07-14 https://data.cms.gov/provide…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> osteopathic_manipulative_medicine    2022-07-14 https://data.cms.gov/provide…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> pediatric_medicine                   2022-07-14 https://data.cms.gov/provide…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> physical_medicine_and_rehabilitation 2022-07-14 https://data.cms.gov/provide…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> preventive_medicine                  2022-07-14 https://data.cms.gov/provide…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> sleep_medicine                       2022-07-14 https://data.cms.gov/provide…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> sports_medicine                      2022-07-14 https://data.cms.gov/provide…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> undersea_and_hyperbaric_medicine     2022-07-14 https://data.cms.gov/provide…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calling the function with no arguments will return the entire dataset</span></span></span>
 <span class="r-in"><span><span class="fu">search_datasets</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘tidyr’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 83 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    specialty                                        released   csv_url          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> addiction_medicine                               2022-07-14 https://data.cms…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> advanced_heart_failure_and_transplant_cardiology 2022-07-14 https://data.cms…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> allergy_immunology                               2022-07-14 https://data.cms…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> anesthesiology                                   2022-07-14 https://data.cms…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> cardiac_surgery                                  2022-07-14 https://data.cms…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> cardiology                                       2022-07-14 https://data.cms…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> certified_clinical_nurse_specialist              2022-07-14 https://data.cms…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> certified_nurse_midwife                          2022-07-14 https://data.cms…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> certified_registered_nurse_anesthetist_crna      2022-07-14 https://data.cms…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> clinic_or_group_practice                         2022-07-14 https://data.cms…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 73 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
