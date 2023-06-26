@@ -107,7 +107,7 @@ names(files) <- NULL
 
 # -------------------------------------------------------------------------
 
-tidyup <- function(file, name, out) {
+tidyup <- function(file, name) {
 
   csv <- tidytable::fread(input = file,
                            nThread = 4,
@@ -115,7 +115,7 @@ tidyup <- function(file, name, out) {
           colClasses = c(
           zip_code = "character",
           most_utilized_procedure_code_for_new_patient = "character",
-           most_utilized_procedure_code_for_established_patient = "character"))
+          most_utilized_procedure_code_for_established_patient = "character"))
 
   csv <- tidytable::select(csv,
                     zip_code,
@@ -135,34 +135,56 @@ tidyup <- function(file, name, out) {
                     est_copay_mode = mode_copay_for_established_patient)
 
 
-  new <- tidytable::select(csv, zip_code, hcpcs = new_code,
+  new <- tidytable::select(csv,
+                           zip_code,
+                           hcpcs = new_code,
                            tidytable::starts_with("new")) |>
     tidytable::pivot_longer(tidytable::starts_with("new_"),
-                            names_to = c("patient", "cost", "stat"),
-                            values_to = "amount", names_sep = "_") |>
-    tidytable::pivot_wider(names_from = stat, values_from = amount)
+                            names_to = c("patient",
+                                         "cost",
+                                         "stat"),
+                            values_to = "amount",
+                            names_sep = "_") |>
+    tidytable::pivot_wider(names_from = stat,
+                           values_from = amount)
 
-  est <- tidytable::select(csv, zip_code, hcpcs = est_code,
+  est <- tidytable::select(csv,
+                           zip_code,
+                           hcpcs = est_code,
                            tidytable::starts_with("est")) |>
     tidytable::pivot_longer(tidytable::starts_with("est_"),
-                            names_to = c("patient", "cost", "stat"),
-                            values_to = "amount", names_sep = "_") |>
-    tidytable::pivot_wider(names_from = stat, values_from = amount)
+                            names_to = c("patient",
+                                         "cost",
+                                         "stat"),
+                            values_to = "amount",
+                            names_sep = "_") |>
+    tidytable::pivot_wider(names_from = stat,
+                           values_from = amount)
 
   csv <- tidytable::bind_rows(new, est) |>
-    tidytable::left_join(costoffice::zip_db, by = c("zip_code")) |>
-    tidytable::mutate(county = tidytable::na_if(county, ""), range = max - min) |>
-    tidytable::select(zip_code, city, county, state, region, division,
+    tidytable::left_join(costoffice::zip_db,
+                         by = c("zip_code")) |>
+    tidytable::mutate(county = tidytable::na_if(county, ""),
+                      range = max - min) |>
+    tidytable::select(zip_code,
+                      city,
+                      county,
+                      state,
+                      region,
+                      division,
                       tidytable::everything())
 
   csv$specialty <- name
 
-  newfile <- gsub("(.csv)", "", basename(file))
+  results <- csv |>
+    tidytable::relocate(specialty) |>
+    tidytable::mutate(patient = tidytable::case_when(
+      patient == "new" ~ "New",
+      patient == "est" ~ "Established",
+      TRUE ~ patient),
+      cost = stringr::str_to_sentence(cost))
 
-  readr::write_csv(csv, paste0(out, newfile, ".csv"),
-                   num_threads = readr::readr_threads())
-
-  gc()
+  return(results)
 
 }
 

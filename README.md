@@ -8,13 +8,14 @@ the latest **Physician Office Visit Costs** datasets from
 [Data.CMS.gov](https://data.cms.gov/provider-data/search?page-size=50&theme=Physician%20office%20visit%20costs).
 
 There are 83 datasets in total, each representing a different medical
-specialty. Each one contains the:
+specialty.
 
-- Most Utilized Procedure Code (HCPCS Level II aka CPT code)
-- Price Medicare Paid (Minimum-Maximum-Mode)
-- Copay the Patient Paid (Minimum-Maximum-Mode)
+Broken down by ZIP code, they contain the:
 
-by ZIP code, for new and established patients both.
+- Most Utilized HCPCS Level II Procedure Code (for both New and
+  Established patients)
+- Price Medicare Paid for the Visit (Min-Mode-Max)
+- Copay the Patient Paid for the Visit (Min-Mode-Max)
 
 <!-- badges: start -->
 
@@ -220,6 +221,174 @@ vascular_surgery
 <br>
 
 <br>
+
+## Example: Analyzing the `Family Practice` Specialty Dataset
+
+``` r
+url <- search_datasets(specialty = "family_practice") |> 
+  dplyr::pull(csv_url)
+
+url
+```
+
+    #> [1] "https://data.cms.gov/provider-data/sites/default/files/resources/91ae7d117c11835deed4941798cdb067_1657569948/Family_Practice.csv"
+
+<br>
+
+``` r
+fam_pract <- tidyup(file = url, name = "Family Practice")
+```
+
+    #> Error in tidyup(file = url, name = "Family Practice"): could not find function "tidyup"
+
+``` r
+# Established Patient Price
+fam_pract |> 
+  dplyr::filter(cost == "Price") |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
+  dplyr::group_by(type) |> 
+  skimr::skim(dplyr::where(is.numeric)) |> 
+  dplyr::select(!c(n_missing, complete_rate)) |> 
+  dplyr::filter(type == "Established Price (99214)")
+```
+
+    #> Error in dplyr::filter(fam_pract, cost == "Price"): object 'fam_pract' not found
+
+<br>
+
+``` r
+# New Patient Price
+fam_pract |> 
+  dplyr::filter(cost == "Price") |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
+  dplyr::group_by(type) |> 
+  skimr::skim(dplyr::where(is.numeric)) |> 
+  dplyr::select(!c(n_missing, complete_rate)) |> 
+  dplyr::filter(type == "New Price (99203)")
+```
+
+    #> Error in dplyr::filter(fam_pract, cost == "Price"): object 'fam_pract' not found
+
+<br>
+
+``` r
+# Established Patient Copay
+fam_pract |> 
+  dplyr::filter(cost == "Copay") |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
+  dplyr::group_by(type) |> 
+  skimr::skim(dplyr::where(is.numeric)) |> 
+  dplyr::select(!c(n_missing, complete_rate)) |> 
+  dplyr::filter(type == "Established Copay (99214)")
+```
+
+    #> Error in dplyr::filter(fam_pract, cost == "Copay"): object 'fam_pract' not found
+
+<br>
+
+``` r
+# New Patient Copay
+fam_pract |> 
+  dplyr::filter(cost == "Copay") |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
+  dplyr::group_by(type) |> 
+  skimr::skim(dplyr::where(is.numeric)) |> 
+  dplyr::select(!c(n_missing, complete_rate)) |> 
+  dplyr::filter(type == "New Copay (99203)")
+```
+
+    #> Error in dplyr::filter(fam_pract, cost == "Copay"): object 'fam_pract' not found
+
+<br>
+
+<details>
+<summary>
+Code
+</summary>
+
+``` r
+library(ggplot2)
+library(cmapplot)
+p <- fam_pract |> 
+  dplyr::filter(cost == "Price") |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
+  ggplot(aes(x = mode, 
+             color = type, 
+             fill = type)) + 
+  cmapplot::theme_cmap(gridlines = "h", 
+                       axisticks = "x",
+                       panel.grid.major.y = element_line(color = "light gray")) +
+  geom_density(alpha = 0.5) +
+  scale_x_continuous(n.breaks = 5) +
+  cmapplot::cmap_fill_discrete("governance") +
+  cmapplot::cmap_color_discrete("governance") +
+  guides(fill = guide_legend(reverse = TRUE),
+         color = "none")
+```
+
+    #> Error in dplyr::filter(fam_pract, cost == "Price"): object 'fam_pract' not found
+
+</details>
+
+    #> Error in cmapplot::finalize_plot(plot = p, title = "Price Medicare Paid Per Visit, 2022.", : object 'p' not found
+
+``` r
+fam_pract |> 
+  dplyr::filter(cost == "Price") |> 
+  dplyr::filter(!is.na(state)) |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", 
+               c(patient, cost, hcpcs), 
+               sep = " ") |> 
+  ggplot() + 
+  cmapplot::theme_cmap(gridlines = "h", 
+                       axisticks = "x",
+                       panel.grid.major.y = element_line(color = "light gray")) +
+  stat_summary(aes(x = mode, y = forcats::fct_reorder(state, mode, median)),
+    fun.min = min,
+    fun.max = max,
+    fun = median) +
+  labs(title = "Amount Medicare Paid Per Visit: Family Medicine",
+       subtitle = "Graph Shows the Range and Median of the Mode Amounts",
+       x = NULL, 
+       y = NULL)
+```
+
+    #> Error in dplyr::filter(fam_pract, cost == "Price"): object 'fam_pract' not found
+
+<details>
+<summary>
+Code
+</summary>
+
+``` r
+p2 <- fam_pract |> 
+  dplyr::filter(cost == "Price") |> 
+  dplyr::filter(!is.na(state)) |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", 
+               c(patient, cost, hcpcs), 
+               sep = " ") |> 
+  ggplot() + 
+  cmapplot::theme_cmap(gridlines = "h", 
+                       axisticks = "x",
+                       panel.grid.major.y = element_line(color = "light gray")) +
+  stat_summary(aes(x = mode, y = forcats::fct_reorder(state, mode, median)),
+    fun.min = min,
+    fun.max = max,
+    fun = median)
+```
+
+    #> Error in dplyr::filter(fam_pract, cost == "Price"): object 'fam_pract' not found
+
+</details>
+
+    #> Error in cmapplot::finalize_plot(plot = p2, title = "Price Medicare Paid Per Visit, 2022.", : object 'p2' not found
 
 ## Code of Conduct
 
