@@ -12,10 +12,10 @@ specialty.
 
 Broken down by ZIP code, they contain the:
 
-- Most Utilized HCPCS Level II Procedure Code (for both New and
-  Established patients)
-- Price Medicare Paid for the Visit (Min-Mode-Max)
-- Copay the Patient Paid for the Visit (Min-Mode-Max)
+- **Most Utilized HCPCS** Level II Procedure Code (for both *New* and
+  *Established* patients)
+- **Price Medicare Paid** for the Visit (Min-Mode-Max)
+- **Copay the Patient Paid** for the Visit (Min-Mode-Max)
 
 <!-- badges: start -->
 
@@ -222,21 +222,12 @@ vascular_surgery
 
 <br>
 
-## Example: Analyzing the `Family Practice` Specialty Dataset
+## Example: `Family Practice` Specialty
 
 ``` r
-url <- search_datasets(specialty = "family_practice") |> 
-  dplyr::pull(csv_url)
-
-url
-```
-
-    #> [1] "https://data.cms.gov/provider-data/sites/default/files/resources/91ae7d117c11835deed4941798cdb067_1657569948/Family_Practice.csv"
-
-<br>
-
-``` r
-fam_pract <- costoffice:::tidyup(file = url, name = "Family Practice")
+fam_pract <- search_datasets(specialty = "family_practice") |> 
+  dplyr::pull(csv_url) |> 
+  costoffice:::tidyup(name = "Family Practice")
 ```
 
 ``` r
@@ -248,10 +239,7 @@ fam_pract |>
   skimr::skim(dplyr::where(is.numeric)) |> 
   skimr::yank("numeric") |> 
   dplyr::filter(skim_variable == "mode") |> 
-  dplyr::select(!c(n_missing, complete_rate, skim_variable)) |> 
-  # dplyr::mutate(mean_less_sd = mean - sd, 
-  #               mean_plus_sd = mean + sd, 
-  #               .after = sd) |> 
+  dplyr::select(!c(n_missing, complete_rate, skim_variable)) |>
   dplyr::arrange(type) |> 
   head(20)
 ```
@@ -408,7 +396,7 @@ p <- fam_pract |>
 
 </details>
 
-<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" />
 
 <details>
 <summary>
@@ -416,8 +404,69 @@ Code
 </summary>
 
 ``` r
-p2 <- fam_pract |> 
-  dplyr::filter(cost == "Price") |> 
+gg_new_price <- fam_pract |> 
+  dplyr::filter(cost == "Price", 
+                patient == "New") |> 
+  dplyr::filter(!is.na(state)) |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", 
+               c(patient, cost, hcpcs), 
+               sep = " ") |> 
+  ggplot() + 
+  cmapplot::theme_cmap(
+    gridlines = "h", 
+    axisticks = "x",
+    panel.grid.major.y = element_line(color = "light gray")) +
+  stat_summary(
+    aes(x = mode, 
+        y = forcats::fct_reorder(state, mode, median)),
+    fun.min = min,
+    fun.max = max,
+    fun = median)
+
+gg_est_price <- fam_pract |> 
+  dplyr::filter(cost == "Price", 
+                patient == "Established") |> 
+  dplyr::filter(!is.na(state)) |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", 
+               c(patient, cost, hcpcs), 
+               sep = " ") |> 
+  ggplot() + 
+  cmapplot::theme_cmap(
+    gridlines = "h", 
+    axisticks = "x",
+    panel.grid.major.y = element_line(color = "light gray")) +
+  stat_summary(
+    aes(x = mode, 
+        y = forcats::fct_reorder(state, mode, median)),
+    fun.min = min,
+    fun.max = max,
+    fun = median)
+
+gg_new_copay <- fam_pract |> 
+  dplyr::filter(cost == "Copay", 
+                patient == "New") |> 
+  dplyr::filter(!is.na(state)) |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", 
+               c(patient, cost, hcpcs), 
+               sep = " ") |> 
+  ggplot() + 
+  cmapplot::theme_cmap(
+    gridlines = "h", 
+    axisticks = "x",
+    panel.grid.major.y = element_line(color = "light gray")) +
+  stat_summary(
+    aes(x = mode, 
+        y = forcats::fct_reorder(state, mode, median)),
+    fun.min = min,
+    fun.max = max,
+    fun = median)
+
+gg_est_copay <- fam_pract |> 
+  dplyr::filter(cost == "Copay", 
+                patient == "Established") |> 
   dplyr::filter(!is.na(state)) |> 
   dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
   tidyr::unite("type", 
@@ -438,7 +487,7 @@ p2 <- fam_pract |>
 
 </details>
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-14-2.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-14-3.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-14-4.png" width="100%" style="display: block; margin: auto;" />
 
 ## Code of Conduct
 
