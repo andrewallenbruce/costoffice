@@ -83,9 +83,12 @@
 <p>There are 83 datasets in total, each representing a different medical specialty.</p>
 <p>Broken down by ZIP code, they contain the:</p>
 <ul>
-<li>Most Utilized HCPCS Level II Procedure Code (for both New and Established patients)</li>
-<li>Price Medicare Paid for the Visit (Min-Mode-Max)</li>
-<li>Copay the Patient Paid for the Visit (Min-Mode-Max)</li>
+<li>
+<strong>Most Utilized HCPCS</strong> Level II Procedure Code (for both <em>New</em> and <em>Established</em> patients)</li>
+<li>
+<strong>Price Medicare Paid</strong> for the Visit (Min-Mode-Max)</li>
+<li>
+<strong>Copay the Patient Paid</strong> for the Visit (Min-Mode-Max)</li>
 </ul>
 <!-- badges: start -->
 <div class="section level2">
@@ -245,18 +248,13 @@
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="example-analyzing-the-family-practice-specialty-dataset">Example: Analyzing the <code>Family Practice</code> Specialty Dataset<a class="anchor" aria-label="anchor" href="#example-analyzing-the-family-practice-specialty-dataset"></a>
+<h2 id="example-family-practice-specialty">Example: <code>Family Practice</code> Specialty<a class="anchor" aria-label="anchor" href="#example-family-practice-specialty"></a>
 </h2>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"family_practice"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">csv_url</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">url</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "https://data.cms.gov/provider-data/sites/default/files/resources/91ae7d117c11835deed4941798cdb067_1657569948/Family_Practice.csv"</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fam_pract</span> <span class="op">&lt;-</span> <span class="fu">costoffice</span><span class="fu">:::</span><span class="fu">tidyup</span><span class="op">(</span>file <span class="op">=</span> <span class="va">url</span>, name <span class="op">=</span> <span class="st">"Family Practice"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fam_pract</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"family_practice"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">csv_url</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">costoffice</span><span class="fu">:::</span><span class="fu">tidyup</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Family Practice"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Mode Variation by Region</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -265,10 +263,7 @@
 <span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">skim</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">yank</span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">skim_variable</span> <span class="op">==</span> <span class="st">"mode"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">complete_rate</span>, <span class="va">skim_variable</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="co"># dplyr::mutate(mean_less_sd = mean - sd, </span></span>
-<span>  <span class="co">#               mean_plus_sd = mean + sd, </span></span>
-<span>  <span class="co">#               .after = sd) |&gt; </span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">complete_rate</span>, <span class="va">skim_variable</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Variable type: numeric</strong></p>
@@ -541,7 +536,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Established Patient Price (99214)</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -624,7 +619,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># New Patient Price (99203)</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -707,7 +702,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Established Patient Copay (99214)</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Copay"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -790,7 +785,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># New Patient Copay (99203)</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Copay"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -875,7 +870,7 @@
 <p><br></p>
 <details><summary>
 Code
-</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">cmapplot</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
@@ -895,12 +890,73 @@ Code
 <span>  <span class="fu">cmapplot</span><span class="fu">::</span><span class="fu">cmap_color_discrete</span><span class="op">(</span><span class="st">"governance"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>         color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
-</details><p><img src="reference/figures/README-unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;"></p>
+</details><p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;"></p>
 <details><summary>
 Code
-</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gg_new_price</span> <span class="op">&lt;-</span> <span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span>, </span>
+<span>                <span class="va">patient</span> <span class="op">==</span> <span class="st">"New"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"type"</span>, </span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">patient</span>, <span class="va">cost</span>, <span class="va">hcpcs</span><span class="op">)</span>, </span>
+<span>               sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">cmapplot</span><span class="fu">::</span><span class="fu">theme_cmap</span><span class="op">(</span></span>
+<span>    gridlines <span class="op">=</span> <span class="st">"h"</span>, </span>
+<span>    axisticks <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>    panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"light gray"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html" class="external-link">stat_summary</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mode</span>, </span>
+<span>        y <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu">fct_reorder</span><span class="op">(</span><span class="va">state</span>, <span class="va">mode</span>, <span class="va">median</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    fun.min <span class="op">=</span> <span class="va">min</span>,</span>
+<span>    fun.max <span class="op">=</span> <span class="va">max</span>,</span>
+<span>    fun <span class="op">=</span> <span class="va">median</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">gg_est_price</span> <span class="op">&lt;-</span> <span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span>, </span>
+<span>                <span class="va">patient</span> <span class="op">==</span> <span class="st">"Established"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"type"</span>, </span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">patient</span>, <span class="va">cost</span>, <span class="va">hcpcs</span><span class="op">)</span>, </span>
+<span>               sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">cmapplot</span><span class="fu">::</span><span class="fu">theme_cmap</span><span class="op">(</span></span>
+<span>    gridlines <span class="op">=</span> <span class="st">"h"</span>, </span>
+<span>    axisticks <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>    panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"light gray"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html" class="external-link">stat_summary</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mode</span>, </span>
+<span>        y <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu">fct_reorder</span><span class="op">(</span><span class="va">state</span>, <span class="va">mode</span>, <span class="va">median</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    fun.min <span class="op">=</span> <span class="va">min</span>,</span>
+<span>    fun.max <span class="op">=</span> <span class="va">max</span>,</span>
+<span>    fun <span class="op">=</span> <span class="va">median</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">gg_new_copay</span> <span class="op">&lt;-</span> <span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Copay"</span>, </span>
+<span>                <span class="va">patient</span> <span class="op">==</span> <span class="st">"New"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"type"</span>, </span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">patient</span>, <span class="va">cost</span>, <span class="va">hcpcs</span><span class="op">)</span>, </span>
+<span>               sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">cmapplot</span><span class="fu">::</span><span class="fu">theme_cmap</span><span class="op">(</span></span>
+<span>    gridlines <span class="op">=</span> <span class="st">"h"</span>, </span>
+<span>    axisticks <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>    panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"light gray"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html" class="external-link">stat_summary</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mode</span>, </span>
+<span>        y <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu">fct_reorder</span><span class="op">(</span><span class="va">state</span>, <span class="va">mode</span>, <span class="va">median</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    fun.min <span class="op">=</span> <span class="va">min</span>,</span>
+<span>    fun.max <span class="op">=</span> <span class="va">max</span>,</span>
+<span>    fun <span class="op">=</span> <span class="va">median</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">gg_est_copay</span> <span class="op">&lt;-</span> <span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Copay"</span>, </span>
+<span>                <span class="va">patient</span> <span class="op">==</span> <span class="st">"Established"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"type"</span>, </span>
@@ -917,7 +973,7 @@ Code
 <span>    fun.min <span class="op">=</span> <span class="va">min</span>,</span>
 <span>    fun.max <span class="op">=</span> <span class="va">max</span>,</span>
 <span>    fun <span class="op">=</span> <span class="va">median</span><span class="op">)</span></span></code></pre></div>
-</details><p><img src="reference/figures/README-unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;"></p>
+</details><p><img src="reference/figures/README-unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;"><img src="reference/figures/README-unnamed-chunk-14-2.png" width="100%" style="display: block; margin: auto;"><img src="reference/figures/README-unnamed-chunk-14-3.png" width="100%" style="display: block; margin: auto;"><img src="reference/figures/README-unnamed-chunk-14-4.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
