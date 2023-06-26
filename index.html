@@ -257,72 +257,36 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fam_pract</span> <span class="op">&lt;-</span> <span class="fu">costoffice</span><span class="fu">:::</span><span class="fu">tidyup</span><span class="op">(</span>file <span class="op">=</span> <span class="va">url</span>, name <span class="op">=</span> <span class="st">"Family Practice"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Established Patient Price</span></span>
+<code class="sourceCode R"><span><span class="co"># Mode Variation by Region</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"type"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">patient</span>, <span class="va">cost</span>, <span class="va">hcpcs</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">region</span>, <span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">skim</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">complete_rate</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"Established Price (99214)"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="71%">
-<col width="28%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">dplyr::group_by(…)</td>
-</tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">87060</td>
-</tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">12</td>
-</tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">numeric</td>
-<td align="left">4</td>
-</tr>
-<tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Group variables</td>
-<td align="left">type</td>
-</tr>
-</tbody>
-</table>
-<p>Data summary</p>
+<span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">yank</span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">skim_variable</span> <span class="op">==</span> <span class="st">"mode"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">complete_rate</span>, <span class="va">skim_variable</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="co"># dplyr::mutate(mean_less_sd = mean - sd, </span></span>
+<span>  <span class="co">#               mean_plus_sd = mean + sd, </span></span>
+<span>  <span class="co">#               .after = sd) |&gt; </span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Variable type: numeric</strong></p>
 <table style="width:100%;" class="table">
 <colgroup>
-<col width="14%">
-<col width="26%">
-<col width="7%">
-<col width="5%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
+<col width="11%">
+<col width="27%">
+<col width="8%">
 <col width="6%">
+<col width="7%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="7%">
 </colgroup>
 <thead><tr class="header">
-<th align="left">skim_variable</th>
+<th align="left">region</th>
 <th align="left">type</th>
 <th align="right">mean</th>
 <th align="right">sd</th>
@@ -335,8 +299,286 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">min</td>
+<td align="left">Northeast</td>
+<td align="left">Established Copay (99214)</td>
+<td align="right">26.94</td>
+<td align="right">1.87</td>
+<td align="right">24.69</td>
+<td align="right">25.41</td>
+<td align="right">25.83</td>
+<td align="right">28.37</td>
+<td align="right">31.32</td>
+<td align="left">▇▂▃▂▂</td>
+</tr>
+<tr class="even">
+<td align="left">Midwest</td>
+<td align="left">Established Copay (99214)</td>
+<td align="right">25.15</td>
+<td align="right">0.72</td>
+<td align="right">24.32</td>
+<td align="right">24.57</td>
+<td align="right">25.16</td>
+<td align="right">25.37</td>
+<td align="right">27.76</td>
+<td align="left">▇▆▂▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">South</td>
+<td align="left">Established Copay (99214)</td>
+<td align="right">25.42</td>
+<td align="right">1.25</td>
+<td align="right">23.90</td>
+<td align="right">24.70</td>
+<td align="right">25.21</td>
+<td align="right">25.94</td>
+<td align="right">30.05</td>
+<td align="left">▇▆▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">West</td>
+<td align="left">Established Copay (99214)</td>
+<td align="right">27.04</td>
+<td align="right">2.04</td>
+<td align="right">24.21</td>
+<td align="right">25.52</td>
+<td align="right">26.58</td>
+<td align="right">28.05</td>
+<td align="right">33.96</td>
+<td align="left">▇▇▂▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">NA</td>
+<td align="left">Established Copay (99214)</td>
+<td align="right">26.40</td>
+<td align="right">1.14</td>
+<td align="right">23.90</td>
+<td align="right">26.32</td>
+<td align="right">26.32</td>
+<td align="right">26.32</td>
+<td align="right">31.32</td>
+<td align="left">▂▇▂▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Northeast</td>
 <td align="left">Established Price (99214)</td>
+<td align="right">107.76</td>
+<td align="right">7.49</td>
+<td align="right">98.76</td>
+<td align="right">101.62</td>
+<td align="right">103.32</td>
+<td align="right">113.47</td>
+<td align="right">125.27</td>
+<td align="left">▇▂▃▂▂</td>
+</tr>
+<tr class="odd">
+<td align="left">Midwest</td>
+<td align="left">Established Price (99214)</td>
+<td align="right">100.61</td>
+<td align="right">2.88</td>
+<td align="right">97.26</td>
+<td align="right">98.30</td>
+<td align="right">100.66</td>
+<td align="right">101.50</td>
+<td align="right">111.04</td>
+<td align="left">▇▆▂▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">South</td>
+<td align="left">Established Price (99214)</td>
+<td align="right">101.68</td>
+<td align="right">5.01</td>
+<td align="right">95.61</td>
+<td align="right">98.79</td>
+<td align="right">100.83</td>
+<td align="right">103.76</td>
+<td align="right">120.20</td>
+<td align="left">▇▆▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">West</td>
+<td align="left">Established Price (99214)</td>
+<td align="right">108.16</td>
+<td align="right">8.17</td>
+<td align="right">96.84</td>
+<td align="right">102.07</td>
+<td align="right">106.33</td>
+<td align="right">112.22</td>
+<td align="right">135.85</td>
+<td align="left">▇▇▂▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">NA</td>
+<td align="left">Established Price (99214)</td>
+<td align="right">105.59</td>
+<td align="right">4.57</td>
+<td align="right">95.61</td>
+<td align="right">105.28</td>
+<td align="right">105.28</td>
+<td align="right">105.28</td>
+<td align="right">125.27</td>
+<td align="left">▂▇▂▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Northeast</td>
+<td align="left">New Copay (99203)</td>
+<td align="right">23.37</td>
+<td align="right">1.72</td>
+<td align="right">21.31</td>
+<td align="right">21.99</td>
+<td align="right">22.31</td>
+<td align="right">24.61</td>
+<td align="right">27.52</td>
+<td align="left">▇▂▃▂▂</td>
+</tr>
+<tr class="even">
+<td align="left">Midwest</td>
+<td align="left">New Copay (99203)</td>
+<td align="right">21.73</td>
+<td align="right">0.68</td>
+<td align="right">20.98</td>
+<td align="right">21.17</td>
+<td align="right">21.79</td>
+<td align="right">22.01</td>
+<td align="right">24.25</td>
+<td align="left">▇▇▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">South</td>
+<td align="left">New Copay (99203)</td>
+<td align="right">22.00</td>
+<td align="right">1.14</td>
+<td align="right">20.58</td>
+<td align="right">21.36</td>
+<td align="right">21.80</td>
+<td align="right">22.56</td>
+<td align="right">26.15</td>
+<td align="left">▇▇▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">West</td>
+<td align="left">New Copay (99203)</td>
+<td align="right">23.39</td>
+<td align="right">1.75</td>
+<td align="right">20.84</td>
+<td align="right">22.08</td>
+<td align="right">23.01</td>
+<td align="right">24.26</td>
+<td align="right">29.17</td>
+<td align="left">▅▇▃▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">NA</td>
+<td align="left">New Copay (99203)</td>
+<td align="right">22.88</td>
+<td align="right">1.03</td>
+<td align="right">20.58</td>
+<td align="right">22.82</td>
+<td align="right">22.82</td>
+<td align="right">22.82</td>
+<td align="right">27.52</td>
+<td align="left">▂▇▂▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Northeast</td>
+<td align="left">New Price (99203)</td>
+<td align="right">93.47</td>
+<td align="right">6.89</td>
+<td align="right">85.25</td>
+<td align="right">87.96</td>
+<td align="right">89.24</td>
+<td align="right">98.42</td>
+<td align="right">110.06</td>
+<td align="left">▇▂▃▂▂</td>
+</tr>
+<tr class="odd">
+<td align="left">Midwest</td>
+<td align="left">New Price (99203)</td>
+<td align="right">86.94</td>
+<td align="right">2.74</td>
+<td align="right">83.92</td>
+<td align="right">84.67</td>
+<td align="right">87.16</td>
+<td align="right">88.06</td>
+<td align="right">96.99</td>
+<td align="left">▇▇▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">South</td>
+<td align="left">New Price (99203)</td>
+<td align="right">88.01</td>
+<td align="right">4.57</td>
+<td align="right">82.31</td>
+<td align="right">85.46</td>
+<td align="right">87.21</td>
+<td align="right">90.25</td>
+<td align="right">104.59</td>
+<td align="left">▇▇▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">West</td>
+<td align="left">New Price (99203)</td>
+<td align="right">93.56</td>
+<td align="right">6.99</td>
+<td align="right">83.37</td>
+<td align="right">88.34</td>
+<td align="right">92.05</td>
+<td align="right">97.05</td>
+<td align="right">116.69</td>
+<td align="left">▅▇▃▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">NA</td>
+<td align="left">New Price (99203)</td>
+<td align="right">91.51</td>
+<td align="right">4.10</td>
+<td align="right">82.31</td>
+<td align="right">91.28</td>
+<td align="right">91.28</td>
+<td align="right">91.28</td>
+<td align="right">110.06</td>
+<td align="left">▂▇▂▁▁</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Established Patient Price (99214)</span></span>
+<span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"type"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">patient</span>, <span class="va">cost</span>, <span class="va">hcpcs</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">skim</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">yank</span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"Established Price (99214)"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">complete_rate</span>, <span class="va">type</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Variable type: numeric</strong></p>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="19%">
+<col width="10%">
+<col width="7%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="9%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">min</td>
 <td align="right">18.07</td>
 <td align="right">1.46</td>
 <td align="right">16.26</td>
@@ -348,7 +590,6 @@
 </tr>
 <tr class="even">
 <td align="left">max</td>
-<td align="left">Established Price (99214)</td>
 <td align="right">144.80</td>
 <td align="right">9.07</td>
 <td align="right">133.85</td>
@@ -360,7 +601,6 @@
 </tr>
 <tr class="odd">
 <td align="left">mode</td>
-<td align="left">Established Price (99214)</td>
 <td align="right">103.65</td>
 <td align="right">6.63</td>
 <td align="right">95.61</td>
@@ -372,7 +612,6 @@
 </tr>
 <tr class="even">
 <td align="left">range</td>
-<td align="left">Established Price (99214)</td>
 <td align="right">126.72</td>
 <td align="right">7.68</td>
 <td align="right">117.58</td>
@@ -385,74 +624,32 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># New Patient Price</span></span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># New Patient Price (99203)</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"type"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">patient</span>, <span class="va">cost</span>, <span class="va">hcpcs</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">skim</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">complete_rate</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"New Price (99203)"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="71%">
-<col width="28%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">dplyr::group_by(…)</td>
-</tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">87060</td>
-</tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">12</td>
-</tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">numeric</td>
-<td align="left">4</td>
-</tr>
-<tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Group variables</td>
-<td align="left">type</td>
-</tr>
-</tbody>
-</table>
-<p>Data summary</p>
+<span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">yank</span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"New Price (99203)"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">complete_rate</span>, <span class="va">type</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Variable type: numeric</strong></p>
 <table style="width:100%;" class="table">
 <colgroup>
-<col width="15%">
 <col width="19%">
-<col width="8%">
-<col width="7%">
-<col width="8%">
-<col width="8%">
-<col width="8%">
-<col width="8%">
-<col width="8%">
-<col width="7%">
+<col width="10%">
+<col width="9%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="9%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">skim_variable</th>
-<th align="left">type</th>
 <th align="right">mean</th>
 <th align="right">sd</th>
 <th align="right">p0</th>
@@ -465,7 +662,6 @@
 <tbody>
 <tr class="odd">
 <td align="left">min</td>
-<td align="left">New Price (99203)</td>
 <td align="right">58.24</td>
 <td align="right">4.04</td>
 <td align="right">53.14</td>
@@ -477,7 +673,6 @@
 </tr>
 <tr class="even">
 <td align="left">max</td>
-<td align="left">New Price (99203)</td>
 <td align="right">177.24</td>
 <td align="right">11.13</td>
 <td align="right">163.67</td>
@@ -489,7 +684,6 @@
 </tr>
 <tr class="odd">
 <td align="left">mode</td>
-<td align="left">New Price (99203)</td>
 <td align="right">89.70</td>
 <td align="right">5.93</td>
 <td align="right">82.31</td>
@@ -501,7 +695,6 @@
 </tr>
 <tr class="even">
 <td align="left">range</td>
-<td align="left">New Price (99203)</td>
 <td align="right">119.00</td>
 <td align="right">7.12</td>
 <td align="right">110.54</td>
@@ -514,74 +707,32 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Established Patient Copay</span></span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Established Patient Copay (99214)</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Copay"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"type"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">patient</span>, <span class="va">cost</span>, <span class="va">hcpcs</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">skim</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">complete_rate</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"Established Copay (99214)"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="71%">
-<col width="28%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">dplyr::group_by(…)</td>
-</tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">87060</td>
-</tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">12</td>
-</tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">numeric</td>
-<td align="left">4</td>
-</tr>
-<tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Group variables</td>
-<td align="left">type</td>
-</tr>
-</tbody>
-</table>
-<p>Data summary</p>
+<span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">yank</span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"Established Copay (99214)"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">complete_rate</span>, <span class="va">type</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Variable type: numeric</strong></p>
 <table style="width:100%;" class="table">
 <colgroup>
-<col width="15%">
-<col width="27%">
-<col width="7%">
-<col width="6%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
+<col width="21%">
+<col width="10%">
+<col width="8%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">skim_variable</th>
-<th align="left">type</th>
 <th align="right">mean</th>
 <th align="right">sd</th>
 <th align="right">p0</th>
@@ -594,7 +745,6 @@
 <tbody>
 <tr class="odd">
 <td align="left">min</td>
-<td align="left">Established Copay (99214)</td>
 <td align="right">4.52</td>
 <td align="right">0.36</td>
 <td align="right">4.06</td>
@@ -606,7 +756,6 @@
 </tr>
 <tr class="even">
 <td align="left">max</td>
-<td align="left">Established Copay (99214)</td>
 <td align="right">36.20</td>
 <td align="right">2.27</td>
 <td align="right">33.46</td>
@@ -618,7 +767,6 @@
 </tr>
 <tr class="odd">
 <td align="left">mode</td>
-<td align="left">Established Copay (99214)</td>
 <td align="right">25.91</td>
 <td align="right">1.66</td>
 <td align="right">23.90</td>
@@ -630,7 +778,6 @@
 </tr>
 <tr class="even">
 <td align="left">range</td>
-<td align="left">Established Copay (99214)</td>
 <td align="right">31.68</td>
 <td align="right">1.92</td>
 <td align="right">29.40</td>
@@ -643,74 +790,32 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># New Patient Copay</span></span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># New Patient Copay (99203)</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Copay"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"type"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">patient</span>, <span class="va">cost</span>, <span class="va">hcpcs</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">skim</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">complete_rate</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"New Copay (99203)"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="71%">
-<col width="28%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">dplyr::group_by(…)</td>
-</tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">87060</td>
-</tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">12</td>
-</tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">numeric</td>
-<td align="left">4</td>
-</tr>
-<tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Group variables</td>
-<td align="left">type</td>
-</tr>
-</tbody>
-</table>
-<p>Data summary</p>
+<span>  <span class="fu">skimr</span><span class="fu">::</span><span class="fu">yank</span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"New Copay (99203)"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n_missing</span>, <span class="va">complete_rate</span>, <span class="va">type</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Variable type: numeric</strong></p>
 <table style="width:100%;" class="table">
 <colgroup>
-<col width="16%">
 <col width="21%">
-<col width="7%">
-<col width="6%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
+<col width="10%">
+<col width="8%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">skim_variable</th>
-<th align="left">type</th>
 <th align="right">mean</th>
 <th align="right">sd</th>
 <th align="right">p0</th>
@@ -723,7 +828,6 @@
 <tbody>
 <tr class="odd">
 <td align="left">min</td>
-<td align="left">New Copay (99203)</td>
 <td align="right">14.56</td>
 <td align="right">1.01</td>
 <td align="right">13.28</td>
@@ -735,7 +839,6 @@
 </tr>
 <tr class="even">
 <td align="left">max</td>
-<td align="left">New Copay (99203)</td>
 <td align="right">44.31</td>
 <td align="right">2.78</td>
 <td align="right">40.92</td>
@@ -747,7 +850,6 @@
 </tr>
 <tr class="odd">
 <td align="left">mode</td>
-<td align="left">New Copay (99203)</td>
 <td align="right">22.42</td>
 <td align="right">1.48</td>
 <td align="right">20.58</td>
@@ -759,7 +861,6 @@
 </tr>
 <tr class="even">
 <td align="left">range</td>
-<td align="left">New Copay (99203)</td>
 <td align="right">29.75</td>
 <td align="right">1.78</td>
 <td align="right">27.63</td>
@@ -774,7 +875,7 @@
 <p><br></p>
 <details><summary>
 Code
-</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">cmapplot</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
@@ -784,9 +885,10 @@ Code
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mode</span>, </span>
 <span>             color <span class="op">=</span> <span class="va">type</span>, </span>
 <span>             fill <span class="op">=</span> <span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">cmapplot</span><span class="fu">::</span><span class="fu">theme_cmap</span><span class="op">(</span>gridlines <span class="op">=</span> <span class="st">"h"</span>, </span>
-<span>                       axisticks <span class="op">=</span> <span class="st">"x"</span>,</span>
-<span>                       panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"light gray"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">cmapplot</span><span class="fu">::</span><span class="fu">theme_cmap</span><span class="op">(</span></span>
+<span>    gridlines <span class="op">=</span> <span class="st">"h"</span>, </span>
+<span>    axisticks <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>    panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"light gray"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">geom_density</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>n.breaks <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">cmapplot</span><span class="fu">::</span><span class="fu">cmap_fill_discrete</span><span class="op">(</span><span class="st">"governance"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -794,27 +896,6 @@ Code
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>         color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 </details><p><img src="reference/figures/README-unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"type"</span>, </span>
-<span>               <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">patient</span>, <span class="va">cost</span>, <span class="va">hcpcs</span><span class="op">)</span>, </span>
-<span>               sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">cmapplot</span><span class="fu">::</span><span class="fu">theme_cmap</span><span class="op">(</span>gridlines <span class="op">=</span> <span class="st">"h"</span>, </span>
-<span>                       axisticks <span class="op">=</span> <span class="st">"x"</span>,</span>
-<span>                       panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"light gray"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html" class="external-link">stat_summary</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mode</span>, y <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu">fct_reorder</span><span class="op">(</span><span class="va">state</span>, <span class="va">mode</span>, <span class="va">median</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    fun.min <span class="op">=</span> <span class="va">min</span>,</span>
-<span>    fun.max <span class="op">=</span> <span class="va">max</span>,</span>
-<span>    fun <span class="op">=</span> <span class="va">median</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Amount Medicare Paid Per Visit: Family Medicine"</span>,</span>
-<span>       subtitle <span class="op">=</span> <span class="st">"Graph Shows the Range and Median of the Mode Amounts"</span>,</span>
-<span>       x <span class="op">=</span> <span class="cn">NULL</span>, </span>
-<span>       y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;"></p>
 <details><summary>
 Code
 </summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
@@ -826,10 +907,13 @@ Code
 <span>               <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">patient</span>, <span class="va">cost</span>, <span class="va">hcpcs</span><span class="op">)</span>, </span>
 <span>               sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">cmapplot</span><span class="fu">::</span><span class="fu">theme_cmap</span><span class="op">(</span>gridlines <span class="op">=</span> <span class="st">"h"</span>, </span>
-<span>                       axisticks <span class="op">=</span> <span class="st">"x"</span>,</span>
-<span>                       panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"light gray"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html" class="external-link">stat_summary</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mode</span>, y <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu">fct_reorder</span><span class="op">(</span><span class="va">state</span>, <span class="va">mode</span>, <span class="va">median</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cmapplot</span><span class="fu">::</span><span class="fu">theme_cmap</span><span class="op">(</span></span>
+<span>    gridlines <span class="op">=</span> <span class="st">"h"</span>, </span>
+<span>    axisticks <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>    panel.grid.major.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"light gray"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html" class="external-link">stat_summary</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mode</span>, </span>
+<span>        y <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu">fct_reorder</span><span class="op">(</span><span class="va">state</span>, <span class="va">mode</span>, <span class="va">median</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    fun.min <span class="op">=</span> <span class="va">min</span>,</span>
 <span>    fun.max <span class="op">=</span> <span class="va">max</span>,</span>
 <span>    fun <span class="op">=</span> <span class="va">median</span><span class="op">)</span></span></code></pre></div>
