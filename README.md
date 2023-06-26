@@ -236,10 +236,8 @@ url
 <br>
 
 ``` r
-fam_pract <- tidyup(file = url, name = "Family Practice")
+fam_pract <- costoffice:::tidyup(file = url, name = "Family Practice")
 ```
-
-    #> Error in tidyup(file = url, name = "Family Practice"): could not find function "tidyup"
 
 ``` r
 # Established Patient Price
@@ -253,7 +251,27 @@ fam_pract |>
   dplyr::filter(type == "Established Price (99214)")
 ```
 
-    #> Error in dplyr::filter(fam_pract, cost == "Price"): object 'fam_pract' not found
+|                                                  |                    |
+|:-------------------------------------------------|:-------------------|
+| Name                                             | dplyr::group_by(…) |
+| Number of rows                                   | 87060              |
+| Number of columns                                | 12                 |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |                    |
+| Column type frequency:                           |                    |
+| numeric                                          | 4                  |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |                    |
+| Group variables                                  | type               |
+
+Data summary
+
+**Variable type: numeric**
+
+| skim_variable | type                      |   mean |   sd |     p0 |    p25 |    p50 |    p75 |   p100 | hist  |
+|:--------------|:--------------------------|-------:|-----:|-------:|-------:|-------:|-------:|-------:|:------|
+| min           | Established Price (99214) |  18.07 | 1.46 |  16.26 |  17.04 |  17.62 |  18.54 |  23.77 | ▇▃▂▁▁ |
+| max           | Established Price (99214) | 144.80 | 9.07 | 133.85 | 138.80 | 142.08 | 147.31 | 190.74 | ▇▃▁▁▁ |
+| mode          | Established Price (99214) | 103.65 | 6.63 |  95.61 |  98.99 | 101.50 | 105.65 | 135.85 | ▇▃▁▁▁ |
+| range         | Established Price (99214) | 126.72 | 7.68 | 117.58 | 121.56 | 124.49 | 128.95 | 168.37 | ▇▂▁▁▁ |
 
 <br>
 
@@ -269,7 +287,27 @@ fam_pract |>
   dplyr::filter(type == "New Price (99203)")
 ```
 
-    #> Error in dplyr::filter(fam_pract, cost == "Price"): object 'fam_pract' not found
+|                                                  |                    |
+|:-------------------------------------------------|:-------------------|
+| Name                                             | dplyr::group_by(…) |
+| Number of rows                                   | 87060              |
+| Number of columns                                | 12                 |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |                    |
+| Column type frequency:                           |                    |
+| numeric                                          | 4                  |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |                    |
+| Group variables                                  | type               |
+
+Data summary
+
+**Variable type: numeric**
+
+| skim_variable | type              |   mean |    sd |     p0 |    p25 |    p50 |    p75 |   p100 | hist  |
+|:--------------|:------------------|-------:|------:|-------:|-------:|-------:|-------:|-------:|:------|
+| min           | New Price (99203) |  58.24 |  4.04 |  53.14 |  55.31 |  56.94 |  59.43 |  74.82 | ▇▃▁▁▁ |
+| max           | New Price (99203) | 177.24 | 11.13 | 163.67 | 169.74 | 174.06 | 180.62 | 233.63 | ▇▃▁▁▁ |
+| mode          | New Price (99203) |  89.70 |  5.93 |  82.31 |  85.61 |  87.96 |  91.33 | 116.69 | ▇▃▁▁▁ |
+| range         | New Price (99203) | 119.00 |  7.12 | 110.54 | 114.54 | 116.89 | 120.94 | 158.82 | ▇▂▁▁▁ |
 
 <br>
 
@@ -285,7 +323,27 @@ fam_pract |>
   dplyr::filter(type == "Established Copay (99214)")
 ```
 
-    #> Error in dplyr::filter(fam_pract, cost == "Copay"): object 'fam_pract' not found
+|                                                  |                    |
+|:-------------------------------------------------|:-------------------|
+| Name                                             | dplyr::group_by(…) |
+| Number of rows                                   | 87060              |
+| Number of columns                                | 12                 |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |                    |
+| Column type frequency:                           |                    |
+| numeric                                          | 4                  |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |                    |
+| Group variables                                  | type               |
+
+Data summary
+
+**Variable type: numeric**
+
+| skim_variable | type                      |  mean |   sd |    p0 |   p25 |   p50 |   p75 |  p100 | hist  |
+|:--------------|:--------------------------|------:|-----:|------:|------:|------:|------:|------:|:------|
+| min           | Established Copay (99214) |  4.52 | 0.36 |  4.06 |  4.26 |  4.40 |  4.64 |  5.94 | ▇▃▂▁▁ |
+| max           | Established Copay (99214) | 36.20 | 2.27 | 33.46 | 34.70 | 35.52 | 36.83 | 47.69 | ▇▃▁▁▁ |
+| mode          | Established Copay (99214) | 25.91 | 1.66 | 23.90 | 24.75 | 25.37 | 26.41 | 33.96 | ▇▃▁▁▁ |
+| range         | Established Copay (99214) | 31.68 | 1.92 | 29.40 | 30.39 | 31.12 | 32.24 | 42.09 | ▇▂▁▁▁ |
 
 <br>
 
@@ -301,7 +359,27 @@ fam_pract |>
   dplyr::filter(type == "New Copay (99203)")
 ```
 
-    #> Error in dplyr::filter(fam_pract, cost == "Copay"): object 'fam_pract' not found
+|                                                  |                    |
+|:-------------------------------------------------|:-------------------|
+| Name                                             | dplyr::group_by(…) |
+| Number of rows                                   | 87060              |
+| Number of columns                                | 12                 |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |                    |
+| Column type frequency:                           |                    |
+| numeric                                          | 4                  |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |                    |
+| Group variables                                  | type               |
+
+Data summary
+
+**Variable type: numeric**
+
+| skim_variable | type              |  mean |   sd |    p0 |   p25 |   p50 |   p75 |  p100 | hist  |
+|:--------------|:------------------|------:|-----:|------:|------:|------:|------:|------:|:------|
+| min           | New Copay (99203) | 14.56 | 1.01 | 13.28 | 13.83 | 14.23 | 14.86 | 18.70 | ▇▃▁▁▁ |
+| max           | New Copay (99203) | 44.31 | 2.78 | 40.92 | 42.43 | 43.51 | 45.16 | 58.41 | ▇▃▁▁▁ |
+| mode          | New Copay (99203) | 22.42 | 1.48 | 20.58 | 21.40 | 21.99 | 22.83 | 29.17 | ▇▃▁▁▁ |
+| range         | New Copay (99203) | 29.75 | 1.78 | 27.63 | 28.64 | 29.22 | 30.24 | 39.70 | ▇▂▁▁▁ |
 
 <br>
 
@@ -331,11 +409,9 @@ p <- fam_pract |>
          color = "none")
 ```
 
-    #> Error in dplyr::filter(fam_pract, cost == "Price"): object 'fam_pract' not found
-
 </details>
 
-    #> Error in cmapplot::finalize_plot(plot = p, title = "Price Medicare Paid Per Visit, 2022.", : object 'p' not found
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" />
 
 ``` r
 fam_pract |> 
@@ -359,7 +435,7 @@ fam_pract |>
        y = NULL)
 ```
 
-    #> Error in dplyr::filter(fam_pract, cost == "Price"): object 'fam_pract' not found
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" />
 
 <details>
 <summary>
@@ -384,11 +460,9 @@ p2 <- fam_pract |>
     fun = median)
 ```
 
-    #> Error in dplyr::filter(fam_pract, cost == "Price"): object 'fam_pract' not found
-
 </details>
 
-    #> Error in cmapplot::finalize_plot(plot = p2, title = "Price Medicare Paid Per Visit, 2022.", : object 'p2' not found
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Code of Conduct
 

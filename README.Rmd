@@ -108,7 +108,7 @@ url
 <br>
 
 ```{r}
-fam_pract <- tidyup(file = url, name = "Family Practice")
+fam_pract <- costoffice:::tidyup(file = url, name = "Family Practice")
 ```
 
 
