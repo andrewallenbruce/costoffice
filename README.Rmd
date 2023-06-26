@@ -111,78 +111,82 @@ url
 fam_pract <- costoffice:::tidyup(file = url, name = "Family Practice")
 ```
 
+```{r results='asis', skimr_digits=2}
+# Mode Variation by Region
+fam_pract |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
+  dplyr::group_by(region, type) |> 
+  skimr::skim(dplyr::where(is.numeric)) |> 
+  skimr::yank("numeric") |> 
+  dplyr::filter(skim_variable == "mode") |> 
+  dplyr::select(!c(n_missing, complete_rate, skim_variable)) |> 
+  # dplyr::mutate(mean_less_sd = mean - sd, 
+  #               mean_plus_sd = mean + sd, 
+  #               .after = sd) |> 
+  dplyr::arrange(type) |> 
+  head(20)
+```
+<br>
 
-```{r}
-# Established Patient Price
+```{r results='asis', skimr_digits=2}
+# Established Patient Price (99214)
 fam_pract |> 
   dplyr::filter(cost == "Price") |> 
   dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
   tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
   dplyr::group_by(type) |> 
   skimr::skim(dplyr::where(is.numeric)) |> 
-  dplyr::select(!c(n_missing, complete_rate)) |> 
-  dplyr::filter(type == "Established Price (99214)")
+  skimr::yank("numeric") |> 
+  dplyr::filter(type == "Established Price (99214)") |> 
+  dplyr::select(!c(n_missing, complete_rate, type))
 ```
 
 <br>
 
-```{r}
-# New Patient Price
+```{r results='asis', skimr_digits=2}
+# New Patient Price (99203)
 fam_pract |> 
   dplyr::filter(cost == "Price") |> 
   dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
   tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
   dplyr::group_by(type) |> 
   skimr::skim(dplyr::where(is.numeric)) |> 
-  dplyr::select(!c(n_missing, complete_rate)) |> 
-  dplyr::filter(type == "New Price (99203)")
+  skimr::yank("numeric") |> 
+  dplyr::filter(type == "New Price (99203)") |> 
+  dplyr::select(!c(n_missing, complete_rate, type))
 ```
 
 <br>
 
-```{r}
-# Established Patient Copay
+```{r results='asis', skimr_digits=2}
+# Established Patient Copay (99214)
 fam_pract |> 
   dplyr::filter(cost == "Copay") |> 
   dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
   tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
   dplyr::group_by(type) |> 
   skimr::skim(dplyr::where(is.numeric)) |> 
-  dplyr::select(!c(n_missing, complete_rate)) |> 
-  dplyr::filter(type == "Established Copay (99214)")
+  skimr::yank("numeric") |> 
+  dplyr::filter(type == "Established Copay (99214)") |> 
+  dplyr::select(!c(n_missing, complete_rate, type))
 ```
 
 <br>
 
-```{r, message=FALSE}
-# New Patient Copay
+```{r results='asis', skimr_digits=2}
+# New Patient Copay (99203)
 fam_pract |> 
   dplyr::filter(cost == "Copay") |> 
   dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
   tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
   dplyr::group_by(type) |> 
   skimr::skim(dplyr::where(is.numeric)) |> 
-  dplyr::select(!c(n_missing, complete_rate)) |> 
-  dplyr::filter(type == "New Copay (99203)")
+  skimr::yank("numeric") |> 
+  dplyr::filter(type == "New Copay (99203)") |> 
+  dplyr::select(!c(n_missing, complete_rate, type))
 ```
 
-
-```{r eval=FALSE, echo=FALSE}
-# Averages by State
-fam_pract |> 
-  dplyr::filter(cost == "Price") |> 
-  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
-  tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
-  dplyr::filter(!is.na(state)) |> 
-  dplyr::group_by(type, state) |> 
-  dplyr::summarise(count_zipcodes = dplyr::n(),
-                   avg_min = round(mean(min, na.rm = TRUE), 2),
-                   avg_mode = round(mean(mode, na.rm = TRUE), 2),
-                   avg_max = round(mean(max, na.rm = TRUE), 2),
-                   avg_rng = round(mean(range, na.rm = TRUE), 2),
-                   .groups = "drop") |> 
-  dplyr::arrange(dplyr::desc(avg_mode))
-```
 
 <br>
 
@@ -198,9 +202,10 @@ p <- fam_pract |>
   ggplot(aes(x = mode, 
              color = type, 
              fill = type)) + 
-  cmapplot::theme_cmap(gridlines = "h", 
-                       axisticks = "x",
-                       panel.grid.major.y = element_line(color = "light gray")) +
+  cmapplot::theme_cmap(
+    gridlines = "h", 
+    axisticks = "x",
+    panel.grid.major.y = element_line(color = "light gray")) +
   geom_density(alpha = 0.5) +
   scale_x_continuous(n.breaks = 5) +
   cmapplot::cmap_fill_discrete("governance") +
@@ -221,8 +226,7 @@ cmapplot::finalize_plot(
   caption_align = 1)
 ```
 
-
-```{r fig.width=7, fig.height=10, fig.align='center', message=FALSE}
+```{r fig.width=7, fig.height=10, fig.align='center', message=FALSE, eval=FALSE, echo=FALSE}
 fam_pract |> 
   dplyr::filter(cost == "Price") |> 
   dplyr::filter(!is.na(state)) |> 
@@ -246,7 +250,7 @@ fam_pract |>
 
 <details><summary>Code</summary>
 
-```{r fig.width=7, fig.height=10, fig.align='center', message=FALSE}
+```{r message=FALSE}
 p2 <- fam_pract |> 
   dplyr::filter(cost == "Price") |> 
   dplyr::filter(!is.na(state)) |> 
@@ -255,10 +259,13 @@ p2 <- fam_pract |>
                c(patient, cost, hcpcs), 
                sep = " ") |> 
   ggplot() + 
-  cmapplot::theme_cmap(gridlines = "h", 
-                       axisticks = "x",
-                       panel.grid.major.y = element_line(color = "light gray")) +
-  stat_summary(aes(x = mode, y = forcats::fct_reorder(state, mode, median)),
+  cmapplot::theme_cmap(
+    gridlines = "h", 
+    axisticks = "x",
+    panel.grid.major.y = element_line(color = "light gray")) +
+  stat_summary(
+    aes(x = mode, 
+        y = forcats::fct_reorder(state, mode, median)),
     fun.min = min,
     fun.max = max,
     fun = median)

@@ -240,146 +240,142 @@ fam_pract <- costoffice:::tidyup(file = url, name = "Family Practice")
 ```
 
 ``` r
-# Established Patient Price
+# Mode Variation by Region
+fam_pract |> 
+  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
+  tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
+  dplyr::group_by(region, type) |> 
+  skimr::skim(dplyr::where(is.numeric)) |> 
+  skimr::yank("numeric") |> 
+  dplyr::filter(skim_variable == "mode") |> 
+  dplyr::select(!c(n_missing, complete_rate, skim_variable)) |> 
+  # dplyr::mutate(mean_less_sd = mean - sd, 
+  #               mean_plus_sd = mean + sd, 
+  #               .after = sd) |> 
+  dplyr::arrange(type) |> 
+  head(20)
+```
+
+**Variable type: numeric**
+
+| region    | type                      |   mean |   sd |    p0 |    p25 |    p50 |    p75 |   p100 | hist  |
+|:----------|:--------------------------|-------:|-----:|------:|-------:|-------:|-------:|-------:|:------|
+| Northeast | Established Copay (99214) |  26.94 | 1.87 | 24.69 |  25.41 |  25.83 |  28.37 |  31.32 | ▇▂▃▂▂ |
+| Midwest   | Established Copay (99214) |  25.15 | 0.72 | 24.32 |  24.57 |  25.16 |  25.37 |  27.76 | ▇▆▂▁▁ |
+| South     | Established Copay (99214) |  25.42 | 1.25 | 23.90 |  24.70 |  25.21 |  25.94 |  30.05 | ▇▆▁▁▁ |
+| West      | Established Copay (99214) |  27.04 | 2.04 | 24.21 |  25.52 |  26.58 |  28.05 |  33.96 | ▇▇▂▁▁ |
+| NA        | Established Copay (99214) |  26.40 | 1.14 | 23.90 |  26.32 |  26.32 |  26.32 |  31.32 | ▂▇▂▁▁ |
+| Northeast | Established Price (99214) | 107.76 | 7.49 | 98.76 | 101.62 | 103.32 | 113.47 | 125.27 | ▇▂▃▂▂ |
+| Midwest   | Established Price (99214) | 100.61 | 2.88 | 97.26 |  98.30 | 100.66 | 101.50 | 111.04 | ▇▆▂▁▁ |
+| South     | Established Price (99214) | 101.68 | 5.01 | 95.61 |  98.79 | 100.83 | 103.76 | 120.20 | ▇▆▁▁▁ |
+| West      | Established Price (99214) | 108.16 | 8.17 | 96.84 | 102.07 | 106.33 | 112.22 | 135.85 | ▇▇▂▁▁ |
+| NA        | Established Price (99214) | 105.59 | 4.57 | 95.61 | 105.28 | 105.28 | 105.28 | 125.27 | ▂▇▂▁▁ |
+| Northeast | New Copay (99203)         |  23.37 | 1.72 | 21.31 |  21.99 |  22.31 |  24.61 |  27.52 | ▇▂▃▂▂ |
+| Midwest   | New Copay (99203)         |  21.73 | 0.68 | 20.98 |  21.17 |  21.79 |  22.01 |  24.25 | ▇▇▁▁▁ |
+| South     | New Copay (99203)         |  22.00 | 1.14 | 20.58 |  21.36 |  21.80 |  22.56 |  26.15 | ▇▇▁▁▁ |
+| West      | New Copay (99203)         |  23.39 | 1.75 | 20.84 |  22.08 |  23.01 |  24.26 |  29.17 | ▅▇▃▁▁ |
+| NA        | New Copay (99203)         |  22.88 | 1.03 | 20.58 |  22.82 |  22.82 |  22.82 |  27.52 | ▂▇▂▁▁ |
+| Northeast | New Price (99203)         |  93.47 | 6.89 | 85.25 |  87.96 |  89.24 |  98.42 | 110.06 | ▇▂▃▂▂ |
+| Midwest   | New Price (99203)         |  86.94 | 2.74 | 83.92 |  84.67 |  87.16 |  88.06 |  96.99 | ▇▇▁▁▁ |
+| South     | New Price (99203)         |  88.01 | 4.57 | 82.31 |  85.46 |  87.21 |  90.25 | 104.59 | ▇▇▁▁▁ |
+| West      | New Price (99203)         |  93.56 | 6.99 | 83.37 |  88.34 |  92.05 |  97.05 | 116.69 | ▅▇▃▁▁ |
+| NA        | New Price (99203)         |  91.51 | 4.10 | 82.31 |  91.28 |  91.28 |  91.28 | 110.06 | ▂▇▂▁▁ |
+
+<br>
+
+``` r
+# Established Patient Price (99214)
 fam_pract |> 
   dplyr::filter(cost == "Price") |> 
   dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
   tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
   dplyr::group_by(type) |> 
   skimr::skim(dplyr::where(is.numeric)) |> 
-  dplyr::select(!c(n_missing, complete_rate)) |> 
-  dplyr::filter(type == "Established Price (99214)")
+  skimr::yank("numeric") |> 
+  dplyr::filter(type == "Established Price (99214)") |> 
+  dplyr::select(!c(n_missing, complete_rate, type))
 ```
-
-|                                                  |                    |
-|:-------------------------------------------------|:-------------------|
-| Name                                             | dplyr::group_by(…) |
-| Number of rows                                   | 87060              |
-| Number of columns                                | 12                 |
-| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |                    |
-| Column type frequency:                           |                    |
-| numeric                                          | 4                  |
-| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |                    |
-| Group variables                                  | type               |
-
-Data summary
 
 **Variable type: numeric**
 
-| skim_variable | type                      |   mean |   sd |     p0 |    p25 |    p50 |    p75 |   p100 | hist  |
-|:--------------|:--------------------------|-------:|-----:|-------:|-------:|-------:|-------:|-------:|:------|
-| min           | Established Price (99214) |  18.07 | 1.46 |  16.26 |  17.04 |  17.62 |  18.54 |  23.77 | ▇▃▂▁▁ |
-| max           | Established Price (99214) | 144.80 | 9.07 | 133.85 | 138.80 | 142.08 | 147.31 | 190.74 | ▇▃▁▁▁ |
-| mode          | Established Price (99214) | 103.65 | 6.63 |  95.61 |  98.99 | 101.50 | 105.65 | 135.85 | ▇▃▁▁▁ |
-| range         | Established Price (99214) | 126.72 | 7.68 | 117.58 | 121.56 | 124.49 | 128.95 | 168.37 | ▇▂▁▁▁ |
+| skim_variable |   mean |   sd |     p0 |    p25 |    p50 |    p75 |   p100 | hist  |
+|:--------------|-------:|-----:|-------:|-------:|-------:|-------:|-------:|:------|
+| min           |  18.07 | 1.46 |  16.26 |  17.04 |  17.62 |  18.54 |  23.77 | ▇▃▂▁▁ |
+| max           | 144.80 | 9.07 | 133.85 | 138.80 | 142.08 | 147.31 | 190.74 | ▇▃▁▁▁ |
+| mode          | 103.65 | 6.63 |  95.61 |  98.99 | 101.50 | 105.65 | 135.85 | ▇▃▁▁▁ |
+| range         | 126.72 | 7.68 | 117.58 | 121.56 | 124.49 | 128.95 | 168.37 | ▇▂▁▁▁ |
 
 <br>
 
 ``` r
-# New Patient Price
+# New Patient Price (99203)
 fam_pract |> 
   dplyr::filter(cost == "Price") |> 
   dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
   tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
   dplyr::group_by(type) |> 
   skimr::skim(dplyr::where(is.numeric)) |> 
-  dplyr::select(!c(n_missing, complete_rate)) |> 
-  dplyr::filter(type == "New Price (99203)")
+  skimr::yank("numeric") |> 
+  dplyr::filter(type == "New Price (99203)") |> 
+  dplyr::select(!c(n_missing, complete_rate, type))
 ```
-
-|                                                  |                    |
-|:-------------------------------------------------|:-------------------|
-| Name                                             | dplyr::group_by(…) |
-| Number of rows                                   | 87060              |
-| Number of columns                                | 12                 |
-| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |                    |
-| Column type frequency:                           |                    |
-| numeric                                          | 4                  |
-| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |                    |
-| Group variables                                  | type               |
-
-Data summary
 
 **Variable type: numeric**
 
-| skim_variable | type              |   mean |    sd |     p0 |    p25 |    p50 |    p75 |   p100 | hist  |
-|:--------------|:------------------|-------:|------:|-------:|-------:|-------:|-------:|-------:|:------|
-| min           | New Price (99203) |  58.24 |  4.04 |  53.14 |  55.31 |  56.94 |  59.43 |  74.82 | ▇▃▁▁▁ |
-| max           | New Price (99203) | 177.24 | 11.13 | 163.67 | 169.74 | 174.06 | 180.62 | 233.63 | ▇▃▁▁▁ |
-| mode          | New Price (99203) |  89.70 |  5.93 |  82.31 |  85.61 |  87.96 |  91.33 | 116.69 | ▇▃▁▁▁ |
-| range         | New Price (99203) | 119.00 |  7.12 | 110.54 | 114.54 | 116.89 | 120.94 | 158.82 | ▇▂▁▁▁ |
+| skim_variable |   mean |    sd |     p0 |    p25 |    p50 |    p75 |   p100 | hist  |
+|:--------------|-------:|------:|-------:|-------:|-------:|-------:|-------:|:------|
+| min           |  58.24 |  4.04 |  53.14 |  55.31 |  56.94 |  59.43 |  74.82 | ▇▃▁▁▁ |
+| max           | 177.24 | 11.13 | 163.67 | 169.74 | 174.06 | 180.62 | 233.63 | ▇▃▁▁▁ |
+| mode          |  89.70 |  5.93 |  82.31 |  85.61 |  87.96 |  91.33 | 116.69 | ▇▃▁▁▁ |
+| range         | 119.00 |  7.12 | 110.54 | 114.54 | 116.89 | 120.94 | 158.82 | ▇▂▁▁▁ |
 
 <br>
 
 ``` r
-# Established Patient Copay
+# Established Patient Copay (99214)
 fam_pract |> 
   dplyr::filter(cost == "Copay") |> 
   dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
   tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
   dplyr::group_by(type) |> 
   skimr::skim(dplyr::where(is.numeric)) |> 
-  dplyr::select(!c(n_missing, complete_rate)) |> 
-  dplyr::filter(type == "Established Copay (99214)")
+  skimr::yank("numeric") |> 
+  dplyr::filter(type == "Established Copay (99214)") |> 
+  dplyr::select(!c(n_missing, complete_rate, type))
 ```
-
-|                                                  |                    |
-|:-------------------------------------------------|:-------------------|
-| Name                                             | dplyr::group_by(…) |
-| Number of rows                                   | 87060              |
-| Number of columns                                | 12                 |
-| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |                    |
-| Column type frequency:                           |                    |
-| numeric                                          | 4                  |
-| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |                    |
-| Group variables                                  | type               |
-
-Data summary
 
 **Variable type: numeric**
 
-| skim_variable | type                      |  mean |   sd |    p0 |   p25 |   p50 |   p75 |  p100 | hist  |
-|:--------------|:--------------------------|------:|-----:|------:|------:|------:|------:|------:|:------|
-| min           | Established Copay (99214) |  4.52 | 0.36 |  4.06 |  4.26 |  4.40 |  4.64 |  5.94 | ▇▃▂▁▁ |
-| max           | Established Copay (99214) | 36.20 | 2.27 | 33.46 | 34.70 | 35.52 | 36.83 | 47.69 | ▇▃▁▁▁ |
-| mode          | Established Copay (99214) | 25.91 | 1.66 | 23.90 | 24.75 | 25.37 | 26.41 | 33.96 | ▇▃▁▁▁ |
-| range         | Established Copay (99214) | 31.68 | 1.92 | 29.40 | 30.39 | 31.12 | 32.24 | 42.09 | ▇▂▁▁▁ |
+| skim_variable |  mean |   sd |    p0 |   p25 |   p50 |   p75 |  p100 | hist  |
+|:--------------|------:|-----:|------:|------:|------:|------:|------:|:------|
+| min           |  4.52 | 0.36 |  4.06 |  4.26 |  4.40 |  4.64 |  5.94 | ▇▃▂▁▁ |
+| max           | 36.20 | 2.27 | 33.46 | 34.70 | 35.52 | 36.83 | 47.69 | ▇▃▁▁▁ |
+| mode          | 25.91 | 1.66 | 23.90 | 24.75 | 25.37 | 26.41 | 33.96 | ▇▃▁▁▁ |
+| range         | 31.68 | 1.92 | 29.40 | 30.39 | 31.12 | 32.24 | 42.09 | ▇▂▁▁▁ |
 
 <br>
 
 ``` r
-# New Patient Copay
+# New Patient Copay (99203)
 fam_pract |> 
   dplyr::filter(cost == "Copay") |> 
   dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
   tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |> 
   dplyr::group_by(type) |> 
   skimr::skim(dplyr::where(is.numeric)) |> 
-  dplyr::select(!c(n_missing, complete_rate)) |> 
-  dplyr::filter(type == "New Copay (99203)")
+  skimr::yank("numeric") |> 
+  dplyr::filter(type == "New Copay (99203)") |> 
+  dplyr::select(!c(n_missing, complete_rate, type))
 ```
-
-|                                                  |                    |
-|:-------------------------------------------------|:-------------------|
-| Name                                             | dplyr::group_by(…) |
-| Number of rows                                   | 87060              |
-| Number of columns                                | 12                 |
-| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |                    |
-| Column type frequency:                           |                    |
-| numeric                                          | 4                  |
-| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |                    |
-| Group variables                                  | type               |
-
-Data summary
 
 **Variable type: numeric**
 
-| skim_variable | type              |  mean |   sd |    p0 |   p25 |   p50 |   p75 |  p100 | hist  |
-|:--------------|:------------------|------:|-----:|------:|------:|------:|------:|------:|:------|
-| min           | New Copay (99203) | 14.56 | 1.01 | 13.28 | 13.83 | 14.23 | 14.86 | 18.70 | ▇▃▁▁▁ |
-| max           | New Copay (99203) | 44.31 | 2.78 | 40.92 | 42.43 | 43.51 | 45.16 | 58.41 | ▇▃▁▁▁ |
-| mode          | New Copay (99203) | 22.42 | 1.48 | 20.58 | 21.40 | 21.99 | 22.83 | 29.17 | ▇▃▁▁▁ |
-| range         | New Copay (99203) | 29.75 | 1.78 | 27.63 | 28.64 | 29.22 | 30.24 | 39.70 | ▇▂▁▁▁ |
+| skim_variable |  mean |   sd |    p0 |   p25 |   p50 |   p75 |  p100 | hist  |
+|:--------------|------:|-----:|------:|------:|------:|------:|------:|:------|
+| min           | 14.56 | 1.01 | 13.28 | 13.83 | 14.23 | 14.86 | 18.70 | ▇▃▁▁▁ |
+| max           | 44.31 | 2.78 | 40.92 | 42.43 | 43.51 | 45.16 | 58.41 | ▇▃▁▁▁ |
+| mode          | 22.42 | 1.48 | 20.58 | 21.40 | 21.99 | 22.83 | 29.17 | ▇▃▁▁▁ |
+| range         | 29.75 | 1.78 | 27.63 | 28.64 | 29.22 | 30.24 | 39.70 | ▇▂▁▁▁ |
 
 <br>
 
@@ -398,9 +394,10 @@ p <- fam_pract |>
   ggplot(aes(x = mode, 
              color = type, 
              fill = type)) + 
-  cmapplot::theme_cmap(gridlines = "h", 
-                       axisticks = "x",
-                       panel.grid.major.y = element_line(color = "light gray")) +
+  cmapplot::theme_cmap(
+    gridlines = "h", 
+    axisticks = "x",
+    panel.grid.major.y = element_line(color = "light gray")) +
   geom_density(alpha = 0.5) +
   scale_x_continuous(n.breaks = 5) +
   cmapplot::cmap_fill_discrete("governance") +
@@ -412,30 +409,6 @@ p <- fam_pract |>
 </details>
 
 <img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" />
-
-``` r
-fam_pract |> 
-  dplyr::filter(cost == "Price") |> 
-  dplyr::filter(!is.na(state)) |> 
-  dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |> 
-  tidyr::unite("type", 
-               c(patient, cost, hcpcs), 
-               sep = " ") |> 
-  ggplot() + 
-  cmapplot::theme_cmap(gridlines = "h", 
-                       axisticks = "x",
-                       panel.grid.major.y = element_line(color = "light gray")) +
-  stat_summary(aes(x = mode, y = forcats::fct_reorder(state, mode, median)),
-    fun.min = min,
-    fun.max = max,
-    fun = median) +
-  labs(title = "Amount Medicare Paid Per Visit: Family Medicine",
-       subtitle = "Graph Shows the Range and Median of the Mode Amounts",
-       x = NULL, 
-       y = NULL)
-```
-
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" />
 
 <details>
 <summary>
@@ -451,10 +424,13 @@ p2 <- fam_pract |>
                c(patient, cost, hcpcs), 
                sep = " ") |> 
   ggplot() + 
-  cmapplot::theme_cmap(gridlines = "h", 
-                       axisticks = "x",
-                       panel.grid.major.y = element_line(color = "light gray")) +
-  stat_summary(aes(x = mode, y = forcats::fct_reorder(state, mode, median)),
+  cmapplot::theme_cmap(
+    gridlines = "h", 
+    axisticks = "x",
+    panel.grid.major.y = element_line(color = "light gray")) +
+  stat_summary(
+    aes(x = mode, 
+        y = forcats::fct_reorder(state, mode, median)),
     fun.min = min,
     fun.max = max,
     fun = median)
