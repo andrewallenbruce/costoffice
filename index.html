@@ -245,16 +245,103 @@
 <span><span class="va">urology</span></span>
 <span><span class="va">vascular_surgery</span></span></code></pre></div>
 </details><p><br></p>
+</div>
+<div class="section level2">
+<h2 id="example-overview">Example: Overview<a class="anchor" aria-label="anchor" href="#example-overview"></a>
+</h2>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dir</span> <span class="op">&lt;-</span> <span class="st">"E:/costoffice_data/costoffice_2022_raw_data/"</span></span>
+<span><span class="va">paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">dir</span>, pattern <span class="op">=</span> <span class="st">"[.]csv$"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">paths</span><span class="op">)</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">".csv"</span>, <span class="st">".rds"</span>, <span class="va">names</span><span class="op">)</span></span>
+<span><span class="va">outdir</span> <span class="op">&lt;-</span> <span class="st">"E:/costoffice_data/costoffice_2022_clean_data/"</span></span>
+<span></span>
+<span><span class="va">df_specialty</span> <span class="op">&lt;-</span> <span class="va">out</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">costoffice</span><span class="fu">:::</span><span class="fu">summarise_by_specialty</span><span class="op">(</span>name <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `purrr::map()`:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ In index: 1.</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Caused by error in `paste0()`:</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! object 'outdir' not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_state</span> <span class="op">&lt;-</span> <span class="va">out</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">costoffice</span><span class="fu">:::</span><span class="fu">summarise_by_state</span><span class="op">(</span>name <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `purrr::map()`:</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ In index: 1.</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Caused by error in `paste0()`:</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! object 'outdir' not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_spec_state</span> <span class="op">&lt;-</span> <span class="va">out</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">costoffice</span><span class="fu">:::</span><span class="fu">summarise_by_spec_state</span><span class="op">(</span>name <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `purrr::map()`:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ In index: 1.</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Caused by error in `paste0()`:</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! object 'outdir' not found</span></span></code></pre></div>
 <p><br></p>
+<div class="section level3">
+<h3 id="summary-by-specialty">Summary by <strong>Specialty</strong>
+<a class="anchor" aria-label="anchor" href="#summary-by-specialty"></a>
+</h3>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_specialty</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'df_specialty' not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># ggplot(df_specialty, aes(x = avg_mode, y = specialty, color = type)) +</span></span>
+<span><span class="co">#   geom_point(size = 2)</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">df_specialty</span><span class="op">$</span><span class="va">specialty</span>, <span class="va">df_specialty</span><span class="op">$</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="va">Var1</span>, </span>
+<span>                type <span class="op">=</span> <span class="va">Var2</span>, </span>
+<span>                count <span class="op">=</span> <span class="va">Freq</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in table(df_specialty$specialty, df_specialty$type): object 'df_specialty' not found</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level3">
+<h3 id="summary-by-state">Summary by <strong>State</strong>
+<a class="anchor" aria-label="anchor" href="#summary-by-state"></a>
+</h3>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_state</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'df_state' not found</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">df_state</span><span class="op">$</span><span class="va">state</span>, <span class="va">df_state</span><span class="op">$</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">Var1</span>, </span>
+<span>                type <span class="op">=</span> <span class="va">Var2</span>, </span>
+<span>                count <span class="op">=</span> <span class="va">Freq</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in table(df_state$state, df_state$type): object 'df_state' not found</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level3">
+<h3 id="summary-by-specialty--state">Summary by <strong>Specialty &amp; State</strong>
+<a class="anchor" aria-label="anchor" href="#summary-by-specialty--state"></a>
+</h3>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_spec_state</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'df_spec_state' not found</span></span></code></pre></div>
+<p><br></p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="example-family-practice-specialty">Example: <code>Family Practice</code> Specialty<a class="anchor" aria-label="anchor" href="#example-family-practice-specialty"></a>
 </h2>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fam_pract</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/search_datasets.html">search_datasets</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"family_practice"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">csv_url</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">costoffice</span><span class="fu">:::</span><span class="fu">tidyup</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Family Practice"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Mode Variation by Region</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"("</span>, <span class="va">hcpcs</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -536,7 +623,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Established Patient Price (99214)</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -619,7 +706,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># New Patient Price (99203)</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -702,7 +789,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Established Patient Copay (99214)</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Copay"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -785,7 +872,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># New Patient Copay (99203)</span></span>
 <span><span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Copay"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -870,7 +957,7 @@
 <p><br></p>
 <details><summary>
 Code
-</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">cmapplot</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
@@ -890,10 +977,10 @@ Code
 <span>  <span class="fu">cmapplot</span><span class="fu">::</span><span class="fu">cmap_color_discrete</span><span class="op">(</span><span class="st">"governance"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>         color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
-</details><p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;"></p>
+</details><p><img src="reference/figures/README-unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;"></p>
 <details><summary>
 Code
-</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg_new_price</span> <span class="op">&lt;-</span> <span class="va">fam_pract</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cost</span> <span class="op">==</span> <span class="st">"Price"</span>, </span>
 <span>                <span class="va">patient</span> <span class="op">==</span> <span class="st">"New"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -973,7 +1060,7 @@ Code
 <span>    fun.min <span class="op">=</span> <span class="va">min</span>,</span>
 <span>    fun.max <span class="op">=</span> <span class="va">max</span>,</span>
 <span>    fun <span class="op">=</span> <span class="va">median</span><span class="op">)</span></span></code></pre></div>
-</details><p><img src="reference/figures/README-unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;"><img src="reference/figures/README-unnamed-chunk-14-2.png" width="100%" style="display: block; margin: auto;"><img src="reference/figures/README-unnamed-chunk-14-3.png" width="100%" style="display: block; margin: auto;"><img src="reference/figures/README-unnamed-chunk-14-4.png" width="100%" style="display: block; margin: auto;"></p>
+</details><p><img src="reference/figures/README-unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;"><img src="reference/figures/README-unnamed-chunk-20-2.png" width="100%" style="display: block; margin: auto;"><img src="reference/figures/README-unnamed-chunk-20-3.png" width="100%" style="display: block; margin: auto;"><img src="reference/figures/README-unnamed-chunk-20-4.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
