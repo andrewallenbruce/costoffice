@@ -243,4 +243,55 @@ retrieve_pin <- function() {
   return(full)
 }
 
+summarise_by_specialty <- function(dir = outdir, name = out) {
+
+  readr::read_rds(paste0(dir, name)) |>
+    dplyr::tibble() |>
+    dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |>
+    tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |>
+    dplyr::group_by(specialty, type) |>
+    dplyr::summarise(n = dplyr::n(),
+                     min = min(min, na.rm = TRUE),
+                     avg_min = mean(min, na.rm = TRUE),
+                     avg_mode = mean(mode, na.rm = TRUE),
+                     avg_max = mean(min, na.rm = TRUE),
+                     max = max(max, na.rm = TRUE),
+                     avg_range = mean(range, na.rm = TRUE),
+                     .groups = "drop")
+}
+
+summarise_by_state <- function(dir = outdir, name = out) {
+
+  readr::read_rds(paste0(dir, name)) |>
+    dplyr::tibble() |>
+    dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |>
+    tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |>
+    dplyr::group_by(state, type) |>
+    dplyr::summarise(n = dplyr::n(),
+                     min = min(min, na.rm = TRUE),
+                     avg_min = mean(min, na.rm = TRUE),
+                     avg_mode = mean(mode, na.rm = TRUE),
+                     avg_max = mean(min, na.rm = TRUE),
+                     max = max(max, na.rm = TRUE),
+                     avg_range = mean(range, na.rm = TRUE),
+                     .groups = "drop")
+}
+
+summarise_by_spec_state <- function(dir = outdir, name = out) {
+
+  readr::read_rds(paste0(dir, name)) |>
+    dplyr::tibble() |>
+    dplyr::mutate(hcpcs = paste0("(", hcpcs, ")")) |>
+    tidyr::unite("type", c(patient, cost, hcpcs), sep = " ") |>
+    dplyr::group_by(specialty, state, type) |>
+    dplyr::summarise(zip_codes = dplyr::n(),
+                     min = min(min, na.rm = TRUE),
+                     avg_min = mean(min, na.rm = TRUE),
+                     avg_mode = mean(mode, na.rm = TRUE),
+                     avg_max = mean(min, na.rm = TRUE),
+                     max = max(max, na.rm = TRUE),
+                     avg_range = mean(range, na.rm = TRUE),
+                     .groups = "drop")
+}
+
 

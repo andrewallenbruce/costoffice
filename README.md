@@ -220,6 +220,112 @@ vascular_surgery
 
 <br>
 
+## Example: Overview
+
+``` r
+dir <- "E:/costoffice_data/costoffice_2022_raw_data/"
+paths <- list.files(dir, pattern = "[.]csv$", full.names = TRUE)
+names <- basename(paths)
+out <- gsub(".csv", ".rds", names)
+outdir <- "E:/costoffice_data/costoffice_2022_clean_data/"
+
+df_specialty <- out |>
+  purrr::map(\(x) costoffice:::summarise_by_specialty(name = x)) |>
+  purrr::list_rbind()
+```
+
+    #> Error in `purrr::map()`:
+    #> ℹ In index: 1.
+    #> Caused by error in `paste0()`:
+    #> ! object 'outdir' not found
+
+``` r
+df_state <- out |>
+  purrr::map(\(x) costoffice:::summarise_by_state(name = x)) |>
+  purrr::list_rbind()
+```
+
+    #> Error in `purrr::map()`:
+    #> ℹ In index: 1.
+    #> Caused by error in `paste0()`:
+    #> ! object 'outdir' not found
+
+``` r
+df_spec_state <- out |>
+  purrr::map(\(x) costoffice:::summarise_by_spec_state(name = x)) |>
+  purrr::list_rbind()
+```
+
+    #> Error in `purrr::map()`:
+    #> ℹ In index: 1.
+    #> Caused by error in `paste0()`:
+    #> ! object 'outdir' not found
+
+<br>
+
+### Summary by **Specialty**
+
+``` r
+df_specialty
+```
+
+    #> Error in eval(expr, envir, enclos): object 'df_specialty' not found
+
+``` r
+# ggplot(df_specialty, aes(x = avg_mode, y = specialty, color = type)) +
+#   geom_point(size = 2)
+```
+
+``` r
+table(df_specialty$specialty, df_specialty$type) |> 
+  as.data.frame() |> 
+  dplyr::tibble() |> 
+  dplyr::select(specialty = Var1, 
+                type = Var2, 
+                count = Freq) |> 
+  dplyr::group_by(type) |> 
+  dplyr::summarise(count = sum(count)) |> 
+  dplyr::arrange(dplyr::desc(count))
+```
+
+    #> Error in table(df_specialty$specialty, df_specialty$type): object 'df_specialty' not found
+
+<br>
+
+### Summary by **State**
+
+``` r
+df_state
+```
+
+    #> Error in eval(expr, envir, enclos): object 'df_state' not found
+
+<br>
+
+``` r
+table(df_state$state, df_state$type) |> 
+  as.data.frame() |> 
+  dplyr::tibble() |> 
+  dplyr::select(state = Var1, 
+                type = Var2, 
+                count = Freq) |> 
+  dplyr::group_by(type) |> 
+  dplyr::summarise(count = sum(count)) |> 
+  dplyr::arrange(dplyr::desc(count))
+```
+
+    #> Error in table(df_state$state, df_state$type): object 'df_state' not found
+
+<br>
+
+### Summary by **Specialty & State**
+
+``` r
+df_spec_state
+```
+
+    #> Error in eval(expr, envir, enclos): object 'df_spec_state' not found
+
 <br>
 
 ## Example: `Family Practice` Specialty
@@ -396,7 +502,7 @@ p <- fam_pract |>
 
 </details>
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;" />
 
 <details>
 <summary>
@@ -487,7 +593,7 @@ gg_est_copay <- fam_pract |>
 
 </details>
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-14-2.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-14-3.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-14-4.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-20-2.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-20-3.png" width="100%" style="display: block; margin: auto;" /><img src="man/figures/README-unnamed-chunk-20-4.png" width="100%" style="display: block; margin: auto;" />
 
 ## Code of Conduct
 

@@ -94,6 +94,81 @@ search_datasets()$specialty |>
   details::details(summary = 'Available Medical Specialties')
 ```
 
+
+## Example: Overview
+
+```{r}
+dir <- "E:/costoffice_data/costoffice_2022_raw_data/"
+paths <- list.files(dir, pattern = "[.]csv$", full.names = TRUE)
+names <- basename(paths)
+out <- gsub(".csv", ".rds", names)
+outdir <- "E:/costoffice_data/costoffice_2022_clean_data/"
+
+df_specialty <- out |>
+  purrr::map(\(x) costoffice:::summarise_by_specialty(name = x)) |>
+  purrr::list_rbind()
+
+df_state <- out |>
+  purrr::map(\(x) costoffice:::summarise_by_state(name = x)) |>
+  purrr::list_rbind()
+
+df_spec_state <- out |>
+  purrr::map(\(x) costoffice:::summarise_by_spec_state(name = x)) |>
+  purrr::list_rbind()
+```
+
+<br>
+
+### Summary by **Specialty**
+
+```{r}
+df_specialty
+# ggplot(df_specialty, aes(x = avg_mode, y = specialty, color = type)) +
+#   geom_point(size = 2)
+```
+
+
+```{r}
+table(df_specialty$specialty, df_specialty$type) |> 
+  as.data.frame() |> 
+  dplyr::tibble() |> 
+  dplyr::select(specialty = Var1, 
+                type = Var2, 
+                count = Freq) |> 
+  dplyr::group_by(type) |> 
+  dplyr::summarise(count = sum(count)) |> 
+  dplyr::arrange(dplyr::desc(count))
+```
+
+<br>
+
+### Summary by **State**
+
+```{r}
+df_state
+```
+<br>
+
+```{r}
+table(df_state$state, df_state$type) |> 
+  as.data.frame() |> 
+  dplyr::tibble() |> 
+  dplyr::select(state = Var1, 
+                type = Var2, 
+                count = Freq) |> 
+  dplyr::group_by(type) |> 
+  dplyr::summarise(count = sum(count)) |> 
+  dplyr::arrange(dplyr::desc(count))
+```
+
+<br>
+
+### Summary by **Specialty & State**
+
+```{r}
+df_spec_state
+```
+
 <br>
 
 ## Example: `Family Practice` Specialty
