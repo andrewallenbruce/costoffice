@@ -105,15 +105,15 @@ out <- gsub(".csv", ".rds", names)
 outdir <- "E:/costoffice_data/costoffice_2022_clean_data/"
 
 df_specialty <- out |>
-  purrr::map(\(x) costoffice:::summarise_by_specialty(name = x)) |>
+  purrr::map(\(x) costoffice:::summarise_by_specialty(dir = outdir, name = x)) |>
   purrr::list_rbind()
 
 df_state <- out |>
-  purrr::map(\(x) costoffice:::summarise_by_state(name = x)) |>
+  purrr::map(\(x) costoffice:::summarise_by_state(dir = outdir, name = x)) |>
   purrr::list_rbind()
 
 df_spec_state <- out |>
-  purrr::map(\(x) costoffice:::summarise_by_spec_state(name = x)) |>
+  purrr::map(\(x) costoffice:::summarise_by_spec_state(dir = outdir, name = x)) |>
   purrr::list_rbind()
 ```
 
@@ -123,8 +123,6 @@ df_spec_state <- out |>
 
 ```{r}
 df_specialty
-# ggplot(df_specialty, aes(x = avg_mode, y = specialty, color = type)) +
-#   geom_point(size = 2)
 ```
 
 

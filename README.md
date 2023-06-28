@@ -230,36 +230,17 @@ out <- gsub(".csv", ".rds", names)
 outdir <- "E:/costoffice_data/costoffice_2022_clean_data/"
 
 df_specialty <- out |>
-  purrr::map(\(x) costoffice:::summarise_by_specialty(name = x)) |>
+  purrr::map(\(x) costoffice:::summarise_by_specialty(dir = outdir, name = x)) |>
   purrr::list_rbind()
-```
 
-    #> Error in `purrr::map()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `paste0()`:
-    #> ! object 'outdir' not found
-
-``` r
 df_state <- out |>
-  purrr::map(\(x) costoffice:::summarise_by_state(name = x)) |>
+  purrr::map(\(x) costoffice:::summarise_by_state(dir = outdir, name = x)) |>
   purrr::list_rbind()
-```
 
-    #> Error in `purrr::map()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `paste0()`:
-    #> ! object 'outdir' not found
-
-``` r
 df_spec_state <- out |>
-  purrr::map(\(x) costoffice:::summarise_by_spec_state(name = x)) |>
+  purrr::map(\(x) costoffice:::summarise_by_spec_state(dir = outdir, name = x)) |>
   purrr::list_rbind()
 ```
-
-    #> Error in `purrr::map()`:
-    #> ℹ In index: 1.
-    #> Caused by error in `paste0()`:
-    #> ! object 'outdir' not found
 
 <br>
 
@@ -269,12 +250,20 @@ df_spec_state <- out |>
 df_specialty
 ```
 
-    #> Error in eval(expr, envir, enclos): object 'df_specialty' not found
-
-``` r
-# ggplot(df_specialty, aes(x = avg_mode, y = specialty, color = type)) +
-#   geom_point(size = 2)
-```
+    #> # A tibble: 332 × 9
+    #>    specialty          type      n   min avg_min avg_mode avg_max   max avg_range
+    #>    <chr>              <chr> <int> <dbl>   <dbl>    <dbl>   <dbl> <dbl>     <dbl>
+    #>  1 Addiction Medicine Esta… 43530  4.06    4.06     25.9    4.06  47.7      31.7
+    #>  2 Addiction Medicine Esta… 43530 16.3    16.3     104.    16.3  191.      127. 
+    #>  3 Addiction Medicine New … 43530 13.3    13.3      33.6   13.3   58.4      29.8
+    #>  4 Addiction Medicine New … 43530 53.1    53.1     134.    53.1  234.      119. 
+    #>  5 Advanced Heart Fa… Esta… 43530  4.06    4.06     25.9    4.06  47.7      31.7
+    #>  6 Advanced Heart Fa… Esta… 43530 16.3    16.3     104.    16.3  191.      127. 
+    #>  7 Advanced Heart Fa… New … 43530 13.3    13.3      33.6   13.3   58.4      29.8
+    #>  8 Advanced Heart Fa… New … 43530 53.1    53.1     134.    53.1  234.      119. 
+    #>  9 Allergy Immunology Esta… 43530  4.06    4.06     18.2    4.06  47.7      31.7
+    #> 10 Allergy Immunology Esta… 43530 16.3    16.3      73.0   16.3  191.      127. 
+    #> # ℹ 322 more rows
 
 ``` r
 table(df_specialty$specialty, df_specialty$type) |> 
@@ -288,7 +277,25 @@ table(df_specialty$specialty, df_specialty$type) |>
   dplyr::arrange(dplyr::desc(count))
 ```
 
-    #> Error in table(df_specialty$specialty, df_specialty$type): object 'df_specialty' not found
+    #> # A tibble: 16 × 2
+    #>    type                      count
+    #>    <fct>                     <int>
+    #>  1 Established Copay (99214)    41
+    #>  2 Established Price (99214)    41
+    #>  3 Established Copay (99213)    39
+    #>  4 Established Price (99213)    39
+    #>  5 New Copay (99204)            32
+    #>  6 New Price (99204)            32
+    #>  7 New Copay (99203)            29
+    #>  8 New Price (99203)            29
+    #>  9 New Copay (99205)            18
+    #> 10 New Price (99205)            18
+    #> 11 New Copay (NA)                4
+    #> 12 New Price (NA)                4
+    #> 13 Established Copay (99211)     2
+    #> 14 Established Price (99211)     2
+    #> 15 Established Copay (99215)     1
+    #> 16 Established Price (99215)     1
 
 <br>
 
@@ -298,7 +305,20 @@ table(df_specialty$specialty, df_specialty$type) |>
 df_state
 ```
 
-    #> Error in eval(expr, envir, enclos): object 'df_state' not found
+    #> # A tibble: 19,920 × 9
+    #>    state type                   n   min avg_min avg_mode avg_max   max avg_range
+    #>    <chr> <chr>              <int> <dbl>   <dbl>    <dbl>   <dbl> <dbl>     <dbl>
+    #>  1 AK    Established Copay…   282  5.59    5.59     34.0    5.59  47.7      42.1
+    #>  2 AK    Established Price…   282 22.4    22.4     136.    22.4  191.      168. 
+    #>  3 AK    New Copay (99204)    282 18.7    18.7      44.1   18.7   58.4      39.7
+    #>  4 AK    New Price (99204)    282 74.8    74.8     176.    74.8  234.      159. 
+    #>  5 AL    Established Copay…   859  4.06    4.06     24.8    4.06  34.8      30.5
+    #>  6 AL    Established Price…   859 16.3    16.3      99.3   16.3  139.      122. 
+    #>  7 AL    New Copay (99204)    859 13.4    13.4      32.3   13.4   42.7      28.8
+    #>  8 AL    New Price (99204)    859 53.5    53.5     129.    53.5  171.      115. 
+    #>  9 AR    Established Copay…   738  4.07    4.07     23.9    4.07  34.2      29.4
+    #> 10 AR    Established Price…   738 16.3    16.3      95.6   16.3  137.      118. 
+    #> # ℹ 19,910 more rows
 
 <br>
 
@@ -314,7 +334,25 @@ table(df_state$state, df_state$type) |>
   dplyr::arrange(dplyr::desc(count))
 ```
 
-    #> Error in table(df_state$state, df_state$type): object 'df_state' not found
+    #> # A tibble: 16 × 2
+    #>    type                      count
+    #>    <fct>                     <int>
+    #>  1 Established Copay (99214)  2419
+    #>  2 Established Price (99214)  2419
+    #>  3 Established Copay (99213)  2301
+    #>  4 Established Price (99213)  2301
+    #>  5 New Copay (99204)          1888
+    #>  6 New Price (99204)          1888
+    #>  7 New Copay (99203)          1711
+    #>  8 New Price (99203)          1711
+    #>  9 New Copay (99205)          1062
+    #> 10 New Price (99205)          1062
+    #> 11 New Copay (NA)              236
+    #> 12 New Price (NA)              236
+    #> 13 Established Copay (99211)   118
+    #> 14 Established Price (99211)   118
+    #> 15 Established Copay (99215)    59
+    #> 16 Established Price (99215)    59
 
 <br>
 
@@ -324,7 +362,21 @@ table(df_state$state, df_state$type) |>
 df_spec_state
 ```
 
-    #> Error in eval(expr, envir, enclos): object 'df_spec_state' not found
+    #> # A tibble: 19,920 × 10
+    #>    specialty          state type  zip_codes   min avg_min avg_mode avg_max   max
+    #>    <chr>              <chr> <chr>     <int> <dbl>   <dbl>    <dbl>   <dbl> <dbl>
+    #>  1 Addiction Medicine AK    Esta…       282  5.59    5.59     34.0    5.59  47.7
+    #>  2 Addiction Medicine AK    Esta…       282 22.4    22.4     136.    22.4  191. 
+    #>  3 Addiction Medicine AK    New …       282 18.7    18.7      44.1   18.7   58.4
+    #>  4 Addiction Medicine AK    New …       282 74.8    74.8     176.    74.8  234. 
+    #>  5 Addiction Medicine AL    Esta…       859  4.06    4.06     24.8    4.06  34.8
+    #>  6 Addiction Medicine AL    Esta…       859 16.3    16.3      99.3   16.3  139. 
+    #>  7 Addiction Medicine AL    New …       859 13.4    13.4      32.3   13.4   42.7
+    #>  8 Addiction Medicine AL    New …       859 53.5    53.5     129.    53.5  171. 
+    #>  9 Addiction Medicine AR    Esta…       738  4.07    4.07     23.9    4.07  34.2
+    #> 10 Addiction Medicine AR    Esta…       738 16.3    16.3      95.6   16.3  137. 
+    #> # ℹ 19,910 more rows
+    #> # ℹ 1 more variable: avg_range <dbl>
 
 <br>
 
